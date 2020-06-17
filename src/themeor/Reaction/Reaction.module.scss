@@ -1,0 +1,35 @@
+$scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
+
+@each $value in $scale {
+  .speed-#{$value} {
+    transition-duration: var(--t-reaction-speed-#{$value});
+    transition-property: all;
+    transition-timing-function: ease;
+  }
+}
+
+.speed-none {
+  transition-duration: 0ms;
+  transition-property: all;
+  transition-timing-function: ease;
+}
+
+.reaction {
+  pointer-events: all;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-text {
+  cursor: text;
+}
+
+.ignore {
+  pointer-events: none
+}

@@ -1,0 +1,139 @@
+$scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
+
+.align {
+  display: flex;
+}
+
+.col {
+  flex-direction: column;
+
+  &.vert-center {
+    justify-content: center;
+  }
+  &.vert-top {
+    justify-content: flex-start;
+  }
+  &.vert-bottom {
+    justify-content: flex-end;
+  }
+  &.vert-stretch {
+    justify-content: stretch;
+  }
+  
+  &.hor-center {
+    align-items: center;
+  }
+  &.hor-right {
+    align-items: flex-end;
+  }
+  &.hor-left {
+    align-items: flex-start;
+  }
+  &.hor-stretch {
+    align-items: stretch;
+  }
+}
+
+
+.stack {
+  flex-wrap: wrap;
+}
+
+
+/* Row */
+
+.row {
+  flex-direction: row;
+
+  &.hor-left {
+    justify-content: flex-start;
+  }
+  &.hor-center {
+    justify-content: center;
+  }
+  &.hor-right {
+    justify-content: flex-end;
+  }
+  &.hor-stretch {
+    justify-content: stretch;
+  }
+
+  &.vert-top {
+    align-items: flex-start;
+  }
+  &.vert-center {
+    align-items: center;
+  }
+  &.vert-bottom {
+    align-items: flex-end;
+  }
+  &.vert-stretch {
+    align-items: stretch;
+  }
+}
+
+
+// Gaps
+@each $value in $scale {
+  .hor-gap-#{$value} {
+    margin-left: calc(var(--t-gap-#{$value}) / 2 * -1);
+    margin-right: calc(var(--t-gap-#{$value}) / 2 * -1);
+  }
+  .vert-gap-#{$value} {
+    margin-top: calc(var(--t-gap-#{$value}) / 2 * -1);
+    margin-bottom: calc(var(--t-gap-#{$value}) / 2 * -1);
+  }
+
+  .item-hor-gap-#{$value} {
+    padding-left: calc(var(--t-gap-#{$value}) / 2);
+    padding-right: calc(var(--t-gap-#{$value}) / 2);
+    box-sizing: border-box;
+  }
+  .item-vert-gap-#{$value} {
+    padding-top: calc(var(--t-gap-#{$value}) / 2);
+    padding-bottom: calc(var(--t-gap-#{$value}) / 2);
+    box-sizing: border-box;
+  }
+}
+
+
+// Template
+.template {
+  display: grid;
+  grid-template-rows: auto;
+  margin: 0;
+
+  &.hor-left {
+    justify-items: left;
+  }
+  &.hor-center {
+    justify-items: center;
+  }
+  &.hor-right {
+    justify-items: end;
+  }
+  &.hor-stretch {
+    justify-items: stretch;
+  }
+
+  &.vert-top {
+    align-items: start;
+  }
+  &.vert-center {
+    align-items: center;
+  }
+  &.vert-bottom {
+    align-items: end;
+  }
+  &.vert-stretch {
+    align-items: stretch;
+  }
+}
+@each $value in $scale {
+  .hor-gap-#{$value} {
+    column-gap: var(--t-gap-#{$value});
+  }
+  .vert-gap-#{$value} {
+    row-gap: var(--t-gap-#{$value});
+  }
+}

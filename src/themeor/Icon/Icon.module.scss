@@ -1,0 +1,41 @@
+$fill: ("base", "faint", "accent", "complement", "critic", "warning", "cussess");
+$fill-shift: ("up", "down");
+$scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
+
+.icon {
+  box-sizing: content-box !important;
+}
+
+// Size
+@each $value in $scale {
+  .size-#{$value} {
+    width: var(--t-icon-size-#{$value});
+    height: var(--t-icon-size-#{$value});
+  }
+}
+
+// Fill
+.inverse path {
+  fill: var(--t-fill-base-weak);
+}
+@each $value in $fill {
+  .fill-#{$value} path {
+    fill: var(--t-icon-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
+  }
+  .inverse.fill-#{$value} path {
+    fill: var(--t-icon-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
+  }
+
+  @each $shift in $fill-shift {
+    .fill-#{$value}.shift-#{$shift} path {
+      fill: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
+    }
+    .inverse.fill-#{$value}.shift-#{$shift} path {
+      fill: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
+    }
+  }
+}
+
+.fill-none path {
+  fill: transparent;
+}

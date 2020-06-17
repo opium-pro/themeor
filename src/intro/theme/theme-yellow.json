@@ -1,0 +1,160 @@
+{
+  "meta": {
+    "name": "Demo Yellow NOT READY",
+    "version": "1.0",
+    "contact": "Denis Elianovsky http://opium.pro"
+  },
+
+  "themeContext": {
+    "shouldInverseOn": ["base", "faint", "accent", "critic", "success"],
+    "_randomContectValue": "HERE YOU CAN SET VALUES FOR ThemeContext, BUT PLEASE START THEM WITH UNDERSCORE"
+  },
+
+  "customVariables": {
+    "random-css-variable": "HERE YOU CAN SET YOUR CSS VARIABLES"
+  },
+
+  "fill": {
+    "base": {
+      "strong": "#000",
+      "weak": "#fff"
+    },
+    "faint": {
+      "strong": "#8994A6",
+      "strong-down": "#aab",
+      "weak": "#F6F8FB",
+      "weak-up": "EDEFF2"
+    },
+    "accent": {
+      "strong": "#0070FF",
+      "weak": "#EBF4FF"
+    },
+    "complement": {
+      "strong": "#8889E2",
+      "weak": "#EEECFD"
+    },
+    "critic": {
+      "strong": "#F74545",
+      "weak": "#FDEDED"
+    },
+    "warning": {
+      "strong": "#F8AE4F",
+      "weak": "#FCEBCF"
+    },
+    "success": {
+      "strong": "#27AE60",
+      "weak": "#DEF8E9"
+    }
+  },
+
+  "fancy-fill": {
+    "accent": {
+      "strong": "linear-gradient(132deg, #3F89EE, #5447FF)",
+      "strong-down": "linear-gradient(132deg, #448FF3, #594CFF)",
+      "strong-up": "linear-gradient(132deg, #357FE4, #4A3DF5)"
+    }
+  },
+
+  "box": {
+    "radius": {
+      "xs": "3px",
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "ma12312x": "1000px",
+      "xl": "20px",
+      "max": "1000px"
+    },
+    "fill": {
+      "faint": {
+        "weak": "rgba(255, 255, 255, 0.15)"
+      }
+    },
+    "shadow": {
+      "md": "0px 20px 40px rgba(59, 70, 128, 0.05)"
+    }
+  },
+
+  "font": {
+    "family": {
+      "primary": "'Helvetica', sans-serif",
+      "special": "'Montserrat', 'YOU NEED TO INCLUDE @font-face BY YOURSELF', sans-serif"
+    },
+    "fill": {
+      "faint": {
+        "weak": "rgba(237, 241, 247, 0.5)"
+      }
+    },
+    "line-height": {
+      "sm": "1.2",
+      "md": "1.5"
+    },
+    "letter-spacing": {
+      "md": "0",
+      "lg": "1em"
+    },
+    "size": {
+      "xs": "12px",
+      "sm": "14px",
+      "md": "16px",
+      "lg": "20px",
+      "xl": "24px",
+      "x2l": "28px"
+    }
+  },
+
+  "line": {
+    "fill": {
+      "faint": {
+        "strong": "#E7E9EC"
+      }
+    },
+    "weight": {
+      "md": "1px",
+      "lg": "2px",
+      "xl": "3px"
+    }
+  },
+
+  "icon": {
+    "size": {
+      "xs": "12px",
+      "sm": "16px",
+      "md": "24px",
+      "lg": "32px",
+      "xl": "40px"
+    }
+  },
+
+  "gap": {
+    "x2s": "4px",
+    "xs": "8px",
+    "sm": "12px",
+    "md": "16px",
+    "lg": "20px",
+    "xl": "24px",
+    "x2l": "32px",
+    "x3l": "40px"
+  },
+
+  "out": {
+    "x2s": "-2px",
+    "xs": "-4px",
+    "sm": "-8px",
+    "md": "-14px"
+  },
+
+  "reaction": {
+    "speed": {
+      "md": "0.25s"
+    }
+  },
+
+  "transparency": {
+    "xs": "0.9",
+    "sm": "0.75",
+    "md": "0.5",
+    "lg": "0.25",
+    "xl": "0.1"
+  }
+}

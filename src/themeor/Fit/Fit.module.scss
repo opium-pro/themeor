@@ -1,0 +1,67 @@
+$scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
+
+.fit {
+  position: relative;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.screen {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.clip {
+  overflow: hidden;
+}
+
+.parent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.scroll {
+  overflow: auto;
+  // scroll-behavior: smooth;
+}
+
+.stick-top-left{left: 0; top: 0; right: unset; bottom: unset;}
+.stick-top{left: unset; top: 0; right: unset; bottom: unset;}
+.stick-top-right{left: unset; top: 0; right: 0; bottom: unset;}
+.stick-right{left: unset; top: unset; right: 0; bottom: unset;}
+.stick-bottom-right{left: unset; top: unset; right: 0; bottom: 0;}
+.stick-bottom{left: unset; top: unset; right: unset; bottom: 0;}
+.stick-bottom-left{left: 0; top: unset; right: unset; bottom: 0;}
+.stick-left{left: 0; top: unset; right: unset; bottom: unset;}
+
+
+// Offsets
+@each $value in $scale {
+  .offset-#{$value} {
+    top: calc(var(--t-gap-#{$value}) * -1);
+    left: calc(var(--t-gap-#{$value}) * -1);
+    right: calc(var(--t-gap-#{$value}) * -1);
+    bottom: calc(var(--t-gap-#{$value}) * -1);
+  }
+  .offset-top-#{$value} {top: var(--t-gap-#{$value});}
+  .offset-right-#{$value} {right: var(--t-gap-#{$value});}
+  .offset-bottom-#{$value} {bottom: var(--t-gap-#{$value});}
+  .offset-left-#{$value} {left: var(--t-gap-#{$value});}
+}
+.offset-none {top: 0; left: 0; right: 0; bottom: 0;}
+.offset-top-none {top: 0;}
+.offset-right-none {right: 0;}
+.offset-bottom-none {bottom: 0;}
+.offset-left-none {left: 0;}

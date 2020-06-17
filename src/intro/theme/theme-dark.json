@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "name": "Demo Light NOT READY",
+    "version": "1.0",
+    "contact": "Denis Elianovsky http://opium.pro",
+    "description": ""
+  },
+
+  "themeContext": {
+    "shallInverseOn": ["base", "faint", "critic", "success", "--demo-var"],
+    "template": ["opium"],
+    "_randomContectValue": "HERE YOU CAN SET VALUES FOR ThemeContext, BUT PLEASE START THEM WITH UNDERSCORE",
+    "_formAttemtionFill": "accent"
+  },
+
+  "customVariables": {
+    "random-css-variable": "HERE YOU CAN SET YOUR CSS VARIABLES",
+    "demo-var": "#fc0"
+  },
+
+  "fill": {
+    "base": {
+      "strong": "#000",
+      "weak": "#fff"
+    },
+    "faint": {
+      "strong": "#8994A6",
+      "strong-down": "#AAB",
+      "weak": "#F6F8FB",
+      "weak-up": "#EBEDF0"
+    },
+    "accent": {
+      "strong": "#fc0",
+      "weak": "#EBF4FF"
+    },
+    "complement": {
+      "strong": "#8889E2",
+      "weak": "#EEECFD"
+    },
+    "critic": {
+      "strong": "#F74545",
+      "weak": "#FDEDED"
+    },
+    "warning": {
+      "strong": "#F8AE4F",
+      "weak": "#FCEBCF"
+    },
+    "success": {
+      "strong": "#27AE60",
+      "weak": "#DEF8E9"
+    }
+  },
+
+  "fancy-fill": {
+    "accent": {
+      "strong": "#fc0",
+      "strong-down": "linear-gradient(132deg, #448FF3, #594CFF)",
+      "strong-up": "linear-gradient(132deg, #357FE4, #4A3DF5)"
+    }
+  },
+
+  "box": {
+    "radius": {
+      "xs": "3px",
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "20px",
+      "x2l": "40px",
+      "x3l": "60px"
+    },
+    "shadow": {
+      "md": "0px 20px 40px rgba(59, 70, 128, 0.05)",
+      "lg": "0px 20px 40px rgba(6, 7, 12, 0.10)"
+    }
+  },
+
+  "font": {
+    "family": {
+      "regular": "'Helvetica', sans-serif",
+      "special": "'Montserrat', 'YOU NEED TO INCLUDE @font-face BY YOURSELF', sans-serif"
+    },
+    "fill": {
+      "faint": {
+        "weak": "rgba(237, 241, 247, 0.5)"
+      }
+    },
+    "line-height": {
+      "sm": "1.2",
+      "md": "1.5"
+    },
+    "letter-spacing": {
+      "md": "0",
+      "lg": "0.05em"
+    },
+    "size": {
+      "xs": "12px",
+      "sm": "14px",
+      "md": "16px",
+      "lg": "20px",
+      "xl": "24px",
+      "x2l": "28px",
+      "x3l": "40px"
+    }
+  },
+
+  "line": {
+    "fill": {
+      "faint": {
+        "strong": "#E7E9EC",
+        "strong-up": "#E2E4E7"
+      }
+    },
+    "weight": {
+      "md": "1px",
+      "lg": "2px",
+      "xl": "3px",
+      "x2l": "4px"
+    }
+  },
+
+  "icon": {
+    "size": {
+      "xs": "12px",
+      "sm": "16px",
+      "md": "24px",
+      "lg": "32px",
+      "xl": "40px"
+    }
+  },
+
+  "gap": {
+    "x2s": "4px",
+    "xs": "8px",
+    "sm": "12px",
+    "md": "16px",
+    "lg": "20px",
+    "xl": "24px",
+    "x2l": "32px",
+    "x3l": "40px"
+  },
+
+  "adjust": {
+    "offset": {
+      "sm": "-4px"
+    }
+  },
+
+  "reaction": {
+    "speed": {
+      "md": "0.25s"
+    }
+  },
+
+  "effect": {
+    "transparency": {
+      "xs": "0.9",
+      "sm": "0.75",
+      "md": "0.5",
+      "lg": "0.25",
+      "xl": "0.1"
+    }
+  }
+}

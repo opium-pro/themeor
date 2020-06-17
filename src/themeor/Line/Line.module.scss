@@ -1,0 +1,67 @@
+$fill: ("base", "faint", "accent", "complement", "critic", "warning", "cussess");
+$fill-shift: ("up", "down");
+$scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
+
+.line {
+  border-style: solid;
+  border-width: 0;
+}
+
+.fill-none {
+  border-color: transparent;
+}
+
+.separator.fill-none {
+  background-color: transparent;
+}
+
+
+.weight-none {border-width: 0;}
+
+@each $value in $scale {
+  .weight-#{$value} {
+    border-width: var(--t-line-weight-#{$value});
+  }
+  .top-#{$value} {
+    border-top-width: var(--t-line-weight-#{$value});
+  }
+  .right-#{$value} {
+    border-right-width: var(--t-line-weight-#{$value});
+  }
+  .bottom-#{$value} {
+    border-bottom-width: var(--t-line-weight-#{$value});
+  }
+  .left-#{$value} {
+    border-left-width: var(--t-line-weight-#{$value});
+  }
+  .separator.weight-#{$value} {
+    border-width: 0;
+    border-top-width: var(--t-line-weight-#{$value});
+  }
+}
+.top-none {border-top-width: 0;}
+.right-none {border-right-width: 0;}
+.bottom-none {border-bottom-width: 0;}
+.left-none {border-left-width: 0;}
+
+
+// Fill
+@each $value in $fill {
+  .fill-#{$value} {
+    border-color: var(--t-line-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
+  }
+
+  .inverse.fill-#{$value} {
+    border-color: var(--t-line-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
+  }
+
+  @each $shift in $fill-shift {
+    .fill-#{$value}-#{$shift} {
+      border-color: var(--t-line-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
+    }
+
+    .inverse.fill-#{$value}-#{$shift} {
+      border-color: var(--t-line-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
+    }
+  }
+}
