@@ -62,7 +62,7 @@ export default class Theme extends React.PureComponent<ThemeProps> {
   render() {
     const {
       global,
-      config,
+      config = {},
       children,
       icons,
       MERGE,
@@ -71,7 +71,8 @@ export default class Theme extends React.PureComponent<ThemeProps> {
       forwardedRef,
       ...restProps
     } = this.props
-    const {themeContext: {shallInverseOn, template, ...custonContext}} = config
+    const {themeContext = {}} = config
+    const {shallInverseOn, template, ...custonContext} = themeContext
     const {themeId} = this.context
 
     this.global = global

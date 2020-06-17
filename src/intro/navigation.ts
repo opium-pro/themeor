@@ -21,7 +21,7 @@ import ThemePage from './pages/ThemePage'
 import CreditsPage from './pages/CreditsPage'
 
 export default [
-  {key: newId(), value: 'Themeor', hint: 'v 0.1.3-alpha.1', component: IntroPage, path: '/', exact: true},
+  {key: newId(), value: 'Themeor', hint: 'v 0.1.3-alpha.3', component: IntroPage, path: '/', exact: true},
 
   {key: newId()},
   {key: newId(), value: 'Getting Started', component: GettingStartedPage, path: '/getting-started'},
