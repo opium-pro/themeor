@@ -3,7 +3,7 @@
 Sorry for the lack of documentation, it's in progress.
 But all the components are ready to use.
 
-`npm i themeor`
+`npm i themeor node-sass`
 
 `npm start` for local demo.
 
@@ -21,7 +21,7 @@ import {Theme, Box, Font, Line, Fit, Align, Gap} from 'themeor'
 export default function App() {
   return (
     <Theme config={theme}>
-      <Font size="xl" weight="700">Imagine that I'm your app</Font>
+      <Font size="xl" weight="700">Imagine that I am your app</Font>
 
       <Gap />
       <Line fill="faint" />
@@ -29,7 +29,7 @@ export default function App() {
 
       <Align row horGap="md" vert="center">
         <Box fill="accent" strong>
-          <Gap>
+          <Gap vert="sm" hor="x2l">
             <Font size="sm" weight="700" uppercase>Text #1</Font>
           </Gap>
         </Box>

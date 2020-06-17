@@ -4,7 +4,11 @@
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
-  "homepage": "http://themeor.opium.pro",
+  "homepage": "http://themeor.opium.pro/",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/opium-pro/themeor.git"
+  },
   "keywords": [
     "react",
     "theme",
@@ -13,24 +17,22 @@
     "primitives",
     "opium pro"
   ],
+  "license" : "GPL-3.0",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "node-sass": "^4.14.1"
+  },
   "devDependencies": {
     "@types/node": "^12.12.37",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-syntax-highlighter": "^11.0.4",
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-syntax-highlighter": "^12.2.1",
     "typescript": "^3.7.5"
-  },
-  "peerDependencies": {
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
   },
   "scripts": {
     "start": "react-scripts start",
