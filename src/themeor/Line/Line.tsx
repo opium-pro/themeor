@@ -15,13 +15,14 @@ export interface PureLineProps {
   bottom?: Types.Scale | 'none',
   left?: Types.Scale | 'none',
 }
-export interface TaglessLineProps extends PureLineProps,  React.ComponentPropsWithoutRef<any> {
+export interface TaglessLineProps extends PureLineProps {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
+  children?: React.ReactNode,
 }
 export interface LineProps extends TaglessLineProps, React.HTMLAttributes<HTMLDivElement> {
   TRY_TAGLESS?: boolean,
-  forwardRef?: (node: any) => void,
+  forwardRef?: any,
 }
 
 export default class Line extends React.PureComponent<LineProps> {

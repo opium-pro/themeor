@@ -11,7 +11,7 @@ export interface IconProps extends React.HTMLAttributes<SVGElement> {
   inverse?: boolean,
   size: Types.Scale,
   name: string,
-  forwardRef?: (node: any) => void,
+  forwardRef?: any,
 }
 
 export default class Icon extends React.PureComponent<IconProps> {

@@ -24,12 +24,12 @@ export default class Toggle extends React.PureComponent<ToggleProps> {
               <Box noContext fill={(on && 'accent') || 'faint-up'} strong={on} radius="max">
                 <Gap size="x2s">
                   <label {...r.props}>
-                    <Fit.TryTagless hidden parent>
+                    <Fit.TryTagless cover="parent">
                       <input onChange={onChange} type="checkbox" checked={on} {...restProps} />
                     </Fit.TryTagless>
 
                     {/* This is stroke for focus */}
-                    <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent offset="x2s">
+                    <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" offset="x2s">
                       <Line className={r.props.className} fill={(r.focus || r.hover) ? "accent" : "none"}>
                         <Box radius="max" />
                       </Line>
@@ -39,11 +39,10 @@ export default class Toggle extends React.PureComponent<ToggleProps> {
                       TRY_RECURSIVE_TAGLESS
                       width="24px"
                       height="24px"
-                      className={r.props.className}
                       left={on ? '21px' : '0'}
                     >
                       <Line fill={on ? "none" : "faint"}>
-                        <Box fill="base" radius="max"/>
+                        <Box className={r.props.className} fill="base" radius="max"/>
                       </Line>
                     </Fit.TryTagless>
                   </label>

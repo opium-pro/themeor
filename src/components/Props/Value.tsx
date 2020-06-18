@@ -16,7 +16,7 @@ export class Value extends React.PureComponent<Props> {
         {children}
       </Font>
 
-      <Align stack vertGap="x2s" horGap="x2s">
+      <Align stack gapVert="x2s" gapHor="x2s">
         {examples.map((example) => (
           <Code key={example} inline>{example}</Code>
         ))}

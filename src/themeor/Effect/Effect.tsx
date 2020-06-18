@@ -10,13 +10,14 @@ export interface PureEffectProps {
   transparency?: Types.Scale | 'none' | 'max',
   hidden?: boolean,
 }
-export interface TaglessEffectProps extends PureEffectProps,  React.ComponentPropsWithoutRef<any> {
+export interface TaglessEffectProps extends PureEffectProps {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
+  children?: React.ReactNode,
 }
 export interface EffectProps extends TaglessEffectProps, React.HTMLAttributes<HTMLDivElement> {
   TRY_TAGLESS?: boolean,
-  forwardRef?: (node: any) => void,
+  forwardRef?: any,
 }
 
 export default class Effect extends React.PureComponent<EffectProps> {

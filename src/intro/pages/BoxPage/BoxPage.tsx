@@ -13,7 +13,7 @@ export default class BoxPage extends React.PureComponent<RouteChildrenProps> {
 
     return (<>
       <Wrapper
-        title="<Box />"
+        title="Box"
         description="Use it if you need to draw a rectangle. It can control background color, border radius, box shadow, background image"
         prev="/scaled-css"
         next="/font"

@@ -26,15 +26,15 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
                   <Box strong radius="max" shadow="lg" img="/img/intro.jpg">
                     <Font family="special" size="x3l" weight="800">Themeor</Font>
 
-                    <Fit width="240px" parent stick="top-left" left="-40px" top="-20px">
+                    <Fit width="240px" cover="parent" stick="top-left" left="-40px" top="-20px">
                       <img alt="" src="/img/meteor.svg" />
                     </Fit>
 
-                    <Fit width="130px" parent stick="bottom-left" left="30%" bottom="-60px">
+                    <Fit width="130px" cover="parent" stick="bottom-left" left="30%" bottom="-60px">
                       <img alt="" src="/img/ufo.svg" />
                     </Fit>
 
-                    <Fit width="260px" parent stick="bottom-right" bottom="-50px" right="-40px">
+                    <Fit width="260px" cover="parent" stick="bottom-right" bottom="-50px" right="-40px">
                       <img alt="" src="/img/planet.svg" />
                     </Fit>
                   </Box>

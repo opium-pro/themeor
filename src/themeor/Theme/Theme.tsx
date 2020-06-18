@@ -15,15 +15,17 @@ export interface PureThemeProps {
   TRY_TAGLESS?: boolean,
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
-  forwardRef?: (node: any) => void,
+  children?: React.ReactNode,
+  forwardRef?: any,
 }
-export interface TaglessThemeProps extends PureThemeProps,  React.ComponentPropsWithoutRef<any> {
+export interface TaglessThemeProps extends PureThemeProps {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
+  children?: React.ReactNode,
 }
 export interface ThemeProps extends TaglessThemeProps, React.HTMLAttributes<HTMLDivElement> {
   TRY_TAGLESS?: boolean,
-  forwardRef?: (node: any) => void,
+  forwardRef?: any,
 }
 
 export default class Theme extends React.PureComponent<ThemeProps> {

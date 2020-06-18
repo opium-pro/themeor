@@ -19,23 +19,24 @@ export interface PureBoxProps {
   radiusBottom?: Types.Scale | 'none' | 'max',
   radiusRight?: Types.Scale | 'none' | 'max',
   radiusLeft?: Types.Scale | 'none' | 'max',
-  radiusTL?: Types.Scale | 'none' | 'max',
-  radiusTR?: Types.Scale | 'none' | 'max',
-  radiusBR?: Types.Scale | 'none' | 'max',
-  radiusBL?: Types.Scale | 'none' | 'max',
+  radiusTopLeft?: Types.Scale | 'none' | 'max',
+  radiusTopRight?: Types.Scale | 'none' | 'max',
+  radiusBottomRight?: Types.Scale | 'none' | 'max',
+  radiusBottomLeft?: Types.Scale | 'none' | 'max',
   shadow?: Types.Scale | 'none',
   shadowInner?: Types.Scale | 'none',
   glow?: Types.Scale | 'none',
   img?: string,
   noContext?: boolean,
 }
-export interface TaglessBoxProps extends PureBoxProps, React.ComponentPropsWithoutRef<any> {
+export interface TaglessBoxProps extends PureBoxProps {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
+  children?: React.ReactNode,
 }
 export interface BoxProps extends TaglessBoxProps, React.HTMLAttributes<HTMLDivElement> {
   TRY_TAGLESS?: boolean,
-  forwardRef?: (node: any) => void,
+  forwardRef?: any,
 }
 
 export default class Box extends React.PureComponent<BoxProps> {
@@ -68,10 +69,10 @@ export default class Box extends React.PureComponent<BoxProps> {
       radiusRight,
       radiusLeft,
       radiusBottom,
-      radiusTL,
-      radiusTR,
-      radiusBR,
-      radiusBL,
+      radiusTopLeft,
+      radiusTopRight,
+      radiusBottomRight,
+      radiusBottomLeft,
       FORCE_TAGLESS,
       TRY_TAGLESS,
       fancy,
@@ -114,10 +115,10 @@ export default class Box extends React.PureComponent<BoxProps> {
         radiusRight && css[`radius-right-${radiusRight}`],
         radiusLeft && css[`radius-left-${radiusLeft}`],
         radiusBottom && css[`radius-bottom-${radiusBottom}`],
-        radiusTL && css[`radius-tl-${radiusTL}`],
-        radiusTR && css[`radius-tr-${radiusTR}`],
-        radiusBL && css[`radius-bl-${radiusBL}`],
-        radiusBR && css[`radius-br-${radiusBR}`],
+        radiusTopLeft && css[`radius-tl-${radiusTopLeft}`],
+        radiusTopRight && css[`radius-tr-${radiusTopRight}`],
+        radiusBottomLeft && css[`radius-bl-${radiusBottomLeft}`],
+        radiusBottomRight && css[`radius-br-${radiusBottomRight}`],
         (inverse !== false) && (inverse || backIsStrong) && !isCuctomVariable(fill) && css.inverse,
         className
       ),

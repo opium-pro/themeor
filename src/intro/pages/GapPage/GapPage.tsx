@@ -11,10 +11,10 @@ export default class BoxPage extends React.PureComponent<RouteChildrenProps> {
 
     return (
       <Wrapper
-        title="Font"
-        description="Controlls all text parameters. Such as color, size, letter spacing, weight, etc"
-        prev="/box"
-        next="/line"
+        title="Gap"
+        description="Controlls space between objects and paddings"
+        prev="/icon"
+        next="/align"
       >
         <Page name="Examples" component={Examples} path={`${match?.url}`} exact />
         <Page name="Props" component={Props} path={`${match?.url}/props`} />

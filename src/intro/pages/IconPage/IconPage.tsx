@@ -11,7 +11,7 @@ export default class BoxPage extends React.PureComponent<RouteChildrenProps> {
 
     return (
       <Wrapper
-        title="<Icon />"
+        title="Icon"
         description="Controlls icons' color and size"
         prev="/line"
         next="/gap"

@@ -14,6 +14,7 @@ export default class _Page extends React.PureComponent<_PageProps, _PageState> {
       <Link href="/font">Font</Link><br /><br />
       <Link href="/line">Line</Link><br /><br />
       <Link href="/icon">Icon</Link><br /><br />
+      <Link href="/gap">Gap</Link><br /><br />
     </>)
   }
 }

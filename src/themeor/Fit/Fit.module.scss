@@ -8,11 +8,19 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   display: inline-block;
 }
 
-.screen {
+.cover-screen {
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
+  bottom: 0;
+}
+
+.cover-parent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
   bottom: 0;
 }
 
@@ -22,14 +30,6 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
 
 .clip {
   overflow: hidden;
-}
-
-.parent {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
 }
 
 .scroll {

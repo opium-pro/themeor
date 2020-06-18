@@ -49,7 +49,7 @@ export default class BoxPage_Props extends React.PureComponent {
         </Group>
 
         <Group title="Other Props">
-          <Item name="forwardRef" type="function" default="undefined" description={<>
+          <Item name="forwardRef" type="any" default="undefined" description={<>
             Passes <Code inline>ref</Code> prop to the rendering tag
           </>} />
 

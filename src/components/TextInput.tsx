@@ -43,7 +43,7 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
 
                     {/* Label */}
                     <Align.TryTagless TRY_RECURSIVE_TAGLESS vert="center">
-                      <Fit parent height={(r.focus || value) ? "60%" : "100%"}>
+                      <Fit cover="parent" height={(r.focus || value) ? "60%" : "100%"}>
                         <Gap hor="sm">
                           <Font
                             size={r.focus || value ? 'xs' : 'md'}
@@ -60,7 +60,7 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
                     </Align.TryTagless>
 
                     {placeholder && r.focus && !value && (
-                      <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent height="60%" stick="bottom-left">
+                      <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" height="60%" stick="bottom-left">
                         <Align vert="center">
                           <Gap hor="sm">
                             <Font fill="faint" size="md">
@@ -72,7 +72,7 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
                     )}
 
                     {/* Input */}
-                    <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent height="60%" stick="bottom-left">
+                    <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" height="60%" stick="bottom-left">
                       <Box>
                         <Gap hor="sm">
                           <Font fill={disabled ? 'faint': 'base'} size="md">

@@ -71,24 +71,24 @@ export default class BoxPage_Props extends React.PureComponent {
             Sets border-radius for left corners. See <Link href="#radius">radius</Link> for avalible values
           </>}/>
 
-          <Item name="radiusTL" type="string" default="undefined" description={<>
+          <Item name="radiusTopLeft" type="string" default="undefined" description={<>
             Sets border-radius for top left corner. See <Link href="#radius">radius</Link> for avalible values
           </>}/>
 
-          <Item name="radiusTR" type="string" default="undefined" description={<>
+          <Item name="radiusTopRight" type="string" default="undefined" description={<>
             Sets border-radius for top right corners. See <Link href="#radius">radius</Link> for avalible values
           </>}/>
 
-          <Item name="radiusBR" type="string" default="undefined" description={<>
+          <Item name="radiusBottomRight" type="string" default="undefined" description={<>
             Sets border-radius for bottom right corners. See <Link href="#radius">radius</Link> for avalible values
           </>}/>
 
-          <Item name="radiusBL" type="string" default="undefined" description={<>
+          <Item name="radiusBottomLeft" type="string" default="undefined" description={<>
             Sets border-radius for bottom left corners. See <Link href="#radius">radius</Link> for avalible values
           </>}/>
         </Group>
 
-        <Group title="Other visual props">
+        <Group title="Other props">
           <Item name="shadow" type="string" default="undefined" description="Sets box-shadow">
             <Value examples={[`"none"`]}>No shadow</Value>
             <Value examples={opiumScale()}>
@@ -103,26 +103,8 @@ export default class BoxPage_Props extends React.PureComponent {
               Any valid path or path to the <Code inline>public</Code> folder
             </Value>
           </Item>
-        </Group>
 
-        <Group title="Other props">
-          <Item name="noContext" type="boolean" default="undefined" description={<>
-            Works only with <Link href="/colors">Opium.Fill</Link>. Ignore auto-passing <Code inline>inverse</Code> to children elements even if <Code inline>shallInverseOn</Code> is set
-          </>} />
-
-          <Item name="TRY_TAGLESS" type="boolean" default="undefined" description={<>
-            If possible, doesn't create separate tag, but passes all the props to the only child. See <Link href="/tag-merging">Tag Merging</Link> for more information
-          </>} />
-
-          <Item name="TRY_RECURSIVE_TAGLESS" type="boolean" default="undefined" description={<>
-            If possible, doesn't create separate tag, but passes all the props to the only child. And also passes <Code inline>TRY_RECURSIVE_TAGLESS="true"</Code> to the child themeor component. See <Link href="/tag-merging">Tag Merging</Link> for more information
-          </>} />
-
-          <Item name="FORCE_TAGLESS" type="boolean" default="undefined" description={<>
-            Works like <Code inline>TRY_TAGLESS</Code>, but passes props even into non-themeor components. Be careful, in that case child component must accept at least <Code inline>className</Code> and <Code inline>style</Code> props to work properly. See <Link href="/tag-merging">Tag Merging</Link> for more information
-          </>} />
-
-          <Item name="forwardRef" type="function" default="undefined" description={<>
+          <Item name="forwardRef" type="any" default="undefined" description={<>
             Passes <Code inline>ref</Code> prop to the rendering tag
           </>} />
 

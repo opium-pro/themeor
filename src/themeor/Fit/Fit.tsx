@@ -13,8 +13,7 @@ export interface PureFitProps {
   maxHeight?: string,
   minWidth?: string,
   minHeight?: string,
-  screen?: boolean,
-  parent?: boolean,
+  cover?: 'parent' | 'screen',
   left?: string,
   top?: string,
   right?: string,
@@ -30,13 +29,14 @@ export interface PureFitProps {
   scroll?: boolean,
   clip?: boolean,
 }
-export interface TaglessFitProps extends PureFitProps,  React.ComponentPropsWithoutRef<any> {
+export interface TaglessFitProps extends PureFitProps {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
+  children?: React.ReactNode,
 }
 export interface FitProps extends TaglessFitProps, React.HTMLAttributes<HTMLDivElement> {
   TRY_TAGLESS?: boolean,
-  forwardRef?: (node: any) => void,
+  forwardRef?: any,
 }
 
 export default class Fit extends React.PureComponent<FitProps> {
@@ -64,8 +64,7 @@ export default class Fit extends React.PureComponent<FitProps> {
       zIndex,
       stick,
       notParent,
-      screen,
-      parent,
+      cover,
       scroll,
       colSpan,
       rowSpan,
@@ -101,8 +100,7 @@ export default class Fit extends React.PureComponent<FitProps> {
         scroll && css.scroll,
         inline && css.inline,
         stick && css[`stick-${stick}`],
-        parent && css.parent,
-        screen && css.screen,
+        cover && css[`cover-${cover}`],
         offset && css[`offset-${offset}`],
         notParent && css.notParent,
         className

@@ -21,7 +21,7 @@ export default class Button extends React.PureComponent<ButtonProps> {
           <Fit width="fit-content">
 
               {/* This is stroke for focus */}
-              <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent offset="x2s">
+              <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" offset="x2s">
                 <Line className={reaction.props.className} fill={reaction.focus ? "accent" : "none"}>
                   <Box radius={radius} />
                 </Line>

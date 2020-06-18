@@ -19,7 +19,7 @@ import {Box, Font, Gap, Align} from 'themeor'
 class FontDemo extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr" horGap="md">
+      <Align template="1fr 1fr 1fr" gapHor="md">
         <Font fill="base" align="center">Black Text</Font>
         <Font fill="accent" align="center">Blue Text</Font>
         <Font fill="--demo-var" align="center">Custom Color</Font>

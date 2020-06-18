@@ -20,7 +20,7 @@ export class Wrapper extends React.PureComponent<Props> {
           <Gap />
           {index > 0 && <Line fill="faint" />}
           <Gap />
-          <Align template="3fr 1fr 1fr" vert="center" vertGap="xs" horGap="x3l">
+          <Align template="3fr 1fr 1fr" vert="center" gapVert="xs" gapHor="x3l">
             <Font {...tableHeaderProps}>{group.props?.title}</Font>
             <Font {...tableHeaderProps}>Type</Font>
             <Font {...tableHeaderProps}>Default</Font>

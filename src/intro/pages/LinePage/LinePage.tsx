@@ -11,7 +11,7 @@ export default class BoxPage extends React.PureComponent<RouteChildrenProps> {
 
     return (
       <Wrapper
-        title="<Line />"
+        title="Line"
         description="Controlls all lines including borders"
         prev="/font"
         next="/icon"

@@ -1,30 +1,29 @@
 import React from 'react'
 import css from './Gap.module.scss'
 import cn from '../utils/class-name'
+import consoleMessage from '../utils/console-message'
 import * as Types from '../config-types'
 import {ThemeContext} from '../context'
 import TryTagless from '../TryTagless'
-import newId from '../utils/new-id'
 
 export interface PureGapProps {
   size?: Types.Scale | 'none',
-  inrow?: boolean,
   vert?: Types.Scale | 'none',
   hor?: Types.Scale | 'none',
   top?: Types.Scale | 'none',
   right?: Types.Scale | 'none',
   bottom?: Types.Scale | 'none',
   left?: Types.Scale | 'none',
-  width?: string,
-  height?: string,
+  inrow?: boolean,
 }
-export interface TaglessGapProps extends PureGapProps,  React.ComponentPropsWithoutRef<any> {
+export interface TaglessGapProps extends PureGapProps {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
+  children?: React.ReactNode,
 }
 export interface GapProps extends TaglessGapProps, React.HTMLAttributes<HTMLDivElement> {
   TRY_TAGLESS?: boolean,
-  forwardRef?: (node: any) => void,
+  forwardRef?: (node: any) => any,
 }
 
 interface GapState {
@@ -42,7 +41,7 @@ export default class Gap extends React.PureComponent<GapProps, GapState> {
   ref = (node: any) => {
     const {forwardRef, inrow} = this.props
     if (!node) {return}
-    forwardRef && forwardRef(node)
+    typeof forwardRef === 'function' && forwardRef(node)
 
     if (inrow === true) {
       this.setState({inrow: true})
@@ -62,8 +61,6 @@ export default class Gap extends React.PureComponent<GapProps, GapState> {
     const {
       className,
       size,
-      width,
-      height,
       top,
       vert,
       hor,
@@ -78,7 +75,14 @@ export default class Gap extends React.PureComponent<GapProps, GapState> {
       ...restProps
     } = this.props
 
-    const inrow = this.state.inrow || this.props.inrow
+    if (this.props.inrow && !!children) {
+      consoleMessage({
+        source: Gap,
+        text: "Prop 'inrow' will be neglected because it work only when there is no children",
+        type: 'error',
+      })
+    }
+    const inrow = !children && (this.state.inrow || this.props.inrow)
 
     const defaultGap = 'md'
 

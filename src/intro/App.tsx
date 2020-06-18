@@ -51,7 +51,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
           <Font size="md" family="regular" fill="base" align="left" lineHeight="md">
             <Box.TryTagless fill="base">
               <Align.TryTagless template="240px 1fr">
-                <Fit minWidth="1024px" screen>
+                <Fit minWidth="1024px" cover="screen">
 
                   <Align.TryTagless>
                     <Fit.TryTagless height="100vh" scroll>
@@ -68,7 +68,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                   </Align.TryTagless>
 
                   <Fit height="100vh">
-                    <Fit.TryTagless parent scroll>
+                    <Fit.TryTagless cover="parent" scroll>
                       <Box shadow="lg" forwardRef={this.refContent}>
                         <div id="content-top-id" />
                         <Switch>
@@ -80,7 +80,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                     </Fit.TryTagless>
 
                     {loading && (
-                      <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent>
+                      <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent">
                         <Box fill="base">
                           <Effect transparency="xs" />
                         </Box>

@@ -19,7 +19,7 @@ import {Line, Align} from 'themeor'
 class LineDemo extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr" horGap="md">
+      <Align template="1fr 1fr 1fr" gapHor="md">
         <Line />
         <Line fill="accent" weight="lg" />
         <Line fill="--demo-var" weight="xl" />
@@ -29,7 +29,7 @@ class LineDemo extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr 1fr" horGap="md">
+          <Align template="1fr 1fr 1fr" gapHor="md">
             <Line />
             <Line fill="accent" weight="lg" />
             <Line fill="--demo-var" weight="xl" />
@@ -49,7 +49,7 @@ import {Line, Box, Gap, Font, Align} from 'themeor'
 class LineDemo extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr" horGap="md">
+      <Align template="1fr 1fr 1fr" gapHor="md">
         <Line>
           <Gap>
             <Font align="center">Border line</Font>
@@ -75,7 +75,7 @@ class LineDemo extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr 1fr" horGap="md">
+          <Align template="1fr 1fr 1fr" gapHor="md">
             <Line>
               <Gap>
                 <Font align="center">Border line</Font>

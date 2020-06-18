@@ -8,7 +8,7 @@ export interface TryTaglessProps {
   children?: any,
   recursive?: boolean,
   force?: boolean,
-  forwardRef?: (node: any) => void,
+  forwardRef?: any,
   [X: string]: any,
 }
 

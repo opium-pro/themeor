@@ -5,7 +5,7 @@ import * as Types from '../config-types'
 import TryTagless from '../TryTagless'
 import Fit from '../Fit'
 import {ThemeContext} from '../context'
-import newId from '../utils/new-id'
+import Gap from '../Gap'
 
 export interface PureAlignProps {
   row?: boolean,
@@ -13,16 +13,17 @@ export interface PureAlignProps {
   template?: string,
   vert?: 'stretch' | 'top' | 'center' | 'bottom',
   hor?: 'stretch' | 'left' | 'center' | 'right',
-  vertAlign?: Types.Scale,
-  horAlign?: Types.Scale,
+  gapVert?: Types.Scale,
+  gapHor?: Types.Scale,
 }
-export interface TaglessAlignProps extends PureAlignProps,  React.ComponentPropsWithoutRef<any> {
+export interface TaglessAlignProps extends PureAlignProps {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
+  children?: React.ReactNode,
 }
 export interface AlignProps extends TaglessAlignProps, React.HTMLAttributes<HTMLDivElement> {
   TRY_TAGLESS?: boolean,
-  forwardRef?: (node: any) => void,
+  forwardRef?: any,
 }
 
 export default class Align extends React.PureComponent<AlignProps> {
@@ -38,8 +39,8 @@ export default class Align extends React.PureComponent<AlignProps> {
       className,
       TRY_TAGLESS,
       template,
-      vertGap,
-      horGap,
+      gapVert,
+      gapHor,
       style,
       stack,
       FORCE_TAGLESS,
@@ -59,8 +60,8 @@ export default class Align extends React.PureComponent<AlignProps> {
         !row && !stack && !template && css.col,
         vert && css[`vert-${vert}`],
         hor && css[`hor-${hor}`],
-        vertGap && css[`vert-gap-${vertGap}`],
-        horGap && css[`hor-gap-${horGap}`],
+        gapVert && css[`vert-gap-${gapVert}`],
+        gapHor && css[`hor-gap-${gapHor}`],
         stack && css.stack,
         stack && css.row,
         !!template && css.template,
@@ -71,11 +72,19 @@ export default class Align extends React.PureComponent<AlignProps> {
       ...restProps,
     }
 
-    if (!template && (vertGap || horGap)) {
-      const {children, ...restComponentProps} = componentProps
+    if (!template && (gapVert || gapHor)) {
+      if (React.Children.count(children) === 1) {
+        return (
+          <Gap vert={gapVert} hor={gapHor}>
+            {children}
+          </Gap>
+        )
+      }
+
+      const {children: componentChildren, ...restComponentProps} = componentProps
       const wrapChildClass = cn(
-        vertGap && css[`item-vert-gap-${vertGap}`],
-        horGap && css[`item-hor-gap-${horGap}`],
+        gapVert && css[`item-vert-gap-${gapVert}`],
+        gapHor && css[`item-hor-gap-${gapHor}`],
       )
 
       return (

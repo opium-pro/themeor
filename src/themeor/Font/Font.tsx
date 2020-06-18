@@ -23,13 +23,14 @@ export interface PureFontProps {
   noselect?: boolean,
   nowrap?: boolean,
 }
-export interface TaglessFontProps extends PureFontProps,  React.ComponentPropsWithoutRef<any> {
+export interface TaglessFontProps extends PureFontProps {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
+  children?: React.ReactNode,
 }
 export interface FontProps extends TaglessFontProps, React.HTMLAttributes<HTMLDivElement> {
   TRY_TAGLESS?: boolean,
-  forwardRef?: (node: any) => void,
+  forwardRef?: any,
 }
 
 export default class Font extends React.PureComponent<FontProps> {

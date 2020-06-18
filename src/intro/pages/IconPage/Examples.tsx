@@ -51,7 +51,7 @@ import {Icon, Align} from 'themeor'
 class IconDemo extends React.Component {
   render() {
     return(
-      <Align row horGap="lg" vert="center">
+      <Align row gapHor="lg" vert="center">
         <Icon />
         <Icon name="bell" fill="accent" size="lg" />
         <Icon name="search" fill="critic" size="xl" />
@@ -60,7 +60,7 @@ class IconDemo extends React.Component {
   }
 }`         }
         >
-          <Align row horGap="lg" vert="center">
+          <Align row gapHor="lg" vert="center">
             <Icon />
             <Icon name="bell" fill="accent" size="lg" />
             <Icon name="search" fill="critic" size="xl" />

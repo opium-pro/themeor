@@ -27,7 +27,7 @@ export default function App() {
       <Line fill="faint" />
       <Gap />
 
-      <Align row horGap="md" vert="center">
+      <Align row gapHor="md" vert="center">
         <Box fill="accent" strong>
           <Gap vert="sm" hor="x2l">
             <Font size="sm" weight="700" uppercase>Text #1</Font>
