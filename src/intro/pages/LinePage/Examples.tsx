@@ -40,7 +40,7 @@ class LineDemo extends React.Component {
       <Wrapper title="Border Line">
         <Item
           description={(<>
-            If Line component has children, it will create a border. To set border radius you need to use <Link href="/tag-merging">MERGE prop</Link> and also use <Link href="/box">Box component</Link>
+            If Line component has children, it will create a border. To set border radius you need to use <Link href="/tag-merging">TRY_TAGLESS prop</Link> and also use <Link href="/box">Box component</Link>
           </>)}
           markLines={[8,14,20,21]}
           code={`import React from 'react'
@@ -62,13 +62,13 @@ class LineDemo extends React.Component {
           </Gap>
         </Line>
 
-        <Line MERGE>
+        <Line.TryTagless>
           <Box radius="max">
             <Gap>
               <Font align="center">Border radius</Font>
             </Gap>
           </Box>
-        </Line>
+        </Line.TryTagless>
       </Align>
     )
   }
@@ -88,13 +88,13 @@ class LineDemo extends React.Component {
               </Gap>
             </Line>
 
-            <Line MERGE>
+            <Line.TryTagless>
               <Box radius="max">
                 <Gap>
                   <Font align="center">Border radius</Font>
                 </Gap>
               </Box>
-            </Line>
+            </Line.TryTagless>
           </Align>
         </Item>
       </Wrapper>

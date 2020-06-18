@@ -3,11 +3,10 @@ import css from './Line.module.scss'
 import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
 import * as Types from '../config-types'
-import Merge from '../Merge'
+import TryTagless from '../TryTagless'
 import isCuctomVariable from '../utils/var-is-custom'
-import newId from '../utils/new-id'
 
-export interface LineProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PureLineProps {
   fill?: string,
   inverse?: boolean,
   weight?: Types.Scale | 'none',
@@ -15,21 +14,25 @@ export interface LineProps extends React.HTMLAttributes<HTMLDivElement> {
   right?: Types.Scale | 'none',
   bottom?: Types.Scale | 'none',
   left?: Types.Scale | 'none',
-  MERGE_CHAIN?: true,
-  MERGE?: boolean,
-  FORCE_MERGE?: true,
-  forwardedRef?: (node: any) => void,
+}
+export interface TaglessLineProps extends PureLineProps,  React.ComponentPropsWithoutRef<any> {
+  TRY_RECURSIVE_TAGLESS?: true,
+  FORCE_TAGLESS?: true,
+}
+export interface LineProps extends TaglessLineProps, React.HTMLAttributes<HTMLDivElement> {
+  TRY_TAGLESS?: boolean,
+  forwardRef?: (node: any) => void,
 }
 
 export default class Line extends React.PureComponent<LineProps> {
   static contextType = ThemeContext
   static defaultProps = {}
-  static id = newId()
+  static TryTagless = (props: TaglessLineProps) => <Line TRY_TAGLESS {...props} />
 
   render() {
     const {
       className,
-      MERGE,
+      TRY_TAGLESS,
       inverse,
       weight,
       fill,
@@ -37,9 +40,9 @@ export default class Line extends React.PureComponent<LineProps> {
       right,
       bottom,
       left,
-      forwardedRef,
-      MERGE_CHAIN,
-      FORCE_MERGE,
+      forwardRef,
+      TRY_RECURSIVE_TAGLESS,
+      FORCE_TAGLESS,
       children,
       style = {},
       ...restProps
@@ -69,14 +72,10 @@ export default class Line extends React.PureComponent<LineProps> {
       ...restProps,
     }
 
-    if (typeof children === 'function') {
-      return children(componentProps)
-    }
-
-    return (MERGE || MERGE_CHAIN || FORCE_MERGE) ? (
-      <Merge forwardedRef={forwardedRef} force={FORCE_MERGE} recursive={MERGE_CHAIN} {...componentProps} />
+    return (TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
+      <TryTagless forwardRef={forwardRef} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
     ) : (
-      <div ref={forwardedRef} {...componentProps} />
+      <div ref={forwardRef} {...componentProps} />
     )
   }
 }

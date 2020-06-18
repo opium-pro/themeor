@@ -18,7 +18,7 @@ export default class NavLink extends React.PureComponent<NavLinkProps> {
     return (
       <Reaction track={['hover', 'focus']}>
         {(r: any) => (
-          <Fit MERGE_CHAIN>
+          <Fit.TryTagless TRY_RECURSIVE_TAGLESS>
             <Line weight="none" fill="accent">
               <Box
                 fill={(r.hover || r.focus || active) ? 'accent' : 'base'}
@@ -26,7 +26,7 @@ export default class NavLink extends React.PureComponent<NavLinkProps> {
               >
                 <Gap vert="sm" hor="lg">
                   <Font
-                    FORCE_MERGE
+                    FORCE_TAGLESS
                     {...r.props}
                     inline
                     size="lg"
@@ -38,7 +38,7 @@ export default class NavLink extends React.PureComponent<NavLinkProps> {
                 </Gap>
               </Box>
             </Line>
-          </Fit>
+          </Fit.TryTagless>
         )}
       </Reaction>
     )

@@ -127,3 +127,17 @@ $max-radius: 1000px;
     box-shadow: var(--t-box-shadow-#{$value});
   }
 }
+
+// Shadow Inner
+@each $value in $scale {
+  .shadow-inner-#{$value} {
+    box-shadow: inset var(--t-box-shadow-inner-#{$value});
+  }
+}
+
+// Glow
+@each $value in $scale {
+  .glow-#{$value} {
+    box-shadow: var(--t-box-glow-#{$value});
+  }
+}

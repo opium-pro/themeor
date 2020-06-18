@@ -28,7 +28,7 @@ export class Item extends React.PureComponent<Props> {
 
       {children && (<>
         <Gap />
-        <Line MERGE_CHAIN fill="faint">
+        <Line.TryTagless TRY_RECURSIVE_TAGLESS fill="faint">
           <Fit clip>
             <Box radius="md">
               <Box fill="faint">
@@ -40,13 +40,13 @@ export class Item extends React.PureComponent<Props> {
               </Box>
 
               <Gap>
-                <Fit width="100%" MERGE>
+                <Fit.TryTagless width="100%">
                   {children}
-                </Fit>
+                </Fit.TryTagless>
               </Gap>
             </Box>
           </Fit>
-        </Line>
+        </Line.TryTagless>
       </>)}
 
       <Gap size="x3l" />

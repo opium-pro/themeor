@@ -21,8 +21,8 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
               <Align hor="center" >
                 <Gap size="x2l" />
 
-                <Fit MERGE width="100%" height="200px">
-                  <Align MERGE vert="center" hor="center">
+                <Fit.TryTagless width="100%" height="200px">
+                  <Align.TryTagless vert="center" hor="center">
                     <Box strong radius="max" shadow="lg" img="/img/intro.jpg">
                       <Font family="special" size="x3l" weight="800">Themeor</Font>
 
@@ -38,8 +38,8 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
                         <img alt="" src="/img/planet.svg" />
                       </Fit>
                     </Box>
-                  </Align>
-                </Fit>
+                  </Align.TryTagless>
+                </Fit.TryTagless>
 
                 <Gap size="x2l" />
 

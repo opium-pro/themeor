@@ -20,23 +20,23 @@ export default class Toggle extends React.PureComponent<ToggleProps> {
     return (
       <Reaction track={['hover', 'focus']} cursor="pointer">
         {(r: any) => (
-          <Fit MERGE_CHAIN width="56px">
+          <Fit.TryTagless TRY_RECURSIVE_TAGLESS width="56px">
               <Box noContext fill={(on && 'accent') || 'faint-up'} strong={on} radius="max">
                 <Gap size="x2s">
                   <label {...r.props}>
-                    <Fit MERGE hidden parent>
+                    <Fit.TryTagless hidden parent>
                       <input onChange={onChange} type="checkbox" checked={on} {...restProps} />
-                    </Fit>
+                    </Fit.TryTagless>
 
                     {/* This is stroke for focus */}
-                    <Fit MERGE_CHAIN parent offset="x2s">
+                    <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent offset="x2s">
                       <Line className={r.props.className} fill={(r.focus || r.hover) ? "accent" : "none"}>
                         <Box radius="max" />
                       </Line>
-                    </Fit>
+                    </Fit.TryTagless>
 
-                    <Fit
-                      MERGE_CHAIN
+                    <Fit.TryTagless
+                      TRY_RECURSIVE_TAGLESS
                       width="24px"
                       height="24px"
                       className={r.props.className}
@@ -45,11 +45,11 @@ export default class Toggle extends React.PureComponent<ToggleProps> {
                       <Line fill={on ? "none" : "faint"}>
                         <Box fill="base" radius="max"/>
                       </Line>
-                    </Fit>
+                    </Fit.TryTagless>
                   </label>
                 </Gap>
               </Box>
-          </Fit>
+          </Fit.TryTagless>
         )}
       </Reaction>
     )

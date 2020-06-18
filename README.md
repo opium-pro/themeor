@@ -34,13 +34,13 @@ export default function App() {
           </Gap>
         </Box>
 
-        <Line MERGE fill="critic">
+        <Line.TryTagless fill="critic">
           <Box fill="critic" radius="max">
             <Gap>
               <Font fill="critic">Text #2</Font>
             </Gap>
           </Box>
-        </Line>
+        </Line.TryTagless>
 
         <Box fill="base" strong radius="md">
           <Fit width="300px">

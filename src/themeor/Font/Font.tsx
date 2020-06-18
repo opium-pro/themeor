@@ -5,9 +5,9 @@ import cn from '../utils/class-name'
 import * as Types from '../config-types'
 import newId from '../utils/new-id'
 import isCuctomVariable from '../utils/var-is-custom'
-import Merge from '../Merge'
+import TryTagless from '../TryTagless'
 
-export interface FontProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PureFontProps {
   fill?: string,
   inverse?: boolean,
   size?: Types.Scale,
@@ -20,18 +20,22 @@ export interface FontProps extends React.HTMLAttributes<HTMLDivElement> {
   family?: Types.FontFamily,
   align?: 'left' | 'right' | 'center',
   inline?: boolean,
-  MERGE?: boolean,
-  MERGE_CHAIN?: true,
-  FORCE_MERGE?: true,
   noselect?: boolean,
   nowrap?: boolean,
-  forwardedRef?: (node: any) => void,
+}
+export interface TaglessFontProps extends PureFontProps,  React.ComponentPropsWithoutRef<any> {
+  TRY_RECURSIVE_TAGLESS?: true,
+  FORCE_TAGLESS?: true,
+}
+export interface FontProps extends TaglessFontProps, React.HTMLAttributes<HTMLDivElement> {
+  TRY_TAGLESS?: boolean,
+  forwardRef?: (node: any) => void,
 }
 
 export default class Font extends React.PureComponent<FontProps> {
   static contextType = ThemeContext
   static defaultProps = {}
-  static id = newId()
+  static TryTagless = (props: TaglessFontProps) => <Font TRY_TAGLESS {...props} />
 
   render() {
     const {
@@ -48,12 +52,12 @@ export default class Font extends React.PureComponent<FontProps> {
       nowrap,
       align,
       style = {},
-      MERGE,
-      MERGE_CHAIN,
-      FORCE_MERGE,
+      TRY_TAGLESS,
+      TRY_RECURSIVE_TAGLESS,
+      FORCE_TAGLESS,
       noselect,
       lineHeight,
-      forwardedRef,
+      forwardRef,
       letterSpacing,
       children,
       ...restProps
@@ -93,14 +97,10 @@ export default class Font extends React.PureComponent<FontProps> {
       ...restProps,
     }
 
-    if (typeof children === 'function') {
-      return children(componentProps)
-    }
-
-    return (MERGE || MERGE_CHAIN || FORCE_MERGE) ? (
-      <Merge forwardedRef={forwardedRef} force={FORCE_MERGE} recursive={MERGE_CHAIN} {...componentProps} />
+    return (TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
+      <TryTagless forwardRef={forwardRef} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
     ) : (
-      <div ref={forwardedRef} {...componentProps} />
+      <div ref={forwardRef} {...componentProps} />
     )
   }
 }

@@ -4,7 +4,6 @@ import css from './Reaction.module.scss'
 import * as Types from '../config-types'
 import consoleMessage from '../utils/console-message'
 import {ThemeContext} from '../context'
-import newId from '../utils/new-id'
 
 type TrackType = 'active' | 'focus' | 'hover'
 
@@ -22,7 +21,6 @@ export interface ReactionState {
 
 export default class Reaction extends React.PureComponent<ReactionProps, ReactionState> {
   static contextType = ThemeContext
-  static id = newId()
   static defaultProps = {speed: 'md', cursor: 'pointer'}
   state = {
     hover: false,

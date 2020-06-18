@@ -1,7 +1,6 @@
 import React from 'react'
 import {ThemeContext} from '../context'
 import consoleMessage from '../utils/console-message'
-import newId from '../utils/new-id'
 
 export interface TemplateProps {
   is?: string,
@@ -12,7 +11,6 @@ export interface TemplateProps {
 
 export default class Template extends React.PureComponent<TemplateProps> {
   static contextType = ThemeContext
-  static id = newId()
 
   static get = () => {
     return localStorage.getItem('themeor-template-global')

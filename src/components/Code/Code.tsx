@@ -37,14 +37,14 @@ export default class Code extends React.PureComponent<CodeProps> {
     const boxFill = (plain && "none") || (inverse && "base") || "faint"
 
     return(
-      <Box
-        MERGE_CHAIN
+      <Box.TryTagless
+        TRY_RECURSIVE_TAGLESS
         fill={boxFill}
         radius="sm"
         strong={inverse || backIsStrong}
         {...restProps}
       >
-        <Gap MERGE vert={gapVert} hor={gapHor}>
+        <Gap.TryTagless vert={gapVert} hor={gapHor}>
           <Font inline={inline}>
             <SyntaxHighlighter
               showLineNumbers={!inline && !plain}
@@ -72,8 +72,8 @@ export default class Code extends React.PureComponent<CodeProps> {
               {children}
             </SyntaxHighlighter>
           </Font>
-        </Gap>
-      </Box>
+        </Gap.TryTagless>
+      </Box.TryTagless>
     )
   }
 }

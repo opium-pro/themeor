@@ -10,7 +10,7 @@ export class Item extends React.PureComponent<ItemProps> {
     return (
       <Reaction track={['hover', 'focus']}>
         {(r: any) => (
-          <Fit MERGE_CHAIN>
+          <Fit.TryTagless TRY_RECURSIVE_TAGLESS>
             <Line weight="none" fill="accent">
               <Box
                 fill={(r.hover || r.focus || active) ? 'accent' : 'base'}
@@ -24,14 +24,14 @@ export class Item extends React.PureComponent<ItemProps> {
                     fill={active ? "base" : "accent"}
                     weight="500"
                     noselect
-                    FORCE_MERGE
+                    FORCE_TAGLESS
                   >
                     {children}
                   </Font>
                 </Gap>
               </Box>
             </Line>
-          </Fit>
+          </Fit.TryTagless>
         )}
       </Reaction>
     )

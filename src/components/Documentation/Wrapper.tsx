@@ -39,9 +39,9 @@ export class Wrapper extends React.PureComponent<Props> {
 
         {description && (<>
           <Gap />
-          <Font MERGE size="xl" weight="300">
+          <Font.TryTagless size="xl" weight="300">
             {description}
-          </Font></>
+          </Font.TryTagless></>
         )}
 
         <Gap size="lg" />

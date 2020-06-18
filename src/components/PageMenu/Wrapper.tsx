@@ -12,7 +12,7 @@ export class Wrapper extends React.PureComponent<WrapperProps> {
 
     return (
       <Align hor="left">
-        <Line fill="faint" MERGE_CHAIN>
+        <Line.TryTagless fill="faint" TRY_RECURSIVE_TAGLESS>
           <Fit clip>
             <Box radius="sm">
               <Align row>
@@ -22,7 +22,7 @@ export class Wrapper extends React.PureComponent<WrapperProps> {
               </Align>
             </Box>
           </Fit>
-        </Line>
+        </Line.TryTagless>
       </Align>
     )
   }

@@ -3,10 +3,10 @@ import css from './Gap.module.scss'
 import cn from '../utils/class-name'
 import * as Types from '../config-types'
 import {ThemeContext} from '../context'
-import Merge from '../Merge'
+import TryTagless from '../TryTagless'
 import newId from '../utils/new-id'
 
-export interface GapProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PureGapProps {
   size?: Types.Scale | 'none',
   inrow?: boolean,
   vert?: Types.Scale | 'none',
@@ -17,27 +17,32 @@ export interface GapProps extends React.HTMLAttributes<HTMLDivElement> {
   left?: Types.Scale | 'none',
   width?: string,
   height?: string,
-  MERGE?: boolean,
-  MERGE_CHAIN?: true,
-  FORCE_MERGE?: true,
-  forwardedRef?: (node: any) => void,
 }
+export interface TaglessGapProps extends PureGapProps,  React.ComponentPropsWithoutRef<any> {
+  TRY_RECURSIVE_TAGLESS?: true,
+  FORCE_TAGLESS?: true,
+}
+export interface GapProps extends TaglessGapProps, React.HTMLAttributes<HTMLDivElement> {
+  TRY_TAGLESS?: boolean,
+  forwardRef?: (node: any) => void,
+}
+
 interface GapState {
   inrow?: boolean,
 }
 
 export default class Gap extends React.PureComponent<GapProps, GapState> {
   static contextType = ThemeContext
-  static id = newId()
+  static TryTagless = (props: TaglessGapProps) => <Gap TRY_TAGLESS {...props} />
   static defaultProps = {}
 
   state = {inrow: false}
 
   // If is inside of flexbox row, make inrow automatically
   ref = (node: any) => {
-    const {forwardedRef, inrow} = this.props
+    const {forwardRef, inrow} = this.props
     if (!node) {return}
-    forwardedRef && forwardedRef(node)
+    forwardRef && forwardRef(node)
 
     if (inrow === true) {
       this.setState({inrow: true})
@@ -66,10 +71,10 @@ export default class Gap extends React.PureComponent<GapProps, GapState> {
       bottom,
       left,
       children,
-      MERGE,
-      MERGE_CHAIN,
-      FORCE_MERGE,
-      forwardedRef,
+      TRY_TAGLESS,
+      TRY_RECURSIVE_TAGLESS,
+      FORCE_TAGLESS,
+      forwardRef,
       ...restProps
     } = this.props
 
@@ -96,12 +101,8 @@ export default class Gap extends React.PureComponent<GapProps, GapState> {
       ...restProps,
     }
 
-    if (typeof children === 'function') {
-      return children(componentProps)
-    }
-
-    return (MERGE || MERGE_CHAIN || FORCE_MERGE) ? (
-      <Merge forwardedRef={this.ref} force={FORCE_MERGE} recursive={MERGE_CHAIN} {...componentProps} />
+    return (TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
+      <TryTagless forwardRef={this.ref} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
     ) : (
       <div ref={this.ref} {...componentProps} />
     )

@@ -35,6 +35,8 @@ export type ThemeConfig = any | {
   box?: {
     radius?: {[X in Scale]: string},
     shadow?: {[X in Scale]: string},
+    'shadow-inner'?: {[X in Scale]: string},
+    glow?: {[X in Scale]: string},
     fill?: Fill,
   },
   font?: {

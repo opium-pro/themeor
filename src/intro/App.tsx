@@ -49,13 +49,13 @@ export default class App extends React.PureComponent<AppProps, AppState> {
       <AppContext.Provider value={this.state}>
         <Theme config={lightTheme as ConfigTypes.ThemeConfig} icons={icons as ConfigTypes.ThemeIcons}>
           <Font size="md" family="regular" fill="base" align="left" lineHeight="md">
-            <Box MERGE fill="base">
-              <Align MERGE template="240px 1fr">
+            <Box.TryTagless fill="base">
+              <Align.TryTagless template="240px 1fr">
                 <Fit minWidth="1024px" maxHeight="100%" screen>
 
-                  <Align MERGE>
-                    <Fit MERGE height="100%" scroll>
-                      <Box fill="faint" forwardedRef={this.refAside}>
+                  <Align.TryTagless>
+                    <Fit.TryTagless height="100%" scroll>
+                      <Box fill="faint" forwardRef={this.refAside}>
                         <MenuAdapter
                           data={navigation}
                           component={SideMenu}
@@ -64,12 +64,12 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                         <Font>Github</Font>
                         <Font>NPM</Font>
                       </Box>
-                    </Fit>
-                  </Align>
+                    </Fit.TryTagless>
+                  </Align.TryTagless>
 
                   <Fit height="100%">
-                    <Fit parent MERGE scroll>
-                      <Box shadow="lg" forwardedRef={this.refContent}>
+                    <Fit.TryTagless parent scroll>
+                      <Box shadow="lg" forwardRef={this.refContent}>
                         <div id="content-top-id" />
                         <Switch>
                           {navigation.map(({key, exact, path, component}) => (
@@ -77,21 +77,21 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                           ))}
                         </Switch>
                       </Box>
-                    </Fit>
+                    </Fit.TryTagless>
 
                     {loading && (
-                      <Fit MERGE_CHAIN parent>
+                      <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent>
                         <Box fill="base">
                           <Effect transparency="xs" />
                         </Box>
-                      </Fit>
+                      </Fit.TryTagless>
                     )}
 
                   </Fit>
 
                 </Fit>
-              </Align>
-            </Box>
+              </Align.TryTagless>
+            </Box.TryTagless>
           </Font>
         </Theme>
       </AppContext.Provider>

@@ -75,19 +75,19 @@ export default class BoxPage_Props extends React.PureComponent {
 
         <Group title="Other Props">
 
-          <Item name="MERGE" type="boolean" default="undefined" description={<>
+          <Item name="TRY_TAGLESS" type="boolean" default="undefined" description={<>
             If possible, doesn't create separate tag, but passes all the props to the only child. See <Link href="/tag-merging">Tag Merging</Link> for more information
           </>} />
 
-          <Item name="MERGE_CHAIN" type="boolean" default="undefined" description={<>
-            If possible, doesn't create separate tag, but passes all the props to the only child. And also passes <Code inline>MERGE_CHAIN="true"</Code> to the child themeor component. See <Link href="/tag-merging">Tag Merging</Link> for more information
+          <Item name="TRY_RECURSIVE_TAGLESS" type="boolean" default="undefined" description={<>
+            If possible, doesn't create separate tag, but passes all the props to the only child. And also passes <Code inline>TRY_RECURSIVE_TAGLESS="true"</Code> to the child themeor component. See <Link href="/tag-merging">Tag Merging</Link> for more information
           </>} />
 
-          <Item name="FORCE_MERGE" type="boolean" default="undefined" description={<>
-            Works like <Code inline>MERGE</Code>, but passes props even into non-themeor components. Be careful, in that case child component must accept at least <Code inline>className</Code> and <Code inline>style</Code> props to work properly. See <Link href="/tag-merging">Tag Merging</Link> for more information
+          <Item name="FORCE_TAGLESS" type="boolean" default="undefined" description={<>
+            Works like <Code inline>TRY_TAGLESS</Code>, but passes props even into non-themeor components. Be careful, in that case child component must accept at least <Code inline>className</Code> and <Code inline>style</Code> props to work properly. See <Link href="/tag-merging">Tag Merging</Link> for more information
           </>} />
 
-          <Item name="forwardedRef" type="function" default="undefined" description={<>
+          <Item name="forwardRef" type="function" default="undefined" description={<>
             Passes <Code inline>ref</Code> prop to the rendering tag
           </>} />
 

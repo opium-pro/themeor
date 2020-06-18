@@ -15,8 +15,8 @@ export class Item extends React.PureComponent<ItemProps> {
       <Reaction track={['hover', 'focus']} cursor="pointer" {...restProps}>
         {(r: any) => (
 
-            <Gap
-              MERGE_CHAIN
+            <Gap.TryTagless
+              TRY_RECURSIVE_TAGLESS
               vert="sm"
               hor="md"
             >
@@ -31,13 +31,13 @@ export class Item extends React.PureComponent<ItemProps> {
                     weight={active ? '700' : '500'}
                     inline={false}
                     tabIndex={0}
-                    FORCE_MERGE
+                    FORCE_TAGLESS
                     noselect
                   >
                     {children}
                   </Font>
               </Box>
-            </Gap>
+            </Gap.TryTagless>
 
         )}
       </Reaction>

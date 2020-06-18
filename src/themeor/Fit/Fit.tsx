@@ -2,11 +2,11 @@ import React from 'react'
 import css from './Fit.module.scss'
 import cn from '../utils/class-name'
 import * as Types from '../config-types'
-import Merge from '../Merge'
+import TryTagless from '../TryTagless'
 import {ThemeContext} from '../context'
 import newId from '../utils/new-id'
 
-export interface FitProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PureFitProps {
   width?: string,
   height?: string,
   maxWidth?: string,
@@ -22,24 +22,27 @@ export interface FitProps extends React.HTMLAttributes<HTMLDivElement> {
   spacer?: boolean,
   stick?: 'top-left' | 'top' | 'top-right' | 'right' | 'bottom-right' | 'bottom' | 'bottom-left' | 'left',
   offset?: Types.Scale,
-  MERGE?: boolean,
-  MERGE_CHAIN?: true,
   zIndex?: number,
   notParent?: boolean,
-  style?: any,
   colSpan?: number,
   rowSpan?: number,
   inline?: boolean,
   scroll?: boolean,
-  FORCE_MERGE?: true,
-  forwardedRef?: (node: any) => void,
   clip?: boolean,
+}
+export interface TaglessFitProps extends PureFitProps,  React.ComponentPropsWithoutRef<any> {
+  TRY_RECURSIVE_TAGLESS?: true,
+  FORCE_TAGLESS?: true,
+}
+export interface FitProps extends TaglessFitProps, React.HTMLAttributes<HTMLDivElement> {
+  TRY_TAGLESS?: boolean,
+  forwardRef?: (node: any) => void,
 }
 
 export default class Fit extends React.PureComponent<FitProps> {
   static contextType = ThemeContext
   static defaultProps = {style: {}}
-  static id = newId()
+  static TryTagless = (props: TaglessFitProps) => <Fit TRY_TAGLESS {...props} />
 
   render() {
     const {
@@ -54,10 +57,10 @@ export default class Fit extends React.PureComponent<FitProps> {
       right,
       bottom,
       offset,
-      forwardedRef,
+      forwardRef,
       className,
       spacer,
-      MERGE,
+      TRY_TAGLESS,
       zIndex,
       stick,
       notParent,
@@ -70,12 +73,12 @@ export default class Fit extends React.PureComponent<FitProps> {
       inline,
       clip,
       children,
-      MERGE_CHAIN,
-      FORCE_MERGE,
+      TRY_RECURSIVE_TAGLESS,
+      FORCE_TAGLESS,
       ...restProps
     } = this.props
 
-    const newStyle = {...style}
+    const newStyle: any = {...style}
     if (left || offset) { newStyle.left = left || offset }
     if (top || offset) { newStyle.top = top || offset }
     if (right || offset) { newStyle.right = right || offset }
@@ -109,14 +112,10 @@ export default class Fit extends React.PureComponent<FitProps> {
       ...restProps,
     }
 
-    if (typeof children === 'function') {
-      return children(componentProps)
-    }
-
-    return (MERGE || MERGE_CHAIN || FORCE_MERGE) ? (
-      <Merge forwardedRef={forwardedRef} force={FORCE_MERGE} recursive={MERGE_CHAIN} {...componentProps} />
+    return (TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
+      <TryTagless forwardRef={forwardRef} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
     ) : (
-      <div ref={forwardedRef} {...componentProps} />
+      <div ref={forwardRef} {...componentProps} />
     )
   }
 }

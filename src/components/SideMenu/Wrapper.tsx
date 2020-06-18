@@ -11,11 +11,11 @@ export class Wrapper extends React.PureComponent<WrapperProps> {
     } = this.props
 
     return (
-      <Gap MERGE vert="sm" {...restProps}>
+      <Gap.TryTagless vert="sm" {...restProps}>
         <nav>
           {children}
         </nav>
-      </Gap>
+      </Gap.TryTagless>
     )
   }
 }

@@ -7,11 +7,11 @@ export default class ContentWrapper extends React.PureComponent<React.AllHTMLAtt
     const {children, ...restProps} = this.props
     return(
       <Align hor="center" {...restProps}>
-        <Fit MERGE width="700px">
+        <Fit.TryTagless width="700px">
           <Font family="regular" weight="400" size="md">
             {children}
           </Font>
-        </Fit>
+        </Fit.TryTagless>
       </Align>
     )
   }

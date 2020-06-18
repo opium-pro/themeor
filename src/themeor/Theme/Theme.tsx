@@ -4,23 +4,31 @@ import cssVariables from '../utils/css-variable'
 import newId from '../utils/new-id'
 import consoleMessage from '../utils/console-message'
 import {ThemeContext} from '../context'
-import Merge from '../Merge'
+import TryTagless from '../TryTagless'
 import './reset.scss'
 
-export interface ThemeProps {
+export interface PureThemeProps {
   config?: ThemeConfig,
   darkConfig?: ThemeConfig,
   icons?: ThemeIcons,
   global?: boolean,
-  MERGE?: boolean,
-  MERGE_CHAIN?: true,
-  FORCE_MERGE?: true,
-  forwardedRef?: (node: any) => void,
+  TRY_TAGLESS?: boolean,
+  TRY_RECURSIVE_TAGLESS?: true,
+  FORCE_TAGLESS?: true,
+  forwardRef?: (node: any) => void,
+}
+export interface TaglessThemeProps extends PureThemeProps,  React.ComponentPropsWithoutRef<any> {
+  TRY_RECURSIVE_TAGLESS?: true,
+  FORCE_TAGLESS?: true,
+}
+export interface ThemeProps extends TaglessThemeProps, React.HTMLAttributes<HTMLDivElement> {
+  TRY_TAGLESS?: boolean,
+  forwardRef?: (node: any) => void,
 }
 
 export default class Theme extends React.PureComponent<ThemeProps> {
   static contextType = ThemeContext
-  static id = newId()
+  static TryTagless = (props: TaglessThemeProps) => <Theme TRY_TAGLESS {...props} />
 
   componentDidUpdate() {
     this.setVariables()
@@ -65,10 +73,10 @@ export default class Theme extends React.PureComponent<ThemeProps> {
       config = {},
       children,
       icons,
-      MERGE,
-      MERGE_CHAIN,
-      FORCE_MERGE,
-      forwardedRef,
+      TRY_TAGLESS,
+      TRY_RECURSIVE_TAGLESS,
+      FORCE_TAGLESS,
+      forwardRef,
       ...restProps
     } = this.props
     const {themeContext = {}} = config
@@ -101,16 +109,12 @@ export default class Theme extends React.PureComponent<ThemeProps> {
       id: this.id,
     }
 
-    if (typeof children === 'function') {
-      return children(componentProps)
-    }
-
     return (
       <ThemeContext.Provider value={context}>
-        {this.global ? children : ((MERGE || MERGE_CHAIN || FORCE_MERGE) ? (
-          <Merge forwardedRef={forwardedRef} force={FORCE_MERGE} recursive={MERGE_CHAIN} {...componentProps} />
+        {this.global ? children : ((TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
+          <TryTagless forwardRef={forwardRef} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
         ) : (
-          <div ref={forwardedRef} {...componentProps} />
+          <div ref={forwardRef} {...componentProps} />
         ))}
       </ThemeContext.Provider>
     )

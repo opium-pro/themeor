@@ -34,7 +34,7 @@ export class Item extends React.PureComponent<Props> {
             {defValue && <Code inline>{`default: ${defValue}`}</Code>}
           </Align>
 
-          <Font nowrap FORCE_MERGE>
+          <Font nowrap FORCE_TAGLESS>
             <Link href="#list">see all props</Link>
           </Font>
         </Gap>

@@ -37,12 +37,12 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
       <Reaction className={className} track={disabled ? undefined : ['focus', 'hover']} cursor={disabled ? 'default': 'text'}>
         {(r: any) => (
           <div>
-            <Fit MERGE_CHAIN height="60px" {...r.props}>
+            <Fit.TryTagless TRY_RECURSIVE_TAGLESS height="60px" {...r.props}>
               <Line fill={(!r.focus && !r.hover && 'none') || (disabled && 'none') || (error && 'critic') || (r.focus && 'accent') || (r.hover && 'faint-up')} weight="md">
                 <Box noContext fill={(r.focus && 'none') || (error && 'critic') || (disabled && 'faint') || 'faint-up'} radius="sm">
 
                     {/* Label */}
-                    <Align MERGE_CHAIN vert="center">
+                    <Align.TryTagless TRY_RECURSIVE_TAGLESS vert="center">
                       <Fit parent height={(r.focus || value) ? "60%" : "100%"}>
                         <Gap hor="sm">
                           <Font
@@ -57,10 +57,10 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
                           </Font>
                         </Gap>
                       </Fit>
-                    </Align>
+                    </Align.TryTagless>
 
                     {placeholder && r.focus && !value && (
-                      <Fit MERGE_CHAIN parent height="60%" stick="bottom-left">
+                      <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent height="60%" stick="bottom-left">
                         <Align vert="center">
                           <Gap hor="sm">
                             <Font fill="faint" size="md">
@@ -68,11 +68,11 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
                             </Font>
                           </Gap>
                         </Align>
-                      </Fit>
+                      </Fit.TryTagless>
                     )}
 
                     {/* Input */}
-                    <Fit MERGE_CHAIN parent height="60%" stick="bottom-left">
+                    <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent height="60%" stick="bottom-left">
                       <Box>
                         <Gap hor="sm">
                           <Font fill={disabled ? 'faint': 'base'} size="md">
@@ -87,11 +87,11 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
                           </Font>
                         </Gap>
                       </Box>
-                    </Fit>
+                    </Fit.TryTagless>
 
                 </Box>
               </Line>
-            </Fit>
+            </Fit.TryTagless>
 
             {typeof error === 'string' && (<>
               <Gap size="x2s" />

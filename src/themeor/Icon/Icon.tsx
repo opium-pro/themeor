@@ -5,20 +5,18 @@ import cn from '../utils/class-name'
 import * as Types from '../config-types'
 import isCustomVariable from '../utils/var-is-custom'
 import consoleMessage from '../utils/console-message'
-import newId from '../utils/new-id'
 
 export interface IconProps extends React.HTMLAttributes<SVGElement> {
   fill?: string,
   inverse?: boolean,
   size: Types.Scale,
   name: string,
-  forwardedRef?: (node: any) => void,
+  forwardRef?: (node: any) => void,
 }
 
 export default class Icon extends React.PureComponent<IconProps> {
   static contextType = ThemeContext
   static defaultProps = {size: 'md', name: 'placeholder', fill: 'base'}
-  static id = newId()
 
   render() {
     const {
@@ -28,7 +26,7 @@ export default class Icon extends React.PureComponent<IconProps> {
       size,
       children,
       name,
-      forwardedRef,
+      forwardRef,
       ...restProps
     } = this.props
 
@@ -79,7 +77,7 @@ export default class Icon extends React.PureComponent<IconProps> {
         (inverse !== false) && (inverse || backIsStrong) && !isCustomVariable(fill) && css.inverse,
         className
       ),
-      ref: forwardedRef,
+      ref: forwardRef,
       ...restProps
     }
 

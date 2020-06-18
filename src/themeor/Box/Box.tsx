@@ -2,20 +2,18 @@ import React from 'react'
 import css from './Box.module.scss'
 import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
-import newId from '../utils/new-id'
 import * as Types from '../config-types'
 import isCuctomVariable from '../utils/var-is-custom'
-import Merge from '../Merge'
-// import Line from '../Line'
+import TryTagless from '../TryTagless'
+import Line from '../Line'
 
-
-export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PureBoxProps {
   fill?: string,
   strong?: boolean,
   inverse?: boolean,
   fancy?: boolean,
-  // lineFill?: string,
-  // lineWeight?: Types.Scale | 'none',
+  borderFill?: string,
+  borderWeight?: Types.Scale | 'none',
   radius?: Types.Scale | 'none' | 'max',
   radiusTop?: Types.Scale | 'none' | 'max',
   radiusBottom?: Types.Scale | 'none' | 'max',
@@ -26,18 +24,24 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   radiusBR?: Types.Scale | 'none' | 'max',
   radiusBL?: Types.Scale | 'none' | 'max',
   shadow?: Types.Scale | 'none',
+  shadowInner?: Types.Scale | 'none',
+  glow?: Types.Scale | 'none',
   img?: string,
   noContext?: boolean,
-  MERGE_CHAIN?: true,
-  MERGE?: boolean,
-  FORCE_MERGE?: true,
-  forwardedRef?: (node: any) => void,
+}
+export interface TaglessBoxProps extends PureBoxProps, React.ComponentPropsWithoutRef<any> {
+  TRY_RECURSIVE_TAGLESS?: true,
+  FORCE_TAGLESS?: true,
+}
+export interface BoxProps extends TaglessBoxProps, React.HTMLAttributes<HTMLDivElement> {
+  TRY_TAGLESS?: boolean,
+  forwardRef?: (node: any) => void,
 }
 
 export default class Box extends React.PureComponent<BoxProps> {
   static contextType = ThemeContext
   static defaultProps = {fill: 'none'}
-  static id = newId()
+  static TryTagless = (props: TaglessBoxProps) => <Box TRY_TAGLESS {...props} />
 
   splitFill = () => {
     const {fill} = this.props
@@ -56,8 +60,8 @@ export default class Box extends React.PureComponent<BoxProps> {
     const {
       className,
       fill,
-      // lineFill,
-      // lineWeight,
+      borderFill,
+      borderWeight,
       inverse,
       radius,
       radiusTop,
@@ -68,16 +72,18 @@ export default class Box extends React.PureComponent<BoxProps> {
       radiusTR,
       radiusBR,
       radiusBL,
-      FORCE_MERGE,
-      MERGE,
+      FORCE_TAGLESS,
+      TRY_TAGLESS,
       fancy,
       strong,
       shadow,
+      shadowInner,
+      glow,
       children,
-      forwardedRef,
+      forwardRef,
       img,
       noContext,
-      MERGE_CHAIN,
+      TRY_RECURSIVE_TAGLESS,
       style = {},
       ...restProps
     } = this.props
@@ -101,6 +107,8 @@ export default class Box extends React.PureComponent<BoxProps> {
         fancy && css.fancy,
         strong && css.strong,
         shadow && css[`shadow-${shadow}`],
+        shadowInner && css[`shadow-inner-${shadowInner}`],
+        glow && css[`glow-${shadowInner}`],
         radius && css[`radius-${radius}`],
         radiusTop && css[`radius-top-${radiusTop}`],
         radiusRight && css[`radius-right-${radiusRight}`],
@@ -118,25 +126,21 @@ export default class Box extends React.PureComponent<BoxProps> {
       ...restProps,
     }
 
-    if (typeof children === 'function') {
-      return children(componentProps)
+    const hasBorder = borderFill || borderWeight
+
+    if (hasBorder) {
+      const {borderFill, borderWeight, ...boxProps} = this.props
+      return (
+        <Line.TryTagless fill={borderFill} weight={borderWeight}>
+          <Box {...boxProps} />
+        </Line.TryTagless>
+      )
     }
 
-    // const hasLine = lineFill || lineWeight
-
-    // if (hasLine) {
-    //   const {lineFill, lineWeight, ...boxProps} = this.props
-    //   return (
-    //     <Line MERGE fill={lineFill} weight={lineWeight}>
-    //       <Box {...boxProps} />
-    //     </Line>
-    //   )
-    // }
-
-    const boxComponent = (MERGE || MERGE_CHAIN || FORCE_MERGE) ? (
-      <Merge forwardedRef={forwardedRef} force={FORCE_MERGE} recursive={MERGE_CHAIN} {...componentProps} />
+    const boxComponent = (TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
+      <TryTagless ref={forwardRef} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
     ) : (
-      <div ref={forwardedRef} {...componentProps} />
+      <div ref={forwardRef} {...componentProps} />
     )
 
     if (noContext || !this.context.shallInverseOn) {

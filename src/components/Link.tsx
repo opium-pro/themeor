@@ -59,11 +59,11 @@ export default class Link extends React.PureComponent<LinkProps> {
     }
 
     return (
-      <Line MERGE_CHAIN fill="accent" bottom="md">
-        <Font FORCE_MERGE fill="accent" inline>
+      <Line.TryTagless TRY_RECURSIVE_TAGLESS fill="accent" bottom="md">
+        <Font FORCE_TAGLESS fill="accent" inline>
           {render}
         </Font>
-      </Line>
+      </Line.TryTagless>
     )
   }
 }

@@ -4,22 +4,21 @@ import newId from '../utils/new-id'
 import {ThemeContext} from '../context'
 import * as mergingComponents from '../merging'
 
-export interface MergeProps {
+export interface TryTaglessProps {
   children?: any,
   recursive?: boolean,
   force?: boolean,
-  forwardedRef?: (node: any) => void,
+  forwardRef?: (node: any) => void,
   [X: string]: any,
 }
 
-// Merge Element Tag
-export default class Merge extends React.PureComponent<MergeProps> {
+// TryTagless Element Tag
+class TryTagless extends React.PureComponent<TryTaglessProps> {
   static contextType = ThemeContext
-  static id = newId()
 
   refuse = (message?: string) => {
     message && consoleMessage({text: message,source: this})
-    const {recursive, force, forwardedRef, ...originalProps} = this.props
+    const {recursive, force, forwardRef, ...originalProps} = this.props
     return <div {...originalProps} />
   }
 
@@ -31,7 +30,7 @@ export default class Merge extends React.PureComponent<MergeProps> {
       id: parentId,
       recursive,
       force,
-      forwardedRef,
+      forwardRef,
       ...parentProps
     } = this.props
 
@@ -59,7 +58,7 @@ export default class Merge extends React.PureComponent<MergeProps> {
       return this.refuse()
     }
 
-    // We can MERGE only with regular tags, functions and objects
+    // We can TRY_TAGLESS only with regular tags, functions and objects
     if (!['string', 'function', 'object'].includes(typeof onlyChild.type)) {
       return this.refuse()
     }
@@ -71,14 +70,14 @@ export default class Merge extends React.PureComponent<MergeProps> {
       return this.refuse(`Component hasn't merged his child because it met another "id" attribute\nParent id "${parentId}", child's id "${childProps.id}"`)
     }
 
-    // Don't MERGE if child starts a new chain
-    if (!force && childProps.MERGE_CHAIN) {
+    // Don't TRY_TAGLESS if child starts a new chain
+    if (!force && childProps.TRY_RECURSIVE_TAGLESS) {
       return this.refuse()
     }
 
     const Component = onlyChild.type
     const is_themeor_component = Object.values(mergingComponents).includes(Component)
-    const child_is_not_against = childProps.MERGE !== false
+    const child_is_not_against = childProps.TRY_TAGLESS !== false
 
     const mergedProps = {
       ...parentProps,
@@ -94,22 +93,25 @@ export default class Merge extends React.PureComponent<MergeProps> {
       mergedProps.id = parentId
     }
 
-    // Merge only with our components and regular tags
+    // TryTagless only with our components and regular tags
     if (!force && !is_themeor_component && typeof Component !== 'string') {
       return this.refuse()
     }
 
     if (is_themeor_component) {
-      forwardedRef && (mergedProps.forwardedRef = forwardedRef)
+      forwardRef && (mergedProps.forwardRef = forwardRef)
     } else {
-      forwardedRef && (mergedProps.ref = forwardedRef)
+      forwardRef && (mergedProps.ref = forwardRef)
     }
 
     if (is_themeor_component && child_is_not_against) {
-      mergedProps.MERGE_CHAIN = recursive || childProps.MERGE_CHAIN
-      mergedProps.FORCE_MERGE = force || childProps.FORCE_MERGE
+      mergedProps.TRY_RECURSIVE_TAGLESS = recursive || childProps.TRY_RECURSIVE_TAGLESS
+      mergedProps.FORCE_TAGLESS = force || childProps.FORCE_TAGLESS
     }
 
     return <Component {...mergedProps} />
   }
 }
+
+const _TryTagless: any = React.forwardRef((props: TryTaglessProps, ref: any) => <TryTagless forwardRef={ref} {...props} />)
+export default _TryTagless

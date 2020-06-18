@@ -21,14 +21,14 @@ export default class Button extends React.PureComponent<ButtonProps> {
           <Fit width="fit-content">
 
               {/* This is stroke for focus */}
-              <Fit MERGE_CHAIN parent offset="x2s">
+              <Fit.TryTagless TRY_RECURSIVE_TAGLESS parent offset="x2s">
                 <Line className={reaction.props.className} fill={reaction.focus ? "accent" : "none"}>
                   <Box radius={radius} />
                 </Line>
-              </Fit>
+              </Fit.TryTagless>
 
 
-              <Align MERGE_CHAIN vert="center" hor="center">
+              <Align.TryTagless TRY_RECURSIVE_TAGLESS vert="center" hor="center">
                 <Fit minWidth="220px" height="60px">
                   <Box
                     fancy
@@ -43,7 +43,7 @@ export default class Button extends React.PureComponent<ButtonProps> {
                     </Gap>
                   </Box>
                 </Fit>
-              </Align>
+              </Align.TryTagless>
 
           </Fit>
         )}

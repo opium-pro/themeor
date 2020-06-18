@@ -2,30 +2,33 @@ import React from 'react'
 import css from './Align.module.scss'
 import cn from '../utils/class-name'
 import * as Types from '../config-types'
-import Merge from '../Merge'
+import TryTagless from '../TryTagless'
 import Fit from '../Fit'
 import {ThemeContext} from '../context'
 import newId from '../utils/new-id'
 
-export interface AlignProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PureAlignProps {
   row?: boolean,
   stack?: boolean,
   template?: string,
   vert?: 'stretch' | 'top' | 'center' | 'bottom',
   hor?: 'stretch' | 'left' | 'center' | 'right',
-  vertGap?: Types.Scale,
-  horGap?: Types.Scale,
-  MERGE?: boolean,
-  MERGE_CHAIN?: true,
-  style?: any,
-  forwardedRef?: (node: any) => void,
-  FORCE_MERGE?: true,
+  vertAlign?: Types.Scale,
+  horAlign?: Types.Scale,
+}
+export interface TaglessAlignProps extends PureAlignProps,  React.ComponentPropsWithoutRef<any> {
+  TRY_RECURSIVE_TAGLESS?: true,
+  FORCE_TAGLESS?: true,
+}
+export interface AlignProps extends TaglessAlignProps, React.HTMLAttributes<HTMLDivElement> {
+  TRY_TAGLESS?: boolean,
+  forwardRef?: (node: any) => void,
 }
 
 export default class Align extends React.PureComponent<AlignProps> {
   static contextType = ThemeContext
   static defaultProps = {style: {}, vert: 'top', hor: 'stretch'}
-  static id = newId()
+  static TryTagless = (props: TaglessAlignProps) => <Align TRY_TAGLESS {...props} />
 
   render() {
     const {
@@ -33,20 +36,20 @@ export default class Align extends React.PureComponent<AlignProps> {
       vert,
       hor,
       className,
-      MERGE,
+      TRY_TAGLESS,
       template,
       vertGap,
       horGap,
       style,
       stack,
-      FORCE_MERGE,
-      forwardedRef,
-      MERGE_CHAIN,
+      FORCE_TAGLESS,
+      forwardRef,
+      TRY_RECURSIVE_TAGLESS,
       children,
       ...restProps
     } = this.props
 
-    const newStyle = {...style}
+    const newStyle: any = {...style}
     if (!!template) { newStyle.gridTemplateColumns = template }
 
     const componentProps = {
@@ -66,10 +69,6 @@ export default class Align extends React.PureComponent<AlignProps> {
       style: newStyle,
       children,
       ...restProps,
-    }
-
-    if (typeof children === 'function') {
-      return children(componentProps)
     }
 
     if (!template && (vertGap || horGap)) {
@@ -94,10 +93,10 @@ export default class Align extends React.PureComponent<AlignProps> {
       )
     }
 
-    return (MERGE || MERGE_CHAIN || FORCE_MERGE) ? (
-      <Merge forwardedRef={forwardedRef} force={FORCE_MERGE} recursive={MERGE_CHAIN} {...componentProps} />
+    return (TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
+      <TryTagless forwardRef={forwardRef} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
     ) : (
-      <div ref={forwardedRef} {...componentProps} />
+      <div ref={forwardRef} {...componentProps} />
     )
   }
 }
