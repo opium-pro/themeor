@@ -138,7 +138,7 @@ export default class Box extends React.PureComponent<BoxProps> {
     }
 
     const boxComponent = (TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
-      <TryTagless ref={forwardRef} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
+      <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
     ) : (
       <div ref={forwardRef} {...componentProps} />
     )
@@ -158,7 +158,6 @@ export default class Box extends React.PureComponent<BoxProps> {
       ...this.context,
       backIsStrong: updateBackIsStrong,
     }
-    
 
     return (
       <ThemeContext.Provider value={context}>

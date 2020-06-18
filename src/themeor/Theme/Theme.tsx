@@ -112,7 +112,7 @@ export default class Theme extends React.PureComponent<ThemeProps> {
     return (
       <ThemeContext.Provider value={context}>
         {this.global ? children : ((TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
-          <TryTagless forwardRef={forwardRef} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
+          <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
         ) : (
           <div ref={forwardRef} {...componentProps} />
         ))}

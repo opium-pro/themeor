@@ -2,7 +2,7 @@ import React from 'react'
 import consoleMessage from '../utils/console-message'
 import newId from '../utils/new-id'
 import {ThemeContext} from '../context'
-import * as mergingComponents from '../merging'
+import {Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect} from '../index'
 
 export interface TryTaglessProps {
   children?: any,
@@ -13,7 +13,7 @@ export interface TryTaglessProps {
 }
 
 // TryTagless Element Tag
-class TryTagless extends React.PureComponent<TryTaglessProps> {
+export default class TryTagless extends React.PureComponent<TryTaglessProps> {
   static contextType = ThemeContext
 
   refuse = (message?: string) => {
@@ -67,7 +67,7 @@ class TryTagless extends React.PureComponent<TryTaglessProps> {
 
     // Check that "id" attributes don't cover each other
     if (!force && parentId && childProps.id) {
-      return this.refuse(`Component hasn't merged his child because it met another "id" attribute\nParent id "${parentId}", child's id "${childProps.id}"`)
+      return this.refuse(`OnlyChild hasn't merged his child because it met another "id" attribute\nParent id "${parentId}", child's id "${childProps.id}"`)
     }
 
     // Don't TRY_TAGLESS if child starts a new chain
@@ -75,8 +75,11 @@ class TryTagless extends React.PureComponent<TryTaglessProps> {
       return this.refuse()
     }
 
-    const Component = onlyChild.type
-    const is_themeor_component = Object.values(mergingComponents).includes(Component)
+    const OnlyChildComponent = onlyChild.type
+    const mergingComponents = [Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect]
+    let child_is_themeor_component = mergingComponents.includes(OnlyChildComponent)
+      || !!mergingComponents.find((mergingComponent: any) => mergingComponent.TryTagless === OnlyChildComponent)
+
     const child_is_not_against = childProps.TRY_TAGLESS !== false
 
     const mergedProps = {
@@ -94,24 +97,21 @@ class TryTagless extends React.PureComponent<TryTaglessProps> {
     }
 
     // TryTagless only with our components and regular tags
-    if (!force && !is_themeor_component && typeof Component !== 'string') {
+    if (!force && !child_is_themeor_component && typeof OnlyChildComponent !== 'string') {
       return this.refuse()
     }
 
-    if (is_themeor_component) {
+    if (child_is_themeor_component) {
       forwardRef && (mergedProps.forwardRef = forwardRef)
     } else {
       forwardRef && (mergedProps.ref = forwardRef)
     }
 
-    if (is_themeor_component && child_is_not_against) {
+    if (child_is_themeor_component && child_is_not_against) {
       mergedProps.TRY_RECURSIVE_TAGLESS = recursive || childProps.TRY_RECURSIVE_TAGLESS
       mergedProps.FORCE_TAGLESS = force || childProps.FORCE_TAGLESS
     }
 
-    return <Component {...mergedProps} />
+    return <OnlyChildComponent {...mergedProps} />
   }
 }
-
-const _TryTagless: any = React.forwardRef((props: TryTaglessProps, ref: any) => <TryTagless forwardRef={ref} {...props} />)
-export default _TryTagless

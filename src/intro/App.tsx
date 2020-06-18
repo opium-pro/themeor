@@ -51,10 +51,10 @@ export default class App extends React.PureComponent<AppProps, AppState> {
           <Font size="md" family="regular" fill="base" align="left" lineHeight="md">
             <Box.TryTagless fill="base">
               <Align.TryTagless template="240px 1fr">
-                <Fit minWidth="1024px" maxHeight="100%" screen>
+                <Fit minWidth="1024px" screen>
 
                   <Align.TryTagless>
-                    <Fit.TryTagless height="100%" scroll>
+                    <Fit.TryTagless height="100vh" scroll>
                       <Box fill="faint" forwardRef={this.refAside}>
                         <MenuAdapter
                           data={navigation}
@@ -67,7 +67,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                     </Fit.TryTagless>
                   </Align.TryTagless>
 
-                  <Fit height="100%">
+                  <Fit height="100vh">
                     <Fit.TryTagless parent scroll>
                       <Box shadow="lg" forwardRef={this.refContent}>
                         <div id="content-top-id" />
