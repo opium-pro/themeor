@@ -19,7 +19,7 @@ import {Box, Font, Gap, Align} from 'themeor'
 class FontDemo extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr" gapHor="md">
+      <Align pattern="1fr 1fr 1fr" gapHor="md">
         <Font fill="base" align="center">Black Text</Font>
         <Font fill="accent" align="center">Blue Text</Font>
         <Font fill="--demo-var" align="center">Custom Color</Font>
@@ -29,7 +29,7 @@ class FontDemo extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr 1fr">
+          <Align pattern="1fr 1fr 1fr">
             <Font fill="base" align="center">Black Text</Font>
             <Font fill="accent" align="center">Blue Text</Font>
             <Font fill="--demo-var" align="center">Custom Color</Font>
@@ -71,7 +71,7 @@ import {Font, Align} from 'themeor'
 class FontDemo extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr">
+      <Align pattern="1fr 1fr 1fr">
         <Font size="sm" align="center">Small Text</Font>
         <Font size="md" align="center">Medium Text</Font>
         <Font size="lg" align="center">Large Text</Font>
@@ -81,7 +81,7 @@ class FontDemo extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr 1fr">
+          <Align pattern="1fr 1fr 1fr">
             <Font size="sm" align="center">Small Text</Font>
             <Font size="md" align="center">Medium Text</Font>
             <Font size="lg" align="center">Large Text</Font>
@@ -98,7 +98,7 @@ import {Font, Align} from 'themeor'
 class FontDemo extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr">
+      <Align pattern="1fr 1fr 1fr">
         <Font weight="700" align="center">Bold Text</Font>
         <Font underline align="center">Underlined Text</Font>
         <Font uppercase align="center">Uppercased Text</Font>
@@ -108,7 +108,7 @@ class FontDemo extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr 1fr">
+          <Align pattern="1fr 1fr 1fr">
             <Font weight="700" align="center">Bold Text</Font>
             <Font underline align="center">Underlined Text</Font>
             <Font uppercase align="center">Uppercased Text</Font>

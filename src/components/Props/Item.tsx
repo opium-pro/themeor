@@ -43,7 +43,7 @@ export class Item extends React.PureComponent<Props> {
 
         {!!children && (<>
           <Gap size="xl" />
-          <Align template="50% 50%" gapHor="md">
+          <Align pattern="50% 50%" gapHor="md">
             <Font {...tableHeaderProps}>Option</Font>
             <Font {...tableHeaderProps}>Example</Font>
           </Align>
@@ -52,7 +52,7 @@ export class Item extends React.PureComponent<Props> {
           <Line fill="faint" />
           <Gap />
 
-          <Align template="50% 50%" gapHor="md" gapVert="md">
+          <Align pattern="50% 50%" gapHor="md" gapVert="md">
             {children}
           </Align>
         </>)}

@@ -19,7 +19,7 @@ import {Box, Font, Gap, Align} from 'themeor'
 class BoxColors extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr" gapHor="md">
+      <Align pattern="1fr 1fr 1fr" gapHor="md">
         <Box fill="accent">
           <Gap><Font align="center">Light Blue</Font></Gap>
         </Box>
@@ -37,7 +37,7 @@ class BoxColors extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr 1fr" gapHor="md">
+          <Align pattern="1fr 1fr 1fr" gapHor="md">
             <Box fill="accent">
               <Gap><Font align="center">Light Blue</Font></Gap>
             </Box>
@@ -61,7 +61,7 @@ class BoxColors extends React.Component {
   <Gap><Font align="center">Custom Color</Font></Gap>
 </Box>`         }
         >
-          <Align template="1fr 1fr 1fr" gapHor="md">
+          <Align pattern="1fr 1fr 1fr" gapHor="md">
             <Box fill="--demo-var">
               <Gap><Font align="center">Custom Var</Font></Gap>
             </Box>
@@ -81,7 +81,7 @@ import {Box, Font, Gap, Align} from 'themeor'
 class BoxColors extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr" gapHor="md">
+      <Align pattern="1fr 1fr 1fr" gapHor="md">
         <Box fill="accent" strong radius="md">
           <Gap><Font align="center">Medium Radius</Font></Gap>
         </Box>
@@ -99,7 +99,7 @@ class BoxColors extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr 1fr" gapHor="md">
+          <Align pattern="1fr 1fr 1fr" gapHor="md">
             <Box fill="accent" strong radius="md">
               <Gap><Font align="center">Medium Radius</Font></Gap>
             </Box>
@@ -124,7 +124,7 @@ import {Box, Font, Gap, Align} from 'themeor'
 class BoxColors extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr" gapHor="md">
+      <Align pattern="1fr 1fr" gapHor="md">
         <Box fill="base" shadow="md">
           <Gap><Font align="center">Medium Box Shadow</Font></Gap>
         </Box>
@@ -138,7 +138,7 @@ class BoxColors extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr" gapHor="md">
+          <Align pattern="1fr 1fr" gapHor="md">
             <Box fill="base" shadow="md">
               <Gap><Font align="center">Medium Box Shadow</Font></Gap>
             </Box>

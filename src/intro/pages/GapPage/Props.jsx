@@ -69,7 +69,7 @@ export default class BoxPage_Props extends React.PureComponent {
             Sets a horizontal gap instead of vertical one. Works only when there is no children. Sets automatically if Gap component is inside of <Code inline language="css">flex-direction: row</Code>
           </>} />
 
-          <Item name="forwardRef" type="any" default="undefined" description={<>
+          <Item name="forwardRef" type="function" default="undefined" description={<>
             Passes <Code inline>ref</Code> prop to the rendering tag
           </>} />
 

@@ -50,7 +50,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
         <Theme config={lightTheme as ConfigTypes.ThemeConfig} icons={icons as ConfigTypes.ThemeIcons}>
           <Font size="md" family="regular" fill="base" align="left" lineHeight="md">
             <Box.TryTagless fill="base">
-              <Align.TryTagless template="240px 1fr">
+              <Align.TryTagless pattern="240px 1fr">
                 <Fit minWidth="1024px" cover="screen">
 
                   <Align.TryTagless>

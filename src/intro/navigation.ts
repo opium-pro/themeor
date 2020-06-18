@@ -20,8 +20,10 @@ import MergePage from './pages/MergePage'
 import ThemePage from './pages/ThemePage'
 import CreditsPage from './pages/CreditsPage'
 
+import {version} from '../../package.json'
+
 export default [
-  {key: newId(), value: 'Themeor', hint: 'v 0.1.3-alpha.4', component: IntroPage, path: '/', exact: true},
+  {key: newId(), value: 'Themeor', hint: `v ${version}`, component: IntroPage, path: '/', exact: true},
 
   {key: newId()},
   {key: newId(), value: 'Getting Started', component: GettingStartedPage, path: '/getting-started'},
@@ -41,7 +43,7 @@ export default [
   {key: newId(), value: 'Effect', component: EffectPage, path: '/effect'},
   {key: newId(), value: 'Template', component: TemplatePage, path: '/template'},
   {key: newId(), value: 'Auto Inverse', component: InversePage, path: '/auto-inverse'},
-  {key: newId(), value: 'Tag Merging', component: MergePage, path: '/tag-merging'},
+  {key: newId(), value: 'Tagless', component: MergePage, path: '/tagless'},
   {key: newId(), value: 'Embedded Themes', component: ThemePage, path: '/embedded-themes'},
 
   {key: newId()},

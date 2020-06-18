@@ -51,6 +51,6 @@ export default function App() {
         </Box>
       </Align>
     </Theme>
-  );
+  )
 }
 ```

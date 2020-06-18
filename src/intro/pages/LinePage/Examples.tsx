@@ -19,7 +19,7 @@ import {Line, Align} from 'themeor'
 class LineDemo extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr" gapHor="md">
+      <Align pattern="1fr 1fr 1fr" gapHor="md">
         <Line />
         <Line fill="accent" weight="lg" />
         <Line fill="--demo-var" weight="xl" />
@@ -29,7 +29,7 @@ class LineDemo extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr 1fr" gapHor="md">
+          <Align pattern="1fr 1fr 1fr" gapHor="md">
             <Line />
             <Line fill="accent" weight="lg" />
             <Line fill="--demo-var" weight="xl" />
@@ -40,7 +40,7 @@ class LineDemo extends React.Component {
       <Wrapper title="Border Line">
         <Item
           description={(<>
-            If Line component has children, it will create a border. To set border radius you need to use <Link href="/tag-merging">TRY_TAGLESS prop</Link> and also use <Link href="/box">Box component</Link>
+            If Line component has children, it will create a border. To set border radius you need to use <Link href="/tagless">TRY_TAGLESS prop</Link> and also use <Link href="/box">Box component</Link>
           </>)}
           markLines={[8,14,20,21]}
           code={`import React from 'react'
@@ -49,7 +49,7 @@ import {Line, Box, Gap, Font, Align} from 'themeor'
 class LineDemo extends React.Component {
   render() {
     return(
-      <Align template="1fr 1fr 1fr" gapHor="md">
+      <Align pattern="1fr 1fr 1fr" gapHor="md">
         <Line>
           <Gap>
             <Font align="center">Border line</Font>
@@ -75,7 +75,7 @@ class LineDemo extends React.Component {
 }`         }
         >
           
-          <Align template="1fr 1fr 1fr" gapHor="md">
+          <Align pattern="1fr 1fr 1fr" gapHor="md">
             <Line>
               <Gap>
                 <Font align="center">Border line</Font>

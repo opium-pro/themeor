@@ -10,7 +10,7 @@ import Gap from '../Gap'
 export interface PureAlignProps {
   row?: boolean,
   stack?: boolean,
-  template?: string,
+  pattern?: string,
   vert?: 'stretch' | 'top' | 'center' | 'bottom',
   hor?: 'stretch' | 'left' | 'center' | 'right',
   gapVert?: Types.Scale,
@@ -38,7 +38,7 @@ export default class Align extends React.PureComponent<AlignProps> {
       hor,
       className,
       TRY_TAGLESS,
-      template,
+      pattern,
       gapVert,
       gapHor,
       style,
@@ -51,20 +51,20 @@ export default class Align extends React.PureComponent<AlignProps> {
     } = this.props
 
     const newStyle: any = {...style}
-    if (!!template) { newStyle.gridTemplateColumns = template }
+    if (!!pattern) { newStyle.gridTemplateColumns = pattern }
 
     const componentProps = {
       className: cn(
         css.align,
         row && css.row,
-        !row && !stack && !template && css.col,
+        !row && !stack && !pattern && css.col,
         vert && css[`vert-${vert}`],
         hor && css[`hor-${hor}`],
         gapVert && css[`vert-gap-${gapVert}`],
         gapHor && css[`hor-gap-${gapHor}`],
         stack && css.stack,
         stack && css.row,
-        !!template && css.template,
+        !!pattern && css.pattern,
         className
       ),
       style: newStyle,
@@ -72,7 +72,7 @@ export default class Align extends React.PureComponent<AlignProps> {
       ...restProps,
     }
 
-    if (!template && (gapVert || gapHor)) {
+    if (!pattern && (gapVert || gapHor)) {
       if (React.Children.count(children) === 1) {
         return (
           <Gap vert={gapVert} hor={gapHor}>
