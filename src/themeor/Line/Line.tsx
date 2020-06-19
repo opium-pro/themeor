@@ -58,7 +58,7 @@ export default class Line extends React.PureComponent<LineProps> {
     const componentProps = {
       className: cn(
         css.line,
-        (weight || (!top && !right && !left && !bottom)) && css[`weight-${weight || 'md'}`],
+        (weight || (!right && !left && !top && !bottom)) && css[`weight-${weight || 'md'}`],
         top && css[`top-${top}`],
         right && css[`right-${right}`],
         bottom && css[`bottom-${bottom}`],

@@ -1,10 +1,10 @@
 {
   "name": "themeor",
-  "version": "0.1.3-alpha.4",
+  "version": "0.1.3-alpha.5",
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
-  "homepage": "http://themeor.opium.pro/",
+  "homepage": "http://themeor.opium.pro",
   "repository": {
     "type" : "git",
     "url" : "https://github.com/opium-pro/themeor.git"
@@ -13,6 +13,8 @@
     "react",
     "theme",
     "theming",
+    "color",
+    "templates",
     "theme control",
     "primitives",
     "opium pro"

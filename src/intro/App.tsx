@@ -1,9 +1,9 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Theme, Box, Font, Align, Fit, ConfigTypes, Effect } from '../themeor'
+import { Theme, Box, Font, Align, Fit, ConfigTypes, Effect, Line } from '../themeor'
 import { AppContext } from '../components/context'
 import { MenuAdapter } from '../adapters'
-import {SideMenu} from '../components'
+import { SideMenu } from '../components'
 import navigation from './navigation'
 
 // Need this fot theme config
@@ -69,14 +69,16 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
                   <Fit height="100vh">
                     <Fit.TryTagless cover="parent" scroll>
-                      <Box shadow="lg" forwardRef={this.refContent}>
-                        <div id="content-top-id" />
-                        <Switch>
-                          {navigation.map(({key, exact, path, component}) => (
-                            !!component && <Route key={key} exact={exact} path={path} component={component} />
-                          ))}
-                        </Switch>
-                      </Box>
+                      <Line.TryTagless left="md" fill="faint-down">
+                        <Box forwardRef={this.refContent}>
+                          <div id="content-top-id" />
+                          <Switch>
+                            {navigation.map(({ key, exact, path, component }) => (
+                              !!component && <Route key={key} exact={exact} path={path} component={component} />
+                            ))}
+                          </Switch>
+                        </Box>
+                      </Line.TryTagless>
                     </Fit.TryTagless>
 
                     {loading && (

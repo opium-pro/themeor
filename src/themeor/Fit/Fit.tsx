@@ -4,7 +4,6 @@ import cn from '../utils/class-name'
 import * as Types from '../config-types'
 import TryTagless from '../TryTagless'
 import {ThemeContext} from '../context'
-import newId from '../utils/new-id'
 
 export interface PureFitProps {
   width?: string,
@@ -18,13 +17,10 @@ export interface PureFitProps {
   top?: string,
   right?: string,
   bottom?: string,
-  spacer?: boolean,
   stick?: 'top-left' | 'top' | 'top-right' | 'right' | 'bottom-right' | 'bottom' | 'bottom-left' | 'left',
   offset?: Types.Scale,
   zIndex?: number,
   notParent?: boolean,
-  colSpan?: number,
-  rowSpan?: number,
   inline?: boolean,
   scroll?: boolean,
   clip?: boolean,
@@ -59,15 +55,12 @@ export default class Fit extends React.PureComponent<FitProps> {
       offset,
       forwardRef,
       className,
-      spacer,
       TRY_TAGLESS,
       zIndex,
       stick,
       notParent,
       cover,
       scroll,
-      colSpan,
-      rowSpan,
       style,
       inline,
       clip,
@@ -89,13 +82,10 @@ export default class Fit extends React.PureComponent<FitProps> {
     if (height) { newStyle.height = height }
     if (maxHeight || height) { newStyle.maxHeight = maxHeight || height }
     if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) }
-    if (colSpan) { newStyle.gridColumnEnd = `span ${colSpan}` }
-    if (rowSpan) { newStyle.gridRowEnd = `span ${rowSpan}` }
 
     const componentProps = {
       className: cn(
         css.fit,
-        spacer && css.spacer,
         clip && css.clip,
         scroll && css.scroll,
         inline && css.inline,

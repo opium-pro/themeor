@@ -28,7 +28,7 @@
       "strong-down": "#AAB",
       "weak": "#F6F8FB",
       "weak-up": "#EDF1F7",
-      "weak-down": "#FEFEFE"
+      "weak-down": "#FAFBFD"
     },
     "accent": {
       "strong": "#1273F3",
@@ -129,7 +129,7 @@
   "line": {
     "fill": {
       "faint": {
-        "strong-down": "rgba(0, 43, 107, 0.04)",
+        "strong-down": "rgba(0, 43, 107, 0.06)",
         "strong": "rgba(0, 43, 107, 0.11)",
         "strong-up": "rgba(0, 43, 107, 0.20)",
         "weak": "rgba(255, 255, 255, 0.1)"

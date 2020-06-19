@@ -3,11 +3,11 @@
 Sorry for the lack of documentation, it's in progress.
 But all the components are ready to use.
 
+---
+
 `npm i themeor node-sass`
 
-`npm start` for local demo.
-
-You can find demo [here](https://github.com/opium-pro/themeor/tree/master/src/intro)
+You can find demo files [here](https://github.com/opium-pro/themeor/tree/master/src/intro)
 
 For fast start download [the demo config file](https://github.com/opium-pro/themeor/blob/master/src/intro/theme/theme-light.json)
 

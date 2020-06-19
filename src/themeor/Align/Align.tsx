@@ -3,7 +3,6 @@ import css from './Align.module.scss'
 import cn from '../utils/class-name'
 import * as Types from '../config-types'
 import TryTagless from '../TryTagless'
-import Fit from '../Fit'
 import {ThemeContext} from '../context'
 import Gap from '../Gap'
 
@@ -25,11 +24,22 @@ export interface AlignProps extends TaglessAlignProps, React.HTMLAttributes<HTML
   TRY_TAGLESS?: boolean,
   forwardRef?: any,
 }
+export interface AlignSpanProps extends AlignProps {
+  col?: number,
+}
 
 export default class Align extends React.PureComponent<AlignProps> {
   static contextType = ThemeContext
   static defaultProps = {style: {}, vert: 'top', hor: 'stretch'}
   static TryTagless = (props: TaglessAlignProps) => <Align TRY_TAGLESS {...props} />
+  static Spacer = ({className, ...restProps}: AlignProps) => <Align {...restProps} className={cn(className, css.spacer)} />
+  static Span = ({col = 1, style, ...restProps}: AlignSpanProps) => {
+    const newStyle: any = {
+      ...style,
+      gridColumnEnd: `span ${col}`
+    }
+    return (<Align {...restProps} style={newStyle} />)
+  }
 
   render() {
     const {
@@ -80,22 +90,14 @@ export default class Align extends React.PureComponent<AlignProps> {
           </Gap>
         )
       }
-
       const {children: componentChildren, ...restComponentProps} = componentProps
       const wrapChildClass = cn(
         gapVert && css[`item-vert-gap-${gapVert}`],
         gapHor && css[`item-hor-gap-${gapHor}`],
       )
-
       return (
         <Align {...restComponentProps}>
           {React.Children.map(children, (child: any) => {
-            if (child && typeof child === 'object' && child.type && child.type === Fit) {
-              return (
-                <Fit className={wrapChildClass} {...child.props} />
-              )
-            }
-
             return <div className={wrapChildClass}>{child}</div>
           })}
         </Align>

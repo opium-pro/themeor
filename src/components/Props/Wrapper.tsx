@@ -24,7 +24,7 @@ export class Wrapper extends React.PureComponent<Props> {
             <Font {...tableHeaderProps}>{group.props?.title}</Font>
             <Font {...tableHeaderProps}>Type</Font>
             <Font {...tableHeaderProps}>Default</Font>
-            <Fit colSpan={3}></Fit>
+            <Align.Span col={3}></Align.Span>
 
             {React.Children.map(group.props?.children, (item: any) => (!!item && <>
               <Tag>

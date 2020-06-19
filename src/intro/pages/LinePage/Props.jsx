@@ -41,7 +41,7 @@ export default class BoxPage_Props extends React.PureComponent {
           </Item>
 
           <Item name="top" type="string" default="undefined" description={(<>
-            Sets top line weight in case if has children. Neglects <Code inline>weight</Code> prop
+            Sets top line weight in case if has children. If set, them <Code inline>weight</Code> prop won't use its default value
           </>)}>
             <Value examples={opiumScale()}>
               <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.line.weight</Code>
@@ -49,7 +49,7 @@ export default class BoxPage_Props extends React.PureComponent {
           </Item>
 
           <Item name="right" type="string" default="undefined" description={(<>
-            Sets right line weight in case if has children. Neglects <Code inline>weight</Code> prop
+            Sets right line weight in case if has children. If set, them <Code inline>weight</Code> prop won't use its default value
           </>)}>
             <Value examples={opiumScale()}>
               <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.line.weight</Code>
@@ -57,7 +57,7 @@ export default class BoxPage_Props extends React.PureComponent {
           </Item>
 
           <Item name="bottom" type="string" default="undefined" description={(<>
-            Sets bottom line weight in case if has children. Neglects <Code inline>weight</Code> prop
+            Sets bottom line weight in case if has children. If set, them <Code inline>weight</Code> prop won't use its default value
           </>)}>
             <Value examples={opiumScale()}>
               <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.line.weight</Code>
@@ -65,7 +65,7 @@ export default class BoxPage_Props extends React.PureComponent {
           </Item>
 
           <Item name="left" type="string" default="undefined" description={(<>
-            Sets left line weight in case if has children. Neglects <Code inline>weight</Code> prop
+            Sets left line weight in case if has children. If set, them <Code inline>weight</Code> prop won't use its default value
           </>)}>
             <Value examples={opiumScale()}>
               <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.line.weight</Code>

@@ -22,7 +22,7 @@ export class Value extends React.PureComponent<Props> {
         ))}
       </Align>
 
-      <Fit colSpan={2}><Line fill="faint" /></Fit>
+      <Align.Span col={2}><Line fill="faint" /></Align.Span>
     </>)
   }
 }

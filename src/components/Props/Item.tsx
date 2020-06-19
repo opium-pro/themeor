@@ -27,16 +27,13 @@ export class Item extends React.PureComponent<Props> {
             <Font family="special" weight="800" size="x2l">
               {name}
             </Font>
-
-            <Gap size="md" />
-
+            <Font.TryTagless nowrap FORCE_TAGLESS>
+              <Link href="#list">see all props</Link>
+            </Font.TryTagless>
+            <Align.Spacer />
             {type && <Code inline>{`type: ${type}`}</Code>}
             {defValue && <Code inline>{`default: ${defValue}`}</Code>}
           </Align>
-
-          <Font nowrap FORCE_TAGLESS>
-            <Link href="#list">see all props</Link>
-          </Font>
         </Gap>
 
         {!!description && <Font size="lg">{description}</Font>}

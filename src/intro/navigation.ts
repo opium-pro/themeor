@@ -23,7 +23,7 @@ import CreditsPage from './pages/CreditsPage'
 import {version} from '../../package.json'
 
 export default [
-  {key: newId(), value: 'Themeor', hint: `v ${version}`, component: IntroPage, path: '/', exact: true},
+  {key: newId(), value: 'Themeor', hint: `v${version}`, component: IntroPage, path: '/', exact: true},
 
   {key: newId()},
   {key: newId(), value: 'Getting Started', component: GettingStartedPage, path: '/getting-started'},
