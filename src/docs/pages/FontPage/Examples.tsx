@@ -10,7 +10,7 @@ export default class BoxPage_Examples extends React.PureComponent {
       <Wrapper title="Text Color">
         <Item
           description={(<>
-            You can change the color according to <Link href="/colors">Opium.Fill</Link>
+            You can change the color according to <Link href="/intro/colors">Opium.Fill</Link>
           </>)}
           markLines={[8,9,10]}
           code={`import React from 'react'
@@ -62,7 +62,7 @@ class FontDemo extends React.Component {
       <Wrapper title="Text Size">
         <Item
           description={(<>
-            You can set any value according to <Link href="/scaled-css">Scaled CSS</Link>
+            You can set any value according to <Link href="/intro/scaled-css">Scaled CSS</Link>
           </>)}
           markLines={[8,9,10]}
           code={`import React from 'react'

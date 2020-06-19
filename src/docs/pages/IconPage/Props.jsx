@@ -10,23 +10,23 @@ export default class BoxPage_Props extends React.PureComponent {
       <Wrapper>
         <Group title="Color Props">
           <Item name="fill" type="string" default={`"base"`} description={(<>
-            Sets icon color from Opium.Fill scheme. See <Link href="/colors">colors</Link> fro more information
+            Sets icon color from Opium.Fill scheme. See <Link href="/intro/colors">colors</Link> fro more information
             </>)}
           >
             <Value examples={[`"none"`]}>Transparent</Value>
 
             <Value examples={opiumFill()}>
-              Any parent color from <Link href="/colors">Opium.Fill</Link><br />
+              Any parent color from <Link href="/intro/colors">Opium.Fill</Link><br />
               By default all colors are <Code inline>strong</Code>
             </Value>
 
             <Value examples={opiumFill(true, true, false)}>
-              Any color shift from <Link href="/colors">Opium.Fill</Link>
+              Any color shift from <Link href="/intro/colors">Opium.Fill</Link>
             </Value>
           </Item>
 
           <Item name="inverse" type="boolean" default="undefined" description={(<>
-            Works only with <Link href="/colors">Opium.Fill</Link>. Maked the color <Code inline>weak</Code><br />
+            Works only with <Link href="/intro/colors">Opium.Fill</Link>. Maked the color <Code inline>weak</Code><br />
             Inverses automatically if background color is strong and included in <Code inline>config.themeContext.shallInverseOn</Code>
           </>)} />
         </Group>
@@ -35,7 +35,7 @@ export default class BoxPage_Props extends React.PureComponent {
         <Group title="Main Props">
           <Item name="size" type="string" default={`"md"`}>
             <Value examples={opiumScale()}>
-              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.icon.size</Code>
+              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.icon.size</Code>
             </Value>
           </Item>
 
@@ -43,7 +43,7 @@ export default class BoxPage_Props extends React.PureComponent {
             Any name that you have previously used in <Code inline>{`<Theme icons={icons} />`}</Code>
           </>)}>
             <Value examples={[`"placeholder"`, `"anyIconName"`]}>
-              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.line.weight</Code>
+              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.line.weight</Code>
             </Value>
           </Item>
         </Group>

@@ -10,7 +10,7 @@ export default class BoxPage_Examples extends React.PureComponent {
       <Wrapper title="Line Color and Weight">
         <Item
           description={(<>
-            You can change the color according to <Link href="/colors">Opium.Fill</Link> or use variables from <Code inline>config.customVariables</Code>
+            You can change the color according to <Link href="/intro/colors">Opium.Fill</Link> or use variables from <Code inline>config.customVariables</Code>
           </>)}
           markLines={[9,16,18,21]}
           code={`import React from 'react'

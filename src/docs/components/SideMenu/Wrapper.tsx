@@ -64,7 +64,7 @@ export class Wrapper extends React.PureComponent<WrapperProps, State> {
       ReactDOM.render((
         <ThemeContext.Provider value={this.context}>
           <Gap vert="md" hor="xs">
-            <Box fill="base" radius="sm" shadow="md">
+            <Box fill="base" radius="sm" shadow="md" borderFill="faint">
               <Gap size="x2s">
                 <Align row pattern="1fr 1fr" gapHor="x2s">
                   {this.menu?.map((group) => (
