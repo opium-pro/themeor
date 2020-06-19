@@ -30,7 +30,7 @@ interface GapState {
   inrow?: boolean,
 }
 
-export default class Gap extends React.PureComponent<GapProps, GapState> {
+export default class Gap extends React.Component<GapProps, GapState> {
   static contextType = ThemeContext
   static TryTagless = (props: TaglessGapProps) => <Gap TRY_TAGLESS {...props} />
   static defaultProps = {}

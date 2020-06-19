@@ -5,7 +5,7 @@ import {SeparatorProps} from '../../adapters/menu-types'
 export class Separator extends React.PureComponent<SeparatorProps> {
   render() {
     return (<>
-      <Gap vert="xs" hor="md">
+      <Gap vert="xs">
         <Line inverse={false} fill="faint" />
       </Gap>
     </>)

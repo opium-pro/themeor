@@ -1,9 +1,9 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Theme, Box, Font, Align, Fit, ConfigTypes, Effect, Line } from '../themeor'
+import { Theme, Box, Font, Align, Fit, ConfigTypes, Effect, Line, Gap } from '../themeor'
 import { AppContext } from './context'
 import { MenuAdapter } from './adapters'
-import { SideMenu } from './components'
+import { SideMenu, Link } from './components'
 import navigation from './navigation'
 
 // Need this fot theme config
@@ -18,16 +18,10 @@ interface AppProps { }
 interface AppState {
   refContent?: any,
   refAside?: any,
-  loading?: boolean,
-  isLoading?: (value: boolean) => void,
 }
 
 export default class App extends React.PureComponent<AppProps, AppState> {
   static contextType = AppContext
-
-  isLoading = (value: boolean) => {
-    this.setState({ loading: value })
-  }
 
   refContent = (ref: any) => {
     this.setState({ refContent: ref })
@@ -37,14 +31,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
     this.setState({ refAside: ref })
   }
 
-  state: AppState = {
-    loading: false,
-    isLoading: this.isLoading
-  }
-
   render() {
-    const { loading } = this.state
-
     return (
       <AppContext.Provider value={this.state}>
         <Theme config={lightTheme as ConfigTypes.ThemeConfig} icons={icons as ConfigTypes.ThemeIcons}>
@@ -61,8 +48,9 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                           component={SideMenu}
                           jumpTo="content-top-id"
                         />
-                        <Font>Github</Font>
-                        <Font>NPM</Font>
+                        <Link href="https://github.com/opium-pro/themeor">
+                          <Gap>Github</Gap>
+                        </Link>
                       </Box>
                     </Fit.TryTagless>
                   </Align.TryTagless>
@@ -80,15 +68,6 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                         </Box>
                       </Line.TryTagless>
                     </Fit.TryTagless>
-
-                    {loading && (
-                      <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent">
-                        <Box fill="base">
-                          <Effect transparency="xs" />
-                        </Box>
-                      </Fit.TryTagless>
-                    )}
-
                   </Fit>
 
                 </Fit>

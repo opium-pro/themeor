@@ -14,7 +14,7 @@ export interface IconProps extends React.HTMLAttributes<SVGElement> {
   forwardRef?: any,
 }
 
-export default class Icon extends React.PureComponent<IconProps> {
+export default class Icon extends React.Component<IconProps> {
   static contextType = ThemeContext
   static defaultProps = {size: 'md', name: 'placeholder', fill: 'base'}
 

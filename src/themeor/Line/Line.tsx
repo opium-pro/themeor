@@ -25,7 +25,7 @@ export interface LineProps extends TaglessLineProps, React.HTMLAttributes<HTMLDi
   forwardRef?: any,
 }
 
-export default class Line extends React.PureComponent<LineProps> {
+export default class Line extends React.Component<LineProps> {
   static contextType = ThemeContext
   static defaultProps = {}
   static TryTagless = (props: TaglessLineProps) => <Line TRY_TAGLESS {...props} />

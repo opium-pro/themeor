@@ -7,6 +7,10 @@ export interface WrapperProps {
   active?: boolean,
 }
 
-export interface TitleProps {}
+export interface GroupProps {
+  title?: string,
+  startNodeId?: any,
+}
+
 export interface SeparatorProps {}
 export interface HintProps {}

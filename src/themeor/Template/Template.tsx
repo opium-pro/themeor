@@ -9,7 +9,7 @@ export interface TemplateProps {
   hasNot?: string,
 }
 
-export default class Template extends React.PureComponent<TemplateProps> {
+export default class Template extends React.Component<TemplateProps> {
   static contextType = ThemeContext
 
   static get = () => {

@@ -35,7 +35,7 @@ export interface FitProps extends TaglessFitProps, React.HTMLAttributes<HTMLDivE
   forwardRef?: any,
 }
 
-export default class Fit extends React.PureComponent<FitProps> {
+export default class Fit extends React.Component<FitProps> {
   static contextType = ThemeContext
   static defaultProps = {style: {}}
   static TryTagless = (props: TaglessFitProps) => <Fit TRY_TAGLESS {...props} />

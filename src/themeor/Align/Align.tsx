@@ -28,7 +28,7 @@ export interface AlignSpanProps extends AlignProps {
   col?: number,
 }
 
-export default class Align extends React.PureComponent<AlignProps> {
+export default class Align extends React.Component<AlignProps> {
   static contextType = ThemeContext
   static defaultProps = {style: {}, vert: 'top', hor: 'stretch'}
   static TryTagless = (props: TaglessAlignProps) => <Align TRY_TAGLESS {...props} />

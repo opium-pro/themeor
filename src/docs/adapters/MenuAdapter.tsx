@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import {withRouter, Link, RouteComponentProps, RouteProps} from 'react-router-dom'
 import {AppContext} from '../context'
 import * as Types from './menu-types'
+import navigation from '../navigation'
 
 
 export interface ItemType extends RouteProps {
@@ -11,9 +12,11 @@ export interface ItemType extends RouteProps {
   component?: any,
   path?: string,
   exact?: boolean,
+  group?: string,
+  groupMenu?: string[],
 }
 
-export interface MenuConstructorProps extends RouteComponentProps {
+export interface MenuAdapterProps extends RouteComponentProps {
   data?: ItemType[] | null,
   jumpTo?: string,
   smoothJump?: boolean,
@@ -21,14 +24,14 @@ export interface MenuConstructorProps extends RouteComponentProps {
     Wrapper: React.ComponentClass<Types.WrapperProps>,
     Item: React.ComponentClass<Types.ItemProps>,
     Separator?: React.ComponentClass<Types.SeparatorProps>,
-    Title?: React.ComponentClass<Types.TitleProps>,
+    Group?: React.ComponentClass<Types.GroupProps>,
     Spacer?: React.ComponentClass,
     Hint?: React.ComponentClass<Types.HintProps>,
   },
 }
 
 
-class MenuConstructor extends React.PureComponent<MenuConstructorProps> {
+class MenuAdapter extends React.PureComponent<MenuAdapterProps> {
   static contextType = AppContext
 
   handleItemClick = (item: ItemType) => {
@@ -39,25 +42,49 @@ class MenuConstructor extends React.PureComponent<MenuConstructorProps> {
         behavior: smoothJump ? 'smooth' : 'auto',
       })
     }
-    // const {history} = this.props
-    // item.path && history.push(item.path)
   }
 
-  renderItem = (item: ItemType) => {
+  currentGroup?:string = undefined
+  groupMenuId?:string = undefined
+
+  renderGroup = (item: ItemType, index: number) => {
     const Menu = this.props.component
-    const {value, hint, path, key, exact} = item
+    const {value, key} = item
+
+    if (!Menu.Group) { return null }
+
+    this.currentGroup = key
+    const group = (
+      <Menu.Group key={key} title={value} startNodeId={this.groupMenuId}>
+        {navigation.slice(index + 1).map((newItem) => this.renderItem(newItem, key))}
+      </Menu.Group>
+    )
+    this.currentGroup = undefined
+
+    return group
+  }
+
+  renderItem = (item: ItemType, parentGroup?: string) => {
+    const Menu = this.props.component
+    const {value, hint, path, key, exact, group} = item
+
+    if (this.currentGroup && group !== this.currentGroup) {
+      return null
+    }
 
     if (!value) {
       if (!Menu.Separator) { return null }
       return <Menu.Separator key={key} />
     }
 
-    if (!path) {
-      if (!Menu.Title) { return null }
-      return <Menu.Title key={key}>{value}</Menu.Title>
+    const {pathname} = this.props.location
+
+    if (!path) {return null}
+
+    if (group !== parentGroup) {
+      return null
     }
 
-    const {pathname} = this.props.location
     return (
       <Menu.Item
         key={key}
@@ -71,15 +98,31 @@ class MenuConstructor extends React.PureComponent<MenuConstructorProps> {
     )
   }
 
+  renderMenu = (item: ItemType, index: number) => {
+    const {path, key, value, groupMenu} = item
+
+    if (groupMenu?.length) {
+      this.groupMenuId = key
+      return <div key={key} id={key} />
+    }
+
+    if (!path && value) {
+      return this.renderGroup(item, index)
+    }
+
+    return this.renderItem(item)
+  }
+
   render() {
     const Menu = this.props.component
+    this.currentGroup = undefined
 
     return (
       <Menu.Wrapper>
-        {this.props.data?.map(this.renderItem)}
+        {this.props.data?.map(this.renderMenu)}
       </Menu.Wrapper>
     )
   }
 }
 
-export default withRouter(MenuConstructor)
+export default withRouter(MenuAdapter)

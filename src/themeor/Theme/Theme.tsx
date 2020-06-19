@@ -28,7 +28,7 @@ export interface ThemeProps extends TaglessThemeProps, React.HTMLAttributes<HTML
   forwardRef?: any,
 }
 
-export default class Theme extends React.PureComponent<ThemeProps> {
+export default class Theme extends React.Component<ThemeProps> {
   static contextType = ThemeContext
   static TryTagless = (props: TaglessThemeProps) => <Theme TRY_TAGLESS {...props} />
 

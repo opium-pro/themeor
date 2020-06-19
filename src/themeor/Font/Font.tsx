@@ -33,7 +33,7 @@ export interface FontProps extends TaglessFontProps, React.HTMLAttributes<HTMLDi
   forwardRef?: any,
 }
 
-export default class Font extends React.PureComponent<FontProps> {
+export default class Font extends React.Component<FontProps> {
   static contextType = ThemeContext
   static defaultProps = {}
   static TryTagless = (props: TaglessFontProps) => <Font TRY_TAGLESS {...props} />

@@ -39,7 +39,7 @@ export interface BoxProps extends TaglessBoxProps, React.HTMLAttributes<HTMLDivE
   forwardRef?: any,
 }
 
-export default class Box extends React.PureComponent<BoxProps> {
+export default class Box extends React.Component<BoxProps> {
   static contextType = ThemeContext
   static defaultProps = {fill: 'none'}
   static TryTagless = (props: TaglessBoxProps) => <Box TRY_TAGLESS {...props} />

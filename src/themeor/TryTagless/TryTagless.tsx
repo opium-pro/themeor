@@ -13,7 +13,7 @@ export interface TryTaglessProps {
 }
 
 // TryTagless Element Tag
-export default class TryTagless extends React.PureComponent<TryTaglessProps> {
+export default class TryTagless extends React.Component<TryTaglessProps> {
   static contextType = ThemeContext
 
   refuse = (message?: string) => {

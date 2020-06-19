@@ -38,7 +38,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build-demo": "react-scripts build",
+    "build-docs": "react-scripts build",
     "build": "rm -fr ./dist && cd ./src/themeor && rsync -R ./**/*.scss ../../dist && cd ../../ && tsc -p tsconfig.dist.json",
     "publish": "npm run build && npm publish"
   },

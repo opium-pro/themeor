@@ -19,7 +19,7 @@ export interface ReactionState {
   focus: boolean,
 }
 
-export default class Reaction extends React.PureComponent<ReactionProps, ReactionState> {
+export default class Reaction extends React.Component<ReactionProps, ReactionState> {
   static contextType = ThemeContext
   static defaultProps = {speed: 'md', cursor: 'pointer'}
   state = {

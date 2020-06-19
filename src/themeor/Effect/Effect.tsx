@@ -20,7 +20,7 @@ export interface EffectProps extends TaglessEffectProps, React.HTMLAttributes<HT
   forwardRef?: any,
 }
 
-export default class Effect extends React.PureComponent<EffectProps> {
+export default class Effect extends React.Component<EffectProps> {
   static contextType = ThemeContext
   static defaultProps = {}
   static TryTagless = (props: TaglessEffectProps) => <Effect TRY_TAGLESS {...props} />
