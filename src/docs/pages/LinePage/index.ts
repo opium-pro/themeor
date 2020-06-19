@@ -1,1 +1,1 @@
-export {default} from './LinePage'
+export {default} from './PageWraper'

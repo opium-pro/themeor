@@ -1,1 +1,1 @@
-export {default} from './IconPage'
+export {default} from './PageWraper'

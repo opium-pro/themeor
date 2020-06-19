@@ -1,20 +1,22 @@
 import React from 'react'
-import { Font, Line, Gap, Box, Align } from '../../../themeor'
+import { Font, Line, Gap, Box, Align, Fit } from '../../../themeor'
 import { Switch } from 'react-router-dom'
 import {PageMenu, Link, ContentWrapper} from '../index'
 import {ItemType} from '../../adapters/MenuAdapter'
 import {MenuAdapter} from '../../adapters'
+import navigation from '../../navigation'
 
 export interface Props {
   title?: string,
   description?: any,
   next?: string,
   prev?: string,
+  path?: string,
 }
 
 export class Wrapper extends React.PureComponent<Props> {
 
-  menu = <MenuAdapter
+  menu = React.Children.count(this.props.children) > 1 && <MenuAdapter
     component={PageMenu}
     data={React.Children.map(this.props.children, ({props}: any): ItemType => ({
       key: props.path,
@@ -27,9 +29,32 @@ export class Wrapper extends React.PureComponent<Props> {
   />
 
   render() {
-    const { title, description, next, prev, children } = this.props
+    const { title, description, path, children } = this.props
 
-    return (<div>
+    let prev = this.props.prev
+    function findPrev(index: number): any {
+      if (navigation[index - 1]) {
+        return navigation[index - 1].path || findPrev(index - 1)
+      }
+    }
+    let next = this.props.next
+    function findNext(index: number): any {
+      if (navigation[index + 1]) {
+        return navigation[index + 1].path || findNext(index + 1)
+      }
+    }
+    path && navigation.forEach((navItem, index) => {
+      if (!prev && navItem.path === path) {
+        prev = findPrev(index)
+      }
+      if (!next && navItem.path === path) {
+        next = findNext(index)
+      }
+    })
+
+    return (
+    <Fit.TryTagless minHeight="100vh">
+    <Align>
       <ContentWrapper >
         <Gap size="xl" />
 
@@ -55,6 +80,8 @@ export class Wrapper extends React.PureComponent<Props> {
         {children}
       </Switch>
 
+      <Align.Spacer />
+
       <Line fill="faint-down" />
 
       <Box fill="faint-down">
@@ -72,6 +99,8 @@ export class Wrapper extends React.PureComponent<Props> {
           </ContentWrapper>
         <Gap size="xl" />
       </Box>
-    </div>)
+      </Align>
+    </Fit.TryTagless>
+    )
   }
 }

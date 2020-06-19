@@ -70,6 +70,16 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
 
         Here will be demo of theme switching
 
+        <Gap />
+        <Font weight="700" size="xl">Only following doc pages are ready yet:</Font><br /><br />
+        <Font size="lg">
+          <Link href="/box">Box</Link><br /><br />
+          <Link href="/font">Font</Link><br /><br />
+          <Link href="/line">Line</Link><br /><br />
+          <Link href="/icon">Icon</Link><br /><br />
+          <Link href="/gap">Gap</Link><br /><br />
+        </Font>
+
         <Gap size="x3l" />
       </ContentWrapper>
     </>)

@@ -1,1 +1,1 @@
-export {default} from './FontPage'
+export {default} from './PageWraper'
