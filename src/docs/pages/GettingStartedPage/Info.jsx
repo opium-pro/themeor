@@ -24,7 +24,9 @@ But all the components are ready to use.</Font>
 <Code inline>npm i themeor node-sass</Code>
 <Gap />
 
-<Font>Here you can find a description of color concept: <Link href="https://medium.com/@opium.pro/standardisation-of-color-schemes-through-the-eyes-of-a-programmer-53cc25148470">Standardization of color schemes through the eyes of a programmer</Link> But this concept is not obligatory to use, you can set your own colors in <Code inline>config.customVariables</Code>
+<Font>
+Here you can find a description of color concept: <Link href="https://medium.com/@opium.pro/standardisation-of-color-schemes-through-the-eyes-of-a-programmer-53cc25148470">Standardization of color schemes through the eyes of a programmer</Link> But this concept is not obligatory to use, you can set your own colors in <Code inline>config.customVariables</Code>
+</Font>
 
 <Gap />
 <Font>
