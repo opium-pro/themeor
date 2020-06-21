@@ -56,7 +56,7 @@ export class Wrapper extends React.PureComponent<Props> {
 
     return (
     <Fit.TryTagless minHeight="100vh">
-    {nonTheming && <Note>This component has nothing to deal with themes. But you can use it to handle the most often cases faster comparing with CSS</Note>}
+    {nonTheming && <Note>This component has nothing to deal with themes. But you can use it to handle the most often cases faster (comparing with CSS)</Note>}
     <Align>
       <ContentWrapper >
         <Gap size="xl" />

@@ -23,9 +23,15 @@ But all the components are ready to use.</Font>
 
 <Code inline>npm i themeor node-sass</Code>
 <Gap />
+
+<Font>Here you can find a description of color concept: <Link href="https://medium.com/@opium.pro/standardisation-of-color-schemes-through-the-eyes-of-a-programmer-53cc25148470">Standardization of color schemes through the eyes of a programmer</Link> But this concept is not obligatory to use, you can set your own colors in <Code inline>config.customVariables</Code>
+
+<Gap />
 <Font>
 For fast start download <Link href="https://github.com/opium-pro/themeor/blob/v-0.1.3/src/docs/theme/theme-light.json">the demo config file</Link>
-<br /><br />
+</Font>
+<Gap />
+<Font>
 ... and here is how you can use it:
 </Font>
 <Gap />

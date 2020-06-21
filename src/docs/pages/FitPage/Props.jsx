@@ -108,7 +108,7 @@ export default class BoxPage_Props extends React.PureComponent {
           </Item>
 
           <Item name="zIndex" type="number" default="undefined" description="">
-            <Value examples={["1", "3", "69"]}>Number of the layer</Value>
+            <Value examples={["4", "20", "69", "666"]}>Number of the layer</Value>
           </Item>
 
           <Item name="inline" type="boolean" default="undefined" description={(<>

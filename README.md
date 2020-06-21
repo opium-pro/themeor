@@ -8,6 +8,8 @@ But all the components are ready to use.
 
 `npm i themeor node-sass`
 
+Here you can find a description of color concept: [Standardization of color schemes through the eyes of a programmer](https://medium.com/@opium.pro/standardisation-of-color-schemes-through-the-eyes-of-a-programmer-53cc25148470) But this concept is not obligatory to use, you can set your own colors in `config.customVariables`
+
 For fast start download [the demo config file](https://github.com/opium-pro/themeor/blob/v-0.1.3/src/docs/theme/theme-light.json)
 
 ... and here is how you can use it:
