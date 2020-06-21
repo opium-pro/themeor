@@ -7,6 +7,11 @@ export default class BoxPage_Config extends React.PureComponent {
   render() {
     return (
       <ContentWrapper>
+        <Font weight="700" size="xl" family="special">
+          Create sophisticated themes in React JS. Fast. Without even knowing CSS
+        </Font>
+
+        <br /><br />
         <Font weight="700">I't still alpha</Font>
 
 <Font>Sorry for the lack of documentation, it's in progress.
@@ -19,8 +24,6 @@ But all the components are ready to use.</Font>
 <Code inline>npm i themeor node-sass</Code>
 <Gap />
 <Font>
-You can find demo files <Link href="https://github.com/opium-pro/themeor/tree/v-0.1.3/src/docs">here</Link>
-<br /><br />
 For fast start download <Link href="https://github.com/opium-pro/themeor/blob/v-0.1.3/src/docs/theme/theme-light.json">the demo config file</Link>
 <br /><br />
 ... and here is how you can use it:

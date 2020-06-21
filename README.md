@@ -1,13 +1,12 @@
-# I't still alpha
+# Create sophisticated themes in React JS. Fast. Without even knowing CSS
 
+## I't still alpha
 Sorry for the lack of documentation, it's in progress.
 But all the components are ready to use.
 
 ---
 
 `npm i themeor node-sass`
-
-You can find demo files [here](https://github.com/opium-pro/themeor/tree/v-0.1.3/src/docs)
 
 For fast start download [the demo config file](https://github.com/opium-pro/themeor/blob/v-0.1.3/src/docs/theme/theme-light.json)
 

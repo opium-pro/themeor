@@ -5,6 +5,7 @@ import {PageMenu, Link, ContentWrapper} from '../index'
 import {ItemType} from '../../adapters/MenuAdapter'
 import {MenuAdapter} from '../../adapters'
 import navigation from '../../navigation'
+import Note from '../Note'
 
 export interface Props {
   title?: string,
@@ -12,6 +13,7 @@ export interface Props {
   next?: string,
   prev?: string,
   path?: string,
+  nonTheming?: boolean,
 }
 
 export class Wrapper extends React.PureComponent<Props> {
@@ -29,7 +31,7 @@ export class Wrapper extends React.PureComponent<Props> {
   />
 
   render() {
-    const { title, description, path, children } = this.props
+    const { title, description, path, children, nonTheming } = this.props
 
     let prev = this.props.prev
     function findPrev(index: number): any {
@@ -54,6 +56,7 @@ export class Wrapper extends React.PureComponent<Props> {
 
     return (
     <Fit.TryTagless minHeight="100vh">
+    {nonTheming && <Note>This component has nothing to deal with themes. But you can use it to handle the most often cases faster comparing with CSS</Note>}
     <Align>
       <ContentWrapper >
         <Gap size="xl" />

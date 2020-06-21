@@ -4,6 +4,10 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   position: relative;
 }
 
+.isNotParent {
+  position: static;
+}
+
 .inline {
   display: inline-block;
 }

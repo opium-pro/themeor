@@ -37,10 +37,10 @@ export default [
   {key: newId(), group: basicsGroup, value: 'Font', component: FontPage, path: '/font'},
   {key: newId(), group: basicsGroup, value: 'Line', component: LinePage, path: '/line'},
   {key: newId(), group: basicsGroup, value: 'Icon', component: IconPage, path: '/icon'},
+  {key: newId(), group: basicsGroup, value: 'Gap', component: GapPage, path: '/gap'},
 
   {key: advancedGroup, value: 'Advanced'},
   {key: newId(), group: advancedGroup, value: 'Advanced', component: ColorPage, path: '/tagless'},
-  {key: newId(), group: advancedGroup, value: 'Gap', component: GapPage, path: '/gap'},
   {key: newId(), group: advancedGroup, value: 'Align', component: AlignPage, path: '/align'},
   {key: newId(), group: advancedGroup, value: 'Fit', component: FitPage, path: '/fit'},
   {key: newId(), group: advancedGroup, value: 'Reaction', component: ReactionPage, path: '/reaction'},

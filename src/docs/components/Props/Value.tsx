@@ -8,6 +8,8 @@ export interface Props {
 
 
 export class Value extends React.PureComponent<Props> {
+  static defaultProps = {examples: []}
+
   render() {
     const { examples, children } = this.props
 
