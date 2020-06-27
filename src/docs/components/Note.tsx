@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {Font, Box, Gap} from '../../themeor'
+import {Font, Box, Gap, Align} from '../../themeor'
 
 export interface NoteProps extends React.AllHTMLAttributes<HTMLElement> {}
 
@@ -10,9 +10,9 @@ export default class Note extends React.PureComponent<NoteProps> {
     const {children, ...restProps} = this.props
 
     return(
-      <Box fill="warning">
+      <Box fill="faint-up" radius="md">
         <Gap>
-          <Font fill="warning">
+          <Font>
             {children}
           </Font>
         </Gap>

@@ -56,7 +56,7 @@ export class Wrapper extends React.PureComponent<Props> {
 
     return (
     <Fit.TryTagless minHeight="100vh">
-    {nonTheming && <Note>This component has nothing to deal with themes. But you can use it to handle the most often cases faster (comparing with CSS)</Note>}
+
     <Align>
       <ContentWrapper >
         <Gap size="xl" />
@@ -64,6 +64,18 @@ export class Wrapper extends React.PureComponent<Props> {
         {title && <Font family="special" weight="800" size="x3l">
           {title}
         </Font>}
+
+        {nonTheming && (<>
+          <Note>
+            <Align row vert="center" gapHor="md">
+              <Font inline size="x2l">😊</Font>
+              <Font>
+                This component has nothing to deal with themes.<br />
+                But you can use it to handle some cases faster then with CSS
+              </Font>
+            </Align>
+          </Note>
+        </>)}
 
         {description && (<>
           <Gap />

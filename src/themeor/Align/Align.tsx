@@ -83,13 +83,6 @@ export default class Align extends React.Component<AlignProps> {
     }
 
     if (!pattern && (gapVert || gapHor)) {
-      if (React.Children.count(children) === 1) {
-        return (
-          <Gap vert={gapVert} hor={gapHor}>
-            {children}
-          </Gap>
-        )
-      }
       const {children: componentChildren, ...restComponentProps} = componentProps
       const wrapChildClass = cn(
         gapVert && css[`item-vert-gap-${gapVert}`],
