@@ -14,6 +14,7 @@ export interface ItemType extends RouteProps {
   exact?: boolean,
   group?: string,
   groupMenu?: string[],
+  startGroup?: boolean,
 }
 
 export interface MenuAdapterProps extends RouteComponentProps {
@@ -27,6 +28,7 @@ export interface MenuAdapterProps extends RouteComponentProps {
     Group?: React.ComponentClass<Types.GroupProps>,
     Spacer?: React.ComponentClass,
     Hint?: React.ComponentClass<Types.HintProps>,
+    Title?: React.ComponentClass<Types.TitleProps>,
   },
 }
 
@@ -64,6 +66,13 @@ class MenuAdapter extends React.PureComponent<MenuAdapterProps> {
     return group
   }
 
+  renderTitle = (item: ItemType, parentGroup?: string) => {
+    const {value} = item
+    const Menu = this.props.component
+    if (!Menu.Title) { return null }
+    return <Menu.Title>{value}</Menu.Title>
+  }
+
   renderItem = (item: ItemType, parentGroup?: string) => {
     const Menu = this.props.component
     const {value, hint, path, key, exact, group} = item
@@ -99,15 +108,19 @@ class MenuAdapter extends React.PureComponent<MenuAdapterProps> {
   }
 
   renderMenu = (item: ItemType, index: number) => {
-    const {path, key, value, groupMenu} = item
+    const {path, key, value, groupMenu, startGroup} = item
 
     if (groupMenu?.length) {
       this.groupMenuId = key
       return <div key={key} id={key} />
     }
 
-    if (!path && value) {
+    if (!path && value && startGroup) {
       return this.renderGroup(item, index)
+    }
+
+    if (!path && value) {
+      return this.renderTitle(item)
     }
 
     return this.renderItem(item)

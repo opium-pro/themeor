@@ -14,3 +14,4 @@ export interface GroupProps {
 
 export interface SeparatorProps {}
 export interface HintProps {}
+export interface TitleProps {}
