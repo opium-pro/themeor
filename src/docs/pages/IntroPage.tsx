@@ -78,6 +78,7 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
           <Link href="/line">Line</Link><br /><br />
           <Link href="/icon">Icon</Link><br /><br />
           <Link href="/gap">Gap</Link><br /><br />
+          <Link href="/fit">Fit</Link><br /><br />
         </Font>
 
         <Gap size="x3l" />
