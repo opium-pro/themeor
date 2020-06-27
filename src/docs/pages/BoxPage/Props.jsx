@@ -10,18 +10,18 @@ export default class BoxPage_Props extends React.PureComponent {
       <Wrapper>
         <Group title="Color Props">
           <Item name="fill" type="string" default={`"none"`} description={(<>
-            Sets background color from Opium.Fill scheme or custom variable from config. See <Link href="/intro/colors">colors</Link> fro more information
+            Sets background color from Opium.Fill scheme or custom variable from config. See <Link href="/colors">colors</Link> fro more information
             </>)}
           >
             <Value examples={[`"none"`]}>Transparent</Value>
 
             <Value examples={opiumFill()}>
-              Any parent color from <Link href="/intro/colors">Opium.Fill</Link><br />
+              Any parent color from <Link href="/colors">Opium.Fill</Link><br />
               By default all colors are <Code inline>weak</Code>
             </Value>
 
             <Value examples={opiumFill(true, true, false)}>
-              Any color shift from <Link href="/intro/colors">Opium.Fill</Link>
+              Any color shift from <Link href="/colors">Opium.Fill</Link>
             </Value>
 
             <Value examples={[`"--my-var"`]}>
@@ -31,15 +31,15 @@ export default class BoxPage_Props extends React.PureComponent {
           </Item>
 
           <Item name="strong" type="boolean" default="undefined" description={(<>
-            Works only with <Link href="/intro/colors">Opium.Fill</Link>. Toggles fill color from  <Code inline>weak</Code> to  <Code inline>strong</Code>
+            Works only with <Link href="/colors">Opium.Fill</Link>. Toggles fill color from  <Code inline>weak</Code> to  <Code inline>strong</Code>
           </>)} />
 
           <Item name="inverse" type="boolean" default="undefined" description={(<>
-            Works only with <Link href="/intro/colors">Opium.Fill</Link>. Takes <Code inline>weak</Code> color not from parent color, but from background context
+            Works only with <Link href="/colors">Opium.Fill</Link>. Takes <Code inline>weak</Code> color not from parent color, but from background context
           </>)} />
 
           <Item name="fancy" type="boolean" default="undefined" description={(<>
-            Works only with <Link href="/intro/colors">Opium.Fill</Link>. Takes gradient fill from config
+            Works only with <Link href="/colors">Opium.Fill</Link>. Takes gradient fill from config
           </>)} />
         </Group>
 
@@ -50,7 +50,7 @@ export default class BoxPage_Props extends React.PureComponent {
           >
             <Value examples={[`"none"`]}>No border-radius</Value>
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.box.radius</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.box.radius</Code>
             </Value>
             <Value examples={[`"max"`]}>Maximal avalible value to make a circle from rectangle</Value>
           </Item>
@@ -92,7 +92,7 @@ export default class BoxPage_Props extends React.PureComponent {
           <Item name="shadow" type="string" default="undefined" description="Sets box-shadow">
             <Value examples={[`"none"`]}>No shadow</Value>
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.box.shadow</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.box.shadow</Code>
             </Value>
           </Item>
 

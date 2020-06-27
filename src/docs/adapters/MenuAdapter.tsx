@@ -67,10 +67,10 @@ class MenuAdapter extends React.PureComponent<MenuAdapterProps> {
   }
 
   renderTitle = (item: ItemType, parentGroup?: string) => {
-    const {value} = item
+    const {value, key} = item
     const Menu = this.props.component
     if (!Menu.Title) { return null }
-    return <Menu.Title>{value}</Menu.Title>
+    return <Menu.Title key={key}>{value}</Menu.Title>
   }
 
   renderItem = (item: ItemType, parentGroup?: string) => {

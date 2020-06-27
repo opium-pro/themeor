@@ -9,6 +9,8 @@ export interface Props {
 }
 
 export class Item extends React.PureComponent<Props> {
+  static defaultProps = {code: ''}
+
   render() {
     const {
       children,

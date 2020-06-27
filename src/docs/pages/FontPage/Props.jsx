@@ -11,18 +11,18 @@ export default class BoxPage_Props extends React.PureComponent {
       <Wrapper>
         <Group title="Color Props">
           <Item name="fill" type="string" default={`inherit`} description={(<>
-            Sets text color from Opium.Fill scheme or custom variable from <Code inline>config.customVariables</Code> See <Link href="/intro/colors">colors</Link> fro more information
+            Sets text color from Opium.Fill scheme or custom variable from <Code inline>config.customVariables</Code> See <Link href="/colors">colors</Link> fro more information
             </>)}
           >
             <Value examples={[`"none"`]}>Transparent</Value>
 
             <Value examples={opiumFill()}>
-              Any parent color from <Link href="/intro/colors">Opium.Fill</Link><br />
+              Any parent color from <Link href="/colors">Opium.Fill</Link><br />
               By default all colors are <Code inline>strong</Code>
             </Value>
 
             <Value examples={opiumFill(true, true, false)}>
-              Any color shift from <Link href="/intro/colors">Opium.Fill</Link>
+              Any color shift from <Link href="/colors">Opium.Fill</Link>
             </Value>
 
             <Value examples={[`"--my-var"`]}>
@@ -32,7 +32,7 @@ export default class BoxPage_Props extends React.PureComponent {
           </Item>
 
           <Item name="inverse" type="boolean" default="undefined" description={(<>
-            Works only with <Link href="/intro/colors">Opium.Fill</Link>. Maked the color <Code inline>weak</Code><br />
+            Works only with <Link href="/colors">Opium.Fill</Link>. Maked the color <Code inline>weak</Code><br />
             Inverses automatically if background color is strong and included in <Code inline>config.themeContext.shallInverseOn</Code>
           </>)} />
         </Group>
@@ -41,7 +41,7 @@ export default class BoxPage_Props extends React.PureComponent {
         <Group title="Text Props">
           <Item name="size" type="string" default="inherit">
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.font.size</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.font.size</Code>
             </Value>
           </Item>
 
@@ -80,13 +80,13 @@ export default class BoxPage_Props extends React.PureComponent {
 
           <Item name="lineHeight" type="string" default="inherit">
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.font.lineHeight</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.font.lineHeight</Code>
             </Value>
           </Item>
 
           <Item name="letterSpacing" type="string" default="inherit">
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.font.letterSpacing</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.font.letterSpacing</Code>
             </Value>
           </Item>
 

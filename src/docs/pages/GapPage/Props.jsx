@@ -11,7 +11,7 @@ export default class BoxPage_Props extends React.PureComponent {
         <Group title="Size Props">
           <Item name="size" type="string" default={`"md"`}>
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
             </Value>
           </Item>
 
@@ -19,7 +19,7 @@ export default class BoxPage_Props extends React.PureComponent {
             Sets vertical padding. If set, then <Code inline>size</Code> prop will be ignored
           </>}>
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
             </Value>
           </Item>
 
@@ -27,7 +27,7 @@ export default class BoxPage_Props extends React.PureComponent {
             Sets horizontal padding. If set, then <Code inline>size</Code> prop will be ignored
           </>}>
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
             </Value>
           </Item>
 
@@ -35,7 +35,7 @@ export default class BoxPage_Props extends React.PureComponent {
             Sets top padding. If set, then <Code inline>size</Code> prop will be ignored
           </>}>
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
             </Value>
           </Item>
 
@@ -43,7 +43,7 @@ export default class BoxPage_Props extends React.PureComponent {
             Sets right padding. If set, then <Code inline>size</Code> prop will be ignored
           </>}>
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
             </Value>
           </Item>
 
@@ -51,7 +51,7 @@ export default class BoxPage_Props extends React.PureComponent {
             Sets bottom padding. If set, then <Code inline>size</Code> prop will be ignored
           </>}>
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
             </Value>
           </Item>
 
@@ -59,7 +59,7 @@ export default class BoxPage_Props extends React.PureComponent {
             Sets left padding. If set, then <Code inline>size</Code> prop will be ignored
           </>}>
             <Value examples={opiumScale()}>
-              <Link href="/intro/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
+              <Link href="/scaled-css">Scaled value</Link> from <Code inline>config.gap</Code>
             </Value>
           </Item>
         </Group>
