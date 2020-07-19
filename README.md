@@ -1,8 +1,9 @@
 # Create sophisticated themes in React JS. Fast. Without even knowing CSS
 
-## I't still alpha
+## Documentation is in progress.
 Sorry for the lack of documentation, it's in progress.
 But all the components are ready to use.
+Feel free to ask any questions [dev@opium.pro](mailto:dev@opium.pro)
 
 ---
 
