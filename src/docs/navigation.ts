@@ -30,7 +30,7 @@ export default [
 
   {key: newId()},
   {key: newId(), value: 'Basics'},
-  {key: newId(), value: '1. Colors', component: ColorPage, path: '/color'},
+  {key: newId(), value: '1. Colors', component: ColorPage, path: '/colors'},
   {key: newId(), value: '2. Scaled CSS', hint: "the page is not ready yet", component: ScaledCssPage, path: '/scaled-css'},
   {key: newId(), value: '3. Box', component: BoxPage, path: '/box'},
   {key: newId(), value: '4. Font', component: FontPage, path: '/font'},

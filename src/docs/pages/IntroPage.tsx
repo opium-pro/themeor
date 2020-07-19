@@ -92,7 +92,7 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
           <div>
             <Font weight="700" size="xl">Basic usage:</Font><br /><br />
             <Font size="lg">
-              <Link href="/color">1. Colors</Link><br /><br />
+              <Link href="/colors">1. Colors</Link><br /><br />
               <Link href="/scaled-css">2. Scaled CSS</Link><br /><br />
               <Link href="/box">3. Box</Link><br /><br />
               <Link href="/font">4. Font</Link><br /><br />
