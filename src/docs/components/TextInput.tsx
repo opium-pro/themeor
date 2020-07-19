@@ -4,8 +4,8 @@ import newId from '../../themeor/utils/new-id'
 
 
 export interface TextInputProps extends React.AllHTMLAttributes<HTMLElement> {
-  label: string,
-  onChange: (e: any) => void,
+  label?: string,
+  onChange?: (e: any) => void,
   value?: string,
   error?: boolean | string,
   disabled?: boolean,

@@ -24,6 +24,7 @@ export class Item extends React.PureComponent<ItemProps> {
                     fill={active ? "base" : "accent"}
                     weight="500"
                     noselect
+                    nowrap
                     FORCE_TAGLESS
                   >
                     {children}

@@ -8,33 +8,44 @@ import navigation from './navigation'
 
 // Need this fot theme config
 import lightTheme from './theme/theme-light.json'
-// import yellowTheme from './theme/theme-yellow.json'
-// import darkTheme from './theme/theme-dark.json'
 import icons from './theme/icons'
 import './theme/font-face.css'
 
-interface AppProps { }
+interface AppProps {}
 
 interface AppState {
   refContent?: any,
   refAside?: any,
+  theme?: ConfigTypes.ThemeConfig,
+  themeChange?: (theme: ConfigTypes.ThemeConfig) => void,
 }
 
 export default class App extends React.PureComponent<AppProps, AppState> {
   static contextType = AppContext
 
   refContent = (ref: any) => {
-    this.setState({ refContent: ref })
+    this.setState({...this.state, refContent: ref })
   }
 
   refAside = (ref: any) => {
-    this.setState({ refAside: ref })
+    this.setState({...this.state, refAside: ref })
+  }
+
+  themeChange = (theme: ConfigTypes.ThemeConfig) => {
+    console.log(theme);
+    
+    this.setState({...this.state, theme})
+  }
+
+  state = {
+    theme: lightTheme,
+    themeChange: this.themeChange,
   }
 
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        <Theme config={lightTheme as ConfigTypes.ThemeConfig} icons={icons as ConfigTypes.ThemeIcons}>
+        <Theme config={this.state.theme} icons={icons as ConfigTypes.ThemeIcons}>
           <Font size="md" family="regular" fill="base" align="left" lineHeight="md">
             <Box.TryTagless fill="base">
               <Align.TryTagless pattern="240px 1fr">

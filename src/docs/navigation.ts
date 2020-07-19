@@ -25,13 +25,13 @@ import {version} from '../../package.json'
 
 export default [
   {key: newId(), value: 'Themeor', hint: `v${version}`, component: IntroPage, path: '/', exact: true},
-  {key: newId(), value: 'Demo', component: DemoPage, path: '/demo'},
   {key: newId(), value: 'Getting Started', component: GettingStartedPage, path: '/getting-started'},
+  {key: newId(), value: 'Demo', component: DemoPage, path: '/demo'},
 
   {key: newId()},
   {key: newId(), value: 'Basics'},
   {key: newId(), value: '1. Colors', component: ColorPage, path: '/color'},
-  {key: newId(), value: '2. Scaled CSS', component: ScaledCssPage, path: '/scaled-css'},
+  {key: newId(), value: '2. Scaled CSS', hint: "the page is not ready yet", component: ScaledCssPage, path: '/scaled-css'},
   {key: newId(), value: '3. Box', component: BoxPage, path: '/box'},
   {key: newId(), value: '4. Font', component: FontPage, path: '/font'},
   {key: newId(), value: '5. Line', component: LinePage, path: '/line'},
@@ -40,15 +40,15 @@ export default [
 
   {key: newId()},
   {key: newId(), value: 'Advanced'},
-  {key: newId(), value: '8. Align', component: AlignPage, path: '/align'},
+  {key: newId(), value: '8. Align', hint: "the page is not ready yet", component: AlignPage, path: '/align'},
   {key: newId(), value: '9. Fit', component: FitPage, path: '/fit'},
-  {key: newId(), value: '10. Reaction', component: ReactionPage, path: '/reaction'},
+  {key: newId(), value: '10. Reaction', hint: "the page is not ready yet", component: ReactionPage, path: '/reaction'},
   // {key: newId(), value: 'Effect', component: EffectPage, path: '/effect'},
   // {key: newId(), value: 'Template', component: TemplatePage, path: '/template'},
   // {key: newId(), value: 'Auto Inverse', component: InversePage, path: '/auto-inverse'},
-  {key: newId(), value: '11. Tagless', component: TaglessPage, path: '/tagless'},
+  {key: newId(), value: '11. Tagless', hint: "the page is not ready yet", component: TaglessPage, path: '/tagless'},
   // {key: newId(), value: 'Embedded Themes', component: ThemePage, path: '/embedded-themes'},
 
   {key: newId()},
-  {key: newId(), value: 'Credits', component: CreditsPage, path: '/credits'},
+  {key: newId(), value: 'Credits', hint: "the page is not ready yet", component: CreditsPage, path: '/credits'},
 ]

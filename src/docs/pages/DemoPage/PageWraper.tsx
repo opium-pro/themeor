@@ -9,8 +9,8 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="This page is not ready yet"
-        description="Here will be description"
+        title="Demo"
+        description="Result will be applied to every page here. So also check out how the other pages are chanding"
         path={match?.url}
       >
         <Page name="Info" component={Info} path={`${match?.url}`} exact />
