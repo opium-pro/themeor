@@ -10,7 +10,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
     return (
       <Wrapper
         title="Getting Started"
-        description="It's not finished yet"
+        description="Create sophisticated themes in React JS. Fast. Without even knowing CSS"
         path={match?.url}
       >
         <Page name="Info" component={Info} path={`${match?.url}`} exact />

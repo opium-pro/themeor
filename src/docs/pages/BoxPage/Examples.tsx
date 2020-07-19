@@ -63,7 +63,7 @@ class BoxColors extends React.Component {
         >
           <Align pattern="1fr 1fr 1fr" gapHor="md">
             <Box fill="--demo-var">
-              <Gap><Font align="center">Custom Var</Font></Gap>
+              <Gap><Font align="center" fill="base">Custom Var</Font></Gap>
             </Box>
           </Align>
         </Item>
@@ -129,7 +129,7 @@ class BoxColors extends React.Component {
           <Gap><Font align="center">Medium Box Shadow</Font></Gap>
         </Box>
 
-        <Box fill="base" strong img="/img/intro.jpg">
+        <Box fill="accent" strong img="/img/intro.jpg">
           <Gap><Font align="center">Background Image</Font></Gap>
         </Box>
       </Align>
@@ -143,7 +143,7 @@ class BoxColors extends React.Component {
               <Gap><Font align="center">Medium Box Shadow</Font></Gap>
             </Box>
 
-            <Box fill="base" strong img="/img/intro.jpg">
+            <Box fill="accent" strong img="/img/intro.jpg">
               <Gap><Font align="center">Background Image</Font></Gap>
             </Box>
           </Align>

@@ -7,11 +7,6 @@ export default class BoxPage_Config extends React.PureComponent {
   render() {
     return (
       <ContentWrapper>
-        <Font weight="700" size="xl" family="special">
-          Create sophisticated themes in React JS. Fast. Without even knowing CSS
-        </Font>
-
-        <br /><br />
         <Font weight="700">I't still alpha</Font>
 
 <Font>Sorry for the lack of documentation, it's in progress.

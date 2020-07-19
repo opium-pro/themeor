@@ -29,9 +29,9 @@ export default class Code extends React.PureComponent<CodeProps> {
       mark,
       ...restProps
     } = this.props
-    const {backIsStrong} = this.context
+    const {backIsStrong, template} = this.context
 
-    const style = (inverse || backIsStrong) ? darkTheme : lightTheme
+    const style = (inverse || backIsStrong || template.includes('dark') || template.includes('corona')) ? darkTheme : lightTheme
     const gapVert = (plain && "none") || (inline && "x2s") || "sm"
     const gapHor = (inline && "x2s") || "none"
     const boxFill = (plain && "none") || (inverse && "base") || "faint"

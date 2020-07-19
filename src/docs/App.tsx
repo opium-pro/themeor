@@ -32,8 +32,6 @@ export default class App extends React.PureComponent<AppProps, AppState> {
   }
 
   themeChange = (theme: ConfigTypes.ThemeConfig) => {
-    console.log(theme);
-    
     this.setState({...this.state, theme})
   }
 

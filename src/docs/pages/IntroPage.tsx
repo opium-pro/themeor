@@ -1,6 +1,6 @@
 import React from 'react'
 import { RouteChildrenProps } from 'react-router-dom'
-import { Box, Font, Gap, Fit, Line, Align } from '../../themeor'
+import { Box, Font, Gap, Fit, Line, Align, Template } from '../../themeor'
 import { Button, Link, ContentWrapper } from '../components'
 
 interface IntroPageProps extends RouteChildrenProps { }
@@ -26,25 +26,37 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
             <Align hor="center" >
               <Gap size="x3l" />
 
-              <Fit.TryTagless width="100%" height="200px">
-                <Align.TryTagless vert="center" hor="center">
-                  <Box strong radius="max" shadow="lg" img="/img/intro.jpg">
-                    <Font family="special" size="x3l" weight="800">Themeor</Font>
+              <Template hasNot="corona">
+                <Fit.TryTagless width="100%" height="200px">
+                  <Align.TryTagless FORCE_TAGLESS vert="center" hor="center">
+                    <Box strong fill="complement" radius="max" shadow="lg" img="/img/intro.jpg">
+                      <Font family="special" size="x3l" weight="800">Themeor</Font>
 
-                    <Fit width="240px" cover="parent" stick="top-left" left="-40px" top="-20px">
-                      <img alt="" src="/img/meteor.svg" />
-                    </Fit>
+                      <Fit width="240px" cover="parent" stick="top-left" left="-40px" top="-20px">
+                        <img alt="" src="/img/meteor.svg" />
+                      </Fit>
 
-                    <Fit width="130px" cover="parent" stick="bottom-left" left="30%" bottom="-60px">
-                      <img alt="" src="/img/ufo.svg" />
-                    </Fit>
+                      <Fit width="130px" cover="parent" stick="bottom-left" left="30%" bottom="-60px">
+                        <img alt="" src="/img/ufo.svg" />
+                      </Fit>
 
-                    <Fit width="260px" cover="parent" stick="bottom-right" bottom="-50px" right="-40px">
-                      <img alt="" src="/img/planet.svg" />
-                    </Fit>
-                  </Box>
-                </Align.TryTagless>
-              </Fit.TryTagless>
+                      <Fit width="260px" cover="parent" stick="bottom-right" bottom="-50px" right="-40px">
+                        <img alt="" src="/img/planet.svg" />
+                      </Fit>
+                    </Box>
+                  </Align.TryTagless>
+                </Fit.TryTagless>
+              </Template>
+
+              <Template has="corona">
+                <Fit.TryTagless width="100%" height="200px">
+                  <Align.TryTagless FORCE_TAGLESS vert="center" hor="center">
+                    <Box strong fill="complement" radius="max" shadow="lg" img="/img/corona1.jpg">
+                      <Font family="special" size="x3l" weight="800">Themeor</Font>
+                    </Box>
+                  </Align.TryTagless>
+                </Fit.TryTagless>
+              </Template>
 
               <Gap size="x2l" />
 

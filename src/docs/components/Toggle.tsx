@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Line, Fit, Gap, Reaction} from '../../themeor'
+import {Box, Line, Fit, Gap, Reaction, Align, Effect} from '../../themeor'
 import newId from '../../themeor/utils/new-id'
 
 
@@ -20,12 +20,14 @@ export default class Toggle extends React.PureComponent<ToggleProps> {
     return (
       <Reaction track={['hover', 'focus']} cursor="pointer">
         {(r: any) => (
-          <Fit.TryTagless TRY_RECURSIVE_TAGLESS width="56px">
-              <Box noContext fill={(on && 'accent') || 'faint-up'} strong={on} radius="max">
+          <Fit.TryTagless width="56px">
+              <Box fill={(on && 'accent') || 'faint-up'} strong={on} radius="max">
                 <Gap size="x2s">
                   <label {...r.props}>
                     <Fit.TryTagless cover="parent">
-                      <input onChange={onChange} type="checkbox" checked={on} {...restProps} />
+                      <Effect transparency="max">
+                        <input onChange={onChange} type="checkbox" checked={on} {...restProps} />
+                      </Effect>
                     </Fit.TryTagless>
 
                     {/* This is stroke for focus */}

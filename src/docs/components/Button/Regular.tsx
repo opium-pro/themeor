@@ -38,7 +38,7 @@ export default class Regular extends React.PureComponent<ButtonProps> {
                   >
                     <Gap hor="md" vert="sm">
                       <button type="button" {...reaction.props}>
-                        <Font noselect size="lg">{children}</Font>
+                        <Font noselect fill="base" size="lg">{children}</Font>
                       </button>
                     </Gap>
                   </Box>

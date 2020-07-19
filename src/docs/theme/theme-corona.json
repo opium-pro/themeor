@@ -7,8 +7,8 @@
   },
 
   "themeContext": {
-    "shallInverseOn": ["base", "faint", "accent", "complement", "critic", "success", "--demo-var"],
-    "template": ["opium"],
+    "shallInverseOn": ["base", "accent"],
+    "template": ["corona"],
     "_randomContectValue": "HERE YOU CAN SET VALUES FOR ThemeContext, BUT PLEASE START THEM WITH UNDERSCORE",
     "_formAttemtionFill": "accent"
   },
@@ -20,28 +20,28 @@
 
   "fill": {
     "base": {
-      "strong": "#000",
-      "weak": "#fff"
+      "strong": "#DBDED5",
+      "weak": "#4C5A2D"
     },
     "faint": {
-      "strong": "#8994A6",
-      "strong-down": "#AAB",
-      "weak": "#F6F8FB",
-      "weak-up": "#EDF1F7",
-      "weak-down": "#FAFBFD"
+      "strong": "#727C59",
+      "strong-down": "#6A7453",
+      "weak": "#424E27",
+      "weak-up": "#3A4422",
+      "weak-down": "#48552B"
     },
     "accent": {
-      "strong": "#1273F3",
-      "weak": "#EBF4FF",
-      "weak-up": "#DBEBFF"
+      "strong": "#FCFF5C",
+      "weak": "#6F7B36",
+      "weak-up": "#7B8A38"
     },
     "complement": {
       "strong": "#8889E2",
       "weak": "#EEECFD"
     },
     "critic": {
-      "strong": "#F74545",
-      "weak": "#FDEDED"
+      "strong": "#FF6C6C",
+      "weak": "#705E3A"
     },
     "warning": {
       "strong": "#E1922D",
@@ -55,9 +55,9 @@
 
   "fancy-fill": {
     "accent": {
-      "strong": "linear-gradient(132deg, #3F89EE, #5447FF)",
-      "strong-down": "linear-gradient(132deg, #448FF3, #594CFF)",
-      "strong-up": "linear-gradient(132deg, #357FE4, #4A3DF5)"
+      "strong": "linear-gradient(132deg, #FCFF5C, #FFDB5C)",
+      "strong-down": "linear-gradient(132deg, #FCFF5C, #FFDB5C)",
+      "strong-up": "linear-gradient(132deg, #FCFF5C, #FFDB5C)"
     }
   },
 
@@ -74,23 +74,6 @@
     "shadow": {
       "md": "0px 20px 40px rgba(59, 70, 128, 0.05)",
       "lg": "0px 20px 40px rgba(6, 7, 12, 0.10)"
-    },
-    "fill": {
-      "base": {
-        "strong": "#222428"
-      },
-      "accent": {
-        "weak": "#202C3C",
-        "weak-up": "#1F3451"
-      },
-      "faint": {
-        "strong": "#323438",
-        "weak-up": "rgba(255, 255, 255, 0.1)",
-        "weak": "rgba(255, 255, 255, 0.05)"
-      },
-      "critic": {
-        "weak": "#521E1E"
-      }
     }
   },
 
@@ -98,14 +81,6 @@
     "family": {
       "regular": "'Helvetica', sans-serif",
       "special": "'Montserrat', 'YOU NEED TO INCLUDE @font-face BY YOURSELF', sans-serif"
-    },
-    "fill": {
-      "faint": {
-        "weak": "rgba(237, 241, 247, 0.5)"
-      },
-      "accent": {
-        "weak": "#4294FF"
-      }
     },
     "line-height": {
       "sm": "1.2",
@@ -129,9 +104,9 @@
   "line": {
     "fill": {
       "faint": {
-        "strong-down": "rgba(0, 43, 107, 0.06)",
-        "strong": "rgba(0, 43, 107, 0.11)",
-        "strong-up": "rgba(0, 43, 107, 0.20)",
+        "strong-down": "rgba(0, 0, 0, 0.15)",
+        "strong": "rgba(0, 0, 0, 0.25)",
+        "strong-up": "rgba(0, 0, 0, 0.35)",
         "weak": "rgba(255, 255, 255, 0.1)"
       }
     },
