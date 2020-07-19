@@ -11,7 +11,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="Font"
+        title="4. Font"
         description="Controlls all text parameters. Such as color, size, letter spacing, weight, etc"
         path={match?.url}
       >

@@ -12,6 +12,11 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
     history.push('/getting-started')
   }
 
+  handleDemo = (e: any) => {
+    const { history } = this.props
+    history.push('/demo')
+  }
+
   render() {
     return (<>
       <Box fill="base">
@@ -19,7 +24,7 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
 
           <Font align="center" >
             <Align hor="center" >
-              <Gap size="x2l" />
+              <Gap size="x3l" />
 
               <Fit.TryTagless width="100%" height="200px">
                 <Align.TryTagless vert="center" hor="center">
@@ -49,8 +54,11 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
                 </Font>
 
               <Gap size="lg" />
-
-              <Button onClick={this.handleGettingStarted} label="Get Started" />
+              <Align row>
+                <Button.Primary onClick={this.handleGettingStarted}>Get Started</Button.Primary>
+                <Gap />
+                <Button onClick={this.handleDemo}>Check out demo</Button>
+              </Align>
 
               <Gap size="lg" />
 
@@ -58,7 +66,7 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
                 by <Link href="http://opium.pro">opium.pro</Link>
               </Font>
 
-              <Gap size="lg" />
+              <Gap size="x2l" />
             </Align>
           </Font>
         </Gap>
@@ -68,18 +76,30 @@ export default class IntroPage extends React.PureComponent<IntroPageProps, Intro
       <ContentWrapper>
         <Gap size="x3l" />
 
-        Here will be demo of theme switching
+        <Align pattern="1fr 1fr" gapHor="md">
+          <div>
+            <Font weight="700" size="xl">Basic usage:</Font><br /><br />
+            <Font size="lg">
+              <Link href="/color">1. Colors</Link><br /><br />
+              <Link href="/scaled-css">2. Scaled CSS</Link><br /><br />
+              <Link href="/box">3. Box</Link><br /><br />
+              <Link href="/font">4. Font</Link><br /><br />
+              <Link href="/line">5. Line</Link><br /><br />
+              <Link href="/icon">6. Icon</Link><br /><br />
+              <Link href="/gap">7. Gap</Link><br /><br />
+            </Font>
+          </div>
 
-        <Gap />
-        <Font weight="700" size="xl">Only following doc pages are ready yet:</Font><br /><br />
-        <Font size="lg">
-          <Link href="/box">Box</Link><br /><br />
-          <Link href="/font">Font</Link><br /><br />
-          <Link href="/line">Line</Link><br /><br />
-          <Link href="/icon">Icon</Link><br /><br />
-          <Link href="/gap">Gap</Link><br /><br />
-          <Link href="/fit">Fit</Link><br /><br />
-        </Font>
+          <div>
+            <Font weight="700" size="xl">Advanced usage:</Font><br /><br />
+            <Font size="lg">
+              <Link href="/align">8. Align</Link><br /><br />
+              <Link href="/fit">9. Fit</Link><br /><br />
+              <Link href="/reaction">10. Reaction</Link><br /><br />
+              <Link href="/tagless">11. Tagless</Link><br /><br />
+            </Font>
+          </div>
+        </Align>
 
         <Gap size="x3l" />
       </ContentWrapper>

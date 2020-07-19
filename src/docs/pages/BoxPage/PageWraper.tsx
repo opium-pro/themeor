@@ -13,7 +13,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (<>
       <Wrapper
-        title="Box"
+        title="3. Box"
         description="Use it if you need to draw a rectangle. It can control background color, border radius, box shadow, background image"
         path={match?.url}
       >

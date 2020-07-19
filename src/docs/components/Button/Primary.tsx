@@ -1,15 +1,13 @@
 import React from 'react'
-import {Box, Font, Fit, Align, Gap, Line, Reaction, Template} from '../../themeor'
+import {Box, Font, Fit, Align, Gap, Line, Reaction, Template} from '../../../themeor'
 
 
-export interface ButtonProps extends React.AllHTMLAttributes<HTMLElement> {
-  label: string,
-}
+export interface ButtonProps extends React.AllHTMLAttributes<HTMLElement> {}
 
-export default class Button extends React.PureComponent<ButtonProps> {
+export default class Primary extends React.PureComponent<ButtonProps> {
   render() {
     const {
-      label,
+      children,
       ...restProps
     } = this.props
 
@@ -38,7 +36,7 @@ export default class Button extends React.PureComponent<ButtonProps> {
                   >
                     <Gap hor="md" vert="sm">
                       <button type="button" {...reaction.props}>
-                        <Font noselect size="lg">{label}</Font>
+                        <Font noselect size="lg">{children}</Font>
                       </button>
                     </Gap>
                   </Box>

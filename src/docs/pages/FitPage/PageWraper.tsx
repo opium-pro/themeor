@@ -12,7 +12,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
     return (<>
       <Wrapper
         nonTheming
-        title="Fit"
+        title="9. Fit"
         description={(<>
           Responsible for block sizes and positioning
         </>)}

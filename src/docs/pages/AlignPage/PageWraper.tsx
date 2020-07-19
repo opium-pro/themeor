@@ -11,7 +11,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="This page is not ready yet"
+        title="8. Align"
         description="Here will be description"
         path={match?.url}
       >

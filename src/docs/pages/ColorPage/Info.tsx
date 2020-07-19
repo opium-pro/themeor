@@ -1,6 +1,6 @@
 import React from 'react'
 import { Gap, Font, Line, Align } from '../../../themeor'
-import { ContentWrapper, NavLink, Tag, Code, Title, Text } from '../../components'
+import { ContentWrapper, NavLink, Tag, Code } from '../../components'
 import {Wrapper, Item} from '../../components/Examples'
 
 

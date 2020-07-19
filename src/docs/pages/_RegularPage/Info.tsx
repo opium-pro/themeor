@@ -1,6 +1,6 @@
 import React from 'react'
 import { Gap, Font, Line, Align } from '../../../themeor'
-import { ContentWrapper, NavLink, Tag, Code, Title, Text } from '../../components'
+import { ContentWrapper, NavLink, Tag, Code } from '../../components'
 
 
 export default class BoxPage_Config extends React.PureComponent {
@@ -12,23 +12,12 @@ export default class BoxPage_Config extends React.PureComponent {
 
         <Gap />
         <Font size="lg">
-          Here you can see an example of Gap configuration
+          Will be gere soon
         </Font>
 
         <Gap />
         <Code language="json">
-          {`{
-  "gap": {
-    "x2s": "4px",
-    "xs": "8px",
-    "sm": "16px",
-    "md": "24px",
-    "lg": "32px",
-    "xl": "40px",
-    "x2l": "64px",
-    "x3l": "80px"
-  }
-}`}
+          {`{}`}
         </Code>
 
         <Gap size="x2l" />

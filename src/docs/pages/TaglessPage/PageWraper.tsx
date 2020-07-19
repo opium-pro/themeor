@@ -2,8 +2,7 @@ import React from 'react'
 import { RouteChildrenProps } from 'react-router-dom'
 import {Wrapper, Page} from '../../components/Documentation'
 import Examples from './Examples'
-import Props from './Props'
-import Config from './Config'
+import Info from './Info'
 
 export default class PageWraper extends React.PureComponent<RouteChildrenProps> {
   render() {
@@ -11,13 +10,12 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="7. Gap"
-        description="Controlls space between objects and paddings"
+        title="11. Tagless"
+        description="Here will be description"
         path={match?.url}
       >
-        <Page name="Examples" component={Examples} path={`${match?.url}`} exact />
-        <Page name="Props" component={Props} path={`${match?.url}/props`} />
-        <Page name="Config" component={Config} path={`${match?.url}/config`} />
+        <Page name="Info" component={Info} path={`${match?.url}`} exact />
+        <Page name="Examples" component={Examples} path={`${match?.url}/examples`} />
       </Wrapper>
     )
   }
