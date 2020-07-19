@@ -12,6 +12,10 @@ Here you can find a description of color concept: [Standardization of color sche
 
 For fast start download [the demo config file](https://github.com/opium-pro/themeor/blob/v-0.1.3/src/docs/theme/theme-light.json)
 
+---
+
+[Documentation and demo](http://themeor.opium.pro/)
+
 ... and here is how you can use it:
 
 ```javascript
