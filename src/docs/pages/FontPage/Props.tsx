@@ -32,7 +32,7 @@ export default class BoxPage_Props extends React.PureComponent {
           </Item>
 
           <Item name="inverse" type="boolean" default="undefined" description={(<>
-            Works only with <Link href="/colors">Opium.Fill</Link>. Maked the color <Code inline>weak</Code><br />
+            Works only with <Link href="/colors">Opium.Fill</Link>. Makes the color <Code inline>weak</Code><br />
             Inverses automatically if background color is strong and included in <Code inline>config.themeContext.shallInverseOn</Code>
           </>)} />
         </Group>
