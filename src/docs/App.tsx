@@ -1,9 +1,9 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Theme, Box, Font, Align, Fit, ConfigTypes, Effect, Line, Gap } from '../themeor'
+import { Theme, Box, Font, Align, Fit, ConfigTypes, Icon, Line, Gap } from '../themeor'
 import { AppContext } from './context'
 import { MenuAdapter } from './adapters'
-import { SideMenu, Link } from './components'
+import { SideMenu } from './components'
 import navigation from './navigation'
 
 // Need this fot theme config
@@ -11,7 +11,7 @@ import lightTheme from './theme/theme-light.json'
 import icons from './theme/icons'
 import './theme/font-face.css'
 
-interface AppProps {}
+interface AppProps { }
 
 interface AppState {
   refContent?: any,
@@ -24,15 +24,15 @@ export default class App extends React.PureComponent<AppProps, AppState> {
   static contextType = AppContext
 
   refContent = (ref: any) => {
-    this.setState({...this.state, refContent: ref })
+    this.setState({ ...this.state, refContent: ref })
   }
 
   refAside = (ref: any) => {
-    this.setState({...this.state, refAside: ref })
+    this.setState({ ...this.state, refAside: ref })
   }
 
   themeChange = (theme: ConfigTypes.ThemeConfig) => {
-    this.setState({...this.state, theme})
+    this.setState({ ...this.state, theme })
   }
 
   state = {
@@ -52,14 +52,27 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                   <Align.TryTagless>
                     <Fit.TryTagless height="100vh" scroll>
                       <Box fill="faint" forwardRef={this.refAside}>
+                        <Gap size="xs">
+                          <Box.TryTagless fill="faint" strong radius="sm">
+                            <Font.TryTagless FORCE_TAGLESS fill="base" inline={false}>
+                              <a target="_blank" href="https://github.com/opium-pro/themeor">
+                                <Gap size="xs">
+                                  <Align row vert="center">
+                                    <Icon size="lg" name="github" />
+                                    <Gap size="x2s" />
+                                  Go to Github
+                                </Align>
+                                </Gap>
+                              </a>
+                            </Font.TryTagless>
+                          </Box.TryTagless>
+                        </Gap>
+
                         <MenuAdapter
                           data={navigation}
                           component={SideMenu}
                           jumpTo="content-top-id"
                         />
-                        <Link href="https://github.com/opium-pro/themeor">
-                          <Gap>Github</Gap>
-                        </Link>
                       </Box>
                     </Fit.TryTagless>
                   </Align.TryTagless>

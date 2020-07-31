@@ -1,5 +1,7 @@
 # Create sophisticated themes in React JS. Fast. Without even knowing CSS
 
+## [Documentation and demo](http://themeor.opium.pro/)
+
 ## Documentation is in progress.
 Sorry for the lack of documentation, it's in progress.
 But all the components are ready to use.
@@ -15,9 +17,7 @@ For fast start download [the demo config file](https://github.com/opium-pro/them
 
 ---
 
-[Documentation and demo](http://themeor.opium.pro/)
-
-... and here is how you can use it:
+Here is how you can use it:
 
 ```javascript
 import React from 'react'

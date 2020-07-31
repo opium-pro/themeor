@@ -5,7 +5,7 @@ import newId from '../utils/new-id'
 import consoleMessage from '../utils/console-message'
 import {ThemeContext} from '../context'
 import TryTagless from '../TryTagless'
-import './reset.scss'
+import css from './Theme.module.scss'
 
 export interface PureThemeProps {
   config?: ThemeConfig,
@@ -109,6 +109,7 @@ export default class Theme extends React.Component<ThemeProps> {
       ...restProps,
       children,
       id: this.id,
+      className: css.theme,
     }
 
     return (
