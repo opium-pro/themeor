@@ -7,7 +7,7 @@ export default class BoxPage_Config extends React.PureComponent {
   render() {
     return (
       <ContentWrapper>
-        <Font weight="700">I't still alpha</Font>
+        <Font weight="700">I't still beta</Font>
 
 <Font>Sorry for the lack of documentation, it's in progress.
 But all the components are ready to use.</Font>
