@@ -53,7 +53,7 @@ export default class BoxPage_Props extends React.PureComponent {
 
           <Item name="family" type="string" default="inherit" description={<>
             Value from <Code inline>config.font.family</Code><br />
-            Please don't forget to unclude @font-face by yourself if needed
+            Please don't forget to include @font-face by yourself if needed
           </>}>
             <Value examples={[`"regular"`, `"special"`]}>
               Regular or special font family

@@ -13,7 +13,7 @@ export default class BoxPage_Config extends React.PureComponent {
         <Gap />
         <Font size="lg">
           Here you can see an example of Font configuration.<br />
-          You need to unclude @font-face by yourself
+          You need to include @font-face by yourself
         </Font>
 
         <Gap />
