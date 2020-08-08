@@ -53,7 +53,7 @@ const md = {placeholder, bell, search}
 // Form an object to pass it to Theme component
 // Can contain keys according to the Scale (from x3s to x3l)
 // If you use the same icons for different sizes, you can dublicate them
-const iconSet = {xs: md, sm: md, md, lg: md, xl: md}
+const iconSet = {xs: md, sm: md, lg: md, xl: md}
 
 class App extends React.Component {
   render() {

@@ -40,7 +40,7 @@ export default [
 
   {key: newId()},
   {key: newId(), value: 'Advanced'},
-  {key: newId(), value: '8. Align', hint: "the page is not ready yet", component: AlignPage, path: '/align'},
+  {key: newId(), value: '8. Align', component: AlignPage, path: '/align'},
   {key: newId(), value: '9. Fit', component: FitPage, path: '/fit'},
   {key: newId(), value: '10. Reaction', hint: "the page is not ready yet", component: ReactionPage, path: '/reaction'},
   // {key: newId(), value: 'Effect', component: EffectPage, path: '/effect'},

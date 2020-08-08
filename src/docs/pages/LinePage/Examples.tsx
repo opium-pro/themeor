@@ -40,7 +40,7 @@ class LineDemo extends React.Component {
       <Wrapper title="Border Line">
         <Item
           description={(<>
-            If Line component has children, it will create a border. To set border radius you need to use <Link href="/tagless">TRY_TAGLESS prop</Link> and also use <Link href="/box">Box component</Link>
+            If Line component has children, it will create a border. To set border radius you need to use <Link href="/tagless">TryTagless</Link> and also use <Link href="/box">Box component</Link>
           </>)}
           markLines={[8,14,20,21]}
           code={`import React from 'react'

@@ -16,7 +16,7 @@ export default class BoxPage_Examples extends React.PureComponent {
           code={`import React from 'react'
 import {Box, Font, Gap, Align} from 'themeor'
 
-class BoxColors extends React.Component {
+class BoxDemo extends React.Component {
   render() {
     return(
       <Align pattern="1fr 1fr 1fr" gapHor="md">
@@ -78,7 +78,7 @@ class BoxColors extends React.Component {
           code={`import React from 'react'
 import {Box, Font, Gap, Align} from 'themeor'
 
-class BoxColors extends React.Component {
+class BoxDemo extends React.Component {
   render() {
     return(
       <Align pattern="1fr 1fr 1fr" gapHor="md">
@@ -121,7 +121,7 @@ class BoxColors extends React.Component {
           code={`import React from 'react'
 import {Box, Font, Gap, Align} from 'themeor'
 
-class BoxColors extends React.Component {
+class BoxDemo extends React.Component {
   render() {
     return(
       <Align pattern="1fr 1fr" gapHor="md">
