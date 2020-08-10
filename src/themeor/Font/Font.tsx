@@ -4,7 +4,7 @@ import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
 import * as Types from '../config-types'
 import newId from '../utils/new-id'
-import isCuctomVariable from '../utils/var-is-custom'
+import isCustomVariable from '../utils/var-is-custom'
 import TryTagless from '../TryTagless'
 
 export interface PureFontProps {
@@ -66,7 +66,7 @@ export default class Font extends React.Component<FontProps> {
 
     const {backIsStrong} = this.context
 
-    if(isCuctomVariable(fill)) {
+    if(isCustomVariable(fill)) {
       style.color = `var(${fill})`
     }
 
@@ -78,9 +78,9 @@ export default class Font extends React.Component<FontProps> {
         underline && css.underline,
         inline && css.inline,
         inline === false && css.block,
-        fill && !isCuctomVariable(fill) && css[`fill-${fill}`],
+        fill && !isCustomVariable(fill) && css[`fill-${fill}`],
         forceInverse && !fill && css[`fill-base`],
-        forceInverse && !isCuctomVariable(fill) && css.inverse,
+        forceInverse && !isCustomVariable(fill) && css.inverse,
         (uppercase && css.uppercase) || ((uppercase === false) && css['non-uppercase']),
         (italic && css.italic )|| ((italic === false) && css['non-italic']),
         noselect && css.noselect,

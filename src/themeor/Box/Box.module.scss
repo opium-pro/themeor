@@ -131,7 +131,7 @@ $max-radius: 1000px;
 // Blur
 @each $value in $scale {
   .blur-#{$value} {
-    backdrop-filter: blur(--t-box-blur-#{$value});
+    backdrop-filter: blur(var(--t-box-blur-#{$value}));
   }
 }
 

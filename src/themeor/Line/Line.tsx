@@ -4,7 +4,7 @@ import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
 import * as Types from '../config-types'
 import TryTagless from '../TryTagless'
-import isCuctomVariable from '../utils/var-is-custom'
+import isCustomVariable from '../utils/var-is-custom'
 
 export interface PureLineProps {
   fill?: string,
@@ -51,7 +51,7 @@ export default class Line extends React.Component<LineProps> {
 
     const {backIsStrong} = this.context
 
-    if (isCuctomVariable(fill)) {
+    if (isCustomVariable(fill)) {
       style.borderColor = `var(${fill})`
     }
 
@@ -63,8 +63,8 @@ export default class Line extends React.Component<LineProps> {
         right && css[`right-${right}`],
         bottom && css[`bottom-${bottom}`],
         left && css[`left-${left}`],
-        fill && !isCuctomVariable(fill) && css[`fill-${fill}`],
-        (inverse !== false) && (inverse || backIsStrong) && !isCuctomVariable(fill) && css.inverse,
+        fill && !isCustomVariable(fill) && css[`fill-${fill}`],
+        (inverse !== false) && (inverse || backIsStrong) && !isCustomVariable(fill) && css.inverse,
         React.Children.count(children) === 0 && css.separator,
         className
       ),

@@ -3,7 +3,7 @@ import css from './Box.module.scss'
 import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
 import * as Types from '../config-types'
-import isCuctomVariable from '../utils/var-is-custom'
+import isCustomVariable from '../utils/var-is-custom'
 import TryTagless from '../TryTagless'
 import Line from '../Line'
 
@@ -95,7 +95,7 @@ export default class Box extends React.Component<BoxProps> {
       style.backgroundImage = `url('${img}')`
     }
 
-    if (isCuctomVariable(fill)) {
+    if (isCustomVariable(fill)) {
       style.backgroundColor = `var(${fill})`
     }
 
@@ -105,7 +105,7 @@ export default class Box extends React.Component<BoxProps> {
       className: cn(
         css.box,
         img && css.img,
-        fill && !isCuctomVariable(fill) && css[`fill-${fill}`],
+        fill && !isCustomVariable(fill) && css[`fill-${fill}`],
         (strong || inverse) && (!fill || fill === 'none') && css[`fill-base`],
         fancy && css.fancy,
         strong && css.strong,
@@ -122,7 +122,7 @@ export default class Box extends React.Component<BoxProps> {
         radiusTopRight && css[`radius-tr-${radiusTopRight}`],
         radiusBottomLeft && css[`radius-bl-${radiusBottomLeft}`],
         radiusBottomRight && css[`radius-br-${radiusBottomRight}`],
-        (inverse !== false) && (inverse || backIsStrong) && !isCuctomVariable(fill) && css.inverse,
+        (inverse !== false) && (inverse || backIsStrong) && !isCustomVariable(fill) && css.inverse,
         className
       ),
       children,

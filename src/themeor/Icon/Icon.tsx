@@ -11,12 +11,26 @@ export interface IconProps extends React.HTMLAttributes<SVGElement> {
   inverse?: boolean,
   size: Types.Scale,
   name: string,
-  forwardRef?: any,
+  forwardRef?: (node: any) => void,
 }
 
 export default class Icon extends React.Component<IconProps> {
   static contextType = ThemeContext
   static defaultProps = {size: 'md', name: 'placeholder', fill: 'base'}
+
+  ref = (node: any) => {
+    if (!node) {return}
+
+    const {fill, forwardRef} = this.props
+    forwardRef && forwardRef(node)
+    const pathList = node.querySelectorAll('path')
+
+    if (isCustomVariable(fill)) {
+      for (let path of pathList) {
+        path.style.fill = `var(${fill})`
+      }
+    }
+  }
 
   render() {
     const {
@@ -77,7 +91,7 @@ export default class Icon extends React.Component<IconProps> {
         (inverse !== false) && (inverse || backIsStrong) && !isCustomVariable(fill) && css.inverse,
         className
       ),
-      ref: forwardRef,
+      ref: this.ref,
       ...restProps
     }
 

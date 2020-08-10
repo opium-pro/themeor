@@ -27,10 +27,10 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   }
 
   @each $shift in $fill-shift {
-    .fill-#{$value}.shift-#{$shift} path {
+    .fill-#{$value}-#{$shift} path {
       fill: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
     }
-    .inverse.fill-#{$value}.shift-#{$shift} path {
+    .inverse.fill-#{$value}-#{$shift} path {
       fill: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
     }
   }

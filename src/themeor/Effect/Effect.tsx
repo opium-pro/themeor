@@ -4,7 +4,6 @@ import cn from '../utils/class-name'
 import * as Types from '../config-types'
 import TryTagless from '../TryTagless'
 import {ThemeContext} from '../context'
-import newId from '../utils/new-id'
 
 export interface PureEffectProps {
   transparency?: Types.Scale | 'none' | 'max',
@@ -40,7 +39,7 @@ export default class Effect extends React.Component<EffectProps> {
 
     const componentProps = {
       className: cn(
-        css.transparency,
+        css.effect,
         transparency && css[`transparency-${transparency}`],
         className
       ),
