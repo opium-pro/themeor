@@ -68,7 +68,7 @@ export class Wrapper extends React.PureComponent<WrapperProps, State> {
               <Gap size="x2s">
                 <Align row pattern="1fr 1fr" gapHor="x2s">
                   {this.menu?.map((group) => (
-                    <Reaction key={group} cursor="pointer">
+                    <Reaction key={group} cursor="pointer" track="hover">
                       {(r: any) => (
                         <Box.TryTagless
                           TRY_RECURSIVE_TAGLESS

@@ -10,7 +10,7 @@ type TrackType = 'active' | 'focus' | 'hover'
 export interface ReactionProps extends React.AllHTMLAttributes<HTMLElement> {
   cursor?: 'pointer' | 'default' | 'text',
   speed?: 'none' | Types.Scale,
-  track: Array<TrackType> | TrackType,
+  track?: Array<TrackType> | TrackType,
 }
 
 export interface ReactionState {
