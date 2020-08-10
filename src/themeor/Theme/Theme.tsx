@@ -12,11 +12,6 @@ export interface PureThemeProps {
   darkConfig?: ThemeConfig,
   icons?: ThemeIcons,
   global?: boolean,
-  TRY_TAGLESS?: boolean,
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  children?: React.ReactNode,
-  forwardRef?: any,
 }
 export interface TaglessThemeProps extends PureThemeProps {
   TRY_RECURSIVE_TAGLESS?: true,
