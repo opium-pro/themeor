@@ -28,6 +28,7 @@ export interface PureBoxProps {
   glow?: Types.Scale | 'none',
   img?: string,
   noContext?: boolean,
+  blur?: Types.Scale | 'none',
 }
 export interface TaglessBoxProps extends PureBoxProps {
   TRY_RECURSIVE_TAGLESS?: true,
@@ -79,6 +80,7 @@ export default class Box extends React.Component<BoxProps> {
       strong,
       shadow,
       shadowInner,
+      blur,
       glow,
       children,
       forwardRef,
@@ -108,6 +110,7 @@ export default class Box extends React.Component<BoxProps> {
         fancy && css.fancy,
         strong && css.strong,
         shadow && css[`shadow-${shadow}`],
+        blur && css[`blur-${blur}`],
         shadowInner && css[`shadow-inner-${shadowInner}`],
         glow && css[`glow-${shadowInner}`],
         radius && css[`radius-${radius}`],

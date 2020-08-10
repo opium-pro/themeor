@@ -4,7 +4,7 @@ import cn from '../utils/class-name'
 import * as Types from '../config-types'
 import TryTagless from '../TryTagless'
 import {ThemeContext} from '../context'
-import Gap from '../Gap'
+import consoleMessage from '../utils/console-message'
 
 export interface PureAlignProps {
   row?: boolean,
@@ -83,6 +83,14 @@ export default class Align extends React.Component<AlignProps> {
     }
 
     if (!pattern && (gapVert || gapHor)) {
+      if (TRY_TAGLESS) {
+        consoleMessage({
+          text: 'Sorry, but "gapVert" and "gapHor" can not be used at the same time with "TryTagless" and one of "row" or "stack". It may cause unexpected behaviour. Try using "pattern" instead of "row" or "stack". Or use a composition with "Gap" component instead of "gapVert" and "gapHor" in props',
+          type: 'error',
+          source: Align,
+        })
+      }
+
       const {children: componentChildren, ...restComponentProps} = componentProps
       const wrapChildClass = cn(
         gapVert && css[`item-vert-gap-${gapVert}`],

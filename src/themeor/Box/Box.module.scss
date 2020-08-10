@@ -128,6 +128,13 @@ $max-radius: 1000px;
   }
 }
 
+// Blur
+@each $value in $scale {
+  .blur-#{$value} {
+    backdrop-filter: blur(--t-box-blur-#{$value});
+  }
+}
+
 // Shadow Inner
 @each $value in $scale {
   .shadow-inner-#{$value} {
