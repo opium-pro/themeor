@@ -127,12 +127,18 @@ $max-radius: 1000px;
     box-shadow: var(--t-box-shadow-#{$value});
   }
 }
+.shadow-none {
+  box-shadow: none;
+}
 
 // Blur
 @each $value in $scale {
   .blur-#{$value} {
     backdrop-filter: blur(var(--t-box-blur-#{$value}));
   }
+}
+.blur-none {
+  backdrop-filter: none;
 }
 
 // Shadow Inner
@@ -141,10 +147,16 @@ $max-radius: 1000px;
     box-shadow: inset var(--t-box-shadow-inner-#{$value});
   }
 }
+.shadow-inner-none {
+  box-shadow: none;
+}
 
 // Glow
 @each $value in $scale {
   .glow-#{$value} {
     box-shadow: var(--t-box-glow-#{$value});
   }
+}
+.glow-none {
+  box-shadow: none;
 }

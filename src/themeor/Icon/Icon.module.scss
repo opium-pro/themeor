@@ -11,6 +11,8 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   .size-#{$value} {
     width: var(--t-icon-size-#{$value});
     height: var(--t-icon-size-#{$value});
+    min-width: var(--t-icon-size-#{$value});
+    min-height: var(--t-icon-size-#{$value});
   }
 }
 
