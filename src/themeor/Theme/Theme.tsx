@@ -6,12 +6,14 @@ import consoleMessage from '../utils/console-message'
 import {ThemeContext} from '../context'
 import TryTagless from '../TryTagless'
 import css from './Theme.module.scss'
+import cn from '../utils/class-name'
 
 export interface PureThemeProps {
   config?: ThemeConfig,
   darkConfig?: ThemeConfig,
   icons?: ThemeIcons,
   global?: boolean,
+  reset?: boolean,
 }
 export interface TaglessThemeProps extends PureThemeProps {
   TRY_RECURSIVE_TAGLESS?: true,
@@ -74,6 +76,8 @@ export default class Theme extends React.Component<ThemeProps> {
       TRY_RECURSIVE_TAGLESS,
       FORCE_TAGLESS,
       forwardRef,
+      className,
+      reset,
       ...restProps
     } = this.props
     const {themeContext = {}} = config
@@ -104,7 +108,11 @@ export default class Theme extends React.Component<ThemeProps> {
       ...restProps,
       children,
       id: this.id,
-      className: css.theme,
+      className: cn(
+        css.theme,
+        reset && css.reset,
+        className
+      ),
     }
 
     return (
