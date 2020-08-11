@@ -91,6 +91,7 @@ export default class Fit extends React.Component<FitProps> {
         inline && css.inline,
         stick && css[`stick-${stick}`],
         cover && css[`cover-${cover}`],
+        stick && !cover && css[`stick-parent`],
         offset && css[`offset-${offset}`],
         isNotParent && css.isNotParent,
         className

@@ -29,6 +29,10 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   bottom: 0;
 }
 
+.stick-parent {
+  position: absolute;
+}
+
 .clip {
   overflow: hidden;
 }
