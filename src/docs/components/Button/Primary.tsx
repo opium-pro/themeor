@@ -14,13 +14,13 @@ export default class Primary extends React.PureComponent<ButtonProps> {
     const radius = Template.has('covid') ? 'max' : 'sm'
 
     return (
-      <Reaction track={['active', 'hover', 'focus']} cursor="pointer" {...restProps}>
-        {(reaction: any) => (
+      <Reaction track={['active', 'hover', 'focus']} cursor="pointer" smooth {...restProps}>
+        {(rProps: any, reaction: any) => (
           <Fit width="fit-content">
 
               {/* This is stroke for focus */}
               <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" offset="x2s">
-                <Line className={reaction.props.className} fill={reaction.focus ? "accent" : "none"}>
+                <Line className={rProps.className} fill={reaction.focus ? "accent" : "none"}>
                   <Box radius={radius} />
                 </Line>
               </Fit.TryTagless>
@@ -35,7 +35,7 @@ export default class Primary extends React.PureComponent<ButtonProps> {
                     radius={radius}
                   >
                     <Gap hor="md" vert="sm">
-                      <button type="button" {...reaction.props}>
+                      <button type="button" {...rProps}>
                         <Font fill="base" noselect size="lg">{children}</Font>
                       </button>
                     </Gap>

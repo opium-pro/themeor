@@ -8,8 +8,8 @@ export class Item extends React.PureComponent<ItemProps> {
     const {children, active} = this.props
 
     return (
-      <Reaction track={['hover', 'focus']}>
-        {(r: any) => (
+      <Reaction smooth track={['hover', 'focus']}>
+        {(rProps: any, r: any) => (
           <Fit.TryTagless TRY_RECURSIVE_TAGLESS>
             <Line weight="none" fill="accent">
               <Box
@@ -18,7 +18,7 @@ export class Item extends React.PureComponent<ItemProps> {
               >
                 <Gap vert="sm" hor="lg">
                   <Font
-                    {...r.props}
+                    {...rProps}
                     inline
                     size="lg"
                     fill={active ? "base" : "accent"}

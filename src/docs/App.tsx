@@ -43,7 +43,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        <Theme config={this.state.theme} icons={icons as ConfigTypes.ThemeIcons}>
+        <Theme reset config={this.state.theme} icons={icons as ConfigTypes.ThemeIcons}>
           <Font size="md" family="regular" fill="base" align="left" lineHeight="md">
             <Box.TryTagless fill="base">
               <Align.TryTagless pattern="240px 1fr">

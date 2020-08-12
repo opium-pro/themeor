@@ -45,7 +45,7 @@ export default class Code extends React.PureComponent<CodeProps> {
         {...restProps}
       >
         <Gap.TryTagless vert={gapVert} hor={gapHor}>
-          <Fit.TryTagless scroll>
+          <Fit.TryTagless scroll bottom={inline ? "-10px" : '0'}>
             <Font inline={inline}>
               <SyntaxHighlighter
                 showLineNumbers={!inline && !plain}

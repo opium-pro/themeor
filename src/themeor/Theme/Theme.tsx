@@ -84,6 +84,8 @@ export default class Theme extends React.Component<ThemeProps> {
     const {shallInverseOn, template, ...custonContext} = themeContext
     const {themeId} = this.context
 
+    reset && import('./reset')
+
     this.global = global
     if (themeId && global) {
       consoleMessage({
@@ -110,7 +112,6 @@ export default class Theme extends React.Component<ThemeProps> {
       id: this.id,
       className: cn(
         css.theme,
-        reset && css.reset,
         className
       ),
     }

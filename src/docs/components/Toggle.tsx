@@ -18,12 +18,12 @@ export default class Toggle extends React.PureComponent<ToggleProps> {
     } = this.props
 
     return (
-      <Reaction track={['hover', 'focus']} cursor="pointer">
-        {(r: any) => (
+      <Reaction track={['hover', 'focus']} cursor="pointer" smooth>
+        {(rProps: any, r: any) => (
           <Fit.TryTagless width="56px">
               <Box fill={(on && 'accent') || 'faint-up'} strong={on} radius="max">
                 <Gap size="x2s">
-                  <label {...r.props}>
+                  <label {...rProps}>
                     <Fit.TryTagless cover="parent">
                       <Effect transparency="max">
                         <input onChange={onChange} type="checkbox" checked={on} {...restProps} />
@@ -32,7 +32,7 @@ export default class Toggle extends React.PureComponent<ToggleProps> {
 
                     {/* This is stroke for focus */}
                     <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" offset="x2s">
-                      <Line className={r.props.className} fill={(r.focus || r.hover) ? "accent" : "none"}>
+                      <Line style={{transition: 'all 0.2s ease'}} fill={(r.focus || r.hover) ? "accent" : "none"}>
                         <Box radius="max" />
                       </Line>
                     </Fit.TryTagless>
@@ -44,7 +44,7 @@ export default class Toggle extends React.PureComponent<ToggleProps> {
                       left={on ? '21px' : '0'}
                     >
                       <Line fill={on ? "none" : "faint"}>
-                        <Box className={r.props.className} fill="base" radius="max"/>
+                        <Box style={{transition: 'all 0.2s ease'}} fill="base" radius="max"/>
                       </Line>
                     </Fit.TryTagless>
                   </label>

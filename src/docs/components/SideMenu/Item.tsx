@@ -12,8 +12,8 @@ export class Item extends React.PureComponent<ItemProps> {
     } = this.props
 
     return (
-      <Reaction track={['hover', 'focus']} cursor="pointer" {...restProps}>
-        {(r: any) => (
+      <Reaction track={['hover', 'focus']} cursor="pointer" {...restProps} smooth>
+        {(rProps: any, r: any) => (
 
             <Gap.TryTagless
               TRY_RECURSIVE_TAGLESS
@@ -21,7 +21,7 @@ export class Item extends React.PureComponent<ItemProps> {
               hor="md"
             >
               <Box
-                {...r.props}
+                {...rProps}
                 radius="xs"
                 fill={!active && (r.hover || r.focus) ? 'faint-up' : 'none'}
               >
@@ -33,6 +33,7 @@ export class Item extends React.PureComponent<ItemProps> {
                     tabIndex={0}
                     FORCE_TAGLESS
                     noselect
+                    style={{transition: 'all 0.2s ease'}}
                   >
                     {children}
                   </Font>

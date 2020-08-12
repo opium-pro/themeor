@@ -9,8 +9,8 @@ export default class Tag extends React.PureComponent<TagProps> {
 
     return (
       <Reaction track={['hover', 'focus']}>
-        {(r: any) => (
-          <Fit.TryTagless TRY_RECURSIVE_TAGLESS FORCE_TAGLESS minWidth="50px" {...r.props}>
+        {(rProps: any, r: any) => (
+          <Fit.TryTagless TRY_RECURSIVE_TAGLESS FORCE_TAGLESS minWidth="50px" {...rProps}>
             <Line weight="none" fill="accent">
               <Box radius="xs" fill={r.hover || r.focus ? 'accent-up' : 'accent'}>
                 <Gap vert="x2s" hor="sm">

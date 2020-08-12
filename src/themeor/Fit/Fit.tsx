@@ -94,6 +94,7 @@ export default class Fit extends React.Component<FitProps> {
         stick && !cover && css[`stick-parent`],
         offset && css[`offset-${offset}`],
         isNotParent && css.isNotParent,
+        (height || cover || stick || offset) && !inline && css.block,
         className
       ),
       style: newStyle,
