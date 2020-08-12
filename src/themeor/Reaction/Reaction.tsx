@@ -11,6 +11,7 @@ export interface ReactionProps extends React.AllHTMLAttributes<HTMLElement> {
   cursor?: 'pointer' | 'default' | 'text',
   speed?: 'none' | Types.Scale,
   track?: Array<TrackType> | TrackType,
+  smooth?: boolean,
 }
 
 export interface ReactionState {
@@ -21,7 +22,11 @@ export interface ReactionState {
 
 export default class Reaction extends React.Component<ReactionProps, ReactionState> {
   static contextType = ThemeContext
-  static defaultProps = {speed: 'md', cursor: 'pointer'}
+  static defaultProps = {
+    speed: 'md',
+    cursor: 'pointer',
+    track: ['hover', 'focus'],
+  }
   state = {
     hover: false,
     active: false,
@@ -59,7 +64,7 @@ export default class Reaction extends React.Component<ReactionProps, ReactionSta
   }
 
   render() {
-    const {children, track, cursor, speed, className, ...restProps} = this.props
+    const {children, track, cursor, speed, className, smooth, ...restProps} = this.props
 
     if (typeof children !== 'function') {
       consoleMessage({
@@ -70,16 +75,7 @@ export default class Reaction extends React.Component<ReactionProps, ReactionSta
       return null
     }
 
-    const componentProps = {
-      props: {
-        className: cn(
-          css.reaction,
-          cursor && css[`cursor-${cursor}`],
-          speed && css[`speed-${speed}`],
-          className,
-        ),
-        ...restProps,
-      },
+    const passState = {
       className: {
         ignoreEvents: css.ignore,
         sursor: cursor && css[`cursor-${cursor}`],
@@ -87,23 +83,33 @@ export default class Reaction extends React.Component<ReactionProps, ReactionSta
       ...this.state,
     }
 
+    const passProps = {
+      className: cn(
+        css.reaction,
+        cursor && css[`cursor-${cursor}`],
+        smooth && speed && css[`speed-${speed}`],
+        className,
+      ),
+      ...restProps,
+    }
+
     if (track?.includes('hover')) {
-      componentProps.props.onMouseOver = this.handleMouseOver
-      componentProps.props.onMouseOut = this.handleMouseOut
+      passProps.onMouseOver = this.handleMouseOver
+      passProps.onMouseOut = this.handleMouseOut
     }
 
     if (track?.includes('active')) {
-      componentProps.props.onMouseDown = this.handleMouseDown
-      componentProps.props.onMouseUp = this.handleMouseUp
+      passProps.onMouseDown = this.handleMouseDown
+      passProps.onMouseUp = this.handleMouseUp
     }
 
     if (track?.includes('focus')) {
-      componentProps.props.onFocus = this.handleFocus
-      componentProps.props.onBlur = this.handleBlur
+      passProps.onFocus = this.handleFocus
+      passProps.onBlur = this.handleBlur
     }
 
     return (
-      children(componentProps)
+      children(passProps, passState)
     )
   }
 }
