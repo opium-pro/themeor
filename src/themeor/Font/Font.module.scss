@@ -32,6 +32,10 @@ $align: (left, center, right);
   text-decoration: underline;
 }
 
+.non-underline {
+  text-decoration: none;
+}
+
 .noselect {
   user-select: none;
 }

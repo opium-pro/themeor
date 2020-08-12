@@ -40,7 +40,7 @@ import {Theme, Box, Font, Line, Fit, Align, Gap} from 'themeor'
 
 export default function App() {
   return (
-    <Theme config={theme}>
+    <Theme config={theme} reset>
       <Font size="xl" weight="700">Imagine that I am your app</Font>
 
       <Gap />

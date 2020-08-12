@@ -76,6 +76,7 @@ export default class Font extends React.Component<FontProps> {
       className: cn(
         css.font,
         underline && css.underline,
+        underline === false && css[`non-underline`],
         inline && css.inline,
         inline === false && css.block,
         fill && !isCustomVariable(fill) && css[`fill-${fill}`],

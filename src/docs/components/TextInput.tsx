@@ -39,7 +39,7 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
           <div>
             <Fit.TryTagless TRY_RECURSIVE_TAGLESS height="60px" {...rProps}>
               <Line fill={(!r.focus && !r.hover && 'none') || (disabled && 'none') || (error && 'critic') || (r.focus && 'accent') || (r.hover && 'faint-up')} weight="md">
-                <Box noContext fill={(r.focus && 'none') || (error && 'critic') || (disabled && 'faint') || 'faint-up'} radius="sm">
+                <Box style={{transition: 'all 0.2s ease'}} noContext fill={(r.focus && 'none') || (error && 'critic') || (disabled && 'faint') || 'faint-up'} radius="sm">
 
                     {/* Label */}
                     <Align.TryTagless TRY_RECURSIVE_TAGLESS vert="center">
