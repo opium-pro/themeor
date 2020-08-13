@@ -18,6 +18,7 @@ export interface ReactionState {
   hover: boolean,
   active: boolean,
   focus: boolean,
+  hoverOrFocus: boolean,
 }
 
 export default class Reaction extends React.Component<ReactionProps, ReactionState> {
@@ -31,16 +32,17 @@ export default class Reaction extends React.Component<ReactionProps, ReactionSta
     hover: false,
     active: false,
     focus: false,
+    hoverOrFocus: false,
   }
 
   handleMouseOver = (event: React.MouseEvent<HTMLElement>) => {
     this.props.onMouseOver && this.props.onMouseOver(event)
-    this.setState({hover: true})
+    this.setState({hover: true, hoverOrFocus: true})
   }
 
   handleMouseOut = (event: React.MouseEvent<HTMLElement>) => {
     this.props.onMouseOut && this.props.onMouseOut(event)
-    this.setState({hover: false})
+    this.setState({hover: false, hoverOrFocus: this.state.focus})
   }
 
   handleMouseDown = (event: React.MouseEvent<HTMLElement>) => {
@@ -55,12 +57,12 @@ export default class Reaction extends React.Component<ReactionProps, ReactionSta
 
   handleFocus = (event: React.FocusEvent<HTMLElement>) => {
     this.props.onFocus && this.props.onFocus(event)
-    this.setState({focus: true})
+    this.setState({focus: true, hoverOrFocus: true})
   }
 
   handleBlur = (event: React.FocusEvent<HTMLElement>) => {
     this.props.onFocus && this.props.onFocus(event)
-    this.setState({focus: false})
+    this.setState({focus: false, hoverOrFocus: this.state.hover})
   }
 
   render() {
