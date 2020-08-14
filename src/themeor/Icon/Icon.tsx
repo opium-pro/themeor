@@ -12,6 +12,10 @@ export interface IconProps extends React.HTMLAttributes<SVGElement> {
   size: Types.Scale,
   name: string,
   forwardRef?: (node: any) => void,
+
+  TRY_RECURSIVE_TAGLESS?: true,
+  FORCE_TAGLESS?: true,
+  TRY_TAGLESS?: boolean,
 }
 
 export default class Icon extends React.Component<IconProps> {
@@ -41,6 +45,9 @@ export default class Icon extends React.Component<IconProps> {
       children,
       name,
       forwardRef,
+      TRY_RECURSIVE_TAGLESS,
+      FORCE_TAGLESS,
+      TRY_TAGLESS,
       ...restProps
     } = this.props
 

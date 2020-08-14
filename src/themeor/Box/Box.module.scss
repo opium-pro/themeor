@@ -24,9 +24,6 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   .fill-#{$value} {
     background-color: var(--t-fill-#{$value}-weak);
   }
-  .inverse.fill-#{$value} {
-    background-color: var(--t-box-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
-  }
   .strong.fill-#{$value} {
     background-color: var(--t-box-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
   }
@@ -36,13 +33,13 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   .fancy.strong.fill-#{$value} {
     background-image: var(--t-fancy-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
   }
+  .inverse.fill-#{$value} {
+    background-color: var(--t-box-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
+  }
 
   @each $shift in $fill-shift {
     .fill-#{$value}-#{$shift} {
       background-color: var(--t-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak));
-    }
-    .inverse.fill-#{$value}-#{$shift} {
-      background-color: var(--t-box-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
     }
     .strong.fill-#{$value}-#{$shift} {
       background-color: var(--t-box-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
@@ -52,6 +49,9 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
     }
     .strong.fancy.fill-#{$value}-#{$shift} {
       background-image: var(--t-fancy-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
+    }
+    .inverse.fill-#{$value}-#{$shift} {
+      background-color: var(--t-box-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
     }
   }
 }
