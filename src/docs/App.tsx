@@ -8,6 +8,7 @@ import navigation from './navigation'
 
 // Need this fot theme config
 import lightTheme from './theme/theme-light.json'
+import darkTheme from './theme/theme-dark.json'
 import icons from './theme/icons'
 import './theme/font-face.css'
 
@@ -18,6 +19,8 @@ interface AppState {
   refAside?: any,
   theme?: ConfigTypes.ThemeConfig,
   themeChange?: (theme: ConfigTypes.ThemeConfig) => void,
+  autoDetectTheme?: boolean,
+  autoDetectChange?: (value: boolean) => void,
 }
 
 export default class App extends React.PureComponent<AppProps, AppState> {
@@ -35,15 +38,21 @@ export default class App extends React.PureComponent<AppProps, AppState> {
     this.setState({ ...this.state, theme })
   }
 
+  autoDetectChange = (value: boolean) => {
+    this.setState({ ...this.state, autoDetectTheme: value })
+  }
+
   state = {
     theme: lightTheme,
     themeChange: this.themeChange,
+    autoDetectTheme: false,
+    autoDetectChange: this.autoDetectChange,
   }
 
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        <Theme reset config={this.state.theme} icons={icons as ConfigTypes.ThemeIcons}>
+        <Theme reset config={this.state.theme} darkConfig={this.state.autoDetectTheme && darkTheme} icons={icons as ConfigTypes.ThemeIcons}>
           <Font size="md" family="regular" fill="base" align="left" lineHeight="md">
             <Box.TryTagless fill="base">
               <Align.TryTagless pattern="240px 1fr">

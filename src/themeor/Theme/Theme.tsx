@@ -25,23 +25,69 @@ export interface ThemeProps extends TaglessThemeProps, React.HTMLAttributes<HTML
   forwardRef?: any,
 }
 
-export default class Theme extends React.Component<ThemeProps> {
+export interface ThemeState {
+  currentConfig?: ThemeConfig
+}
+
+export default class Theme extends React.Component<ThemeProps, ThemeState> {
   static contextType = ThemeContext
   static TryTagless = (props: TaglessThemeProps) => <Theme TRY_TAGLESS {...props} />
 
-  componentDidUpdate() {
+  state: ThemeState = {
+    currentConfig: this.props.config
+  }
+
+  isTrackingDarkMode: boolean = false
+
+  isDarkMode: () => boolean = () => !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+
+  componentDidMount() {
+    this.trackDarkMode()
+    this.setCurrentConfig()
     this.setVariables()
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
+    this.trackDarkMode()
+    this.setCurrentConfig()
     this.setVariables()
+  }
+
+  componentWillUnmount() {
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', this.changeColorMode)
+  }
+
+  setCurrentConfig = () => {
+    const {darkConfig, config} = this.props
+    const hasToBeSet = (darkConfig && this.isDarkMode()) ? darkConfig : config
+    
+    if (hasToBeSet !== this.state.currentConfig) {
+      this.setState({currentConfig: hasToBeSet})
+    }
   }
 
   global?: boolean = false
-  id = newId()
+  id: string = newId()
+
+  trackDarkMode = () => {
+    if (this.props.darkConfig && !this.isTrackingDarkMode) {
+      this.isTrackingDarkMode = true
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', this.changeColorMode)
+    }
+  }
+
+  changeColorMode = () => {
+    const {darkConfig, config} = this.props
+
+    if (this.isDarkMode()) {
+      this.setState({currentConfig: darkConfig})
+    } else {
+      this.setState({currentConfig: config})
+    }
+  }
 
   setVariables = () => {
-    const {themeContext, customVariables, meta, ...restVariables} = this.props.config
+    const {themeContext, customVariables, meta, ...restVariables} = this.state.currentConfig
     cssVariables.unset(`style-${this.id}`)
     cssVariables.set({
       json: restVariables,
@@ -69,7 +115,6 @@ export default class Theme extends React.Component<ThemeProps> {
   render() {
     const {
       global,
-      config = {},
       children,
       icons,
       TRY_TAGLESS,
@@ -77,10 +122,14 @@ export default class Theme extends React.Component<ThemeProps> {
       FORCE_TAGLESS,
       forwardRef,
       className,
+      darkConfig,
       reset,
       ...restProps
     } = this.props
-    const {themeContext = {}} = config
+
+    const {currentConfig = {}} = this.state
+
+    const {themeContext = {}} = currentConfig
     const {shallInverseOn, template, ...custonContext} = themeContext
     const {themeId} = this.context
 
