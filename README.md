@@ -13,7 +13,9 @@ Feel free to ask any questions [dev@opium.pro](mailto:dev@opium.pro)
 
 Here you can find a description of color concept: [Standardization of color schemes through the eyes of a programmer](https://medium.com/@opium.pro/standardisation-of-color-schemes-through-the-eyes-of-a-programmer-53cc25148470) But this concept is not obligatory to use, you can set your own colors in `config.customVariables`
 
-For fast start download [the demo config file](https://github.com/opium-pro/themeor/blob/v-0.1.3/src/docs/theme/theme-light.json)
+For fast start download [the demo config file](https://github.com/opium-pro/themeor/blob/master/src/docs/theme/theme-light.json)
+
+And optionally [the dark theme file](https://github.com/opium-pro/themeor/blob/master/src/docs/theme/theme-dark.json)
 
 ---
 

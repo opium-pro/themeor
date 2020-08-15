@@ -23,7 +23,12 @@ But all the components are ready to use.</Font>
 
         <Gap />
         <Font>
-          For fast start download <Link href="https://github.com/opium-pro/themeor/blob/v-0.1.3/src/docs/theme/theme-light.json">the demo config file</Link>
+          For fast start download <Link href="https://github.com/opium-pro/themeor/blob/master/src/docs/theme/theme-light.json">the demo config file</Link>
+        </Font>
+
+        <Gap />
+        <Font>
+          And optionally <Link href="https://github.com/opium-pro/themeor/blob/master/src/docs/theme/theme-dark.json">the dark theme file</Link>
         </Font>
         <Gap />
         <Font>
