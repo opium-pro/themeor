@@ -22,11 +22,12 @@ Here is how you can use it:
 ```javascript
 import React from 'react'
 import theme from './theme-light.json' // here is your config file
+import darkTheme from './theme-dark.json' // if you set 'darkConfig' prop, dark theme on user's computer will be detected automatically
 import {Theme, Box, Font, Line, Fit, Align, Gap} from 'themeor'
 
 export default function App() {
   return (
-    <Theme config={theme} reset>
+    <Theme config={theme} darkConfig={darkTheme} reset>
       <Font size="xl" weight="700">Imagine that I am your app</Font>
 
       <Gap />

@@ -7,8 +7,6 @@ export default class BoxPage_Config extends React.PureComponent {
   render() {
     return (
       <ContentWrapper>
-        <Font weight="700">I't still beta</Font>
-
         <Font>Sorry for the lack of documentation, it's in progress.
 But all the components are ready to use.</Font>
 
@@ -36,11 +34,12 @@ But all the components are ready to use.</Font>
         <Code>
           {`import React from 'react'
 import theme from './theme-light.json' // here is your config file
+import darkTheme from './theme-dark.json' // if you set 'darkConfig' prop, dark theme on user's computer will be detected automatically
 import {Theme, Box, Font, Line, Fit, Align, Gap} from 'themeor'
 
 export default function App() {
   return (
-    <Theme config={theme} reset>
+    <Theme config={theme} darkConfig={darkTheme} reset>
       <Font size="xl" weight="700">Imagine that I am your app</Font>
 
       <Gap />
