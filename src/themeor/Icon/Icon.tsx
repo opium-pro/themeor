@@ -85,7 +85,7 @@ export default class Icon extends React.Component<IconProps> {
       return null
     }
 
-    const {backIsStrong} = this.context
+    const {TRY_TO_INVERSE} = this.context
 
     const componentProps = {
       width: undefined,
@@ -95,7 +95,7 @@ export default class Icon extends React.Component<IconProps> {
         css.icon,
         fill && !isCustomVariable(fill) && css[`fill-${fill}`],
         size && css[`size-${size}`],
-        (inverse !== false) && (inverse || backIsStrong) && !isCustomVariable(fill) && css.inverse,
+        (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
         className
       ),
       ref: this.ref,

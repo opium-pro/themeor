@@ -99,7 +99,7 @@ export default class Box extends React.Component<BoxProps> {
       style.backgroundColor = `var(${fill})`
     }
 
-    const {backIsStrong} = this.context
+    const {TRY_TO_INVERSE} = this.context
 
     const componentProps = {
       className: cn(
@@ -122,7 +122,7 @@ export default class Box extends React.Component<BoxProps> {
         radiusTopRight && css[`radius-tr-${radiusTopRight}`],
         radiusBottomLeft && css[`radius-bl-${radiusBottomLeft}`],
         radiusBottomRight && css[`radius-br-${radiusBottomRight}`],
-        (inverse !== false) && (inverse || backIsStrong) && !isCustomVariable(fill) && css.inverse,
+        (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
         className
       ),
       children,
@@ -152,15 +152,15 @@ export default class Box extends React.Component<BoxProps> {
     }
 
     // Automatically inverse text and other stuff on this background
-    let updateBackIsStrong = this.context.shallInverseOn?.includes(this.splitFill()) && strong
-    if (!fill || fill === 'none' || inverse || backIsStrong) {
+    let inverseStatus: boolean | undefined = this.context.shallInverseOn?.includes(this.splitFill()) && strong
+    if (!fill || fill === 'none' || inverse || TRY_TO_INVERSE) {
       if (!strong) {
-        updateBackIsStrong = backIsStrong
+        inverseStatus = TRY_TO_INVERSE
       }
     }
     const context = {
       ...this.context,
-      backIsStrong: updateBackIsStrong,
+      TRY_TO_INVERSE: inverseStatus,
     }
 
     return (

@@ -64,13 +64,13 @@ export default class Font extends React.Component<FontProps> {
       ...restProps
     } = this.props
 
-    const {backIsStrong} = this.context
+    const {TRY_TO_INVERSE} = this.context
 
     if(isCustomVariable(fill)) {
       style.color = `var(${fill})`
     }
 
-    const forceInverse = (inverse !== false) && (inverse || backIsStrong)
+    const forceInverse = (inverse !== false) && (inverse || TRY_TO_INVERSE)
 
     const componentProps = {
       className: cn(

@@ -54,7 +54,8 @@ export default class Theme extends React.Component<ThemeProps, ThemeState> {
   }
 
   componentWillUnmount() {
-    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', this.changeColorMode)
+    const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
+    colorScheme.addEventListener && colorScheme.removeEventListener('change', this.changeColorMode)
   }
 
   setCurrentConfig = () => {
@@ -72,7 +73,8 @@ export default class Theme extends React.Component<ThemeProps, ThemeState> {
   trackDarkMode = () => {
     if (this.props.darkConfig && !this.isTrackingDarkMode) {
       this.isTrackingDarkMode = true
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', this.changeColorMode)
+      const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
+      colorScheme.addEventListener && colorScheme.addEventListener('change', this.changeColorMode)
     }
   }
 
@@ -149,10 +151,10 @@ export default class Theme extends React.Component<ThemeProps, ThemeState> {
       ...custonContext,
       shallInverseOn,
       template,
-      backIsStrong: false,
       icons,
+      TRY_TO_INVERSE: false,
       themeId: this.id,
-      mergeHistory: [],
+      darkMode: this.isDarkMode(),
     }
 
     const componentProps = {

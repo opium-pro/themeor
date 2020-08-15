@@ -49,7 +49,7 @@ export default class Line extends React.Component<LineProps> {
       ...restProps
     } = this.props
 
-    const {backIsStrong} = this.context
+    const {TRY_TO_INVERSE} = this.context
 
     if (isCustomVariable(fill)) {
       style.borderColor = `var(${fill})`
@@ -64,7 +64,7 @@ export default class Line extends React.Component<LineProps> {
         bottom && css[`bottom-${bottom}`],
         left && css[`left-${left}`],
         fill && !isCustomVariable(fill) && css[`fill-${fill}`],
-        (inverse !== false) && (inverse || backIsStrong) && !isCustomVariable(fill) && css.inverse,
+        (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
         React.Children.count(children) === 0 && css.separator,
         className
       ),
