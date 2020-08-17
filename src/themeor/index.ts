@@ -2,6 +2,7 @@ import * as ConfigTypes from './config-types'
 export {ConfigTypes}
 
 export {ThemeContext} from './context'
+export {default as isDarkMode} from './utils/is-dark-mode'
 
 export {default as Theme} from './Theme'
 export {default as Box} from './Box'

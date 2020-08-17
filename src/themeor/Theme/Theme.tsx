@@ -7,6 +7,7 @@ import {ThemeContext} from '../context'
 import TryTagless from '../TryTagless'
 import css from './Theme.module.scss'
 import cn from '../utils/class-name'
+import isDarkMode from '../utils/is-dark-mode'
 
 export interface PureThemeProps {
   config?: ThemeConfig,
@@ -39,8 +40,6 @@ export default class Theme extends React.Component<ThemeProps, ThemeState> {
 
   isTrackingDarkMode: boolean = false
 
-  isDarkMode: () => boolean = () => !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-
   componentDidMount() {
     this.trackDarkMode()
     this.setCurrentConfig()
@@ -60,7 +59,7 @@ export default class Theme extends React.Component<ThemeProps, ThemeState> {
 
   setCurrentConfig = () => {
     const {darkConfig, config} = this.props
-    const hasToBeSet = (darkConfig && this.isDarkMode()) ? darkConfig : config
+    const hasToBeSet = (darkConfig && isDarkMode()) ? darkConfig : config
     
     if (hasToBeSet !== this.state.currentConfig) {
       this.setState({currentConfig: hasToBeSet})
@@ -81,7 +80,7 @@ export default class Theme extends React.Component<ThemeProps, ThemeState> {
   changeColorMode = () => {
     const {darkConfig, config} = this.props
 
-    if (this.isDarkMode()) {
+    if (isDarkMode()) {
       this.setState({currentConfig: darkConfig})
     } else {
       this.setState({currentConfig: config})
@@ -154,7 +153,7 @@ export default class Theme extends React.Component<ThemeProps, ThemeState> {
       icons,
       TRY_TO_INVERSE: false,
       themeId: this.id,
-      darkMode: this.isDarkMode(),
+      darkMode: isDarkMode(),
     }
 
     const componentProps = {
