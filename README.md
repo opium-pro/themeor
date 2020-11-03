@@ -9,7 +9,7 @@ Feel free to ask any questions [dev@opium.pro](mailto:dev@opium.pro)
 
 ---
 
-`npm i themeor node-sass`
+`npm i themeor node-sass@4.14.4`
 
 Here you can find a description of color concept: [Standardization of color schemes through the eyes of a programmer](https://medium.com/@opium.pro/standardisation-of-color-schemes-through-the-eyes-of-a-programmer-53cc25148470) But this concept is not obligatory to use, you can set your own colors in `config.customVariables`
 
