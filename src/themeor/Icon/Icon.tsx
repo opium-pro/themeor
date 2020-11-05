@@ -2,31 +2,30 @@ import React from 'react'
 import css from './Icon.module.scss'
 import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
-import * as Types from '../config-types'
 import isCustomVariable from '../utils/var-is-custom'
 import consoleMessage from '../utils/console-message'
+import {IconProps} from "./types"
 
-export interface IconProps extends React.HTMLAttributes<SVGElement> {
-  fill?: string,
-  inverse?: boolean,
-  size: Types.Scale,
-  name: string,
-  forwardRef?: (node: any) => void,
+export default function Icon({
+  className,
+  fill = "base",
+  inverse,
+  size = "md",
+  children,
+  name = "placeholder",
+  forwardRef,
+  TRY_RECURSIVE_TAGLESS,
+  FORCE_TAGLESS,
+  TRY_TAGLESS,
+  ...restProps
+}: IconProps, ref: React.Ref<any>) {
 
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  TRY_TAGLESS?: boolean,
-}
-
-export default class Icon extends React.Component<IconProps> {
-  static contextType = ThemeContext
-  static defaultProps = {size: 'md', name: 'placeholder', fill: 'base'}
-
-  ref = (node: any) => {
+  function handleRef (node: any) {
     if (!node) {return}
 
-    const {fill, forwardRef} = this.props
-    forwardRef && forwardRef(node)
+    typeof forwardRef === 'function' && forwardRef(node)
+    // typeof ref === 'function' && ref(node)
+
     const pathList = node.querySelectorAll('path')
 
     if (isCustomVariable(fill)) {
@@ -36,76 +35,56 @@ export default class Icon extends React.Component<IconProps> {
     }
   }
 
-  render() {
-    const {
-      className,
-      fill,
-      inverse,
-      size,
-      children,
-      name,
-      forwardRef,
-      TRY_RECURSIVE_TAGLESS,
-      FORCE_TAGLESS,
-      TRY_TAGLESS,
-      ...restProps
-    } = this.props
-
-    if (children) {
-      consoleMessage({
-        text: 'Prop "children" is prohibited, it will be ignored',
-        type: 'error',
-        source: this,
-      })
-    }
-
-    const {icons} = this.context
-
-    if (!icons) {
-      return null
-    }
-
-    if (!icons[size]) {
-      consoleMessage({
-        text: `There is no such size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
-        type: 'error',
-        source: this,
-      })
-      return null
-    }
-
-    const FinalIcon = icons[size][name]
-
-    if (!FinalIcon) {
-      consoleMessage({
-        text: `There is no such Icon like "${name}" with size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
-        type: 'error',
-        source: this,
-      })
-      return null
-    }
-
-    const {TRY_TO_INVERSE} = this.context
-
-    const componentProps = {
-      width: undefined,
-      height: undefined,
-      fill: undefined,
-      className: cn(
-        css.icon,
-        fill && !isCustomVariable(fill) && css[`fill-${fill}`],
-        size && css[`size-${size}`],
-        (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
-        className
-      ),
-      ref: this.ref,
-      ...restProps
-    }
-
-    // if (isCustomVariable(fill)) {}
-
-    return (
-      <FinalIcon {...componentProps} />
-    )
+  if (children) {
+    consoleMessage({
+      text: 'Prop "children" is prohibited, it will be ignored',
+      type: 'error',
+      source: Icon,
+    })
   }
+
+  const {icons, TRY_TO_INVERSE} = React.useContext(ThemeContext)
+
+  if (!icons) {
+    return null
+  }
+
+  if (!icons[size]) {
+    consoleMessage({
+      text: `There is no such size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
+      type: 'error',
+      source: Icon,
+    })
+    return null
+  }
+
+  const FinalIcon = icons[size]?.[name]
+
+  if (!FinalIcon) {
+    consoleMessage({
+      text: `There is no such Icon like "${name}" with size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
+      type: 'error',
+      source: Icon,
+    })
+    return null
+  }
+
+  const componentProps = {
+    ...restProps,
+    width: undefined,
+    height: undefined,
+    fill: undefined,
+    className: cn(
+      css.icon,
+      fill && !isCustomVariable(fill) && css[`fill-${fill}`],
+      size && css[`size-${size}`],
+      (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
+      className
+    ),
+    ref: handleRef,
+  }
+
+  return (
+    <FinalIcon {...componentProps} />
+  )
 }

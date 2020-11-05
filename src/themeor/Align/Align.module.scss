@@ -4,10 +4,6 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   display: flex;
 }
 
-.spacer {
-  flex-grow: 1;
-}
-
 .col {
   flex-direction: column;
 

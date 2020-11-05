@@ -1,117 +1,99 @@
 import React from 'react'
 import cn from '../utils/class-name'
 import css from './Reaction.module.scss'
-import * as Types from '../config-types'
 import consoleMessage from '../utils/console-message'
-import {ThemeContext} from '../context'
+import {ReactionProps, ReactionState} from './types'
 
-type TrackType = 'active' | 'focus' | 'hover'
+export default function Reaction({
+  children,
+  track = ['hover', 'focus'],
+  cursor = 'pointer',
+  speed = 'md',
+  className,
+  smooth,
+  ...restProps
+}: ReactionProps) {
 
-export interface ReactionProps extends React.AllHTMLAttributes<HTMLElement> {
-  cursor?: 'pointer' | 'default' | 'text',
-  speed?: 'none' | Types.Scale,
-  track?: Array<TrackType> | TrackType,
-  smooth?: boolean,
-}
-
-export interface ReactionState {
-  hover: boolean,
-  active: boolean,
-  focus: boolean,
-  hoverOrFocus: boolean,
-}
-
-export default class Reaction extends React.Component<ReactionProps, ReactionState> {
-  static contextType = ThemeContext
-  static defaultProps = {
-    speed: 'md',
-    cursor: 'pointer',
-    track: ['hover', 'focus'],
-  }
-  state = {
+  const [state, setState] = React.useState({
     hover: false,
     active: false,
     focus: false,
     hoverOrFocus: false,
+  })
+
+  function handleMouseOver(event: React.MouseEvent<HTMLElement>) {
+    restProps.onMouseOver && restProps.onMouseOver(event)
+    setState({hover: true, hoverOrFocus: true} as ReactionState)
   }
 
-  handleMouseOver = (event: React.MouseEvent<HTMLElement>) => {
-    this.props.onMouseOver && this.props.onMouseOver(event)
-    this.setState({hover: true, hoverOrFocus: true})
+  function handleMouseOut(event: React.MouseEvent<HTMLElement>) {
+    restProps.onMouseOut && restProps.onMouseOut(event)
+    setState({hover: false, hoverOrFocus: state.focus} as ReactionState)
   }
 
-  handleMouseOut = (event: React.MouseEvent<HTMLElement>) => {
-    this.props.onMouseOut && this.props.onMouseOut(event)
-    this.setState({hover: false, hoverOrFocus: this.state.focus})
+  function handleMouseDown(event: React.MouseEvent<HTMLElement>) {
+    restProps.onMouseDown && restProps.onMouseDown(event)
+    setState({active: true} as ReactionState)
   }
 
-  handleMouseDown = (event: React.MouseEvent<HTMLElement>) => {
-    this.props.onMouseDown && this.props.onMouseDown(event)
-    this.setState({active: true})
+  function handleMouseUp(event: React.MouseEvent<HTMLElement>) {
+    restProps.onMouseUp && restProps.onMouseUp(event)
+    setState({active: false} as ReactionState)
   }
 
-  handleMouseUp = (event: React.MouseEvent<HTMLElement>) => {
-    this.props.onMouseUp && this.props.onMouseUp(event)
-    this.setState({active: false})
+  function handleFocus(event: React.FocusEvent<HTMLElement>) {
+    restProps.onFocus && restProps.onFocus(event)
+    setState({focus: true, hoverOrFocus: true} as ReactionState)
   }
 
-  handleFocus = (event: React.FocusEvent<HTMLElement>) => {
-    this.props.onFocus && this.props.onFocus(event)
-    this.setState({focus: true, hoverOrFocus: true})
+  function handleBlur(event: React.FocusEvent<HTMLElement>) {
+    restProps.onFocus && restProps.onFocus(event)
+    setState({focus: false, hoverOrFocus: state.hover} as ReactionState)
   }
 
-  handleBlur = (event: React.FocusEvent<HTMLElement>) => {
-    this.props.onFocus && this.props.onFocus(event)
-    this.setState({focus: false, hoverOrFocus: this.state.hover})
+  if (typeof children !== 'function') {
+    consoleMessage({
+      text: 'Only accept function as "children"',
+      type: 'error',
+      source: Reaction,
+    })
+    return null
   }
 
-  render() {
-    const {children, track, cursor, speed, className, smooth, ...restProps} = this.props
-
-    if (typeof children !== 'function') {
-      consoleMessage({
-        text: 'Only accept function as "children"',
-        type: 'error',
-        source: this,
-      })
-      return null
-    }
-
-    const passState = {
-      className: {
-        ignoreEvents: css.ignore,
-        sursor: cursor && css[`cursor-${cursor}`],
-      },
-      ...this.state,
-    }
-
-    const passProps = {
-      className: cn(
-        css.reaction,
-        cursor && css[`cursor-${cursor}`],
-        smooth && speed && css[`speed-${speed}`],
-        className,
-      ),
-      ...restProps,
-    }
-
-    if (track?.includes('hover')) {
-      passProps.onMouseOver = this.handleMouseOver
-      passProps.onMouseOut = this.handleMouseOut
-    }
-
-    if (track?.includes('active')) {
-      passProps.onMouseDown = this.handleMouseDown
-      passProps.onMouseUp = this.handleMouseUp
-    }
-
-    if (track?.includes('focus')) {
-      passProps.onFocus = this.handleFocus
-      passProps.onBlur = this.handleBlur
-    }
-
-    return (
-      children(passProps, passState)
-    )
+  const passState = {
+    className: {
+      ignoreEvents: css.ignore,
+      sursor: cursor && css[`cursor-${cursor}`],
+    },
+    ...state,
   }
+
+  const passProps = {
+    className: cn(
+      css.reaction,
+      cursor && css[`cursor-${cursor}`],
+      smooth && speed && css[`speed-${speed}`],
+      className,
+    ),
+    ...restProps,
+  }
+
+  if (track?.includes('hover')) {
+    passProps.onMouseOver = handleMouseOver
+    passProps.onMouseOut = handleMouseOut
+  }
+
+  if (track?.includes('active')) {
+    passProps.onMouseDown = handleMouseDown
+    passProps.onMouseUp = handleMouseUp
+  }
+
+  if (track?.includes('focus')) {
+    passProps.onFocus = handleFocus
+    passProps.onBlur = handleBlur
+  }
+
+  return (
+    children(passProps, passState)
+  )
 }

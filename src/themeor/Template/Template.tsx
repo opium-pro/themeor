@@ -40,6 +40,12 @@ export default class Template extends React.Component<TemplateProps> {
     const {template = []} = this.context
     const {children, ...rules} = this.props
 
+    consoleMessage({
+      text: 'This component is depricated and will be removed in version 0.2. Try using ThemeContext instead.',
+      type: 'warn',
+      source: this,
+    })
+
     const ruleNames = Object.keys(rules)
     let resolve = false
 

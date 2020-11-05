@@ -2,81 +2,59 @@ import React from 'react'
 import css from './Line.module.scss'
 import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
-import * as Types from '../config-types'
 import TryTagless from '../TryTagless'
 import isCustomVariable from '../utils/var-is-custom'
+import {LineProps, TaglessLineProps} from './types'
 
-export interface PureLineProps {
-  fill?: string,
-  inverse?: boolean,
-  weight?: Types.Scale | 'none',
-  top?: Types.Scale | 'none',
-  right?: Types.Scale | 'none',
-  bottom?: Types.Scale | 'none',
-  left?: Types.Scale | 'none',
-}
-export interface TaglessLineProps extends PureLineProps {
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  children?: React.ReactNode,
-}
-export interface LineProps extends TaglessLineProps, React.HTMLAttributes<HTMLDivElement> {
-  TRY_TAGLESS?: boolean,
-  forwardRef?: any,
-}
 
-export default class Line extends React.Component<LineProps> {
-  static contextType = ThemeContext
-  static defaultProps = {}
-  static TryTagless = (props: TaglessLineProps) => <Line TRY_TAGLESS {...props} />
+Line.TryTagless = (props: TaglessLineProps) => <Line {...props} TRY_TAGLESS />
 
-  render() {
-    const {
-      className,
-      TRY_TAGLESS,
-      inverse,
-      weight,
-      fill,
-      top,
-      right,
-      bottom,
-      left,
-      forwardRef,
-      TRY_RECURSIVE_TAGLESS,
-      FORCE_TAGLESS,
-      children,
-      style = {},
-      ...restProps
-    } = this.props
+export default function Line({
+  className,
+  TRY_TAGLESS,
+  inverse,
+  weight,
+  fill,
+  top,
+  right,
+  bottom,
+  left,
+  forwardRef,
+  TRY_RECURSIVE_TAGLESS,
+  FORCE_TAGLESS,
+  children,
+  style = {},
+  ...restProps
+}: LineProps, ref: React.Ref<any>) {
 
-    const {TRY_TO_INVERSE} = this.context
+  const {TRY_TO_INVERSE} = React.useContext(ThemeContext)
 
-    if (isCustomVariable(fill)) {
-      style.borderColor = `var(${fill})`
-    }
-
-    const componentProps = {
-      className: cn(
-        css.line,
-        (weight || (!right && !left && !top && !bottom)) && css[`weight-${weight || 'md'}`],
-        top && css[`top-${top}`],
-        right && css[`right-${right}`],
-        bottom && css[`bottom-${bottom}`],
-        left && css[`left-${left}`],
-        fill && !isCustomVariable(fill) && css[`fill-${fill}`],
-        (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
-        React.Children.count(children) === 0 && css.separator,
-        className
-      ),
-      style,
-      children,
-      ...restProps,
-    }
-
-    return (TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS) ? (
-      <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-    ) : (
-      <div ref={forwardRef} {...componentProps} />
-    )
+  if (isCustomVariable(fill)) {
+    style.borderColor = `var(${fill})`
   }
+
+  const componentProps = {
+    ...restProps,
+    className: cn(
+      css.line,
+      (weight || (!right && !left && !top && !bottom)) && css[`weight-${weight || 'md'}`],
+      top && css[`top-${top}`],
+      right && css[`right-${right}`],
+      bottom && css[`bottom-${bottom}`],
+      left && css[`left-${left}`],
+      fill && !isCustomVariable(fill) && css[`fill-${fill}`],
+      (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
+      React.Children.count(children) === 0 && css.separator,
+      className
+    ),
+    style,
+    children,
+  }
+
+  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
+  if (tryTagless) {
+    return <TryTagless {...componentProps} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} />
+  }
+
+  return <div ref={forwardRef} {...componentProps} />
 }
