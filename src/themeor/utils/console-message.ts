@@ -1,17 +1,25 @@
-export default function(params: {
+export default function({text, type = 'warn', source}: {
   text: string,
   type?: 'error' | 'warn' | 'info',
-  source?: any
+  source?: any,
 }) {
 
-  const type = params.type || 'warn'
-  const component = params.source && `Source — <${params.source.constructor.name} />`
+  let component = ''
+  if (typeof source === 'function') {
+    component = `Component — <${source.name} />`
+
+  } else if (typeof source === 'object' && source.constructor) {
+    component = `Component — <${source.constructor.name} />`
+
+  } else if (typeof source === 'string') {
+    component = `Component — ${source}`
+  }
 
   const message = `From Themeor (http://themeor.opium.pro)
 
-${component || ''}
+${component}
 
-${params.text}
+${text}
 `
   console[type](message)
 }
