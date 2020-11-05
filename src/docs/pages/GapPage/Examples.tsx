@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Font, Gap, Line } from '../../../themeor'
-import {Link, Code} from '../../components'
+import {Link} from '../../components'
 import {Wrapper, Item} from '../../components/Examples'
 
 

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Box, Font, Gap, Line, Fit, Align } from '../../../themeor'
-import {Link, Code} from '../../components'
+import { Font, Gap, Line, Fit, Align } from '../../../themeor'
 import {Wrapper, Item} from '../../components/Examples'
 
 

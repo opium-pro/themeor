@@ -1,5 +1,5 @@
 import React from 'react'
-import { Font, Line, Gap, Align, Fit } from '../../../themeor'
+import { Font, Line, Gap, Align } from '../../../themeor'
 import { Code, Link } from '../index'
 import {Value} from './Value'
 

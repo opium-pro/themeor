@@ -1,6 +1,6 @@
 import React from 'react'
 import { Gap, Font, Line, Align, Box } from '../../../themeor'
-import { ContentWrapper, Tag, Code } from '../../components'
+import { ContentWrapper, Code } from '../../components'
 import opiumScale from '../../../themeor/utils/opium-scale'
 import {Wrapper, Item} from '../../components/Examples'
 

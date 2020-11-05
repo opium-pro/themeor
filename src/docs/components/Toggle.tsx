@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Line, Fit, Gap, Reaction, Align, Effect} from '../../themeor'
+import {Box, Line, Fit, Gap, Reaction, Effect} from '../../themeor'
 import newId from '../../themeor/utils/new-id'
 
 

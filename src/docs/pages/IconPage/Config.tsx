@@ -1,6 +1,6 @@
 import React from 'react'
-import { Gap, Font, Line, Align } from '../../../themeor'
-import { ContentWrapper, Tag, Code, Link } from '../../components'
+import { Gap, Font } from '../../../themeor'
+import { ContentWrapper, Code, Link } from '../../components'
 
 
 export default class BoxPage_Config extends React.PureComponent {

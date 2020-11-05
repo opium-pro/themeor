@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Gap, Font, Align, Box, Reaction, Effect } from '../../../themeor'
+import { Gap, Font, Align, Box, Reaction } from '../../../themeor'
 import { Group } from './Group'
 import { Item } from './Item'
 import { WrapperProps } from '../../adapters/menu-types'

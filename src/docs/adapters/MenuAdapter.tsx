@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import {withRouter, Link, RouteComponentProps, RouteProps} from 'react-router-dom'
 import {AppContext} from '../context'
 import * as Types from './menu-types'

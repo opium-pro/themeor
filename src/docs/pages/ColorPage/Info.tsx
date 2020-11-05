@@ -1,6 +1,4 @@
 import React from 'react'
-import { Gap, Font, Line, Align } from '../../../themeor'
-import { ContentWrapper, Tag, Code } from '../../components'
 import {Wrapper, Item} from '../../components/Examples'
 
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Align, Icon } from '../../../themeor'
-import {Link, Code} from '../../components'
 import {Wrapper, Item} from '../../components/Examples'
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Gap, Font, Line, Align, Fit, Box } from '../../../themeor'
-import { ContentWrapper, PageMenu, Code, TextInput, Toggle } from '../../components'
+import { Gap, Font, Align, Fit, Box } from '../../../themeor'
+import { ContentWrapper, PageMenu, TextInput, Toggle } from '../../components'
 import {AppContext} from '../../context'
 import darkTheme from '../../theme/theme-dark.json'
 import coronaTheme from '../../theme/theme-corona.json'
@@ -35,8 +35,8 @@ export default class BoxPage_Config extends React.PureComponent<{}, State> {
   }
 
   render() {
-    const {theme, themeChange, autoDetectTheme, autoDetectChange} = this.context
-    const {inputText, toggleIsOn} = this.state
+    const {theme, themeChange, autoDetectTheme} = this.context
+    const {inputText} = this.state
 
     return (
       <ContentWrapper>

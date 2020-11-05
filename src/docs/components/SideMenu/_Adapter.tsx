@@ -1,5 +1,4 @@
 import React from 'react'
-import {Font} from '../../../themeor'
 
 export interface _ComponentProps extends React.AllHTMLAttributes<HTMLElement> {}
 

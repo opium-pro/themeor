@@ -1,7 +1,6 @@
 import React from 'react'
 import { RouteChildrenProps } from 'react-router-dom'
 import {Wrapper, Page} from '../../components/Documentation'
-import {Note} from '../../components'
 import Examples from './Examples'
 import Props from './Props'
 

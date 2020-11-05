@@ -5,8 +5,6 @@ import Examples from './Examples'
 import Props from './Props'
 import Config from './Config'
 
-import {Box, Font} from '../../../themeor'
-
 export default class PageWraper extends React.PureComponent<RouteChildrenProps> {
   render() {
     const {match} = this.props
