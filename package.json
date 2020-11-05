@@ -1,13 +1,13 @@
 {
   "name": "themeor",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
   "homepage": "http://themeor.opium.pro",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/opium-pro/themeor.git"
+    "type": "git",
+    "url": "https://github.com/opium-pro/themeor.git"
   },
   "keywords": [
     "react",
@@ -19,7 +19,7 @@
     "primitives",
     "opium pro"
   ],
-  "license" : "MIT",
+  "license": "MIT",
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
