@@ -3,7 +3,8 @@ import consoleMessage from '../utils/console-message'
 import {Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect} from '../index'
 import {TryTaglessProps} from './types'
 
-// TryTagless Element Tag
+// Try not to render a tag, but just send new className and style to the only child
+
 export default function TryTagless(props: TryTaglessProps) {
   const {
     children,

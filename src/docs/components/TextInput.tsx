@@ -34,10 +34,15 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
     } = this.props
 
     return (
-      <Reaction smooth className={className} track={disabled ? undefined : ['focus', 'hover']} cursor={disabled ? 'default': 'text'}>
+      <Reaction
+        smooth
+        className={className}
+        track={disabled ? undefined : ['focus', 'hover']}
+        cursor={disabled ? 'default': 'text'}
+      >
         {(rProps: any, r: any) => (
           <div>
-            <Fit.TryTagless TRY_RECURSIVE_TAGLESS height="60px" {...rProps}>
+            <Fit.TryTagless TRY_RECURSIVE_TAGLESS height="60px">
               <Line fill={(!r.focus && !r.hover && 'none') || (disabled && 'none') || (error && 'critic') || (r.focus && 'accent') || (r.hover && 'faint-up')} weight="md">
                 <Box style={{transition: 'all 0.2s ease'}} noContext fill={(r.focus && 'none') || (error && 'critic') || (disabled && 'faint') || 'faint-up'} radius="sm">
 
@@ -77,6 +82,7 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
                         <Gap hor="sm">
                           <Font fill={disabled ? 'faint': 'base'} size="md">
                             <input
+                              {...rProps}
                               {...restProps}
                               id={id || this.id}
                               disabled={disabled}
