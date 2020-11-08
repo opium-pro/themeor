@@ -3,7 +3,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import lightTheme from 'react-syntax-highlighter/dist/esm/styles/hljs/atom-one-light'
 import darkTheme from 'react-syntax-highlighter/dist/esm/styles/hljs/atom-one-dark'
 import { Gap, Box, ThemeContext, Font, Fit } from '../../../themeor'
-import css from './Code.module.scss'
+import css from './Code.module.css'
 
 export interface CodeProps {
   inverse?: boolean,

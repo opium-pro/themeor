@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './Box.module.scss'
+import css from './Box.module.css'
 import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
 import isCustomVariable from '../utils/var-is-custom'

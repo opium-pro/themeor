@@ -22,8 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "node-sass": "^4.14.1"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@types/node": "^12.12.37",
@@ -31,6 +30,7 @@
     "@types/react-dom": "^16.9.7",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-syntax-highlighter": "^11.0.4",
+    "node-sass": "^4.14.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-syntax-highlighter": "^12.2.1",
@@ -38,8 +38,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "css:watch": "node-sass -w ./src/themeor -o ./src/themeor --output-style compressed",
+    "css": "node-sass ./src/themeor -o ./src/themeor --output-style compressed",
     "build-docs": "react-scripts build",
-    "build": "rm -fr ./dist && cd ./src/themeor && rsync -R ./**/*.scss ../../dist && cd ../../ && tsc -p tsconfig.dist.json",
+    "build": "npm run css && rm -fr ./dist && cd ./src/themeor && rsync -R ./**/*.css ../../dist && cd ../../ && tsc -p tsconfig.dist.json",
     "publish": "npm run build && npm publish"
   },
   "eslintConfig": {

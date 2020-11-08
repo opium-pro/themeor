@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './Align.module.scss'
+import css from './Align.module.css'
 import cn from '../utils/class-name'
 import TryTagless from '../TryTagless'
 import consoleMessage from '../utils/console-message'

@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './Font.module.scss'
+import css from './Font.module.css'
 import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
 import isCustomVariable from '../utils/var-is-custom'
