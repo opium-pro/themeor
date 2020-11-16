@@ -49,7 +49,11 @@ export default function Box(props: BoxProps, ref?: React.Ref<any>) {
   }
 
   if (isCustomVariable(fill)) {
-    style.backgroundColor = `var(${fill})`
+    if (fancy) {
+      style.backgroundImage = `var(${fill})`
+    } else {
+      style.backgroundColor = `var(${fill})`
+    }
   }
 
   const context = React.useContext(ThemeContext)
