@@ -24,7 +24,7 @@ export default function Fit({
   isNotParent,
   cover,
   scroll,
-  style,
+  style = {},
   inline,
   clip,
   className,

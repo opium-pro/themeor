@@ -35,8 +35,10 @@ export default function Font({
 }: FontProps, ref?: React.Ref<any>) {
   const {TRY_TO_INVERSE} = React.useContext(ThemeContext)
 
+  const newStyle: any = {...style}
+
   if(isCustomVariable(fill)) {
-    style.color = `var(${fill})`
+    newStyle.color = `var(${fill})`
   }
 
   const forceInverse = (inverse !== false) && (inverse || TRY_TO_INVERSE)
@@ -63,7 +65,7 @@ export default function Font({
       nowrap && css.nowrap,
       className,
     ),
-    style,
+    style: newStyle,
     children,
     ...restProps,
   }

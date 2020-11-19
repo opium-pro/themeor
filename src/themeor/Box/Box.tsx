@@ -44,15 +44,17 @@ export default function Box(props: BoxProps, ref?: React.Ref<any>) {
     ...restProps
   } = props
 
+  const newStyle: any = {...style}
+
   if (img) {
-    style.backgroundImage = `url('${img}')`
+    newStyle.backgroundImage = `url('${img}')`
   }
 
   if (isCustomVariable(fill)) {
     if (fancy) {
-      style.backgroundImage = `var(${fill})`
+      newStyle.backgroundImage = `var(${fill})`
     } else {
-      style.backgroundColor = `var(${fill})`
+      newStyle.backgroundColor = `var(${fill})`
     }
   }
 
@@ -83,7 +85,7 @@ export default function Box(props: BoxProps, ref?: React.Ref<any>) {
       className
     ),
     children,
-    style,
+    style: newStyle,
     ...restProps,
   }
 

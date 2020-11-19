@@ -29,8 +29,10 @@ export default function Line({
 
   const {TRY_TO_INVERSE} = React.useContext(ThemeContext)
 
+  const newStyle: any = {...style}
+
   if (isCustomVariable(fill)) {
-    style.borderColor = `var(${fill})`
+    newStyle.borderColor = `var(${fill})`
   }
 
   const componentProps = {
@@ -47,7 +49,7 @@ export default function Line({
       React.Children.count(children) === 0 && css.separator,
       className
     ),
-    style,
+    style: newStyle,
     children,
   }
 
