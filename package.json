@@ -1,6 +1,6 @@
 {
   "name": "themeor",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",

@@ -23,32 +23,32 @@ export default function Reaction({
 
   function handleMouseOver(event: React.MouseEvent<HTMLElement>) {
     restProps.onMouseOver && restProps.onMouseOver(event)
-    setState({hover: true, hoverOrFocus: true} as ReactionState)
+    setState({...state, hover: true, hoverOrFocus: true} as ReactionState)
   }
 
   function handleMouseOut(event: React.MouseEvent<HTMLElement>) {
     restProps.onMouseOut && restProps.onMouseOut(event)
-    setState({hover: false, hoverOrFocus: state.focus} as ReactionState)
+    setState({...state, hover: false, active: false, hoverOrFocus: state.focus} as ReactionState)
   }
 
   function handleMouseDown(event: React.MouseEvent<HTMLElement>) {
     restProps.onMouseDown && restProps.onMouseDown(event)
-    setState({active: true} as ReactionState)
+    setState({...state, active: true} as ReactionState)
   }
 
   function handleMouseUp(event: React.MouseEvent<HTMLElement>) {
     restProps.onMouseUp && restProps.onMouseUp(event)
-    setState({active: false} as ReactionState)
+    setState({...state, active: false} as ReactionState)
   }
 
   function handleFocus(event: React.FocusEvent<HTMLElement>) {
     restProps.onFocus && restProps.onFocus(event)
-    setState({focus: true, hoverOrFocus: true} as ReactionState)
+    setState({...state, focus: true, hoverOrFocus: true} as ReactionState)
   }
 
   function handleBlur(event: React.FocusEvent<HTMLElement>) {
     restProps.onFocus && restProps.onFocus(event)
-    setState({focus: false, hoverOrFocus: state.hover} as ReactionState)
+    setState({...state, focus: false, hoverOrFocus: state.hover} as ReactionState)
   }
 
   if (typeof children !== 'function') {
