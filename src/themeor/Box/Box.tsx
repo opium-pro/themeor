@@ -113,12 +113,20 @@ export default function Box(props: BoxProps, ref?: React.Ref<any>) {
   }
 
   // Automatically inverse text and other stuff on this background
-  let inverseStatus: boolean | undefined = context.shallInverseOn?.includes(splitFill(fill)) && strong
-  if (!fill || fill === 'none' || inverse || context.TRY_TO_INVERSE) {
+  let inverseStatus: boolean | undefined
+  inverseStatus = context.shallInverseOn?.includes(splitFill(fill)) && strong
+
+
+  if (context.TRY_TO_INVERSE && !inverse) {
+    inverseStatus = false
+  }
+
+  if (!fill || fill === 'none' || inverse) {
     if (!strong) {
       inverseStatus = context.TRY_TO_INVERSE
     }
   }
+
   const newContext = {
     ...context,
     TRY_TO_INVERSE: inverseStatus,
