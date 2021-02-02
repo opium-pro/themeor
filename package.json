@@ -1,6 +1,6 @@
 {
   "name": "themeor",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
@@ -21,8 +21,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "node-sass": "^4.14.1"
   },
   "devDependencies": {
