@@ -1,17 +1,17 @@
 import * as Types from '../config-types'
 
 export type PureEffectProps = {
-  transparency?: Types.Scale | 'none' | 'max',
+  transparency?: Types.Scale | 'none' | 'max' | false,
   hidden?: boolean,
 }
 
-export type TaglessEffectProps = PureEffectProps & {
+export type TaglessEffectProps = PureEffectProps & React.HTMLAttributes<HTMLDivElement> & {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,
   children?: React.ReactNode,
+  forwardRef?: any,
 }
 
-export type EffectProps = TaglessEffectProps & React.HTMLAttributes<HTMLDivElement> & {
+export type EffectProps = TaglessEffectProps & {
   TRY_TAGLESS?: boolean,
-  forwardRef?: any,
 }

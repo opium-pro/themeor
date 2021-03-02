@@ -1,10 +1,11 @@
 import * as Types from '../config-types'
 
 export type IconProps = React.HTMLAttributes<SVGElement> & {
-  fill?: string,
+  fill?: string | false,
   inverse?: boolean,
-  size?: Types.Scale,
-  name?: string,
+  size?: Types.Scale | false,
+  name?: string | false,
+  line?: boolean,
   forwardRef?: (node: any) => void,
 
   TRY_RECURSIVE_TAGLESS?: true,

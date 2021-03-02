@@ -90,17 +90,17 @@ export default function Reaction({
     ...restProps,
   }
 
-  if (track?.includes('hover')) {
+  if (track && track.includes('hover')) {
     passProps.onMouseOver = handleMouseOver
     passProps.onMouseOut = handleMouseOut
   }
 
-  if (track?.includes('active')) {
+  if (track && track.includes('active')) {
     passProps.onMouseDown = handleMouseDown
     passProps.onMouseUp = handleMouseUp
   }
 
-  if (track?.includes('focus')) {
+  if (track && track.includes('focus')) {
     passProps.onFocus = handleFocus
     passProps.onBlur = handleBlur
   }

@@ -6,6 +6,7 @@ export const ThemeContext: React.Context<{
   template?: string | string[],
   TRY_TO_INVERSE?: boolean,
   icons?: ThemeIcons,
+  lineIcons?: boolean,
   themeId?: string,
   darkMode?: boolean,
 }> = React.createContext({})

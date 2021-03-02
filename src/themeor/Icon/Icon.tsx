@@ -13,6 +13,7 @@ export default function Icon({
   size = "md",
   children,
   name = "placeholder",
+  line,
   forwardRef,
   TRY_RECURSIVE_TAGLESS,
   FORCE_TAGLESS,
@@ -43,13 +44,15 @@ export default function Icon({
     })
   }
 
-  const {icons, TRY_TO_INVERSE} = React.useContext(ThemeContext)
+  const {icons, lineIcons, TRY_TO_INVERSE} = React.useContext(ThemeContext)
+
+  const makeItLine = (typeof line !== 'undefined') ? line : lineIcons
 
   if (!icons) {
     return null
   }
 
-  if (!icons[size]) {
+  if (!size || !icons[size]) {
     consoleMessage({
       text: `There is no such size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
       type: 'error',
@@ -58,7 +61,7 @@ export default function Icon({
     return null
   }
 
-  const FinalIcon = icons[size]?.[name]
+  const FinalIcon = name && icons[size]?.[name]
 
   if (!FinalIcon) {
     consoleMessage({
@@ -76,6 +79,7 @@ export default function Icon({
     fill: undefined,
     className: cn(
       css.icon,
+      makeItLine ? css['line'] : css['not-line'],
       fill && !isCustomVariable(fill) && css[`fill-${fill}`],
       size && css[`size-${size}`],
       (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,

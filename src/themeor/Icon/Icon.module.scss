@@ -17,27 +17,83 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
 }
 
 // Fill
-.inverse path {
-  fill: var(--t-fill-base-weak);
-}
-@each $value in $fill {
-  .fill-#{$value} path {
-    fill: var(--t-icon-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
-  }
-  .inverse.fill-#{$value} path {
-    fill: var(--t-icon-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
-  }
-
-  @each $shift in $fill-shift {
-    .fill-#{$value}-#{$shift} path {
-      fill: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
-    }
-    .inverse.fill-#{$value}-#{$shift} path {
-      fill: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
+.not-line {
+  &.inverse {
+    path, rect, circle, line {
+      fill: var(--t-fill-base-weak);
     }
   }
+  @each $value in $fill {
+    &.fill-#{$value} {
+      path, rect, circle, line {
+        fill: var(--t-icon-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
+      }
+    }
+    &.inverse.fill-#{$value} {
+      path, rect, circle, line {
+        fill: var(--t-icon-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
+      }
+    }
+
+    @each $shift in $fill-shift {
+      &.fill-#{$value}-#{$shift} {
+        path, rect, circle, line {
+         fill: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
+        }
+      }
+      &.inverse.fill-#{$value}-#{$shift} {
+        path, rect, circle, line {
+          fill: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
+        }
+      }
+    }
+  }
+  &.fill-none {
+    path, rect, circle, line {
+      fill: none;
+    }
+  }
 }
 
-.fill-none path {
-  fill: transparent;
+.line {
+
+  path, rect, circle, line {
+    fill: none;
+  }
+
+  &.inverse{
+    path, rect, circle, line {
+      stroke: var(--t-fill-base-weak);
+    }
+  }
+  @each $value in $fill {
+    &.fill-#{$value} {
+      path, rect, circle, line {
+        stroke: var(--t-icon-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
+      }
+    }
+    &.inverse.fill-#{$value} {
+      path, rect, circle, line {
+        stroke: var(--t-icon-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
+      }
+    }
+
+    @each $shift in $fill-shift {
+      &.fill-#{$value}-#{$shift} {
+        path, rect, circle, line {
+          stroke: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
+        }
+      }
+      &.inverse.fill-#{$value}-#{$shift} {
+        path, rect, circle, line {
+          stroke: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
+        }
+      }
+    }
+  }
+  &.fill-none {
+    path, rect, circle, line {
+      stroke: none;
+    }
+  }
 }
