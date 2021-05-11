@@ -51,29 +51,29 @@ export default function Align({
     ...restProps,
   }
 
-  // const hasGap = !pattern && (gapVert || gapHor)
-  // if (hasGap) {
-  //   if (TRY_TAGLESS) {
-  //     consoleMessage({
-  //       text: 'Sorry, but "gapVert" and "gapHor" can not be used at the same time with "TryTagless" and one of "row" or "stack". It may cause unexpected behaviour. Try using "pattern" instead of "row" or "stack". Or use a composition with "Gap" component instead of "gapVert" and "gapHor" in props',
-  //       type: 'error',
-  //       source: Align,
-  //     })
-  //   }
+  const hasGap = !pattern && (gapVert || gapHor)
+  if (hasGap) {
+    if (TRY_TAGLESS) {
+      consoleMessage({
+        text: 'Sorry, but "gapVert" and "gapHor" can not be used at the same time with "TryTagless" and one of "row" or "stack". It may cause unexpected behaviour. Try using "pattern" instead of "row" or "stack". Or use a composition with "Gap" component instead of "gapVert" and "gapHor" in props',
+        type: 'error',
+        source: Align,
+      })
+    }
 
-  //   const {children: componentChildren, ...restComponentProps} = componentProps
-  //   const wrapChildClass = cn(
-  //     gapVert && css[`item-vert-gap-${gapVert}`],
-  //     gapHor && css[`item-hor-gap-${gapHor}`],
-  //   )
-  //   return (
-  //     <Align {...restComponentProps}>
-  //       {React.Children.map(children, (child: any) => {
-  //         return <div className={wrapChildClass}>{child}</div>
-  //       })}
-  //     </Align>
-  //   )
-  // }
+    const {children: componentChildren, ...restComponentProps} = componentProps
+    const wrapChildClass = cn(
+      gapVert && css[`item-vert-gap-${gapVert}`],
+      gapHor && css[`item-hor-gap-${gapHor}`],
+    )
+    return (
+      <Align {...restComponentProps}>
+        {React.Children.map(children, (child: any) => {
+          return <div className={wrapChildClass}>{child}</div>
+        })}
+      </Align>
+    )
+  }
 
   const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
   return tryTagless ? (
