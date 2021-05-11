@@ -9,4 +9,5 @@ export const ThemeContext: React.Context<{
   lineIcons?: boolean,
   themeId?: string,
   darkMode?: boolean,
+  defaultIconName?: string,
 }> = React.createContext({})

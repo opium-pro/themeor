@@ -14,7 +14,7 @@ But all the components are ready to use.</Font>
         <Line />
         <Gap />
 
-        <Code inline>npm i themeor node-sass</Code>
+        <Code inline>npm i themeor</Code>
         <Gap />
 
         <Font>

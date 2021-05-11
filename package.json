@@ -1,6 +1,6 @@
 {
   "name": "themeor",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
@@ -37,9 +37,11 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run css && react-scripts start",
     "build-docs": "react-scripts build",
-    "build": "rm -fr ./dist && cd ./src/themeor && rsync -R ./**/*.scss ../../dist && cd ../../ && tsc -p tsconfig.dist.json",
+    "css": "node-sass ./src/themeor -o ./src/themeor --output-style compressed",
+    "css:watch": "node-sass ./src/themeor -o ./src/themeor -wr ./src/themeor --output-style compressed",
+    "build": "npm run css && rm -fr ./dist && cd ./src/themeor && rsync -R ./**/*.css ../../dist && cd ../../ && tsc -p tsconfig.dist.json",
     "publish": "npm run build && npm publish"
   },
   "eslintConfig": {

@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from '../utils/class-name'
-import css from './Reaction.module.scss'
+import css from './Reaction.module.css'
 import consoleMessage from '../utils/console-message'
 import {ReactionProps, ReactionState} from './types'
 

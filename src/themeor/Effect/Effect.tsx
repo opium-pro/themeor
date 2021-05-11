@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './Effect.module.scss'
+import css from './Effect.module.css'
 import cn from '../utils/class-name'
 import TryTagless from '../TryTagless'
 import {EffectProps, TaglessEffectProps} from './types'

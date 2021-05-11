@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './Line.module.scss'
+import css from './Line.module.css'
 import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
 import TryTagless from '../TryTagless'

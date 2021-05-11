@@ -9,6 +9,7 @@
   "themeContext": {
     "shallInverseOn": ["base", "--demo-var"],
     "template": ["dark"],
+    "defaultIconName": "placeholder",
     "_randomContectValue": "HERE YOU CAN SET VALUES FOR ThemeContext, BUT PLEASE START THEM WITH UNDERSCORE",
     "_formAttemtionFill": "accent"
   },

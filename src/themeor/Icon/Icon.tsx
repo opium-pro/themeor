@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './Icon.module.scss'
+import css from './Icon.module.css'
 import {ThemeContext} from '../context'
 import cn from '../utils/class-name'
 import isCustomVariable from '../utils/var-is-custom'
@@ -12,7 +12,7 @@ export default function Icon({
   inverse,
   size = "md",
   children,
-  name = "placeholder",
+  name,
   line,
   forwardRef,
   TRY_RECURSIVE_TAGLESS,
@@ -44,7 +44,11 @@ export default function Icon({
     })
   }
 
-  const {icons, lineIcons, TRY_TO_INVERSE} = React.useContext(ThemeContext)
+  const {icons, lineIcons, TRY_TO_INVERSE, defaultIconName} = React.useContext(ThemeContext)
+
+  if (!name) {
+    name = defaultIconName
+  }
 
   const makeItLine = (typeof line !== 'undefined') ? line : lineIcons
 

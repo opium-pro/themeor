@@ -1,6 +1,6 @@
 import React from 'react'
 import Align from './Align'
-import css from './Spacer.module.scss'
+import css from './Spacer.module.css'
 import cn from '../utils/class-name'
 import {AlignSpanProps, TaglessAlignProps} from './types'
 

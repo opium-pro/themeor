@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './Fit.module.scss'
+import css from './Fit.module.css'
 import cn from '../utils/class-name'
 import TryTagless from '../TryTagless'
 import {FitProps, TaglessFitProps} from './types'

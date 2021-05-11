@@ -42,7 +42,7 @@ export default class Template extends React.Component<TemplateProps> {
 
     consoleMessage({
       text: 'This component is depricated and will be removed in version 0.2. Try using ThemeContext instead.',
-      type: 'warn',
+      type: 'error',
       source: this,
     })
 

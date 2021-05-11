@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './Gap.module.scss'
+import css from './Gap.module.css'
 import cn from '../utils/class-name'
 import consoleMessage from '../utils/console-message'
 import TryTagless from '../TryTagless'
