@@ -54,16 +54,28 @@ export default function Align({
   let tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
 
   const hasGap = !pattern && (gapVert || gapHor)
-  const wrapChildClass = cn(
-    gapVert && css[`item-vert-gap-${gapVert}`],
-    gapHor && css[`item-hor-gap-${gapHor}`],
-  )
+
+
   function wrapChildren(children: any): React.ReactNode {
+    const wrapChildClass = cn(
+      gapVert && css[`item-vert-gap-${gapVert}`],
+      gapHor && css[`item-hor-gap-${gapHor}`],
+    )
+
     return React.Children.map(children, (child: any) => {
       if (tryTagless && React.Children.count(children) === 1 && child.type?.TryTagless) {
         const Child = child.type
         const {children: subChildren, ...restChildProps} = child.props
-        return <Child {...restChildProps} TRY_TAGLESS={TRY_TAGLESS} FORCE_TAGLESS={FORCE_TAGLESS} TRY_RECURSIVE_TAGLESS={TRY_RECURSIVE_TAGLESS}>{wrapChildren(subChildren)}</Child>
+        return (
+          <Child
+            {...restChildProps}
+            TRY_TAGLESS={TRY_TAGLESS}
+            FORCE_TAGLESS={FORCE_TAGLESS}
+            TRY_RECURSIVE_TAGLESS={TRY_RECURSIVE_TAGLESS}
+          >
+            {wrapChildren(subChildren)}
+          </Child>
+        )
       } else {
         return <div className={wrapChildClass}>{child}</div>
       }
