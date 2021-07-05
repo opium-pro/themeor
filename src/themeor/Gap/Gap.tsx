@@ -59,11 +59,13 @@ export default function Gap({
 
   const defaultGap = 'md'
 
+  const notSpecified = !right && !left && !top && !bottom && !vert && !hor
+
   const componentProps = {
     className: cn(
       css.gap,
-      !children && useInrow && css[`left-${size || defaultGap}`],
-      !children && !useInrow && css[`top-${size || defaultGap}`],
+      !children && useInrow && notSpecified && css[`left-${size || defaultGap}`],
+      !children && !useInrow && notSpecified && css[`top-${size || defaultGap}`],
       top && css[`top-${top}`],
       right && css[`right-${right}`],
       bottom && css[`bottom-${bottom}`],
@@ -71,7 +73,7 @@ export default function Gap({
       size && !!children && css[`size-${size}`],
       vert && css[`vert-${vert}`],
       hor && css[`hor-${hor}`],
-      !size && !!children && !right && !left && !top && !bottom && !vert && !hor && css[`size-${defaultGap}`],
+      !size && !!children && notSpecified && css[`size-${defaultGap}`],
       className
     ),
     children,
