@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Font, Fit, Align, Gap, Line, Reaction, Template} from '../../../themeor'
+import {Box, Font, Fit, Align, Gap, Line, Reaction, useTheme} from '../../../themeor'
 
 
 export interface ButtonProps extends React.AllHTMLAttributes<HTMLElement> {}
@@ -11,7 +11,9 @@ export default class Primary extends React.PureComponent<ButtonProps> {
       ...restProps
     } = this.props
 
-    const radius = Template.has('covid') ? 'max' : 'sm'
+    const {template} = useTheme()
+
+    const radius = template?.includes('covid') ? 'max' : 'sm'
 
     return (
       <Reaction track={['active', 'hover', 'focus']} cursor="pointer" smooth {...restProps}>
