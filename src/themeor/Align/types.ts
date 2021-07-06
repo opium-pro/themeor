@@ -8,12 +8,12 @@ export type PureAlignProps = {
   hor?: 'stretch' | 'left' | 'center' | 'right' | false,
   gapVert?: Types.Scale | false,
   gapHor?: Types.Scale | false,
-  width?: string | false,
-  height?: string | false,
-  maxWidth?: string | false,
-  maxHeight?: string | false,
-  minWidth?: string | false,
-  minHeight?: string | false,
+  width?: string | false | number,
+  height?: string | false | number,
+  maxWidth?: string | false | number,
+  maxHeight?: string | false | number,
+  minWidth?: string | false | number,
+  minHeight?: string | false | number,
 }
 
 export type TaglessAlignProps = PureAlignProps & React.HTMLAttributes<HTMLDivElement> & {

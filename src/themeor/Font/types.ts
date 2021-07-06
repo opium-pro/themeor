@@ -15,12 +15,12 @@ export type PureFontProps = {
   inline?: boolean,
   noselect?: boolean,
   nowrap?: boolean,
-  width?: string | false,
-  height?: string | false,
-  maxWidth?: string | false,
-  maxHeight?: string | false,
-  minWidth?: string | false,
-  minHeight?: string | false,
+  width?: string | false | number,
+  height?: string | false | number,
+  maxWidth?: string | false | number,
+  maxHeight?: string | false | number,
+  minWidth?: string | false | number,
+  minHeight?: string | false | number,
 }
 
 export type TaglessFontProps = PureFontProps & React.HTMLAttributes<HTMLDivElement> & {

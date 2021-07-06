@@ -1,5 +1,11 @@
-import {default as Button} from './Regular'
-import {default as Primary} from './Primary'
+import {FC} from 'react'
+import {default as Button, ButtonProps} from './Regular'
+import {default as Primary, ButtonProps as PrimaryButtonProps} from './Primary'
 
-Button.Primary = Primary
-export default Button
+export interface IButton extends FC<ButtonProps> {
+  Primary: FC<PrimaryButtonProps>
+}
+
+(Button as IButton).Primary = Primary
+
+export default Button as IButton

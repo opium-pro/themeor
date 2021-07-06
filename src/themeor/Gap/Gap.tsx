@@ -35,7 +35,7 @@ export function Gap({
 
   const [isInrow, setInrow] = React.useState(false)
 
-  const newStyle = {...style}
+  const newStyle: any = {...style}
 
   if (maxWidth || width) { newStyle.maxWidth = maxWidth || width }
   if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) }

@@ -61,7 +61,7 @@ export function Fit({
       offset && css[`offset-${offset}`],
       isNotParent && css.isNotParent,
       inline === false && css.block,
-      (height || cover || stick || offset) && !inline && css.block,
+      (!!height || cover || stick || offset) && !inline && css.block,
       className
     ),
     style: newStyle,
