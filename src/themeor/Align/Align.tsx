@@ -1,17 +1,17 @@
 import React from 'react'
 import css from './Align.module.css'
 import cn from '../utils/class-name'
-import TryTagless from '../TryTagless'
+import {TryTagless} from '../TryTagless'
 import consoleMessage from '../utils/console-message'
 import { AlignProps, TaglessAlignProps } from './types'
-import Span from './Span'
-import Spacer from './Spacer'
+import {Span} from './Span'
+import {Spacer} from './Spacer'
 
 Align.Span = Span
 Align.Spacer = Spacer
 Align.TryTagless = (props: TaglessAlignProps) => <Align {...props} TRY_TAGLESS />
 
-export default function Align({
+export function Align({
   row,
   vert = "top",
   hor = "stretch",
@@ -26,11 +26,24 @@ export default function Align({
   forwardRef,
   TRY_RECURSIVE_TAGLESS,
   children,
+  width,
+  height,
+  maxWidth,
+  maxHeight,
+  minWidth,
+  minHeight,
   ...restProps
 }: AlignProps, ref: React.Ref<any>) {
 
   const newStyle: any = { ...style }
   if (!!pattern) { newStyle.gridTemplateColumns = pattern }
+
+  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width }
+  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) }
+  if (width) { newStyle.width = width }
+  if (height) { newStyle.height = height }
+  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height }
+  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) }
 
   const componentProps = {
     className: cn(

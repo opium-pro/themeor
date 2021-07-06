@@ -1,15 +1,15 @@
 import React from 'react'
 import css from './Font.module.css'
-import {ThemeContext} from '../context'
+import {useTheme} from '../context'
 import cn from '../utils/class-name'
 import isCustomVariable from '../utils/var-is-custom'
-import TryTagless from '../TryTagless'
+import {TryTagless} from '../TryTagless'
 import {FontProps, TaglessFontProps} from './types'
 
 
 Font.TryTagless = (props: TaglessFontProps) => <Font {...props} TRY_TAGLESS />
 
-export default function Font({
+export function Font({
   className,
   fill,
   inverse,
@@ -31,15 +31,28 @@ export default function Font({
   forwardRef,
   letterSpacing,
   children,
+  width,
+  height,
+  maxWidth,
+  maxHeight,
+  minWidth,
+  minHeight,
   ...restProps
 }: FontProps, ref?: React.Ref<any>) {
-  const {TRY_TO_INVERSE} = React.useContext(ThemeContext)
+  const {TRY_TO_INVERSE} = useTheme()
 
   const newStyle: any = {...style}
 
   if(isCustomVariable(fill)) {
     newStyle.color = `var(${fill})`
   }
+
+  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width }
+  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) }
+  if (width) { newStyle.width = width }
+  if (height) { newStyle.height = height }
+  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height }
+  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) }
 
   const forceInverse = (inverse !== false) && (inverse || TRY_TO_INVERSE)
 

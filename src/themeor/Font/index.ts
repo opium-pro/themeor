@@ -1,2 +1,2 @@
-export {default} from './Font'
+export * from './Font'
 export * from './types'

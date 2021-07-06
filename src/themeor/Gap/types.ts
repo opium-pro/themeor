@@ -9,6 +9,12 @@ export type PureGapProps = {
   bottom?: Types.Scale | 'none' | false,
   left?: Types.Scale | 'none' | false,
   inrow?: boolean,
+  width?: string | false,
+  height?: string | false,
+  maxWidth?: string | false,
+  maxHeight?: string | false,
+  minWidth?: string | false,
+  minHeight?: string | false,
 }
 
 export type TaglessGapProps = PureGapProps & React.HTMLAttributes<HTMLDivElement> & {

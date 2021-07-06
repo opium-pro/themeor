@@ -4,7 +4,7 @@ import {Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect} from '../index'
 import {TryTaglessProps} from './types'
 
 // TryTagless Element Tag
-export default function TryTagless(props: TryTaglessProps) {
+export function TryTagless(props: TryTaglessProps) {
   const {
     children,
     className: parentClassName,

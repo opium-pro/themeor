@@ -1,17 +1,17 @@
 import React from 'react'
 import css from './Box.module.css'
-import {ThemeContext} from '../context'
+import {useTheme, ThemeContext} from '../context'
 import cn from '../utils/class-name'
 import isCustomVariable from '../utils/var-is-custom'
-import TryTagless from '../TryTagless'
-import Line from '../Line'
+import {TryTagless} from '../TryTagless'
+import {Line} from '../Line'
 import {BoxProps, TaglessBoxProps} from './types'
 import splitFill from '../utils/split-fill'
 
 
 Box.TryTagless = (props: TaglessBoxProps) => <Box {...props} TRY_TAGLESS />
 
-export default function Box(props: BoxProps, ref?: React.Ref<any>) {
+export function Box(props: BoxProps, ref?: React.Ref<any>) {
   const {
     className,
     fill = "none",
@@ -41,6 +41,12 @@ export default function Box(props: BoxProps, ref?: React.Ref<any>) {
     noContext,
     TRY_RECURSIVE_TAGLESS,
     style = {},
+    width,
+    height,
+    maxWidth,
+    maxHeight,
+    minWidth,
+    minHeight,
     ...restProps
   } = props
 
@@ -58,7 +64,14 @@ export default function Box(props: BoxProps, ref?: React.Ref<any>) {
     }
   }
 
-  const context = React.useContext(ThemeContext)
+  const context = useTheme()
+
+  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width }
+  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) }
+  if (width) { newStyle.width = width }
+  if (height) { newStyle.height = height }
+  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height }
+  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) }
 
   const componentProps = {
     className: cn(

@@ -1,10 +1,10 @@
 import React from 'react'
-import Align from './Align'
+import {Align} from './Align'
 import {AlignSpanProps, TaglessAlignProps} from './types'
 
 Span.TryTagless = (props: TaglessAlignProps) => <Span {...props} TRY_TAGLESS />
 
-export default function Span(
+export function Span(
   {col = 1, style, ...restProps}: AlignSpanProps,
   ref: React.Ref<any>
 ) {

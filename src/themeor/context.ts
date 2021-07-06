@@ -11,3 +11,5 @@ export const ThemeContext: React.Context<{
   darkMode?: boolean,
   defaultIconName?: string,
 }> = React.createContext({})
+
+export const useTheme = () => React.useContext(ThemeContext)

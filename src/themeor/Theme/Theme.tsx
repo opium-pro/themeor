@@ -3,7 +3,7 @@ import cssVariables from '../utils/css-variable'
 import newId from '../utils/new-id'
 import consoleMessage from '../utils/console-message'
 import {ThemeContext} from '../context'
-import TryTagless from '../TryTagless'
+import {TryTagless} from '../TryTagless'
 import css from './Theme.module.css'
 import cn from '../utils/class-name'
 import isDarkMode from '../utils/is-dark-mode'
@@ -12,7 +12,7 @@ import {ThemeProps, TaglessThemeProps} from './types'
 
 Theme.TryTagless = (props: TaglessThemeProps) => <Theme {...props} TRY_TAGLESS />
 
-export default function Theme({
+export function Theme({
   global,
   children,
   icons,
@@ -101,6 +101,7 @@ export default function Theme({
   }
 
   const context = {
+    ...currentConfig,
     ...customContext,
     shallInverseOn,
     template,
