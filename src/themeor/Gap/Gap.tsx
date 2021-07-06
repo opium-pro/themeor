@@ -2,13 +2,13 @@ import React from 'react'
 import css from './Gap.module.css'
 import cn from '../utils/class-name'
 import consoleMessage from '../utils/console-message'
-import TryTagless from '../TryTagless'
+import {TryTagless} from '../TryTagless'
 import {GapProps, TaglessGapProps} from './types'
 
 
 Gap.TryTagless = (props: TaglessGapProps) => <Gap {...props} TRY_TAGLESS />
 
-export default function Gap({
+export function Gap({
   className,
   size,
   top,
@@ -23,10 +23,26 @@ export default function Gap({
   FORCE_TAGLESS,
   forwardRef,
   inrow,
+  style={},
+  width,
+  height,
+  maxWidth,
+  maxHeight,
+  minWidth,
+  minHeight,
   ...restProps
 }: GapProps, ref: React.Ref<any>) {
 
   const [isInrow, setInrow] = React.useState(false)
+
+  const newStyle: any = {...style}
+
+  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width }
+  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) }
+  if (width) { newStyle.width = width }
+  if (height) { newStyle.height = height }
+  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height }
+  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) }
 
   // If is inside of flexbox row, make inrow automatically
   function handleRef(node: any) {
@@ -76,6 +92,7 @@ export default function Gap({
       !size && !!children && notSpecified && css[`size-${defaultGap}`],
       className
     ),
+    style: newStyle,
     children,
     ...restProps,
   }

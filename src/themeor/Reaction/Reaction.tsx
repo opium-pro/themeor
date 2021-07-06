@@ -4,7 +4,7 @@ import css from './Reaction.module.css'
 import consoleMessage from '../utils/console-message'
 import {ReactionProps, ReactionState} from './types'
 
-export default function Reaction({
+export function Reaction({
   children,
   track = ['hover', 'focus'],
   cursor = 'pointer',

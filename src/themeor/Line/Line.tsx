@@ -1,15 +1,15 @@
 import React from 'react'
 import css from './Line.module.css'
-import {ThemeContext} from '../context'
+import {useTheme} from '../context'
 import cn from '../utils/class-name'
-import TryTagless from '../TryTagless'
+import {TryTagless} from '../TryTagless'
 import isCustomVariable from '../utils/var-is-custom'
 import {LineProps, TaglessLineProps} from './types'
 
 
 Line.TryTagless = (props: TaglessLineProps) => <Line {...props} TRY_TAGLESS />
 
-export default function Line({
+export function Line({
   className,
   TRY_TAGLESS,
   inverse,
@@ -27,7 +27,7 @@ export default function Line({
   ...restProps
 }: LineProps, ref: React.Ref<any>) {
 
-  const {TRY_TO_INVERSE} = React.useContext(ThemeContext)
+  const {TRY_TO_INVERSE} = useTheme()
 
   const newStyle: any = {...style}
 

@@ -1,2 +1,2 @@
-export {default} from './Reaction'
+export * from './Reaction'
 export * from './types'

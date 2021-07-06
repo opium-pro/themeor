@@ -1,2 +1,2 @@
-export {default} from './Line'
+export * from './Line'
 export * from './types'

@@ -1,2 +1,2 @@
-export {default} from './Fit'
+export * from './Fit'
 export * from './types'

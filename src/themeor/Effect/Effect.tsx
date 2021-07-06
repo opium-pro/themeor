@@ -1,13 +1,13 @@
 import React from 'react'
 import css from './Effect.module.css'
 import cn from '../utils/class-name'
-import TryTagless from '../TryTagless'
+import {TryTagless} from '../TryTagless'
 import {EffectProps, TaglessEffectProps} from './types'
 
 
 Effect.TryTagless = (props: TaglessEffectProps) => <Effect {...props} TRY_TAGLESS />
 
-export default function Effect({
+export function Effect({
   className,
   hidden,
   TRY_TAGLESS,

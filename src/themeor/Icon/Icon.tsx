@@ -1,12 +1,12 @@
 import React from 'react'
 import css from './Icon.module.css'
-import {ThemeContext} from '../context'
+import {useTheme} from '../context'
 import cn from '../utils/class-name'
 import isCustomVariable from '../utils/var-is-custom'
 import consoleMessage from '../utils/console-message'
 import {IconProps} from "./types"
 
-export default function Icon({
+export function Icon({
   className,
   fill = "base",
   inverse,
@@ -44,7 +44,7 @@ export default function Icon({
     })
   }
 
-  const {icons, lineIcons, TRY_TO_INVERSE, defaultIconName} = React.useContext(ThemeContext)
+  const {icons, lineIcons, TRY_TO_INVERSE, defaultIconName} = useTheme()
 
   if (!name) {
     name = defaultIconName

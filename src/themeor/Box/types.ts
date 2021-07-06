@@ -22,6 +22,12 @@ export type PureBoxProps = {
   img?: string | false,
   noContext?: boolean,
   blur?: Types.Scale | 'none' | false,
+  width?: string | false | number,
+  height?: string | false | number,
+  maxWidth?: string | false | number,
+  maxHeight?: string | false | number,
+  minWidth?: string | false | number,
+  minHeight?: string | false | number,
 }
 
 export type TaglessBoxProps = PureBoxProps & React.HTMLAttributes<HTMLDivElement> & {

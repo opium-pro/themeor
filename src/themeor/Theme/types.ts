@@ -7,6 +7,7 @@ export type PureThemeProps = {
   global?: boolean,
   reset?: boolean,
 }
+
 export type TaglessThemeProps = PureThemeProps & React.HTMLAttributes<HTMLDivElement> & {
   TRY_RECURSIVE_TAGLESS?: true,
   FORCE_TAGLESS?: true,

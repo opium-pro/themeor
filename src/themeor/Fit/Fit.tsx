@@ -1,13 +1,13 @@
 import React from 'react'
 import css from './Fit.module.css'
 import cn from '../utils/class-name'
-import TryTagless from '../TryTagless'
+import {TryTagless} from '../TryTagless'
 import {FitProps, TaglessFitProps} from './types'
 
 
 Fit.TryTagless = (props: TaglessFitProps) => <Fit {...props} TRY_TAGLESS/>
 
-export default function Fit({
+export function Fit({
   width,
   height,
   maxWidth,
@@ -61,7 +61,7 @@ export default function Fit({
       offset && css[`offset-${offset}`],
       isNotParent && css.isNotParent,
       inline === false && css.block,
-      (height || cover || stick || offset) && !inline && css.block,
+      (!!height || cover || stick || offset) && !inline && css.block,
       className
     ),
     style: newStyle,
