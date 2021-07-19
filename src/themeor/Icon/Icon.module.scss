@@ -16,84 +16,106 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   }
 }
 
-// Fill
-.not-line {
-  &.inverse {
-    path, rect, circle, line, polygon {
-      fill: var(--t-fill-base-weak);
-    }
+// Handlinf fills
+.inverse {
+  path[fill],
+  rect[fill],
+  circle[fill],
+  line[fill],
+  polygon[fill] {
+    fill: var(--t-fill-base-weak);
   }
-  @each $value in $fill {
-    &.fill-#{$value} {
-      path, rect, circle, line, polygon {
-        fill: var(--t-icon-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
-      }
-    }
-    &.inverse.fill-#{$value} {
-      path, rect, circle, line, polygon {
-        fill: var(--t-icon-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
-      }
+
+  path[stroke],
+  rect[stroke],
+  circle[stroke],
+  line[stroke],
+  polygon[stroke] {
+    stroke: var(--t-fill-base-weak);
+  }
+}
+
+@each $value in $fill {
+  .fill-#{$value} {
+    path[fill],
+    rect[fill],
+    circle[fill],
+    line[fill],
+    polygon[fill] {
+      fill: var(--t-icon-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
     }
 
-    @each $shift in $fill-shift {
-      &.fill-#{$value}-#{$shift} {
-        path, rect, circle, line, polygon {
-         fill: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
-        }
-      }
-      &.inverse.fill-#{$value}-#{$shift} {
-        path, rect, circle, line, polygon {
-          fill: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
-        }
-      }
+    path[stroke],
+    rect[stroke],
+    circle[stroke],
+    line[stroke],
+    polygon[stroke] {
+      stroke: var(--t-icon-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
     }
   }
-  &.fill-none {
-    path, rect, circle, line, polygon {
-      fill: none;
+  .inverse.fill-#{$value} {
+    path[fill],
+    rect[fill],
+    circle[fill],
+    line[fill],
+    polygon[fill] {
+      fill: var(--t-icon-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
+    }
+
+    path[stroke],
+    rect[stroke],
+    circle[stroke],
+    line[stroke],
+    polygon[stroke] {
+      stroke: var(--t-icon-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
+    }
+  }
+
+  @each $shift in $fill-shift {
+    .fill-#{$value}-#{$shift} {
+      path[fill],
+      rect[fill],
+      circle[fill],
+      line[fill],
+      polygon[fill] {
+        fill: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
+      }
+
+      path[stroke],
+      rect[stroke],
+      circle[stroke],
+      line[stroke],
+      polygon[stroke] {
+        stroke: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
+      }
+    }
+    .inverse.fill-#{$value}-#{$shift} {
+      path[fill],
+      rect[fill],
+      circle[fill],
+      line[fill],
+      polygon[fill] {
+        fill: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
+      }
+
+      path[stroke],
+      rect[stroke],
+      circle[stroke],
+      line[stroke],
+      polygon[stroke] {
+        stroke: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
+      }
     }
   }
 }
 
-.line {
-
-  path, rect, circle, line, polygon {
+.fill-none {
+  path,
+  rect,
+  circle,
+  line,
+  polygon {
     fill: none;
-  }
-
-  &.inverse{
-    path, rect, circle, line, polygon {
-      stroke: var(--t-fill-base-weak);
-    }
-  }
-  @each $value in $fill {
-    &.fill-#{$value} {
-      path, rect, circle, line, polygon {
-        stroke: var(--t-icon-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
-      }
-    }
-    &.inverse.fill-#{$value} {
-      path, rect, circle, line, polygon {
-        stroke: var(--t-icon-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
-      }
-    }
-
-    @each $shift in $fill-shift {
-      &.fill-#{$value}-#{$shift} {
-        path, rect, circle, line, polygon {
-          stroke: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
-        }
-      }
-      &.inverse.fill-#{$value}-#{$shift} {
-        path, rect, circle, line, polygon {
-          stroke: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
-        }
-      }
-    }
-  }
-  &.fill-none {
-    path, rect, circle, line, polygon {
-      stroke: none;
-    }
+    stroke: none;
   }
 }
