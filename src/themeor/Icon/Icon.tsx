@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react'
+import React from 'react'
 import css from './Icon.module.css'
 import {useTheme} from '../context'
 import cn from '../utils/class-name'
@@ -6,7 +6,7 @@ import isCustomVariable from '../utils/var-is-custom'
 import consoleMessage from '../utils/console-message'
 import {IconProps} from "./types"
 
-export const Icon = forwardRef(({
+export const Icon = React.forwardRef(({
   className,
   fill = "base",
   inverse,
