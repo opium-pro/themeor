@@ -19,7 +19,7 @@ export function Icon({
   FORCE_TAGLESS,
   TRY_TAGLESS,
   ...restProps
-}: IconProps, ref: React.Ref<any>) {
+}: IconProps) {
 
   function handleRef (node: any) {
     if (!node) {return}
