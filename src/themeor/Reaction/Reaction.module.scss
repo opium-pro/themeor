@@ -3,7 +3,7 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
 @each $value in $scale {
   .speed-#{$value} {
     transition-duration: var(--t-reaction-speed-#{$value});
-    transition-property: color, background, fill, font-size, font-weight;
+    transition-property: color, background, fill, font-size, font-weight, width, height, top, left, right, bottom, opacity;
     transition-timing-function: ease;
   }
 }
@@ -31,5 +31,5 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
 }
 
 .ignore {
-  pointer-events: none
+  pointer-events: none;
 }

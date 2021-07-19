@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {forwardRef} from 'react'
 import css from './Icon.module.css'
 import {useTheme} from '../context'
 import cn from '../utils/class-name'
@@ -6,7 +6,7 @@ import isCustomVariable from '../utils/var-is-custom'
 import consoleMessage from '../utils/console-message'
 import {IconProps} from "./types"
 
-export function Icon({
+export const Icon = forwardRef(({
   className,
   fill = "base",
   inverse,
@@ -19,7 +19,7 @@ export function Icon({
   FORCE_TAGLESS,
   TRY_TAGLESS,
   ...restProps
-}: IconProps) {
+}: IconProps, ref: any) => {
 
   function handleRef (node: any) {
     if (!node) {return}
@@ -95,4 +95,4 @@ export function Icon({
   return (
     <FinalIcon {...componentProps} />
   )
-}
+})

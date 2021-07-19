@@ -2,7 +2,8 @@ import React from 'react'
 import cn from '../utils/class-name'
 import css from './Reaction.module.css'
 import consoleMessage from '../utils/console-message'
-import {ReactionProps, ReactionState} from './types'
+import { ReactionProps, ReactionState } from './types'
+import { ReactionContext } from './context'
 
 export function Reaction({
   children,
@@ -24,52 +25,43 @@ export function Reaction({
   function handleMouseOver(event: React.MouseEvent<HTMLElement>) {
     restProps.onMouseOver && restProps.onMouseOver(event)
     if (!state.hover || !state.hoverOrFocus) {
-      setState({...state, hover: true, hoverOrFocus: true} as ReactionState)
+      setState({ ...state, hover: true, hoverOrFocus: true } as ReactionState)
     }
   }
 
   function handleMouseOut(event: React.MouseEvent<HTMLElement>) {
     restProps.onMouseOut && restProps.onMouseOut(event)
     if (state.hover || state.hoverOrFocus) {
-      setState({...state, hover: false, active: false, hoverOrFocus: state.focus} as ReactionState)
+      setState({ ...state, hover: false, active: false, hoverOrFocus: state.focus } as ReactionState)
     }
   }
 
   function handleMouseDown(event: React.MouseEvent<HTMLElement>) {
     restProps.onMouseDown && restProps.onMouseDown(event)
     if (!state.active) {
-      setState({...state, active: true} as ReactionState)
+      setState({ ...state, active: true } as ReactionState)
     }
   }
 
   function handleMouseUp(event: React.MouseEvent<HTMLElement>) {
     restProps.onMouseUp && restProps.onMouseUp(event)
     if (state.active) {
-      setState({...state, active: false} as ReactionState)
+      setState({ ...state, active: false } as ReactionState)
     }
   }
 
   function handleFocus(event: React.FocusEvent<HTMLElement>) {
     restProps.onFocus && restProps.onFocus(event)
     if (!state.focus || !state.hoverOrFocus) {
-      setState({...state, focus: true, hoverOrFocus: true} as ReactionState)
+      setState({ ...state, focus: true, hoverOrFocus: true } as ReactionState)
     }
   }
 
   function handleBlur(event: React.FocusEvent<HTMLElement>) {
     restProps.onBlur && restProps.onBlur(event)
     if (state.focus || state.hoverOrFocus) {
-      setState({...state, focus: false, hoverOrFocus: state.hover} as ReactionState)
+      setState({ ...state, focus: false, hoverOrFocus: state.hover } as ReactionState)
     }
-  }
-
-  if (typeof children !== 'function') {
-    consoleMessage({
-      text: 'Only accept function as "children"',
-      type: 'error',
-      source: Reaction,
-    })
-    return null
   }
 
   const passState = {
@@ -106,6 +98,13 @@ export function Reaction({
   }
 
   return (
-    children(passProps, passState)
+    <ReactionContext.Provider value={{
+      reaction: state,
+      passProps,
+    }}>
+      {(typeof children === 'function') ? (
+        children(passProps, passState)
+      ) : (children)}
+    </ReactionContext.Provider>
   )
 }
