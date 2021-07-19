@@ -119,3 +119,21 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
     stroke: none;
   }
 }
+
+.icon {
+  path[fill="none"],
+  rect[fill="none"],
+  circle[fill="none"],
+  line[fill="none"],
+  polygon[fill="none"] {
+    fill: none;
+  }
+
+  path[stroke="none"],
+  rect[stroke="none"],
+  circle[stroke="none"],
+  line[stroke="none"],
+  polygon[stroke="none"] {
+    stroke: none;
+  }
+}
