@@ -1,5 +1,6 @@
 import getFills from './opium-fill'
 import {isInScale} from './opium-scale'
+import {isInFills} from './opium-fill'
 
 
 export function isCustomFill (fill?: string | false | undefined | number): boolean {
@@ -21,6 +22,14 @@ export function isCustomVariable (variable?: string | false | number): boolean {
 
 export function isCustomValue (value?: string | number | false): boolean {
   if (!value) { return false }
-  const additionalValues = ['none', 'max'] as any[]
-  return isInScale(value) || isCustomFill(value) || isCustomVariable(value) || additionalValues.includes(value) || false
+
+  if (isInScale(value)) {
+    return false
+  }
+
+  if (isInFills(value)) {
+    return false
+  }
+
+  return true
 }

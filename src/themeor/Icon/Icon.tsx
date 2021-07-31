@@ -14,7 +14,8 @@ export const Icon = React.forwardRef(({
   style={},
   children,
   name,
-  line,
+  forceLine,
+  forceFill,
   forwardRef,
   TRY_RECURSIVE_TAGLESS,
   FORCE_TAGLESS,
@@ -38,7 +39,7 @@ export const Icon = React.forwardRef(({
     }
   }
 
-  if (isCustomValue(fill)) {
+  if (fill && isCustomValue(fill)) {
     consoleMessage({
       text: 'Sorry, themeor icons dont support yet custom values for fill. Use a variable instead',
       source: Icon,
@@ -64,12 +65,14 @@ export const Icon = React.forwardRef(({
     name = defaultIconName
   }
 
-  const makeItLine = (typeof line !== 'undefined') ? line : lineIcons
+  const makeItLined = forceLine === true || lineIcons === true
+  const makeItFilled = forceFill === true || lineIcons === false
 
   if (!icons) {
     return null
   }
 
+  // @ts-ignore
   if (!size || !icons[size]) {
     consoleMessage({
       text: `There is no such size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
@@ -79,6 +82,7 @@ export const Icon = React.forwardRef(({
     return null
   }
 
+  // @ts-ignore
   const FinalIcon = name && icons[size]?.[name]
 
   if (!FinalIcon) {
@@ -98,7 +102,8 @@ export const Icon = React.forwardRef(({
     style: newStyle,
     className: cn(
       css.icon,
-      makeItLine ? css['line'] : css['not-line'],
+      makeItLined && css['force-stroke'],
+      makeItFilled && css['force-fill'],
       !isCustomValue(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
       !isCustomValue(size) && css[`size-${size}`],
       (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,

@@ -1,6 +1,7 @@
 $fill: ("base", "faint", "accent", "complement", "critic", "warning", "success");
 $fill-shift: ("up", "down");
 $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
+$forces: ("stroke", "fill");
 
 .icon {
   box-sizing: content-box !important;
@@ -16,7 +17,7 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
   }
 }
 
-// Handlinf fills
+// Handling fills
 .inverse {
   path[fill],
   rect[fill],
@@ -104,6 +105,113 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
       line[stroke],
       polygon[stroke] {
         stroke: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
+      }
+    }
+  }
+}
+
+// Force fills
+@each $force in $forces {
+  .force-#{$force} {
+    &.inverse {
+      path[class],
+      path[stroke],
+      path[fill],
+      rect[class],
+      rect[stroke],
+      rect[fill],
+      circle[class],
+      circle[stroke],
+      circle[fill],
+      line[class],
+      line[stroke],
+      line[fill],
+      polygon[class],
+      polygon[stroke],
+      polygon[fill] {
+        #{$force}: var(--t-fill-base-weak);
+      }
+    }
+
+    @each $value in $fill {
+      &.fill-#{$value} {
+        path[class],
+        path[stroke],
+        path[fill],
+        rect[class],
+        rect[stroke],
+        rect[fill],
+        circle[class],
+        circle[stroke],
+        circle[fill],
+        line[class],
+        line[stroke],
+        line[fill],
+        polygon[class],
+        polygon[stroke],
+        polygon[fill] {
+          #{$force}: var(--t-icon-fill-#{$value}-strong, var(--t-fill-#{$value}-strong));
+        }
+      }
+      &.inverse.fill-#{$value} {
+        path[class],
+        path[stroke],
+        path[fill],
+        rect[class],
+        rect[stroke],
+        rect[fill],
+        circle[class],
+        circle[stroke],
+        circle[fill],
+        line[class],
+        line[stroke],
+        line[fill],
+        polygon[class],
+        polygon[stroke],
+        polygon[fill] {
+          #{$force}: var(--t-icon-fill-#{$value}-weak, var(--t-fill-#{$value}-weak));
+        }
+      }
+
+      @each $shift in $fill-shift {
+        &.fill-#{$value}-#{$shift} {
+          path[class],
+          path[stroke],
+          path[fill],
+          rect[class],
+          rect[stroke],
+          rect[fill],
+          circle[class],
+          circle[stroke],
+          circle[fill],
+          line[class],
+          line[stroke],
+          line[fill],
+          polygon[class],
+          polygon[stroke],
+          polygon[fill] {
+            #{$force}: var(--t-icon-fill-#{$value}-strong-#{$shift}, var(--t-fill-#{$value}-strong-#{$shift}));
+          }
+        }
+        &.inverse.fill-#{$value}-#{$shift} {
+          path[class],
+          path[stroke],
+          path[fill],
+          rect[class],
+          rect[stroke],
+          rect[fill],
+          circle[class],
+          circle[stroke],
+          circle[fill],
+          line[class],
+          line[stroke],
+          line[fill],
+          polygon[class],
+          polygon[stroke],
+          polygon[fill] {
+            fill: var(--t-icon-fill-#{$value}-weak-#{$shift}, var(--t-fill-#{$value}-weak-#{$shift}));
+          }
+        }
       }
     }
   }
