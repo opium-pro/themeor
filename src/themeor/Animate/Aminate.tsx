@@ -17,7 +17,6 @@ export function Animate(props: AnimateProps) {
     onUnmount,
     onHover,
     onClick,
-    getTrigger,
     duration = 1000,
     delay = 0,
     repeat = 1,
@@ -75,8 +74,6 @@ export function Animate(props: AnimateProps) {
   }
 
   useEffect(() => {
-    getTrigger?.(setAnimationName)
-
     cssVar.set({
       id: styleId,
       prefix: 't',

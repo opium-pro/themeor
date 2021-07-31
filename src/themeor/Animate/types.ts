@@ -8,7 +8,7 @@ export type PureAnimateProps = {
   delay?: number,
   repeat?: number,
   mounted?: boolean,
-  getTrigger?: (trigger?: (value: string) => void) => any,
+  // getTrigger?: (trigger?: (value: string) => void) => any,
   [X: string]: any,
 }
 

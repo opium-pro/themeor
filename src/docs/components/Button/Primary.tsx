@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Font, Fit, Align, Gap, Line, Reaction, useTheme } from '../../../themeor'
+import { Box, Font, Fit, Align, Gap, Line, Reaction, useTheme, Animate } from '../../../themeor'
 
 
 export interface ButtonProps extends React.AllHTMLAttributes<HTMLElement> { }
