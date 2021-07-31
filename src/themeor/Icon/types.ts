@@ -3,7 +3,7 @@ import * as Types from '../config-types'
 export type IconProps = React.HTMLAttributes<SVGElement> & {
   fill?: string | false,
   inverse?: boolean,
-  size?: Types.Scale | false,
+  size?: string | Types.Scale | false,
   name?: string | false,
   line?: boolean,
   forwardRef?: (node: any) => void,

@@ -1,13 +1,13 @@
 import * as Types from '../config-types'
 
 export type PureGapProps = {
-  size?: Types.Scale | 'none' | false,
-  vert?: Types.Scale | 'none' | false,
-  hor?: Types.Scale | 'none' | false,
-  top?: Types.Scale | 'none' | false,
-  right?: Types.Scale | 'none' | false,
-  bottom?: Types.Scale | 'none' | false,
-  left?: Types.Scale | 'none' | false,
+  size?: string | Types.Scale | 'none' | false,
+  vert?: string | Types.Scale | 'none' | false,
+  hor?: string | Types.Scale | 'none' | false,
+  top?: string | Types.Scale | 'none' | false,
+  right?: string | Types.Scale | 'none' | false,
+  bottom?: string | Types.Scale | 'none' | false,
+  left?: string | Types.Scale | 'none' | false,
   inrow?: boolean,
   width?: string | false | number,
   height?: string | false | number,

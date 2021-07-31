@@ -1,7 +1,7 @@
 import * as Types from '../config-types'
 
 export type PureEffectProps = {
-  transparency?: Types.Scale | 'none' | 'max' | false,
+  transparency?: string | Types.Scale | 'none' | 'max' | false,
   hidden?: boolean,
 }
 
