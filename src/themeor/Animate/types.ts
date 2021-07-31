@@ -1,6 +1,6 @@
 export type PureAnimateProps = {
   onMount?: string,
-  onUnMount?: string,
+  onUnmount?: string,
   onHover?: string,
   onClick?: string,
   onFocus?: string,

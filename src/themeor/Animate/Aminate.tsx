@@ -14,7 +14,7 @@ Animate.TryTagless = (props: TaglessAnimateProps) => <Animate {...props} TRY_TAG
 export function Animate(props: AnimateProps) {
   const {
     onMount,
-    onUnMount,
+    onUnmount,
     onHover,
     onClick,
     getTrigger,
@@ -37,7 +37,7 @@ export function Animate(props: AnimateProps) {
 
   useEffect(() => {
     if (initialMounted === false) {
-      onUnMount && setAnimationName(onUnMount)
+      onUnmount && setAnimationName(onUnmount)
       remove()
 
       setTimeout(() => {
