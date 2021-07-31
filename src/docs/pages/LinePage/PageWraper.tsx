@@ -11,7 +11,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="5. Line"
+        title="Line"
         description="Controlls all lines including borders"
         path={match?.url}
       >

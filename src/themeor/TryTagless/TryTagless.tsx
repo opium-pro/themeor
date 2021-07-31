@@ -1,6 +1,6 @@
 import React from 'react'
 import consoleMessage from '../utils/console-message'
-import {Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect} from '../index'
+import {Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate} from '../index'
 import {TryTaglessProps} from './types'
 
 // TryTagless Element Tag
@@ -64,7 +64,7 @@ export function TryTagless(props: TryTaglessProps) {
   }
 
   const OnlyChildComponent = onlyChild.type
-  const mergingComponents = [Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect]
+  const mergingComponents = [Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate]
   let child_is_themeor_component = mergingComponents.includes(OnlyChildComponent)
     || !!mergingComponents.find((mergingComponent: any) => mergingComponent.TryTagless === OnlyChildComponent)
 

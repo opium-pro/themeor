@@ -17,7 +17,7 @@ export class Item extends React.PureComponent<ItemProps> {
 
             <Gap.TryTagless
               TRY_RECURSIVE_TAGLESS
-              vert="sm"
+              vert="12px"
               hor="md"
             >
               <Box

@@ -10,7 +10,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="8. Align"
+        title="Align"
         description="Controlls alignment and adjustment of children"
         path={match?.url}
         nonTheming

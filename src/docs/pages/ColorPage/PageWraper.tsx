@@ -10,7 +10,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="1. Color"
+        title="Color"
         description={(<>
           You can use your own color conceptions or <Link href="https://medium.com/@opium.pro/standardisation-of-color-schemes-through-the-eyes-of-a-programmer-53cc25148470">Opium.Fill conception</Link> as a native one
         </>)}

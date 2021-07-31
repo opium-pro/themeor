@@ -11,7 +11,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="7. Gap"
+        title="Gap"
         description="Controlls space between objects and paddings"
         path={match?.url}
       >

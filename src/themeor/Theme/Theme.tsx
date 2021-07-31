@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import cssVariables from '../utils/css-variable'
 import newId from '../utils/new-id'
 import consoleMessage from '../utils/console-message'
@@ -26,11 +26,12 @@ export function Theme({
   config = {},
   ...restProps
 }: ThemeProps, ref: React.Ref<any>) {
+  const [id] = useState(newId())
 
   let useGlobal: boolean = !!global
-  const id: string = newId()
   const [currentConfig, setCurrentConfig] = React.useState(config)
-  const {themeId} = React.useContext(ThemeContext)
+  const {themeId: parentThemeId} = React.useContext(ThemeContext)
+
   let isTrackingDarkMode: boolean = false
 
   function changeColorMode() {
@@ -74,14 +75,14 @@ export function Theme({
   }
 
   // Update
-  React.useEffect(() => {
+  useEffect(() => {
     trackDarkMode()
     setConfig()
     setVariables()
   })
 
   // Unmount
-  React.useEffect(() => () => {
+  useEffect(() => () => {
     const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
     colorScheme.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
   })
@@ -91,7 +92,7 @@ export function Theme({
 
   reset && import('./reset')
 
-  if (themeId && global) {
+  if (parentThemeId && global) {
     consoleMessage({
       text: 'You can set "global" prop only once. All nested globals will be ignored',
       type: 'error',

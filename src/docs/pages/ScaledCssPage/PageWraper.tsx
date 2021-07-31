@@ -9,7 +9,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="2. Scaled CSS"
+        title="Scaled CSS"
         path={match?.url}
       >
         <Page name="Info" component={Info} path={`${match?.url}`} exact />

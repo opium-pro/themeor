@@ -11,7 +11,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="6. Icon"
+        title="Icon"
         description="Controlls icons' color and size"
         path={match?.url}
       >

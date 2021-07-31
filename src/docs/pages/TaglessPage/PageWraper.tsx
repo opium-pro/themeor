@@ -10,7 +10,7 @@ export default class PageWraper extends React.PureComponent<RouteChildrenProps> 
 
     return (
       <Wrapper
-        title="11. Tagless"
+        title="Tagless"
         description="Here will be description"
         path={match?.url}
       >
