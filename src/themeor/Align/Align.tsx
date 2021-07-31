@@ -1,11 +1,13 @@
 import React from 'react'
 import css from './Align.module.css'
 import cn from '../utils/class-name'
-import {TryTagless} from '../TryTagless'
+import { TryTagless } from '../TryTagless'
 import consoleMessage from '../utils/console-message'
+import { isInScale } from '../utils/opium-scale'
+import { half, minus } from '../utils/change-css-value'
 import { AlignProps, TaglessAlignProps } from './types'
-import {Span} from './Span'
-import {Spacer} from './Spacer'
+import { Span } from './Span'
+import { Spacer } from './Spacer'
 
 Align.Span = Span
 Align.Spacer = Spacer
@@ -44,6 +46,14 @@ export function Align({
   if (height) { newStyle.height = height }
   if (maxHeight || height) { newStyle.maxHeight = maxHeight || height }
   if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) }
+  if (!isInScale(gapVert)) {
+    newStyle.marginTop = minus(half(gapVert))
+    newStyle.marginBottom = minus(half(gapVert))
+  }
+  if (!isInScale(gapHor)) {
+    newStyle.marginRight = minus(half(gapHor))
+    newStyle.marginLeft = minus(half(gapHor))
+  }
 
   const componentProps = {
     className: cn(
@@ -52,8 +62,8 @@ export function Align({
       !row && !stack && !pattern && css.col,
       vert && css[`vert-${vert}`],
       hor && css[`hor-${hor}`],
-      gapVert && css[`vert-gap-${gapVert}`],
-      gapHor && css[`hor-gap-${gapHor}`],
+      isInScale(gapVert) && css[`vert-gap-${gapVert}`],
+      isInScale(gapHor) && css[`hor-gap-${gapHor}`],
       stack && css.stack,
       stack && css.row,
       !!pattern && css.pattern,
@@ -71,14 +81,22 @@ export function Align({
 
   function wrapChildren(children: any): React.ReactNode {
     const wrapChildClass = cn(
-      gapVert && css[`item-vert-gap-${gapVert}`],
-      gapHor && css[`item-hor-gap-${gapHor}`],
+      isInScale(gapVert) && css[`item-vert-gap-${gapVert}`],
+      isInScale(gapHor) && css[`item-hor-gap-${gapHor}`],
     )
+
+    const wrapChildStyle = {
+      paddingRight: (!isInScale(gapHor) && half(gapHor)) || undefined,
+      paddingLeft: (!isInScale(gapHor) && half(gapHor)) || undefined,
+      paddingTop: (!isInScale(gapVert) && half(gapVert)) || undefined,
+      paddingBottom: (!isInScale(gapVert) && half(gapVert)) || undefined,
+      boxSizing: 'border-box' as any,
+    }
 
     return React.Children.map(children, (child: any) => {
       if (tryTagless && React.Children.count(children) === 1 && child.type?.TryTagless) {
         const Child = child.type
-        const {children: subChildren, ...restChildProps} = child.props
+        const { children: subChildren, ...restChildProps } = child.props
         return (
           <Child
             {...restChildProps}
@@ -90,7 +108,7 @@ export function Align({
           </Child>
         )
       } else {
-        return <div className={wrapChildClass}>{child}</div>
+        return <div className={wrapChildClass} style={wrapChildStyle}>{child}</div>
       }
     })
   }

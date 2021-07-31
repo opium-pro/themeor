@@ -2,7 +2,7 @@ import React from 'react'
 import css from './Icon.module.css'
 import {useTheme} from '../context'
 import cn from '../utils/class-name'
-import isCustomVariable from '../utils/var-is-custom'
+import {isCustomValue, isCustomVariable} from '../utils/is-custom'
 import consoleMessage from '../utils/console-message'
 import {IconProps} from "./types"
 
@@ -11,6 +11,7 @@ export const Icon = React.forwardRef(({
   fill = "base",
   inverse,
   size = "md",
+  style={},
   children,
   name,
   line,
@@ -20,6 +21,7 @@ export const Icon = React.forwardRef(({
   TRY_TAGLESS,
   ...restProps
 }: IconProps, ref: any) => {
+  const newStyle = {...style}
 
   function handleRef (node: any) {
     if (!node) {return}
@@ -34,6 +36,18 @@ export const Icon = React.forwardRef(({
         path.style.fill = `var(${fill})`
       }
     }
+  }
+
+  if (isCustomValue(fill)) {
+    consoleMessage({
+      text: 'Sorry, themeor icons dont support yet custom values for fill. Use a variable instead',
+      source: Icon,
+    })
+  }
+
+  if (isCustomValue(size)) {
+    newStyle.width = size || undefined
+    newStyle.height = size || undefined
   }
 
   if (children) {
@@ -81,11 +95,12 @@ export const Icon = React.forwardRef(({
     width: undefined,
     height: undefined,
     fill: undefined,
+    style: newStyle,
     className: cn(
       css.icon,
       makeItLine ? css['line'] : css['not-line'],
-      fill && !isCustomVariable(fill) && css[`fill-${fill}`],
-      size && css[`size-${size}`],
+      !isCustomValue(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
+      !isCustomValue(size) && css[`size-${size}`],
       (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
       className
     ),

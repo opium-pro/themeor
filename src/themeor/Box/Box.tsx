@@ -2,11 +2,11 @@ import React from 'react'
 import css from './Box.module.css'
 import {useTheme, ThemeContext} from '../context'
 import cn from '../utils/class-name'
-import isCustomVariable from '../utils/var-is-custom'
 import {TryTagless} from '../TryTagless'
 import {Line} from '../Line'
 import {BoxProps, TaglessBoxProps} from './types'
 import splitFill from '../utils/split-fill'
+import {isCustomFill, isCustomVariable, isCustomValue} from '../utils/is-custom'
 
 
 Box.TryTagless = (props: TaglessBoxProps) => <Box {...props} TRY_TAGLESS />
@@ -50,7 +50,7 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     ...restProps
   } = props
 
-  const newStyle: any = {...style}
+  const newStyle = {...style}
 
   if (img) {
     newStyle.backgroundImage = `url('${img}')`
@@ -64,36 +64,71 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     }
   }
 
+  if (isCustomFill(fill)) {
+    if (fancy) {
+      newStyle.backgroundImage = fill || undefined
+    } else {
+      newStyle.backgroundColor = fill || undefined
+    }
+  }
+
+  if (isCustomValue(radius)) { newStyle.borderRadius = radius || undefined}
+  if (isCustomValue(radiusTop)) {
+    newStyle.borderTopLeftRadius = radiusTop || undefined
+    newStyle.borderTopRightRadius = radiusTop || undefined
+  }
+  if (isCustomValue(radiusRight)) {
+    newStyle.borderTopRightRadius = radiusRight || undefined
+    newStyle.borderBottomRightRadius = radiusRight || undefined
+  }
+  if (isCustomValue(radiusLeft)) {
+    newStyle.borderTopLeftRadius = radiusLeft || undefined
+    newStyle.borderBottomLeftRadius = radiusLeft || undefined
+  }
+  if (isCustomValue(radiusBottom)) {
+    newStyle.borderBottomLeftRadius = radiusBottom || undefined
+    newStyle.borderBottomRightRadius = radiusBottom || undefined
+  }
+  if (isCustomValue(radiusTopLeft)) { newStyle.borderTopLeftRadius = radiusTopLeft || undefined}
+  if (isCustomValue(radiusTopRight)) { newStyle.borderTopRightRadius = radiusTopRight || undefined}
+  if (isCustomValue(radiusBottomLeft)) { newStyle.borderBottomLeftRadius = radiusBottomLeft || undefined}
+  if (isCustomValue(radiusBottomRight)) { newStyle.borderBottomRightRadius = radiusBottomRight || undefined}
+
+  if (isCustomValue(shadow)) { newStyle.boxShadow = shadow || undefined}
+  if (isCustomValue(shadowInner)) { newStyle.boxShadow = 'inset ' + shadowInner || undefined}
+  if (isCustomValue(blur)) { newStyle.backdropFilter = blur ? `blur(${blur})` : undefined}
+  if (isCustomValue(glow)) { newStyle.boxShadow = glow || undefined}
+
   const context = useTheme()
 
-  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width }
-  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) }
+  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined}
+  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
   if (width) { newStyle.width = width }
   if (height) { newStyle.height = height }
-  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height }
-  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) }
+  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
+  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
 
   const componentProps = {
     className: cn(
       css.box,
       img && css.img,
-      fill && !isCustomVariable(fill) && css[`fill-${fill}`],
+      !isCustomFill(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
       (strong || inverse) && (!fill || fill === 'none') && css[`fill-base`],
       fancy && css.fancy,
       strong && css.strong,
-      shadow && css[`shadow-${shadow}`],
-      blur && css[`blur-${blur}`],
-      shadowInner && css[`shadow-inner-${shadowInner}`],
-      glow && css[`glow-${shadowInner}`],
-      radius && css[`radius-${radius}`],
-      radiusTop && css[`radius-top-${radiusTop}`],
-      radiusRight && css[`radius-right-${radiusRight}`],
-      radiusLeft && css[`radius-left-${radiusLeft}`],
-      radiusBottom && css[`radius-bottom-${radiusBottom}`],
-      radiusTopLeft && css[`radius-tl-${radiusTopLeft}`],
-      radiusTopRight && css[`radius-tr-${radiusTopRight}`],
-      radiusBottomLeft && css[`radius-bl-${radiusBottomLeft}`],
-      radiusBottomRight && css[`radius-br-${radiusBottomRight}`],
+      !isCustomValue(shadow) && css[`shadow-${shadow}`],
+      !isCustomValue(blur) && css[`blur-${blur}`],
+      !isCustomValue(shadowInner) && css[`shadow-inner-${shadowInner}`],
+      !isCustomValue(glow) && css[`glow-${shadowInner}`],
+      !isCustomValue(radius) && css[`radius-${radius}`],
+      !isCustomValue(radiusTop) && css[`radius-top-${radiusTop}`],
+      !isCustomValue(radiusRight) && css[`radius-right-${radiusRight}`],
+      !isCustomValue(radiusLeft) && css[`radius-left-${radiusLeft}`],
+      !isCustomValue(radiusBottom) && css[`radius-bottom-${radiusBottom}`],
+      !isCustomValue(radiusTopLeft) && css[`radius-tl-${radiusTopLeft}`],
+      !isCustomValue(radiusTopRight) && css[`radius-tr-${radiusTopRight}`],
+      !isCustomValue(radiusBottomLeft) && css[`radius-bl-${radiusBottomLeft}`],
+      !isCustomValue(radiusBottomRight) && css[`radius-br-${radiusBottomRight}`],
       (inverse !== false) && (inverse || context.TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
       className
     ),
@@ -127,7 +162,7 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
 
   // Automatically inverse text and other stuff on this background
   let inverseStatus: boolean | undefined
-  inverseStatus = context.shallInverseOn?.includes(splitFill(fill)) && strong
+  inverseStatus = context.shallInverseOn?.includes(splitFill(fill)) && (isCustomFill(fill) || strong)
 
 
   if (context.TRY_TO_INVERSE && !inverse) {

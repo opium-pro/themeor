@@ -3,7 +3,7 @@ import css from './Line.module.css'
 import {useTheme} from '../context'
 import cn from '../utils/class-name'
 import {TryTagless} from '../TryTagless'
-import isCustomVariable from '../utils/var-is-custom'
+import {isCustomValue, isCustomVariable} from '../utils/is-custom'
 import {LineProps, TaglessLineProps} from './types'
 
 
@@ -29,22 +29,27 @@ export function Line({
 
   const {TRY_TO_INVERSE} = useTheme()
 
-  const newStyle: any = {...style}
+  const newStyle = {...style}
 
-  if (isCustomVariable(fill)) {
-    newStyle.borderColor = `var(${fill})`
-  }
+  if (isCustomVariable(fill)) { newStyle.borderColor = `var(${fill})` }
+
+  if (isCustomValue(fill)) { newStyle.borderColor = fill || undefined}
+  if (isCustomValue(weight)) { newStyle.borderWidth = weight || undefined}
+  if (isCustomValue(top)) { newStyle.borderTopWidth = top || undefined}
+  if (isCustomValue(right)) { newStyle.borderRightWidth = right || undefined}
+  if (isCustomValue(bottom)) { newStyle.borderBottomWidth = bottom || undefined}
+  if (isCustomValue(left)) { newStyle.borderLeftWidth = left || undefined}
 
   const componentProps = {
     ...restProps,
     className: cn(
       css.line,
       (weight || (!right && !left && !top && !bottom)) && css[`weight-${weight || 'md'}`],
-      top && css[`top-${top}`],
-      right && css[`right-${right}`],
-      bottom && css[`bottom-${bottom}`],
-      left && css[`left-${left}`],
-      fill && !isCustomVariable(fill) && css[`fill-${fill}`],
+      !isCustomValue(top) && css[`top-${top}`],
+      !isCustomValue(right) && css[`right-${right}`],
+      !isCustomValue(bottom) && css[`bottom-${bottom}`],
+      !isCustomValue(left) && css[`left-${left}`],
+      !isCustomValue(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
       (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
       React.Children.count(children) === 0 && css.separator,
       className
