@@ -37,22 +37,28 @@ export function Align({
   ...restProps
 }: AlignProps, ref: React.Ref<any>) {
 
-  const newStyle: any = { ...style }
+  const newStyle = { ...style }
   if (!!pattern) { newStyle.gridTemplateColumns = pattern }
 
-  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width }
-  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) }
+  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
+  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
   if (width) { newStyle.width = width }
   if (height) { newStyle.height = height }
-  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height }
-  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) }
-  if (!isInScale(gapVert)) {
+  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
+  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
+  if (!isInScale(gapVert) && !pattern) {
     newStyle.marginTop = minus(half(gapVert))
     newStyle.marginBottom = minus(half(gapVert))
   }
-  if (!isInScale(gapHor)) {
+  if (!isInScale(gapHor) && !pattern) {
     newStyle.marginRight = minus(half(gapHor))
     newStyle.marginLeft = minus(half(gapHor))
+  }
+  if (!isInScale(gapVert) && !!pattern) {
+    newStyle.rowGap = gapVert || undefined
+  }
+  if (!isInScale(gapHor) && !!pattern) {
+    newStyle.columnGap = gapHor || undefined
   }
 
   const componentProps = {
