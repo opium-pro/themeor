@@ -3,7 +3,7 @@ import consoleMessage from '../utils/console-message'
 import { AnimateProps, TaglessAnimateProps } from './types'
 import { TryTagless } from '../TryTagless'
 import cn from '../utils/class-name'
-import css from './animate.module.scss'
+import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
 import newId from '../utils/new-id'
 
