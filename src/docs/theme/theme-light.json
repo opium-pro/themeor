@@ -14,6 +14,12 @@
     "_formAttemtionFill": "accent"
   },
 
+  "colorConversion": {
+    "ifBackIs": ["base", "faint", "accent", "complement"],
+    "takeFills": ["base", "faint"],
+    "convertFillsTo": ["inverse"]
+  },
+
   "customVariables": {
     "random-css-variable": "HERE YOU CAN SET YOUR CSS VARIABLES",
     "demo-var": "#fc0"

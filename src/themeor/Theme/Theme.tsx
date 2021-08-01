@@ -8,6 +8,8 @@ import css from './Theme.module.css'
 import cn from '../utils/class-name'
 import isDarkMode from '../utils/is-dark-mode'
 import {ThemeProps, TaglessThemeProps} from './types'
+import setBoxStyle from '../Box/box-style'
+import normilizeConfig from '../utils/normalize-config'
 
 
 Theme.TryTagless = (props: TaglessThemeProps) => <Theme {...props} TRY_TAGLESS />
@@ -29,8 +31,12 @@ export function Theme({
   const [id] = useState(newId())
 
   let useGlobal: boolean = !!global
-  const [currentConfig, setCurrentConfig] = React.useState(config)
+  const [currentConfig, directSetCurrentConfig] = React.useState(config)
   const {themeId: parentThemeId} = React.useContext(ThemeContext)
+
+  function setCurrentConfig(config: any) {
+    directSetCurrentConfig(normilizeConfig(config))
+  }
 
   let isTrackingDarkMode: boolean = false
 
@@ -81,14 +87,17 @@ export function Theme({
     setVariables()
   })
 
+  // Update components styles
+  useEffect(() => {
+    setBoxStyle(currentConfig)
+  }, [currentConfig])
+
   // Unmount
   useEffect(() => () => {
     const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
     colorScheme.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
   })
 
-  const {themeContext = {}} = currentConfig
-  const {shallInverseOn, template, ...customContext} = themeContext
 
   reset && import('./reset')
 
@@ -103,11 +112,7 @@ export function Theme({
 
   const context = {
     ...currentConfig,
-    ...customContext,
-    shallInverseOn,
-    template,
     icons,
-    TRY_TO_INVERSE: false,
     themeId: id,
     darkMode: isDarkMode(),
   }
