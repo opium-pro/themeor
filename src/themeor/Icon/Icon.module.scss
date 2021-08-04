@@ -223,8 +223,8 @@ $forces: ("stroke", "fill");
   circle,
   line,
   polygon {
-    fill: none;
-    stroke: none;
+    fill: none !important;
+    stroke: none !important;
   }
 }
 
@@ -234,7 +234,7 @@ $forces: ("stroke", "fill");
   circle[fill="none"],
   line[fill="none"],
   polygon[fill="none"] {
-    fill: none;
+    fill: none !important;
   }
 
   path[stroke="none"],
@@ -242,6 +242,6 @@ $forces: ("stroke", "fill");
   circle[stroke="none"],
   line[stroke="none"],
   polygon[stroke="none"] {
-    stroke: none;
+    stroke: none !important;
   }
 }

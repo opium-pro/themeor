@@ -1,4 +1,4 @@
-import getFills from './opium-fill'
+import {allFills} from './opium-fill'
 import {isInScale} from './opium-scale'
 import {isInFills} from './opium-fill'
 
@@ -6,7 +6,7 @@ import {isInFills} from './opium-fill'
 export function isCustomFill (fill?: string | false | undefined | number): boolean {
   if (typeof fill !== 'string') { return false }
 
-  return !getFills(true, true).includes(fill) && !isCustomVariable(fill)
+  return !allFills.includes(fill) && !isCustomVariable(fill)
 }
 
 

@@ -19,7 +19,7 @@ export default function getFills (up: boolean = false, down: boolean = false, cl
 }
 
 export const baseFills = getFills()
-export const allFills = getFills(true, true)
+export const allFills = [...getFills(true, true), 'none']
 
 export function isInFills (value?: string | number | boolean): boolean {
   if (typeof value !== 'string') {return false}
