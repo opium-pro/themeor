@@ -59,14 +59,14 @@ export const Icon = React.forwardRef(({
     })
   }
 
-  const {icons, lineIcons, TRY_TO_INVERSE, defaultIconName} = useTheme()
+  const {icons, TRY_TO_INVERSE} = useTheme()
 
-  if (!name) {
-    name = defaultIconName
-  }
+  // if (!name) {
+  //   name = defaultIconName
+  // }
 
-  const makeItLined = forceLine === true || lineIcons === true
-  const makeItFilled = forceFill === true || lineIcons === false
+  // const makeItLined = forceLine === true || lineIcons === true
+  // const makeItFilled = forceFill === true || lineIcons === false
 
   if (!icons) {
     return null
@@ -102,8 +102,8 @@ export const Icon = React.forwardRef(({
     style: newStyle,
     className: cn(
       css.icon,
-      makeItLined && css['force-stroke'],
-      makeItFilled && css['force-fill'],
+      // makeItLined && css['force-stroke'],
+      // makeItFilled && css['force-fill'],
       !isCustomValue(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
       !isCustomValue(size) && css[`size-${size}`],
       (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,

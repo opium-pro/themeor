@@ -1,10 +1,10 @@
 import React from 'react'
-import css from './Font.module.css'
-import {useTheme} from '../context'
+import { useTheme } from '../context'
 import cn from '../utils/class-name'
-import {isCustomVariable, isCustomValue, isCustomFill} from '../utils/is-custom'
-import {TryTagless} from '../TryTagless'
-import {FontProps, TaglessFontProps} from './types'
+import { isCustomVariable } from '../utils/is-custom'
+import { TryTagless } from '../TryTagless'
+import { FontProps, TaglessFontProps } from './types'
+import { useConfig } from '../utils/use-config'
 
 
 Font.TryTagless = (props: TaglessFontProps) => <Font {...props} TRY_TAGLESS />
@@ -39,18 +39,20 @@ export function Font({
   minHeight,
   ...restProps
 }: FontProps, ref?: React.Ref<any>) {
-  const {TRY_TO_INVERSE} = useTheme()
+  const context = useTheme()
+  const { TRY_TO_INVERSE } = context
+  const { fontConfig } = useConfig(context)
 
-  const newStyle = {...style}
+  const newStyle = { ...style }
 
-  if(isCustomVariable(fill)) { newStyle.color = `var(${fill})` }
+  if (!fontConfig({ fill })) { newStyle.color = `var(${fill})` }
 
-  if(isCustomValue(fill)) { newStyle.color = fill || undefined }
-  if(isCustomValue(size)) { newStyle.fontSize = size || undefined }
-  if(isCustomValue(weight)) { newStyle.fontWeight = weight as any }
-  if(isCustomValue(letterSpacing)) { newStyle.letterSpacing = letterSpacing || undefined }
-  if(isCustomValue(lineHeight)) { newStyle.lineHeight = lineHeight || undefined }
-  if(isCustomValue(family)) { newStyle.fontFamily = family || undefined }
+  if (!fontConfig({ fill })) { newStyle.color = fill || undefined }
+  if (!fontConfig({ size })) { newStyle.fontSize = size || undefined }
+  if (!fontConfig({ weight })) { newStyle.fontWeight = weight as any }
+  if (!fontConfig({ letterSpacing })) { newStyle.letterSpacing = letterSpacing || undefined }
+  if (!fontConfig({ lineHeight })) { newStyle.lineHeight = lineHeight || undefined }
+  if (!fontConfig({ family })) { newStyle.fontFamily = family || undefined }
 
   if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
   if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
@@ -63,24 +65,24 @@ export function Font({
 
   const componentProps = {
     className: cn(
-      css.font,
-      underline && css.underline,
-      underline === false && css[`non-underline`],
-      inline && css.inline,
-      inline === false && css.block,
-      !isCustomValue(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
-      forceInverse && !fill && css[`fill-base`],
-      forceInverse && !isCustomVariable(fill) && css.inverse,
-      (uppercase && css.uppercase) || ((uppercase === false) && css['non-uppercase']),
-      (italic && css.italic )|| ((italic === false) && css['non-italic']),
-      noselect && css.noselect,
-      !isCustomValue(letterSpacing) && css[`letter-spacing-${letterSpacing}`],
-      !isCustomValue(lineHeight) && css[`line-height-${lineHeight}`],
-      !isCustomValue(size) && css[`size-${size}`],
-      !isCustomValue(weight) && css[`weight-${weight}`],
-      !isCustomValue(family) && css[`family-${family}`],
-      align && css[`align-${align}`],
-      nowrap && css.nowrap,
+      't-font',
+      underline && 't-font-underline',
+      underline === false && 't-font-non-underline',
+      inline && 't-font-inline',
+      inline === false && 't-font-block',
+      fontConfig({ fill }) && !isCustomVariable(fill) && `t-font-fill-${fill}`,
+      forceInverse && !fill && `t-font-fill-base`,
+      forceInverse && !isCustomVariable(fill) && 't-font-inverse',
+      (uppercase && 't-font-uppercase') || ((uppercase === false) && 't-font-non-uppercase'),
+      (italic && 't-font-italic') || ((italic === false) && 't-font-non-italic'),
+      noselect && 't-font-noselect',
+      fontConfig({ letterSpacing }) && `t-font-letter-spacing-${letterSpacing}`,
+      fontConfig({ lineHeight }) && `t-font-line-height-${lineHeight}`,
+      fontConfig({ size }) && `t-font-size-${size}`,
+      fontConfig({ weight }) && `t-font-weight-${weight}`,
+      fontConfig({ family }) && `t-font-family-${family}`,
+      align && `t-font-align-${align}`,
+      nowrap && 't-font-nowrap',
       className,
     ),
     style: newStyle,

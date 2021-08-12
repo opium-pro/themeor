@@ -1,14 +1,13 @@
-import { setStyles, addStyles } from '../utils/styles'
+import { setStyles } from '../utils/styles'
 import newId from '../utils/new-id'
-import { normalizedConfig } from '../normalized-config'
 
 export const id = newId()
 
-export default function () {
+export default function (normalizedConfig: any) {
   const {
-    fillFancy,
     box: {
       fill,
+      fillFancy,
       fillInversed,
       radius,
       shadow,
@@ -36,14 +35,17 @@ export default function () {
 
   // Fills
   for (const key in fill) {
-    styles += `.t-box-fill-${key} {background-color: ${fill[key]}};`
+    styles += `.t-box-fill-${key} {background-color: ${fill[key]}};
+`
 
     for (const key in fillFancy) {
-      styles += `.t-box-fill-${key}.t-box-fancy {background-image: ${fillFancy[key]}};`
+      styles += `.t-box-fill-${key}.t-box-fancy {background-image: ${fillFancy[key]}};
+`
     }
 
     for (const key in fillInversed) {
-      styles += `.t-box-fill-${key}.t-box-inverse {background-color: ${fillInversed[key]}};`
+      styles += `.t-box-fill-${key}.t-box-inverse {background-color: ${fillInversed[key]}};
+`
     }
   }
 
@@ -56,7 +58,8 @@ export default function () {
 `
 
   for (const key in radius) {
-    styles += `.t-box-radius-${key} {border-radius: ${radius[key]}};`
+    styles += `.t-box-radius-${key} {border-radius: ${radius[key]}};
+`
   }
   styles += `
 .t-box-radius-top-none {border-top-left-radius: 0; border-top-right-radius: 0;}
@@ -120,24 +123,32 @@ export default function () {
 
 
   // Shadows
-  styles += `.t-box-shadow-none {box-shadow: none;}`
+  styles += `.t-box-shadow-none {box-shadow: none;}
+`
   for (const key in shadow) {
-    styles += `.t-box-shadow-${key} {box-shadow: ${shadow[key]};}`
+    styles += `.t-box-shadow-${key} {box-shadow: ${shadow[key]};}
+`
   }
 
   // Inner Shadows
   for (const key in shadowInner) {
-    styles += `.t-box-shadow-inner-${key} {box-shadow: inset ${shadowInner[key]};}`
+    styles += `.t-box-shadow-inner-${key} {box-shadow: inset ${shadowInner[key]};}
+`
   }
 
   // Glows
   for (const key in glow) {
-    styles += `.t-box-glow-${key} {box-shadow: ${glow[key]};}`
+    styles += `.t-box-glow-${key} {box-shadow: ${glow[key]};}
+`
   }
 
   // Blurs
-  styles += `.t-box-blur-none {backdrop-filter: none;}`
+  styles += `.t-box-blur-none {backdrop-filter: none;}
+`
   for (const key in blur) {
-    styles += `.t-box-blur-${key} {backdrop-filter: blur(${blur[key]});}`
+    styles += `.t-box-blur-${key} {backdrop-filter: blur(${blur[key]});}
+`
   }
+
+  setStyles(id, styles)
 }

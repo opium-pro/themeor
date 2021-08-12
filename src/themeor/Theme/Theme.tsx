@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import cssVariables from '../utils/css-variable'
 import newId from '../utils/new-id'
 import consoleMessage from '../utils/console-message'
-import {ThemeContext} from '../context'
-import {TryTagless} from '../TryTagless'
-import css from './Theme.module.css'
-import cn from '../utils/class-name'
+import { ThemeContext } from '../context'
+import { TryTagless } from '../TryTagless'
 import isDarkMode from '../utils/is-dark-mode'
-import {ThemeProps, TaglessThemeProps} from './types'
-import setBoxStyle from '../Box/box-style'
-import normilizeConfig from '../utils/normalize-config'
+import { ThemeProps, TaglessThemeProps } from './types'
+import setBoxStyle from '../Box/styles'
+import setFontStyle from '../Font/styles'
+import { normalizeConfig } from '../utils/normalize-config'
 
 
 Theme.TryTagless = (props: TaglessThemeProps) => <Theme {...props} TRY_TAGLESS />
@@ -31,73 +30,34 @@ export function Theme({
   const [id] = useState(newId())
 
   let useGlobal: boolean = !!global
-  const [currentConfig, directSetCurrentConfig] = React.useState(config)
-  const {themeId: parentThemeId} = React.useContext(ThemeContext)
-
-  function setCurrentConfig(config: any) {
-    directSetCurrentConfig(normilizeConfig(config))
-  }
-
-  let isTrackingDarkMode: boolean = false
+  const [currentConfig, setCurrentConfig] = React.useState(config)
+  const { themeId: parentThemeId } = React.useContext(ThemeContext)
 
   function changeColorMode() {
-    if (isDarkMode()) {
+    if (darkConfig && isDarkMode()) {
       setCurrentConfig(darkConfig)
-    } else {
+    } else if (currentConfig != config) {
       setCurrentConfig(config)
     }
   }
 
-  function trackDarkMode() {
-    if (darkConfig && !isTrackingDarkMode) {
-      isTrackingDarkMode = true
-      const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
-      colorScheme.addEventListener && colorScheme.addEventListener('change', changeColorMode)
-    }
-  }
-
-  function setVariables() {
-    const {themeContext, customVariables, meta, ...restVariables} = currentConfig
-    cssVariables.unset(`style-${id}`)
-    cssVariables.set({
-      json: restVariables,
-      prefix: 't',
-      selector: useGlobal ? ':root' : `#${id}`,
-      id: `style-${id}`,
-    })
-    cssVariables.set({
-      json: customVariables,
-      selector: useGlobal ? ':root' : `#${id}`,
-      id: `style-${id}`,
-    })
-  }
-
-  function setConfig() {
-    const newConfig = (darkConfig && isDarkMode()) ? darkConfig : config
-    
-    if (newConfig !== currentConfig) {
-      setCurrentConfig(newConfig)
-    }
-  }
+  const normalizedConfig = normalizeConfig(currentConfig)
 
   // Update
   useEffect(() => {
-    trackDarkMode()
-    setConfig()
-    setVariables()
-  })
-
-  // Update components styles
-  useEffect(() => {
-    setBoxStyle(currentConfig)
+    setBoxStyle(normalizedConfig)
+    setFontStyle(normalizedConfig)
   }, [currentConfig])
 
-  // Unmount
-  useEffect(() => () => {
-    const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
-    colorScheme.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
-  })
 
+  // Track dark mode
+  useEffect(() => {
+    const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
+    darkConfig && colorScheme.addEventListener && colorScheme.addEventListener('change', changeColorMode)
+    return () => {
+      colorScheme.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
+    }
+  }, [])
 
   reset && import('./reset')
 
@@ -115,16 +75,14 @@ export function Theme({
     icons,
     themeId: id,
     darkMode: isDarkMode(),
+    normalizedConfig,
   }
 
   const componentProps = {
     ...restProps,
     children,
-    id: id,
-    className: cn(
-      css.theme,
-      className
-    ),
+    id,
+    className,
   }
 
   const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
