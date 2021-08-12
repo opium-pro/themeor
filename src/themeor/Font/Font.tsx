@@ -2,7 +2,7 @@ import React from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-name'
 import { isCustomVariable } from '../utils/is-custom'
-import { TryTagless } from '../TryTagless'
+import { TryTagless } from '../with-tagless'
 import { FontProps, TaglessFontProps } from './types'
 import { useConfig } from '../utils/use-config'
 

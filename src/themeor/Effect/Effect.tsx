@@ -1,7 +1,7 @@
 import React from 'react'
 import css from './Effect.module.css'
 import cn from '../utils/class-name'
-import {TryTagless} from '../TryTagless'
+import {TryTagless} from '../with-tagless'
 import {EffectProps, TaglessEffectProps} from './types'
 import {isCustomValue} from '../utils/is-custom'
 

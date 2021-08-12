@@ -1,25 +1,25 @@
-import React from 'react'
+import React, {FC} from 'react'
 import consoleMessage from '../utils/console-message'
-import {Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate} from '../index'
-import {TryTaglessProps} from './types'
+import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate } from '../index'
+import { TryTaglessProps } from './types'
 
-// TryTagless Element Tag
-export function TryTagless(props: TryTaglessProps) {
+
+export const withTagless = (Component: FC<any>) => (props: TryTaglessProps) => {
   const {
     children,
     className: parentClassName,
     style: parentStyle,
     id: parentId,
-    recursive,
-    force,
+    TRY_RECURSIVE_TAGLESS,
+    FORCE_TAGLESS,
     forwardRef,
     ...parentProps
   } = props
 
-  function refuse (message?: string) {
-    message && consoleMessage({text: message,source: TryTagless})
-    const {recursive, force, forwardRef, ...originalProps} = props
-    return <div {...originalProps} />
+  function refuse(message?: string) {
+    message && consoleMessage({ text: message, source: withTagless })
+    const { TRY_RECURSIVE_TAGLESS, FORCE_TAGLESS, forwardRef, ...originalProps } = props
+    return <Component {...originalProps} />
   }
 
   // Remove invalid children
@@ -54,12 +54,12 @@ export function TryTagless(props: TryTaglessProps) {
   const childProps = onlyChild.props
 
   // Check that "id" attributes don't cover each other
-  if (!force && parentId && childProps.id) {
+  if (!FORCE_TAGLESS && parentId && childProps.id) {
     return refuse(`OnlyChild hasn't merged his child because it met another "id" attribute\nParent id "${parentId}", child's id "${childProps.id}"`)
   }
 
   // Don't TRY_TAGLESS if child starts a new chain
-  if (!force && childProps.TRY_RECURSIVE_TAGLESS) {
+  if (!FORCE_TAGLESS && childProps.TRY_RECURSIVE_TAGLESS) {
     return refuse()
   }
 
@@ -85,7 +85,7 @@ export function TryTagless(props: TryTaglessProps) {
   }
 
   // TryTagless only with our components and regular tags
-  if (!force && !child_is_themeor_component && typeof OnlyChildComponent !== 'string') {
+  if (!FORCE_TAGLESS && !child_is_themeor_component && typeof OnlyChildComponent !== 'string') {
     return refuse()
   }
 
@@ -96,9 +96,10 @@ export function TryTagless(props: TryTaglessProps) {
   }
 
   if (child_is_themeor_component && child_is_not_against) {
-    mergedProps.TRY_RECURSIVE_TAGLESS = recursive || childProps.TRY_RECURSIVE_TAGLESS
-    mergedProps.FORCE_TAGLESS = force || childProps.FORCE_TAGLESS
+    mergedProps.TRY_RECURSIVE_TAGLESS = TRY_RECURSIVE_TAGLESS || childProps.TRY_RECURSIVE_TAGLESS
+    mergedProps.FORCE_TAGLESS = FORCE_TAGLESS || childProps.FORCE_TAGLESS
   }
 
   return <OnlyChildComponent {...mergedProps} />
+
 }

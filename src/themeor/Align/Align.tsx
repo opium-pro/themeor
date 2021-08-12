@@ -1,7 +1,7 @@
 import React from 'react'
 import css from './Align.module.css'
 import cn from '../utils/class-name'
-import { TryTagless } from '../TryTagless'
+import { TryTagless } from '../with-tagless'
 import consoleMessage from '../utils/console-message'
 import { isInScale } from '../utils/opium-scale'
 import { half, minus } from '../utils/change-css-value'

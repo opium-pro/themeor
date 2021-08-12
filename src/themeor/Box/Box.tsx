@@ -1,16 +1,14 @@
 import React from 'react'
 import { useTheme, ThemeContext } from '../context'
 import cn from '../utils/class-name'
-import { TryTagless } from '../TryTagless'
 import { Line } from '../Line'
-import { BoxProps, TaglessBoxProps } from './types'
+import { BoxProps } from './types'
 import splitFill from '../utils/split-fill'
 import { useConfig } from '../utils/use-config'
+import { withCommon, CommonComponent } from '../with-common'
 
 
-Box.TryTagless = (props: TaglessBoxProps) => <Box {...props} TRY_TAGLESS />
-
-export function Box(props: BoxProps, ref?: React.Ref<any>) {
+export const Box: CommonComponent<BoxProps> = withCommon((props: BoxProps, ref?: React.Ref<any>) => {
   const {
     className,
     fill = "none",
@@ -26,8 +24,6 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     radiusTopRight,
     radiusBottomRight,
     radiusBottomLeft,
-    FORCE_TAGLESS,
-    TRY_TAGLESS,
     fancy,
     strong,
     shadow,
@@ -35,17 +31,9 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     blur,
     glow,
     children,
-    forwardRef,
     img,
     noContext,
-    TRY_RECURSIVE_TAGLESS,
     style = {},
-    width,
-    height,
-    maxWidth,
-    maxHeight,
-    minWidth,
-    minHeight,
     ...restProps
   } = props
 
@@ -95,13 +83,6 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
   if (!boxConfig({ blur })) { newStyle.backdropFilter = blur ? `blur(${blur})` : undefined }
   if (!boxConfig({ glow })) { newStyle.boxShadow = glow || undefined }
 
-  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
-  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
-  if (width) { newStyle.width = width }
-  if (height) { newStyle.height = height }
-  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
-  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
-
 
   // Setting classNames
 
@@ -130,7 +111,6 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     ),
     children,
     style: newStyle,
-    ...restProps,
   }
 
   const hasBorder = borderFill || borderWeight
@@ -144,12 +124,8 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     )
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-
-  const renderBoxComponent = tryTagless ? (
-    <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  ) : (
-    <div ref={forwardRef} {...componentProps} />
+  const renderBoxComponent = (
+    <div {...restProps} {...componentProps} />
   )
 
   if (noContext || !context.shallInverseOn) {
@@ -181,4 +157,4 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
       {renderBoxComponent}
     </ThemeContext.Provider>
   )
-}
+})

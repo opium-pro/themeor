@@ -2,7 +2,7 @@ import React from 'react'
 import css from './Line.module.css'
 import {useTheme} from '../context'
 import cn from '../utils/class-name'
-import {TryTagless} from '../TryTagless'
+import {TryTagless} from '../with-tagless'
 import {isCustomValue, isCustomVariable} from '../utils/is-custom'
 import {LineProps, TaglessLineProps} from './types'
 

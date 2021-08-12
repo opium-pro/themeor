@@ -2,7 +2,7 @@ import React from 'react'
 import css from './Gap.module.css'
 import cn from '../utils/class-name'
 import consoleMessage from '../utils/console-message'
-import {TryTagless} from '../TryTagless'
+import {TryTagless} from '../with-tagless'
 import {GapProps, TaglessGapProps} from './types'
 import {isCustomValue} from '../utils/is-custom'
 

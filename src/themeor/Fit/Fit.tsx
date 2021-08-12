@@ -1,7 +1,7 @@
 import React from 'react'
 import css from './Fit.module.css'
 import cn from '../utils/class-name'
-import {TryTagless} from '../TryTagless'
+import {TryTagless} from '../with-tagless'
 import {FitProps, TaglessFitProps} from './types'
 import {isCustomValue} from '../utils/is-custom'
 import {minus} from '../utils/change-css-value'

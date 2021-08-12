@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import consoleMessage from '../utils/console-message'
 import { AnimateProps, TaglessAnimateProps } from './types'
-import { TryTagless } from '../TryTagless'
+import { TryTagless } from '../with-tagless'
 import cn from '../utils/class-name'
 import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
