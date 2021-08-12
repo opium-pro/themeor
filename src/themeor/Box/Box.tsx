@@ -5,7 +5,8 @@ import { TryTagless } from '../TryTagless'
 import { Line } from '../Line'
 import { BoxProps, TaglessBoxProps } from './types'
 import splitFill from '../utils/split-fill'
-import { isCustomFill, isCustomVariable, isCustomValue } from '../utils/is-custom'
+import { isCustomFill, isCustomVariable } from '../utils/is-custom'
+import { boxConfig } from '../utils/get-config'
 
 
 Box.TryTagless = (props: TaglessBoxProps) => <Box {...props} TRY_TAGLESS />
@@ -71,32 +72,32 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     }
   }
 
-  if (isCustomValue(radius)) { newStyle.borderRadius = radius || undefined }
-  if (isCustomValue(radiusTop)) {
+  if (!boxConfig({radius})) { newStyle.borderRadius = radius || undefined }
+  if (!boxConfig({radiusTop})) {
     newStyle.borderTopLeftRadius = radiusTop || undefined
     newStyle.borderTopRightRadius = radiusTop || undefined
   }
-  if (isCustomValue(radiusRight)) {
+  if (!boxConfig({radius: radiusRight})) {
     newStyle.borderTopRightRadius = radiusRight || undefined
     newStyle.borderBottomRightRadius = radiusRight || undefined
   }
-  if (isCustomValue(radiusLeft)) {
+  if (!boxConfig({radius: radiusLeft})) {
     newStyle.borderTopLeftRadius = radiusLeft || undefined
     newStyle.borderBottomLeftRadius = radiusLeft || undefined
   }
-  if (isCustomValue(radiusBottom)) {
+  if (!boxConfig({radius: radiusBottom})) {
     newStyle.borderBottomLeftRadius = radiusBottom || undefined
     newStyle.borderBottomRightRadius = radiusBottom || undefined
   }
-  if (isCustomValue(radiusTopLeft)) { newStyle.borderTopLeftRadius = radiusTopLeft || undefined }
-  if (isCustomValue(radiusTopRight)) { newStyle.borderTopRightRadius = radiusTopRight || undefined }
-  if (isCustomValue(radiusBottomLeft)) { newStyle.borderBottomLeftRadius = radiusBottomLeft || undefined }
-  if (isCustomValue(radiusBottomRight)) { newStyle.borderBottomRightRadius = radiusBottomRight || undefined }
+  if (!boxConfig({radius: radiusTopLeft})) { newStyle.borderTopLeftRadius = radiusTopLeft || undefined }
+  if (!boxConfig({radius: radiusTopRight})) { newStyle.borderTopRightRadius = radiusTopRight || undefined }
+  if (!boxConfig({radius: radiusBottomLeft})) { newStyle.borderBottomLeftRadius = radiusBottomLeft || undefined }
+  if (!boxConfig({radius: radiusBottomRight})) { newStyle.borderBottomRightRadius = radiusBottomRight || undefined }
 
-  if (isCustomValue(shadow)) { newStyle.boxShadow = shadow || undefined }
-  if (isCustomValue(shadowInner)) { newStyle.boxShadow = 'inset ' + shadowInner || undefined }
-  if (isCustomValue(blur)) { newStyle.backdropFilter = blur ? `blur(${blur})` : undefined }
-  if (isCustomValue(glow)) { newStyle.boxShadow = glow || undefined }
+  if (!boxConfig({shadow})) { newStyle.boxShadow = shadow || undefined }
+  if (!boxConfig({shadowInner})) { newStyle.boxShadow = 'inset ' + shadowInner || undefined }
+  if (!boxConfig({blur})) { newStyle.backdropFilter = blur ? `blur(${blur})` : undefined }
+  if (!boxConfig({glow})) { newStyle.boxShadow = glow || undefined }
 
   const context = useTheme()
 
@@ -111,22 +112,22 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     className: cn(
       't-box',
       img && 't-box-img',
-      !isCustomFill(fill) && !isCustomVariable(fill) && `t-box-fill-${fill}-${strong ? 'strong' : 'weak'}`,
+      boxConfig({fill}) && `t-box-fill-${fill}${strong ? '-strong' : '-weak'}`,
       (strong || inverse) && (!fill || fill === 'none') && `t-box-fill-base`,
       fancy && 't-box-fancy',
-      configShadow[shadow] && `t-box-shadow-${shadow}`,
-      !isCustomValue(blur) && `t-box-blur-${blur}`,
-      !isCustomValue(shadowInner) && `t-box-shadow-inner-${shadowInner}`,
-      !isCustomValue(glow) && `t-box-glow-${shadowInner}`,
-      !isCustomValue(radius) && `t-box-radius-${radius}`,
-      !isCustomValue(radiusTop) && `t-box-radius-top-${radiusTop}`,
-      !isCustomValue(radiusRight) && `t-box-radius-right-${radiusRight}`,
-      !isCustomValue(radiusLeft) && `t-box-radius-left-${radiusLeft}`,
-      !isCustomValue(radiusBottom) && `t-box-radius-bottom-${radiusBottom}`,
-      !isCustomValue(radiusTopLeft) && `t-box-radius-tl-${radiusTopLeft}`,
-      !isCustomValue(radiusTopRight) && `t-box-radius-tr-${radiusTopRight}`,
-      !isCustomValue(radiusBottomLeft) && `t-box-radius-bl-${radiusBottomLeft}`,
-      !isCustomValue(radiusBottomRight) && `t-box-radius-br-${radiusBottomRight}`,
+      boxConfig({shadow}) && `t-box-shadow-${shadow}`,
+      boxConfig({blur}) && `t-box-blur-${blur}`,
+      boxConfig({shadowInner}) && `t-box-shadow-inner-${shadowInner}`,
+      boxConfig({glow}) && `t-box-glow-${shadowInner}`,
+      boxConfig({radius}) && `t-box-radius-${radius}`,
+      boxConfig({radius: radiusTop}) && `t-box-radius-top-${radiusTop}`,
+      boxConfig({radius: radiusRight}) && `t-box-radius-right-${radiusRight}`,
+      boxConfig({radius: radiusLeft}) && `t-box-radius-left-${radiusLeft}`,
+      boxConfig({radius: radiusBottom}) && `t-box-radius-bottom-${radiusBottom}`,
+      boxConfig({radius: radiusTopLeft}) && `t-box-radius-tl-${radiusTopLeft}`,
+      boxConfig({radius: radiusTopRight}) && `t-box-radius-tr-${radiusTopRight}`,
+      boxConfig({radius: radiusBottomLeft}) && `t-box-radius-bl-${radiusBottomLeft}`,
+      boxConfig({radius: radiusBottomRight}) && `t-box-radius-br-${radiusBottomRight}`,
       (inverse !== false) && (inverse || context.TRY_TO_INVERSE) && !isCustomVariable(fill) && 't-box-inverse',
       className
     ),

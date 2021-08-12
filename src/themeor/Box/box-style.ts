@@ -1,28 +1,24 @@
 import { setStyles, addStyles } from '../utils/styles'
 import newId from '../utils/new-id'
-import {ThemeContext} from '../context'
+import { normalizedConfig } from '../normalized-config'
 
 export const id = newId()
 
-export default function (config: ThemeContext) {
-  if (!config) {
-    return
-  }
-
+export default function () {
   const {
+    fillFancy,
     box: {
       fill,
-      fancyFill,
-      inverseFill,
+      fillInversed,
       radius,
       shadow,
       glow,
       shadowInner,
       blur,
     }
-  } = config
+  } = normalizedConfig
 
-  setStyles(id, `
+  let styles = `
 .t-box {
   border-radius: 0;
   outline: none;
@@ -35,34 +31,34 @@ export default function (config: ThemeContext) {
   background-size: cover;
   background-position: center;
 }
-  `)
+`
 
 
   // Fills
   for (const key in fill) {
-    addStyles(id, `.t-box-fill-${key} {background-color: ${fill[key]}};`)
+    styles += `.t-box-fill-${key} {background-color: ${fill[key]}};`
 
-    for (const key in fancyFill) {
-      addStyles(id, `.t-box-fill-${key}.t-box-fancy {background-image: ${fancyFill[key]}};`)
+    for (const key in fillFancy) {
+      styles += `.t-box-fill-${key}.t-box-fancy {background-image: ${fillFancy[key]}};`
     }
 
-    for (const key in inverseFill) {
-      addStyles(id, `.t-box-fill-${key}.t-box-inverse {background-color: ${inverseFill[key]}};`)
+    for (const key in fillInversed) {
+      styles += `.t-box-fill-${key}.t-box-inverse {background-color: ${fillInversed[key]}};`
     }
   }
 
 
   // Raduis
   const defaultMaxRadius = '1000px'
-  addStyles(id, `
+  styles += `
 .t-box-radius-none {border-radius: 0;}
 .t-box-radius-max {border-radius: ${defaultMaxRadius};}
 `
-  )
+
   for (const key in radius) {
-    addStyles(id, `.t-box-radius-${key} {border-radius: ${radius[key]}};`)
+    styles += `.t-box-radius-${key} {border-radius: ${radius[key]}};`
   }
-  addStyles(id, `
+  styles += `
 .t-box-radius-top-none {border-top-left-radius: 0; border-top-right-radius: 0;}
 .t-box-radius-bottom-none {border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
 .t-box-radius-right-none {border-bottom-right-radius: 0; border-top-right-radius: 0;}
@@ -71,9 +67,10 @@ export default function (config: ThemeContext) {
 .t-box-radius-bottom-max {border-bottom-left-radius: ${defaultMaxRadius}; border-bottom-right-radius: ${defaultMaxRadius};}
 .t-box-radius-right-max {border-bottom-right-radius: ${defaultMaxRadius}; border-top-right-radius: ${defaultMaxRadius};}
 .t-box-radius-left-max {border-bottom-left-radius: ${defaultMaxRadius}; border-top-left-radius: ${defaultMaxRadius};}
-  `)
+`
+
   for (const key in radius) {
-    addStyles(id, `
+    styles += `
 .t-box-radius-top-${key} {
   border-top-left-radius: ${radius[key]};
   border-top-right-radius: ${radius[key]};
@@ -91,10 +88,10 @@ export default function (config: ThemeContext) {
   border-bottom-left-radius: ${radius[key]};
   border-top-left-radius: ${radius[key]};
 }
-    `)
+`
   }
 
-  addStyles(id, `
+  styles += `
 .t-box-radius-tl-none {border-top-left-radius: 0;}
 .t-box-radius-tr-none {border-top-right-radius: 0;}
 .t-box-radius-br-none {border-bottom-right-radius: 0;}
@@ -103,9 +100,9 @@ export default function (config: ThemeContext) {
 .t-box-radius-tr-max {border-top-right-radius: ${defaultMaxRadius};}
 .t-box-radius-br-max {border-bottom-right-radius: ${defaultMaxRadius};}
 .t-box-radius-bl-max {border-bottom-left-radius: ${defaultMaxRadius};}
-  `)
+`
   for (const key in radius) {
-    addStyles(id, `
+    styles += `
 .t-box-radius-tl-${key} {
   border-top-left-radius: ${radius[key]};
 }
@@ -118,29 +115,29 @@ export default function (config: ThemeContext) {
 .t-box-radius-bl-${key} {
   border-bottom-left-radius: ${radius[key]};
 }
-    `)
+`
   }
 
 
   // Shadows
-  addStyles(id, `.t-box-shadow-none {box-shadow: none;}`)
+  styles += `.t-box-shadow-none {box-shadow: none;}`
   for (const key in shadow) {
-    addStyles(id, `.t-box-shadow-${key} {box-shadow: ${shadow[key]};}`)
+    styles += `.t-box-shadow-${key} {box-shadow: ${shadow[key]};}`
   }
 
   // Inner Shadows
   for (const key in shadowInner) {
-    addStyles(id, `.t-box-shadow-inner-${key} {box-shadow: inset ${shadowInner[key]};}`)
+    styles += `.t-box-shadow-inner-${key} {box-shadow: inset ${shadowInner[key]};}`
   }
 
   // Glows
   for (const key in glow) {
-    addStyles(id, `.t-box-glow-${key} {box-shadow: ${glow[key]};}`)
+    styles += `.t-box-glow-${key} {box-shadow: ${glow[key]};}`
   }
 
   // Blurs
-  addStyles(id, `.t-box-blur-none {backdrop-filter: none;}`)
+  styles += `.t-box-blur-none {backdrop-filter: none;}`
   for (const key in blur) {
-    addStyles(id, `.t-box-blur-${key} {backdrop-filter: blur(${blur[key]});}`)
+    styles += `.t-box-blur-${key} {backdrop-filter: blur(${blur[key]});}`
   }
 }
