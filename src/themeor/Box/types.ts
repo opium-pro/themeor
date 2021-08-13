@@ -1,4 +1,6 @@
-export type PureBoxProps = {
+import { CommonProps } from '../with-common'
+
+export type BoxProps = CommonProps & {
   fill?: string | false,
   strong?: boolean,
   inverse?: boolean,
@@ -20,21 +22,5 @@ export type PureBoxProps = {
   img?: string | false,
   noContext?: boolean,
   blur?: string | 'none' | false,
-  width?: string | false | number,
-  height?: string | false | number,
-  maxWidth?: string | false | number,
-  maxHeight?: string | false | number,
-  minWidth?: string | false | number,
-  minHeight?: string | false | number,
-}
-
-export type TaglessBoxProps = PureBoxProps & React.HTMLAttributes<HTMLDivElement> & {
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  children?: React.ReactNode,
   forwardRef?: any,
-}
-
-export type BoxProps = TaglessBoxProps & {
-  TRY_TAGLESS?: boolean,
 }

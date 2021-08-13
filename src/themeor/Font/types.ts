@@ -1,35 +1,19 @@
-import * as Types from '../config-types'
+import { CommonProps } from '../with-common'
 
-export type PureFontProps = {
+export type FontProps = CommonProps & {
   fill?: string | false,
   inverse?: boolean,
-  size?: string | Types.Scale | false,
+  size?: string | false,
   weight?: '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | false,
-  lineHeight?: string | Types.Scale | false,
-  letterSpacing?: string | Types.Scale | false,
+  lineHeight?: string | false,
+  letterSpacing?: string | false,
   uppercase?: boolean,
   italic?: boolean,
   underline?: boolean,
-  family?: string | Types.FontFamily | false,
+  family?: string | false,
   align?: 'left' | 'right' | 'center' | false,
   inline?: boolean,
   noselect?: boolean,
   nowrap?: boolean,
-  width?: string | false | number,
-  height?: string | false | number,
-  maxWidth?: string | false | number,
-  maxHeight?: string | false | number,
-  minWidth?: string | false | number,
-  minHeight?: string | false | number,
-}
-
-export type TaglessFontProps = PureFontProps & React.HTMLAttributes<HTMLDivElement> & {
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  children?: React.ReactNode,
   forwardRef?: any,
-}
-
-export type FontProps = TaglessFontProps & {
-  TRY_TAGLESS?: boolean,
 }

@@ -2,14 +2,12 @@ import React from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-name'
 import { isCustomVariable } from '../utils/is-custom'
-import { TryTagless } from '../with-tagless'
-import { FontProps, TaglessFontProps } from './types'
+import { FontProps } from './types'
 import { useConfig } from '../utils/use-config'
+import { withCommon, CommonComponent } from '../with-common'
 
 
-Font.TryTagless = (props: TaglessFontProps) => <Font {...props} TRY_TAGLESS />
-
-export function Font({
+export const Font: CommonComponent<FontProps> = withCommon(({
   className,
   fill,
   inverse,
@@ -23,29 +21,18 @@ export function Font({
   nowrap,
   align,
   style = {},
-  TRY_TAGLESS,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
   noselect,
   lineHeight,
   forwardRef,
   letterSpacing,
   children,
-  width,
-  height,
-  maxWidth,
-  maxHeight,
-  minWidth,
-  minHeight,
   ...restProps
-}: FontProps, ref?: React.Ref<any>) {
+}: FontProps, ref?: React.Ref<any>) => {
   const context = useTheme()
   const { TRY_TO_INVERSE } = context
   const { fontConfig } = useConfig(context)
 
   const newStyle = { ...style }
-
-  if (!fontConfig({ fill })) { newStyle.color = `var(${fill})` }
 
   if (!fontConfig({ fill })) { newStyle.color = fill || undefined }
   if (!fontConfig({ size })) { newStyle.fontSize = size || undefined }
@@ -53,13 +40,6 @@ export function Font({
   if (!fontConfig({ letterSpacing })) { newStyle.letterSpacing = letterSpacing || undefined }
   if (!fontConfig({ lineHeight })) { newStyle.lineHeight = lineHeight || undefined }
   if (!fontConfig({ family })) { newStyle.fontFamily = family || undefined }
-
-  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
-  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
-  if (width) { newStyle.width = width }
-  if (height) { newStyle.height = height }
-  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
-  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
 
   const forceInverse = (inverse !== false) && (inverse || TRY_TO_INVERSE)
 
@@ -90,11 +70,7 @@ export function Font({
     ...restProps,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-
-  return tryTagless ? (
-    <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  ) : (
+  return (
     <div ref={forwardRef} {...componentProps} />
   )
-}
+})
