@@ -9,32 +9,35 @@ export type CommonComponent<Props = CommonProps> = FC<Props & CommonProps> & {
 
 
 export const withCommon = (Component: CommonComponent<any>) => {
-  const makeComponent: CommonComponent = forwardRef(({
-    stretch,
-    width,
-    height,
-    maxWidth,
-    maxHeight,
-    minWidth,
-    minHeight,
-    style = {},
-    ...restProps
-  }, ref: React.Ref<any>) => {
-    const newStyle = { ...style }
 
-    if (stretch) { newStyle.flexGrow = 1 }
+  const makeComponent: CommonComponent = ({
+      stretch,
+      width,
+      height,
+      maxWidth,
+      maxHeight,
+      minWidth,
+      minHeight,
+      style = {},
+      ...restProps
+    }, ref) => {
+      const newStyle = { ...style }
 
-    if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
-    if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
-    if (width) { newStyle.width = width }
-    if (height) { newStyle.height = height }
-    if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
-    if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
+      if (stretch) { newStyle.flexGrow = 1 }
 
-    return Component({...restProps, style: newStyle}, ref)
-  })
+      if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
+      if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
+      if (width) { newStyle.width = width }
+      if (height) { newStyle.height = height }
+      if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
+      if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
 
-  const CommonComponent = makeComponent
+      return Component({...restProps, style: newStyle})
+    }
+
+  makeComponent.displayName = Component.name
+
+  const CommonComponent: any = forwardRef(makeComponent as any)
   CommonComponent.TryTagless = withTagless(makeComponent)
 
   return CommonComponent

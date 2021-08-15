@@ -90,10 +90,11 @@ export const Gap: CommonComponent<GapProps> = withCommon(({
     ),
     style: newStyle,
     children,
+    ref: handleRef,
     ...restProps,
   }
 
-  return (
-    <div ref={handleRef} {...componentProps} />
-  )
+  return typeof children === 'function'
+    ? children(componentProps)
+    : <div {...componentProps} />
 })

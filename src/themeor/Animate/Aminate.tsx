@@ -8,7 +8,7 @@ import {withCommon, CommonComponent} from '../with-common'
 
 
 // TryTagless Element Tag
-export const Animate: CommonComponent<AnimateProps> = withCommon((props: AnimateProps, ref) => {
+export const Animate: CommonComponent<AnimateProps> = withCommon(function Aminate(props: AnimateProps, ref) {
   const {
     onMount,
     onUnmount,
@@ -17,6 +17,7 @@ export const Animate: CommonComponent<AnimateProps> = withCommon((props: Animate
     duration = 1000,
     delay = 0,
     repeat = 1,
+    children,
     mounted:initialMounted = true,
     ...restProps
   } = props
@@ -44,6 +45,7 @@ export const Animate: CommonComponent<AnimateProps> = withCommon((props: Animate
   const componentProps = {
     ref,
     id: thisId,
+    children,
     onMouseEnter: (() => { onHover && setAnimationName(onHover); onHover && remove() }),
     onClick: onClick && (() => { setAnimationName(onClick); remove() }),
     className: cn(
@@ -88,7 +90,7 @@ export const Animate: CommonComponent<AnimateProps> = withCommon((props: Animate
     return null
   }
 
-  return (
-    <div {...componentProps} />
-  )
+  return typeof children === 'function'
+    ? children(componentProps)
+    : <div {...componentProps} />
 })

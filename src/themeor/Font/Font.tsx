@@ -7,7 +7,7 @@ import { useConfig } from '../utils/use-config'
 import { withCommon, CommonComponent } from '../with-common'
 
 
-export const Font: CommonComponent<FontProps> = withCommon(({
+export const Font: CommonComponent<FontProps> = withCommon(function Font({
   className,
   fill,
   inverse,
@@ -27,7 +27,7 @@ export const Font: CommonComponent<FontProps> = withCommon(({
   letterSpacing,
   children,
   ...restProps
-}: FontProps, ref?: React.Ref<any>) => {
+}: FontProps, ref?: React.Ref<any>) {
   const context = useTheme()
   const { TRY_TO_INVERSE } = context
   const { fontConfig } = useConfig(context)

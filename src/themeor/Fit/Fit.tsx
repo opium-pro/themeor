@@ -1,12 +1,11 @@
 import React from 'react'
 import cn from '../utils/class-name'
-import {FitProps} from './types'
-import {isCustomValue} from '../utils/is-custom'
-import {minus} from '../utils/change-css-value'
-import {withCommon, CommonComponent} from '../with-common'
+import { FitComponent } from './types'
+import { isCustomValue } from '../utils/is-custom'
+import { minus } from '../utils/change-css-value'
+import { withCommon } from '../with-common'
 
-
-export const Fit: CommonComponent<FitProps> = withCommon(({
+var Fit: FitComponent= ({
   left,
   top,
   right,
@@ -28,19 +27,19 @@ export const Fit: CommonComponent<FitProps> = withCommon(({
   children,
   forwardRef,
   ...restProps
-}: FitProps, ref: React.Ref<any>) => {
+}, ref) => {
 
-  const newStyle = {...style}
+  const newStyle = { ...style }
   if (left || offset) { newStyle.left = left || offset || undefined }
   if (top || offset) { newStyle.top = top || offset || undefined }
   if (right || offset) { newStyle.right = right || offset || undefined }
   if (bottom || offset) { newStyle.bottom = bottom || offset || undefined }
   if (zIndex) { newStyle.zIndex = zIndex }
-  if (isCustomValue(offset)) { newStyle.margin = minus(offset)}
-  if (offsetTop) { newStyle.marginTop = minus(offsetTop)}
-  if (offsetBottom) { newStyle.marginBottom = minus(offsetBottom)}
-  if (offsetRight) { newStyle.marginRight = minus(offsetRight)}
-  if (offsetLeft) { newStyle.marginLeft = minus(offsetLeft)}
+  if (isCustomValue(offset)) { newStyle.margin = minus(offset) }
+  if (offsetTop) { newStyle.marginTop = minus(offsetTop) }
+  if (offsetBottom) { newStyle.marginBottom = minus(offsetBottom) }
+  if (offsetRight) { newStyle.marginRight = minus(offsetRight) }
+  if (offsetLeft) { newStyle.marginLeft = minus(offsetLeft) }
 
   const componentProps = {
     ref: ref || forwardRef,
@@ -63,5 +62,9 @@ export const Fit: CommonComponent<FitProps> = withCommon(({
     ...restProps,
   }
 
-  return <div {...componentProps} />
-})
+  return typeof children === 'function'
+    ? children(componentProps)
+    : <div {...componentProps} />
+}
+
+export default withCommon(Fit)

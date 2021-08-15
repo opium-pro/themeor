@@ -1,10 +1,10 @@
 import React from 'react'
-import css from './Icon.module.css'
 import {useTheme} from '../context'
 import cn from '../utils/class-name'
 import {isCustomValue, isCustomVariable} from '../utils/is-custom'
 import consoleMessage from '../utils/console-message'
 import {IconProps} from "./types"
+import {useConfig} from '../utils/use-config'
 
 export const Icon = React.forwardRef(({
   className,
@@ -17,36 +17,29 @@ export const Icon = React.forwardRef(({
   forceLine,
   forceFill,
   forwardRef,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
-  TRY_TAGLESS,
   ...restProps
 }: IconProps, ref: any) => {
   const newStyle = {...style}
+  const {icons, TRY_TO_INVERSE} = useTheme()
+
+  const {iconConfig} = useConfig(useTheme())
 
   function handleRef (node: any) {
     if (!node) {return}
 
     typeof forwardRef === 'function' && forwardRef(node)
-    // typeof ref === 'function' && ref(node)
+    typeof ref === 'function' && ref(node)
 
     const pathList = node.querySelectorAll('path')
 
-    if (isCustomVariable(fill)) {
+    if (!iconConfig({fill})) {
       for (let path of pathList) {
-        path.style.fill = `var(${fill})`
+        path.style.fill = fill
       }
     }
   }
 
-  if (fill && isCustomValue(fill)) {
-    consoleMessage({
-      text: 'Sorry, themeor icons dont support yet custom values for fill. Use a variable instead',
-      source: Icon,
-    })
-  }
-
-  if (isCustomValue(size)) {
+  if (!iconConfig({size})) {
     newStyle.width = size || undefined
     newStyle.height = size || undefined
   }
@@ -58,8 +51,6 @@ export const Icon = React.forwardRef(({
       source: Icon,
     })
   }
-
-  const {icons, TRY_TO_INVERSE} = useTheme()
 
   // if (!name) {
   //   name = defaultIconName
@@ -101,12 +92,12 @@ export const Icon = React.forwardRef(({
     fill: undefined,
     style: newStyle,
     className: cn(
-      css.icon,
+      `t-icon`,
       // makeItLined && css['force-stroke'],
       // makeItFilled && css['force-fill'],
-      !isCustomValue(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
-      !isCustomValue(size) && css[`size-${size}`],
-      (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
+      iconConfig({fill}) && `t-icon-fill-${fill}`,
+      iconConfig({size}) && `t-icon-size-${size}`,
+      (inverse !== false) && (inverse || TRY_TO_INVERSE) && iconConfig({fill}) && `t-icon-inverse`,
       className
     ),
     ref: handleRef,

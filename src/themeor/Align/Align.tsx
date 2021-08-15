@@ -1,11 +1,12 @@
 import React from 'react'
 import cn from '../utils/class-name'
-import { isInScale } from '../utils/opium-scale'
 import { half, minus } from '../utils/change-css-value'
-import { AlignProps } from './types'
-import { withCommon, CommonComponent } from '../with-common'
+import { AlignComponent } from './types'
+import { withCommon } from '../with-common'
+import { useConfig } from '../utils/use-config'
+import { useTheme } from '../context'
 
-export const Align: CommonComponent<AlignProps> = withCommon(({
+const Align: AlignComponent = ({
   row,
   vert = "top",
   hor = "stretch",
@@ -18,35 +19,37 @@ export const Align: CommonComponent<AlignProps> = withCommon(({
   forwardRef,
   children,
   ...restProps
-}: AlignProps, ref) => {
+}, ref) => {
+  const { gapConfig } = useConfig(useTheme())
 
   const newStyle = { ...style }
   if (!!pattern) { newStyle.gridTemplateColumns = pattern }
 
-  if (!isInScale(gapVert) && !pattern) {
+  if (!gapConfig({size: gapVert}) && !pattern) {
     newStyle.marginTop = minus(half(gapVert))
     newStyle.marginBottom = minus(half(gapVert))
   }
-  if (!isInScale(gapHor) && !pattern) {
+  if (!gapConfig({size: gapHor}) && !pattern) {
     newStyle.marginRight = minus(half(gapHor))
     newStyle.marginLeft = minus(half(gapHor))
   }
-  if (!isInScale(gapVert) && !!pattern) {
+  if (!gapConfig({size: gapVert}) && !!pattern) {
     newStyle.rowGap = gapVert || undefined
   }
-  if (!isInScale(gapHor) && !!pattern) {
+  if (!gapConfig({size: gapHor}) && !!pattern) {
     newStyle.columnGap = gapHor || undefined
   }
 
   const componentProps = {
+    ...restProps,
     className: cn(
       `t-align`,
       row && `t-align-row`,
       !row && !stack && !pattern && `t-align-col`,
       vert && `t-align-vert-${vert}`,
       hor && `t-align-hor-${hor}`,
-      isInScale(gapVert) && `t-align-vert-gap-${gapVert}`,
-      isInScale(gapHor) && `t-align-hor-gap-${gapHor}`,
+      gapConfig({size: gapVert}) && `t-align-vert-gap-${gapVert}`,
+      gapConfig({size: gapHor}) && `t-align-hor-gap-${gapHor}`,
       stack && `t-align-stack`,
       stack && `t-align-row`,
       !!pattern && `t-align-pattern`,
@@ -54,7 +57,7 @@ export const Align: CommonComponent<AlignProps> = withCommon(({
     ),
     style: newStyle,
     children,
-    ...restProps,
+    ref: ref || forwardRef,
   }
 
   const hasGap = !pattern && (gapVert || gapHor)
@@ -62,15 +65,15 @@ export const Align: CommonComponent<AlignProps> = withCommon(({
 
   function wrapChildren(children: any): React.ReactNode {
     const wrapChildClass = cn(
-      isInScale(gapVert) && `t-align-item-vert-gap-${gapVert}`,
-      isInScale(gapHor) && `t-align-item-hor-gap-${gapHor}`,
+      gapConfig({size: gapVert}) && `t-align-item-vert-gap-${gapVert}`,
+      gapConfig({size: gapHor}) && `t-align-item-hor-gap-${gapHor}`,
     )
 
     const wrapChildStyle = {
-      paddingRight: (!isInScale(gapHor) && half(gapHor)) || undefined,
-      paddingLeft: (!isInScale(gapHor) && half(gapHor)) || undefined,
-      paddingTop: (!isInScale(gapVert) && half(gapVert)) || undefined,
-      paddingBottom: (!isInScale(gapVert) && half(gapVert)) || undefined,
+      paddingRight: (!gapConfig({size: gapHor}) && half(gapHor)) || undefined,
+      paddingLeft: (!gapConfig({size: gapHor}) && half(gapHor)) || undefined,
+      paddingTop: (!gapConfig({size: gapVert}) && half(gapVert)) || undefined,
+      paddingBottom: (!gapConfig({size: gapVert}) && half(gapVert)) || undefined,
       boxSizing: 'border-box' as any,
     }
 
@@ -84,7 +87,10 @@ export const Align: CommonComponent<AlignProps> = withCommon(({
   }
 
 
-  return (
-    <div ref={ref || forwardRef} {...componentProps} />
-  )
-})
+  return typeof children === 'function'
+    ? children(componentProps)
+    : <div {...componentProps} />
+}
+
+
+export default withCommon(Align)

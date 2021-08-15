@@ -1,4 +1,4 @@
-import { CommonProps } from "../with-common"
+import { CommonProps, CommonComponent } from "../with-common"
 
 export type FitProps = CommonProps & {
   cover?: 'parent' | 'screen' | false,
@@ -19,3 +19,5 @@ export type FitProps = CommonProps & {
   clip?: boolean,
   forwardRef?: any,
 }
+
+export type FitComponent = CommonComponent<FitProps>

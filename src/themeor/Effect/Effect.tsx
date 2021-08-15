@@ -6,7 +6,7 @@ import { isCustomValue } from '../utils/is-custom'
 import { withCommon, CommonComponent } from '../with-common'
 
 
-export const Effect: CommonComponent<EffectProps> = withCommon(({
+export const Effect: CommonComponent<EffectProps> = withCommon(function Effect({
   className,
   hidden,
   TRY_TAGLESS,
@@ -17,7 +17,7 @@ export const Effect: CommonComponent<EffectProps> = withCommon(({
   children,
   style={},
   ...restProps
-}: EffectProps, ref: React.Ref<any>) => {
+}: EffectProps, ref: React.Ref<any>) {
   const newStyle = { ...style }
 
   if (transparency && isCustomValue(transparency)) {
@@ -26,7 +26,7 @@ export const Effect: CommonComponent<EffectProps> = withCommon(({
 
   const componentProps = {
     ...restProps,
-    ref,
+    ref: ref || forwardRef,
     className: cn(
       css.effect,
       transparency && css[`transparency-${transparency}`],
@@ -36,5 +36,7 @@ export const Effect: CommonComponent<EffectProps> = withCommon(({
     style: newStyle,
   }
 
-  return <div ref={forwardRef} {...componentProps} />
+  return typeof children === 'function'
+    ? children(componentProps)
+    : <div {...componentProps} />
 })

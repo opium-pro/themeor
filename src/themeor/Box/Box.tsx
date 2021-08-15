@@ -8,7 +8,7 @@ import { useConfig } from '../utils/use-config'
 import { withCommon, CommonComponent } from '../with-common'
 
 
-export const Box: CommonComponent<BoxProps> = withCommon((props: BoxProps, ref?: React.Ref<any>) => {
+export const Box: CommonComponent<BoxProps> = withCommon(function Box(props: BoxProps, ref?: React.Ref<any>) {
   const {
     className,
     fill = "none",
@@ -87,6 +87,7 @@ export const Box: CommonComponent<BoxProps> = withCommon((props: BoxProps, ref?:
   // Setting classNames
 
   const componentProps = {
+    ...restProps,
     className: cn(
       't-box',
       img && 't-box-img',
@@ -124,9 +125,9 @@ export const Box: CommonComponent<BoxProps> = withCommon((props: BoxProps, ref?:
     )
   }
 
-  const renderBoxComponent = (
-    <div {...restProps} {...componentProps} />
-  )
+  const renderBoxComponent = typeof children === 'function'
+    ? children(componentProps)
+    : <div {...componentProps} />
 
   if (noContext || !context.shallInverseOn) {
     return renderBoxComponent

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Align } from './Align'
+import Align from './Align'
 import { AlignSpanProps } from './types'
 import { withCommon, CommonComponent } from '../with-common'
 

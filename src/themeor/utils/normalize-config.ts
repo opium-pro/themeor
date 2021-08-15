@@ -40,18 +40,11 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     letterSpacing: makeFlat(config.font?.['letter-spacing']),
   }
   newConfig.line = {
-    size: makeFlat(config.font?.size),
-    family: makeFlat(config.font?.family),
     fill: makeFlat(config.font?.fill),
-    lineHeight: makeFlat(config.font?.['line-height']),
-    letterSpacing: makeFlat(config.font?.['letter-spacing']),
+    weight: makeFlat(config.font?.fill),
   }
   newConfig.gap = {
     size: makeFlat(config.font?.size),
-    family: makeFlat(config.font?.family),
-    fill: makeFlat(config.font?.fill),
-    lineHeight: makeFlat(config.font?.['line-height']),
-    letterSpacing: makeFlat(config.font?.['letter-spacing']),
   }
 
   return newConfig

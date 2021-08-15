@@ -1,4 +1,4 @@
-import { Align as SourceAlign } from './Align'
+import { default as SourceAlign } from './Align'
 import { Span } from './Span'
 export * from './types'
 

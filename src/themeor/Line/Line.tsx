@@ -50,7 +50,10 @@ export const Line: CommonComponent<LineProps> = withCommon(({
     ),
     style: newStyle,
     children,
+    ref: ref || forwardRef,
   }
 
-  return <div ref={forwardRef} {...componentProps} />
+  return typeof children === 'function'
+    ? children(componentProps)
+    : <div {...componentProps} />
 })
