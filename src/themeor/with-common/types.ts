@@ -1,3 +1,5 @@
+import React from "react"
+
 export type CommonProps = {
   stretch?: boolean,
   width?: string | false | number,
@@ -6,4 +8,5 @@ export type CommonProps = {
   maxHeight?: string | false | number,
   minWidth?: string | false | number,
   minHeight?: string | false | number,
+  ref?: React.Ref<any>,
 } & React.HTMLAttributes<HTMLDivElement>

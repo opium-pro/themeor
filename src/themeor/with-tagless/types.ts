@@ -1,7 +1,7 @@
 export type TryTaglessProps = {
   children?: any,
-  recursive?: boolean,
-  force?: boolean,
+  TRY_RECURSIVE_TAGLESS?: boolean,
+  FORCE_TAGLESS?: boolean,
   forwardRef?: any,
   [X: string]: any,
 }

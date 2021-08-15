@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import cssVariables from '../utils/css-variable'
 import newId from '../utils/new-id'
 import consoleMessage from '../utils/console-message'
 import { ThemeContext } from '../context'
-import { TryTagless } from '../with-tagless'
 import isDarkMode from '../utils/is-dark-mode'
-import { ThemeProps, TaglessThemeProps } from './types'
+import { ThemeProps } from './types'
 import setBoxStyle from '../Box/styles'
 import setFontStyle from '../Font/styles'
 import { normalizeConfig } from '../utils/normalize-config'
 
 
-Theme.TryTagless = (props: TaglessThemeProps) => <Theme {...props} TRY_TAGLESS />
-
 export function Theme({
   global,
   children,
   icons,
-  TRY_TAGLESS,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
   forwardRef,
   className,
   darkConfig,
@@ -85,15 +78,9 @@ export function Theme({
     className,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-
   function renderTheme() {
     if (useGlobal) {
       return children
-    }
-
-    if (tryTagless) {
-      return <TryTagless {...componentProps} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} />
     }
 
     return <div ref={forwardRef} {...componentProps} />

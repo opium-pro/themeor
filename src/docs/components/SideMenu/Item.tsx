@@ -25,7 +25,7 @@ export class Item extends React.PureComponent<ItemProps> {
                 radius="xs"
                 fill={!active && (r.hover || r.focus) ? 'faint-up' : 'none'}
               >
-                  <Font
+                  <Font.TryTagless
                     size={active ? "lg" : "sm"}
                     fill={active ? 'accent' : 'base'}
                     weight={active ? '700' : '500'}
@@ -36,7 +36,7 @@ export class Item extends React.PureComponent<ItemProps> {
                     style={{transition: 'all 0.2s ease'}}
                   >
                     {children}
-                  </Font>
+                  </Font.TryTagless>
               </Box>
             </Gap.TryTagless>
 

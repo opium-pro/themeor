@@ -1,14 +1,12 @@
 import React from 'react'
 import css from './Effect.module.css'
 import cn from '../utils/class-name'
-import {TryTagless} from '../with-tagless'
-import {EffectProps, TaglessEffectProps} from './types'
-import {isCustomValue} from '../utils/is-custom'
+import { EffectProps } from './types'
+import { isCustomValue } from '../utils/is-custom'
+import { withCommon, CommonComponent } from '../with-common'
 
 
-Effect.TryTagless = (props: TaglessEffectProps) => <Effect {...props} TRY_TAGLESS />
-
-export function Effect({
+export const Effect: CommonComponent<EffectProps> = withCommon(({
   className,
   hidden,
   TRY_TAGLESS,
@@ -19,8 +17,8 @@ export function Effect({
   children,
   style={},
   ...restProps
-}: EffectProps, ref: React.Ref<any>) {
-  const newStyle = {...style}
+}: EffectProps, ref: React.Ref<any>) => {
+  const newStyle = { ...style }
 
   if (transparency && isCustomValue(transparency)) {
     newStyle.opacity = transparency
@@ -28,6 +26,7 @@ export function Effect({
 
   const componentProps = {
     ...restProps,
+    ref,
     className: cn(
       css.effect,
       transparency && css[`transparency-${transparency}`],
@@ -37,10 +36,5 @@ export function Effect({
     style: newStyle,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-  if (tryTagless) {
-    return <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  }
-
   return <div ref={forwardRef} {...componentProps} />
-}
+})

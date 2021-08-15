@@ -1,7 +1,5 @@
 import React from 'react'
 import cn from '../utils/class-name'
-import css from './Reaction.module.css'
-import consoleMessage from '../utils/console-message'
 import { ReactionProps, ReactionState } from './types'
 import { ReactionContext } from './context'
 
@@ -66,17 +64,17 @@ export function Reaction({
 
   const passState = {
     className: {
-      ignoreEvents: css.ignore,
-      sursor: cursor && css[`cursor-${cursor}`],
+      ignoreEvents: `t-reaction-ignore`,
+      sursor: cursor && `t-reaction-cursor-${cursor}`,
     },
     ...state,
   }
 
   const passProps = {
     className: cn(
-      css.reaction,
-      cursor && css[`cursor-${cursor}`],
-      smooth && speed && css[`speed-${speed}`],
+      `t-reaction`,
+      cursor && `t-reaction-cursor-${cursor}`,
+      smooth && speed && `t-reaction-speed-${speed}`,
       className,
     ),
     ...restProps,

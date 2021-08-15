@@ -1,17 +1,13 @@
 import React from 'react'
-import css from './Line.module.css'
 import {useTheme} from '../context'
 import cn from '../utils/class-name'
-import {TryTagless} from '../with-tagless'
 import {isCustomValue, isCustomVariable} from '../utils/is-custom'
-import {LineProps, TaglessLineProps} from './types'
+import {LineProps} from './types'
+import { withCommon, CommonComponent } from '../with-common'
 
 
-Line.TryTagless = (props: TaglessLineProps) => <Line {...props} TRY_TAGLESS />
-
-export function Line({
+export const Line: CommonComponent<LineProps> = withCommon(({
   className,
-  TRY_TAGLESS,
   inverse,
   weight,
   fill,
@@ -20,12 +16,10 @@ export function Line({
   bottom,
   left,
   forwardRef,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
   children,
   style = {},
   ...restProps
-}: LineProps, ref: React.Ref<any>) {
+}: LineProps, ref: React.Ref<any>) => {
 
   const {TRY_TO_INVERSE} = useTheme()
 
@@ -43,25 +37,20 @@ export function Line({
   const componentProps = {
     ...restProps,
     className: cn(
-      css.line,
-      (weight || (!right && !left && !top && !bottom)) && css[`weight-${weight || 'md'}`],
-      !isCustomValue(top) && css[`top-${top}`],
-      !isCustomValue(right) && css[`right-${right}`],
-      !isCustomValue(bottom) && css[`bottom-${bottom}`],
-      !isCustomValue(left) && css[`left-${left}`],
-      !isCustomValue(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
-      (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
-      React.Children.count(children) === 0 && css.separator,
+      `t-line`,
+      (weight || (!right && !left && !top && !bottom)) && `t-line-weight-${weight || 'md'}`,
+      !isCustomValue(top) && `t-line-top-${top}`,
+      !isCustomValue(right) && `t-line-right-${right}`,
+      !isCustomValue(bottom) && `t-line-bottom-${bottom}`,
+      !isCustomValue(left) && `t-line-left-${left}`,
+      !isCustomValue(fill) && !isCustomVariable(fill) && `t-line-fill-${fill}`,
+      (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && `t-line-inverse`,
+      React.Children.count(children) === 0 && `t-line-separator`,
       className
     ),
     style: newStyle,
     children,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-  if (tryTagless) {
-    return <TryTagless {...componentProps} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} />
-  }
-
   return <div ref={forwardRef} {...componentProps} />
-}
+})

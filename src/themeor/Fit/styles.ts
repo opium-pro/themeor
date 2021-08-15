@@ -1,5 +1,15 @@
-$scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
+import { setStyles } from '../utils/styles'
+import newId from '../utils/new-id'
+import { minus } from '../utils/change-css-value'
 
+export const id = newId()
+
+export default function (normalizedConfig: any) {
+  const {
+    gap: { size }
+  } = normalizedConfig
+
+  let styles = `
 .fit {
   position: relative;
 }
@@ -53,23 +63,32 @@ $scale: ("x3s", "x2s", "xs", "sm", "md", "lg", "xl", "x2l", "x3l");
 .stick-bottom{left: unset; top: unset; right: unset; bottom: 0;}
 .stick-bottom-left{left: 0; top: unset; right: unset; bottom: 0;}
 .stick-left{left: 0; top: unset; right: unset; bottom: unset;}
+`
 
 
-// Offsets
-@each $value in $scale {
-  .offset-#{$value} {
-    top: calc(var(--t-gap-#{$value}) * -1);
-    left: calc(var(--t-gap-#{$value}) * -1);
-    right: calc(var(--t-gap-#{$value}) * -1);
-    bottom: calc(var(--t-gap-#{$value}) * -1);
-  }
-  .offset-top-#{$value} {top: var(--t-gap-#{$value});}
-  .offset-right-#{$value} {right: var(--t-gap-#{$value});}
-  .offset-bottom-#{$value} {bottom: var(--t-gap-#{$value});}
-  .offset-left-#{$value} {left: var(--t-gap-#{$value});}
+  // Offset
+  for (const key in size) {
+    styles += `
+.offset-${key} {
+  top: ${minus(size[key])};
+  left: ${minus(size[key])};
+  right: ${minus(size[key])};
+  bottom: ${minus(size[key])};
 }
+.offset-top-${key} {top: ${size[key]};}
+.offset-right-${key} {right: ${size[key]};}
+.offset-bottom-${key} {bottom: ${size[key]};}
+.offset-left-${key} {left: ${size[key]};}
+`
+  }
+
+  styles += `
 .offset-none {top: 0; left: 0; right: 0; bottom: 0;}
 .offset-top-none {top: 0;}
 .offset-right-none {right: 0;}
 .offset-bottom-none {bottom: 0;}
 .offset-left-none {left: 0;}
+`
+
+  setStyles(id, styles)
+}

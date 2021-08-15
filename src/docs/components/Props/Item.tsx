@@ -30,7 +30,7 @@ export class Item extends React.PureComponent<Props> {
             <Font.TryTagless nowrap FORCE_TAGLESS>
               <Link href="#list">see all props</Link>
             </Font.TryTagless>
-            <Align.Spacer />
+            <Gap stretch />
             {type && <Code inline>{`type: ${type}`}</Code>}
             {defValue && <Code inline>{`default: ${defValue}`}</Code>}
           </Align>

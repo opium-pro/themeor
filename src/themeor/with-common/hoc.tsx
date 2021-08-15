@@ -1,14 +1,15 @@
-import React, { FC } from 'react'
+import React, { FC, forwardRef } from 'react'
 import { CommonProps } from './types'
 import { withTagless } from '../with-tagless'
-// import cn from '../utils/class-name'
 
 
-export type CommonComponent<Props = CommonProps> = FC<Props & CommonProps>
+export type CommonComponent<Props = CommonProps> = FC<Props & CommonProps> & {
+  TryTagless?: any,
+}
 
 
-export const withCommon = (Component: CommonComponent) => {
-  const makeComponent: CommonComponent = ({
+export const withCommon = (Component: CommonComponent<any>) => {
+  const makeComponent: CommonComponent = forwardRef(({
     stretch,
     width,
     height,
@@ -18,7 +19,7 @@ export const withCommon = (Component: CommonComponent) => {
     minHeight,
     style = {},
     ...restProps
-  }) => {
+  }, ref: React.Ref<any>) => {
     const newStyle = { ...style }
 
     if (stretch) { newStyle.flexGrow = 1 }
@@ -30,16 +31,10 @@ export const withCommon = (Component: CommonComponent) => {
     if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
     if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
 
-    return (
-      <Component {...restProps} style={newStyle} />
-    )
-  }
+    return Component({...restProps, style: newStyle}, ref)
+  })
 
-  type ComponentType = typeof Component & {
-    TryTagless?: any
-  }
-
-  const CommonComponent: ComponentType = makeComponent
+  const CommonComponent = makeComponent
   CommonComponent.TryTagless = withTagless(makeComponent)
 
   return CommonComponent

@@ -1,21 +1,12 @@
 import React from 'react'
-import css from './Fit.module.css'
 import cn from '../utils/class-name'
-import {TryTagless} from '../with-tagless'
-import {FitProps, TaglessFitProps} from './types'
+import {FitProps} from './types'
 import {isCustomValue} from '../utils/is-custom'
 import {minus} from '../utils/change-css-value'
+import {withCommon, CommonComponent} from '../with-common'
 
 
-Fit.TryTagless = (props: TaglessFitProps) => <Fit {...props} TRY_TAGLESS/>
-
-export function Fit({
-  width,
-  height,
-  maxWidth,
-  maxHeight,
-  minWidth,
-  minHeight,
+export const Fit: CommonComponent<FitProps> = withCommon(({
   left,
   top,
   right,
@@ -36,11 +27,8 @@ export function Fit({
   className,
   children,
   forwardRef,
-  TRY_TAGLESS,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
   ...restProps
-}: FitProps, ref: React.Ref<any>) {
+}: FitProps, ref: React.Ref<any>) => {
 
   const newStyle = {...style}
   if (left || offset) { newStyle.left = left || offset || undefined }
@@ -48,12 +36,6 @@ export function Fit({
   if (right || offset) { newStyle.right = right || offset || undefined }
   if (bottom || offset) { newStyle.bottom = bottom || offset || undefined }
   if (zIndex) { newStyle.zIndex = zIndex }
-  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
-  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
-  if (width) { newStyle.width = width }
-  if (height) { newStyle.height = height }
-  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
-  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
   if (isCustomValue(offset)) { newStyle.margin = minus(offset)}
   if (offsetTop) { newStyle.marginTop = minus(offsetTop)}
   if (offsetBottom) { newStyle.marginBottom = minus(offsetBottom)}
@@ -61,18 +43,19 @@ export function Fit({
   if (offsetLeft) { newStyle.marginLeft = minus(offsetLeft)}
 
   const componentProps = {
+    ref: ref || forwardRef,
     className: cn(
-      css.fit,
-      clip && css.clip,
-      scroll && css.scroll,
-      inline && css.inline,
-      stick && css[`stick-${stick}`],
-      cover && css[`cover-${cover}`],
-      stick && !cover && css[`stick-parent`],
-      offset && css[`offset-${offset}`],
-      isNotParent && css.isNotParent,
-      inline === false && css.block,
-      (!!height || cover || stick || offset) && !inline && css.block,
+      `t-fit`,
+      clip && `t-fit-clip`,
+      scroll && `t-fit-scroll`,
+      inline && `t-fit-inline`,
+      stick && `t-fit-stick-${stick}`,
+      cover && `t-fit-cover-${cover}`,
+      stick && !cover && `t-fit-stick-parent`,
+      offset && `t-fit-offset-${offset}`,
+      isNotParent && `t-fit-isNotParent`,
+      inline === false && `t-fit-block`,
+      (cover || stick || offset) && !inline && `t-fit-block`,
       className
     ),
     style: newStyle,
@@ -80,10 +63,5 @@ export function Fit({
     ...restProps,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-  if (tryTagless) {
-    return <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  }
-
-  return <div ref={forwardRef} {...componentProps} />
-}
+  return <div {...componentProps} />
+})

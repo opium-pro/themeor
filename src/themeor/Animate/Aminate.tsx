@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import consoleMessage from '../utils/console-message'
-import { AnimateProps, TaglessAnimateProps } from './types'
-import { TryTagless } from '../with-tagless'
+import { AnimateProps } from './types'
 import cn from '../utils/class-name'
 import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
 import newId from '../utils/new-id'
+import {withCommon, CommonComponent} from '../with-common'
 
-
-Animate.TryTagless = (props: TaglessAnimateProps) => <Animate {...props} TRY_TAGLESS />
 
 // TryTagless Element Tag
-export function Animate(props: AnimateProps) {
+export const Animate: CommonComponent<AnimateProps> = withCommon((props: AnimateProps, ref) => {
   const {
     onMount,
     onUnmount,
@@ -21,9 +18,6 @@ export function Animate(props: AnimateProps) {
     delay = 0,
     repeat = 1,
     mounted:initialMounted = true,
-    TRY_TAGLESS,
-    TRY_RECURSIVE_TAGLESS,
-    FORCE_TAGLESS,
     ...restProps
   } = props
 
@@ -47,9 +41,8 @@ export function Animate(props: AnimateProps) {
 
   const styleId = 'style-' + thisId
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-
   const componentProps = {
+    ref,
     id: thisId,
     onMouseEnter: (() => { onHover && setAnimationName(onHover); onHover && remove() }),
     onClick: onClick && (() => { setAnimationName(onClick); remove() }),
@@ -95,9 +88,7 @@ export function Animate(props: AnimateProps) {
     return null
   }
 
-  return tryTagless ? (
-    <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  ) : (
+  return (
     <div {...componentProps} />
   )
-}
+})

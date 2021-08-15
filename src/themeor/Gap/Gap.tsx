@@ -1,15 +1,12 @@
 import React from 'react'
-import css from './Gap.module.css'
 import cn from '../utils/class-name'
 import consoleMessage from '../utils/console-message'
-import {TryTagless} from '../with-tagless'
-import {GapProps, TaglessGapProps} from './types'
+import {GapProps} from './types'
 import {isCustomValue} from '../utils/is-custom'
+import {CommonComponent, withCommon} from '../with-common'
 
 
-Gap.TryTagless = (props: TaglessGapProps) => <Gap {...props} TRY_TAGLESS />
-
-export function Gap({
+export const Gap: CommonComponent<GapProps> = withCommon(({
   className,
   size,
   top,
@@ -19,31 +16,15 @@ export function Gap({
   bottom,
   left,
   children,
-  TRY_TAGLESS,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
   forwardRef,
   inrow,
   style={},
-  width,
-  height,
-  maxWidth,
-  maxHeight,
-  minWidth,
-  minHeight,
   ...restProps
-}: GapProps, ref: React.Ref<any>) {
+}: GapProps, ref: React.Ref<any>) => {
 
   const [isInrow, setInrow] = React.useState(false)
 
   const newStyle = {...style}
-
-  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
-  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
-  if (width) { newStyle.width = width }
-  if (height) { newStyle.height = height }
-  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
-  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
 
   if (isCustomValue(size)) { newStyle.padding = size || undefined }
   if (isCustomValue(vert)) {
@@ -63,7 +44,7 @@ export function Gap({
   function handleRef(node: any) {
     if (!node) {return}
     typeof forwardRef === 'function' && forwardRef(node)
-    // typeof ref === 'function' && ref(node)
+    typeof ref === 'function' && ref(node)
 
     if (inrow === true) {
       setInrow(true)
@@ -94,17 +75,17 @@ export function Gap({
 
   const componentProps = {
     className: cn(
-      css.gap,
-      !children && useInrow && notSpecified && css[`left-${size || defaultGap}`],
-      !children && !useInrow && notSpecified && css[`top-${size || defaultGap}`],
-      !isCustomValue(top) && css[`top-${top}`],
-      !isCustomValue(right) && css[`right-${right}`],
-      !isCustomValue(bottom) && css[`bottom-${bottom}`],
-      !isCustomValue(left) && css[`left-${left}`],
-      !isCustomValue(size) && !!children && css[`size-${size}`],
-      !isCustomValue(vert) && css[`vert-${vert}`],
-      !isCustomValue(hor) && css[`hor-${hor}`],
-      !size && !!children && notSpecified && css[`size-${defaultGap}`],
+      `t-gap`,
+      !children && useInrow && notSpecified && `t-gap-left-${size || defaultGap}`,
+      !children && !useInrow && notSpecified && `t-gap-top-${size || defaultGap}`,
+      !isCustomValue(top) && `t-gap-top-${top}`,
+      !isCustomValue(right) && `t-gap-right-${right}`,
+      !isCustomValue(bottom) && `t-gap-bottom-${bottom}`,
+      !isCustomValue(left) && `t-gap-left-${left}`,
+      !isCustomValue(size) && !!children && `t-gap-size-${size}`,
+      !isCustomValue(vert) && `t-gap-vert-${vert}`,
+      !isCustomValue(hor) && `t-gap-hor-${hor}`,
+      !size && !!children && notSpecified && `t-gap-size-${defaultGap}`,
       className
     ),
     style: newStyle,
@@ -112,11 +93,7 @@ export function Gap({
     ...restProps,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-
-  return tryTagless ? (
-    <TryTagless forwardRef={handleRef} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  ) : (
+  return (
     <div ref={handleRef} {...componentProps} />
   )
-}
+})

@@ -60,9 +60,9 @@ export default class Link extends React.PureComponent<LinkProps> {
 
     return (
       <Line.TryTagless TRY_RECURSIVE_TAGLESS fill="accent" bottom="md">
-        <Font FORCE_TAGLESS fill="accent" inline>
+        <Font.TryTagless FORCE_TAGLESS fill="accent" inline>
           {render}
-        </Font>
+        </Font.TryTagless>
       </Line.TryTagless>
     )
   }
