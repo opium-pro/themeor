@@ -1,11 +1,12 @@
 import React from 'react'
 import cn from '../utils/class-name'
 import { FitComponent } from './types'
-import { isCustomValue } from '../utils/is-custom'
 import { minus } from '../utils/change-css-value'
 import { withCommon } from '../with-common'
+import { useConfig } from '../utils/use-config'
+import { useTheme } from '../context'
 
-var Fit: FitComponent= ({
+const Fit: FitComponent= ({
   left,
   top,
   right,
@@ -29,13 +30,16 @@ var Fit: FitComponent= ({
   ...restProps
 }, ref) => {
 
+  const context = useTheme()
+  const { gapConfig } = useConfig(context)
+
   const newStyle = { ...style }
   if (left || offset) { newStyle.left = left || offset || undefined }
   if (top || offset) { newStyle.top = top || offset || undefined }
   if (right || offset) { newStyle.right = right || offset || undefined }
   if (bottom || offset) { newStyle.bottom = bottom || offset || undefined }
   if (zIndex) { newStyle.zIndex = zIndex }
-  if (isCustomValue(offset)) { newStyle.margin = minus(offset) }
+  if (!gapConfig({size: offset})) { newStyle.margin = minus(offset) }
   if (offsetTop) { newStyle.marginTop = minus(offsetTop) }
   if (offsetBottom) { newStyle.marginBottom = minus(offsetBottom) }
   if (offsetRight) { newStyle.marginRight = minus(offsetRight) }
@@ -52,9 +56,8 @@ var Fit: FitComponent= ({
       cover && `t-fit-cover-${cover}`,
       stick && !cover && `t-fit-stick-parent`,
       offset && `t-fit-offset-${offset}`,
-      isNotParent && `t-fit-isNotParent`,
+      isNotParent && `t-fit-is-not-parent`,
       inline === false && `t-fit-block`,
-      (cover || stick || offset) && !inline && `t-fit-block`,
       className
     ),
     style: newStyle,

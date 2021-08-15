@@ -10,19 +10,19 @@ export default function (normalizedConfig: any) {
   } = normalizedConfig
 
   let styles = `
-.fit {
+.t-fit {
   position: relative;
 }
 
-.isNotParent {
+.t-fit-is-not-parent {
   position: static;
 }
 
-.inline {
+.t-fit-inline {
   display: inline-block;
 }
 
-.cover-screen {
+.t-fit-cover-screen {
   position: fixed;
   left: 0;
   top: 0;
@@ -30,7 +30,7 @@ export default function (normalizedConfig: any) {
   bottom: 0;
 }
 
-.cover-parent {
+.t-fit-cover-parent {
   position: absolute;
   left: 0;
   right: 0;
@@ -38,56 +38,56 @@ export default function (normalizedConfig: any) {
   bottom: 0;
 }
 
-.stick-parent {
+.t-fit-stick-parent {
   position: absolute;
 }
 
-.clip {
+.t-fit-clip {
   overflow: hidden;
 }
 
-.block {
+.t-fit-block {
   display: block;
 }
 
-.scroll {
+.t-fit-scroll {
   overflow: auto;
   // scroll-behavior: smooth;
 }
 
-.stick-top-left{left: 0; top: 0; right: unset; bottom: unset;}
-.stick-top{left: unset; top: 0; right: unset; bottom: unset;}
-.stick-top-right{left: unset; top: 0; right: 0; bottom: unset;}
-.stick-right{left: unset; top: unset; right: 0; bottom: unset;}
-.stick-bottom-right{left: unset; top: unset; right: 0; bottom: 0;}
-.stick-bottom{left: unset; top: unset; right: unset; bottom: 0;}
-.stick-bottom-left{left: 0; top: unset; right: unset; bottom: 0;}
-.stick-left{left: 0; top: unset; right: unset; bottom: unset;}
+.t-fit-stick-top-left{left: 0; top: 0; right: unset; bottom: unset;}
+.t-fit-stick-top{left: unset; top: 0; right: unset; bottom: unset;}
+.t-fit-stick-top-right{left: unset; top: 0; right: 0; bottom: unset;}
+.t-fit-stick-right{left: unset; top: unset; right: 0; bottom: unset;}
+.t-fit-stick-bottom-right{left: unset; top: unset; right: 0; bottom: 0;}
+.t-fit-stick-bottom{left: unset; top: unset; right: unset; bottom: 0;}
+.t-fit-stick-bottom-left{left: 0; top: unset; right: unset; bottom: 0;}
+.t-fit-stick-left{left: 0; top: unset; right: unset; bottom: unset;}
 `
 
 
   // Offset
   for (const key in size) {
     styles += `
-.offset-${key} {
+.t-fit-offset-${key} {
   top: ${minus(size[key])};
   left: ${minus(size[key])};
   right: ${minus(size[key])};
   bottom: ${minus(size[key])};
 }
-.offset-top-${key} {top: ${size[key]};}
-.offset-right-${key} {right: ${size[key]};}
-.offset-bottom-${key} {bottom: ${size[key]};}
-.offset-left-${key} {left: ${size[key]};}
+.t-fit-offset-top-${key} {top: ${size[key]};}
+.t-fit-offset-right-${key} {right: ${size[key]};}
+.t-fit-offset-bottom-${key} {bottom: ${size[key]};}
+.t-fit-offset-left-${key} {left: ${size[key]};}
 `
   }
 
   styles += `
-.offset-none {top: 0; left: 0; right: 0; bottom: 0;}
-.offset-top-none {top: 0;}
-.offset-right-none {right: 0;}
-.offset-bottom-none {bottom: 0;}
-.offset-left-none {left: 0;}
+.t-fit-offset-none {top: 0; left: 0; right: 0; bottom: 0;}
+.t-fit-offset-top-none {top: 0;}
+.t-fit-offset-right-none {right: 0;}
+.t-fit-offset-bottom-none {bottom: 0;}
+.t-fit-offset-left-none {left: 0;}
 `
 
   setStyles(id, styles)
