@@ -113,18 +113,19 @@ const Box: BoxComponent = (props: any, ref: any) => {
     style: newStyle,
   }
 
+  let renderBoxComponent = Common(componentProps)
+
   const hasBorder = borderFill || borderWeight
 
   if (hasBorder) {
-    const { borderFill, borderWeight, ...boxProps } = props
-    return (
+    const { borderFill, borderWeight } = props
+
+    renderBoxComponent = (
       <Line.TryTagless fill={borderFill} weight={borderWeight}>
-        <Box {...boxProps} />
+        {Common(componentProps)}
       </Line.TryTagless>
     )
   }
-
-  const renderBoxComponent = Common(componentProps)
 
   if (noContext || !context.shallInverseOn) {
     return renderBoxComponent

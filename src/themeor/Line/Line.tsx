@@ -45,7 +45,7 @@ const Line: LineComponent = ({
       lineConfig({weight: left}) && `t-line-left-${left}`,
       lineConfig({fill}) && `t-line-fill-${fill}`,
       (inverse !== false) && (inverse || TRY_TO_INVERSE) && `t-line-inverse`,
-      React.Children.count(children) === 0 && `t-line-separator`,
+      !children && `t-line-separator`,
       className
     ),
     style: newStyle,
