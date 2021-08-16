@@ -7,9 +7,13 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
   const newConfig = { ...config.themeContext, ...config }
   const opiumFill = config?.fill?.base?.strong
 
-  newConfig.fill = makeFlat(config.fill)
+  newConfig.fill = {
+    none: 'transparent',
+    ...makeFlat(config.fill),
+  }
   newConfig.fillFancy = makeFlat({...config['fancy-fill'], ...config.fancyFill})
   newConfig.fillInverse = makeFlat({...config['inverse-fill'], ...config.inverseFill})
+
   newConfig.box = {
     radius: {
       none: '0',
@@ -22,6 +26,7 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     fill: {...newConfig.fill, ...makeFlat(config.box?.fill)},
     fillFancy: makeFlat(newConfig.fillFancy),
   }
+
   newConfig.font = {
     size: makeFlat(config.font?.size),
     weight: {
@@ -36,18 +41,26 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
       '900': '900',
       ...makeFlat(config.font?.weight),
     },
+    align: {
+      center: 'center',
+      left: 'left',
+      right: 'right',
+    },
     family: makeFlat(config.font?.family),
     fill: {...newConfig.fill, ...makeFlat(config.font?.fill)},
     lineHeight: makeFlat(config.font?.['line-height']),
     letterSpacing: makeFlat(config.font?.['letter-spacing']),
   }
+
   newConfig.line = {
-    fill: makeFlat(config.font?.fill),
-    weight: makeFlat(config.font?.fill),
+    fill: {...newConfig.fill, ...makeFlat(config.line?.fill)},
+    weight: makeFlat(config.line?.weight),
   }
+
   newConfig.gap = {
     size: makeFlat(config.gap?.size || config.gap),
   }
+
   newConfig.icon = {
     fill: {...newConfig.fill, ...makeFlat(config.icon?.fill )},
     size: makeFlat(config.icon?.size),
@@ -55,16 +68,20 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
 
   if (opiumFill) {
     const boxFill: any = {}
+    const lineFill: any = {}
 
     for (const opiumFill of allFills) {
       const splitFill = opiumFill.split('-')
       boxFill[opiumFill] = newConfig.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
       newConfig.font.fill[opiumFill] = newConfig.font.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-      newConfig.line.fill[opiumFill] = newConfig.line.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      lineFill[opiumFill] = newConfig.line.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
       newConfig.icon.fill[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
     }
 
+    boxFill.none = lineFill.none = 'transparent'
+
     newConfig.box.fill = boxFill
+    newConfig.line.fill = lineFill
   }
 
 

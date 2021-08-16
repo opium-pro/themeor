@@ -92,8 +92,6 @@ export default function (normalizedConfig: any) {
 `
     }
   }
-  styles += `.t-box-fill-none {color: transparent;}
-`
 
 
   // Size

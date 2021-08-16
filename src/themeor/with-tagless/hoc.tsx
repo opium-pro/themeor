@@ -98,12 +98,11 @@ export const withTagless = (Component: any): TryTagless => {
       mergedProps.FORCE_TAGLESS = FORCE_TAGLESS || childProps.FORCE_TAGLESS
     }
 
-    // Component.displayName = undefined
-
     return (
       <Component {...parentProps}>
-        {({ className, style }: any) => (
+        {({ className, style, ...rest }: any) => (
           <Child
+            // {...rest}
             {...mergedProps}
             className={cn(className, mergedProps.className)}
             style={{ ...style, ...mergedProps.style }}

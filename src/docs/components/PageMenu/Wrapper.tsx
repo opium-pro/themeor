@@ -12,17 +12,15 @@ export class Wrapper extends React.PureComponent<WrapperProps> {
 
     return (
       <Align hor="left">
-        <Line.TryTagless fill="faint" TRY_RECURSIVE_TAGLESS>
-          <Fit clip>
-            <Box radius="sm">
-              <Align row>
+          <Fit.TryTagless clip>
+            <Box.TryTagless radius="sm" borderFill="faint">
+              <Align.TryTagless row>
                 <nav>
                   {children}
                 </nav>
-              </Align>
-            </Box>
-          </Fit>
-        </Line.TryTagless>
+              </Align.TryTagless>
+            </Box.TryTagless>
+          </Fit.TryTagless>
       </Align>
     )
   }

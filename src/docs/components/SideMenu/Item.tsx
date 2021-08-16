@@ -16,12 +16,10 @@ export class Item extends React.PureComponent<ItemProps> {
         {(rProps: any, r: any) => (
 
             <Gap.TryTagless
-              TRY_RECURSIVE_TAGLESS
               vert="12px"
               hor="md"
             >
-              <Box
-                {...rProps}
+              <Box.TryTagless
                 radius="xs"
                 fill={!active && (r.hover || r.focus) ? 'faint-up' : 'none'}
               >
@@ -33,11 +31,12 @@ export class Item extends React.PureComponent<ItemProps> {
                     tabIndex={0}
                     FORCE_TAGLESS
                     noselect
+                    {...rProps}
                     style={{transition: 'all 0.2s ease'}}
                   >
                     {children}
                   </Font.TryTagless>
-              </Box>
+              </Box.TryTagless>
             </Gap.TryTagless>
 
         )}

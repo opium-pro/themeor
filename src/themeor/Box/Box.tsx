@@ -48,40 +48,40 @@ export const Box: CommonComponent<BoxProps> = withCommon(function Box(props: Box
     newStyle.backgroundImage = `url('${img}')`
   }
 
-  if (!boxConfig({ fill })) {
+  if (fill && !boxConfig({ fill })) {
     if (fancy) {
-      newStyle.backgroundImage = fill || undefined
+      newStyle.backgroundImage = fill
     } else {
-      newStyle.backgroundColor = fill || undefined
+      newStyle.backgroundColor = fill
     }
   }
 
-  if (!boxConfig({ radius })) { newStyle.borderRadius = radius || undefined }
-  if (!boxConfig({ radiusTop })) {
-    newStyle.borderTopLeftRadius = radiusTop || undefined
-    newStyle.borderTopRightRadius = radiusTop || undefined
+  if (radius && !boxConfig({ radius })) { newStyle.borderRadius = radius }
+  if (radiusTop && !boxConfig({ radiusTop })) {
+    newStyle.borderTopLeftRadius = radiusTop
+    newStyle.borderTopRightRadius = radiusTop
   }
-  if (!boxConfig({ radius: radiusRight })) {
-    newStyle.borderTopRightRadius = radiusRight || undefined
-    newStyle.borderBottomRightRadius = radiusRight || undefined
+  if (radiusRight && !boxConfig({ radius: radiusRight })) {
+    newStyle.borderTopRightRadius = radiusRight
+    newStyle.borderBottomRightRadius = radiusRight
   }
-  if (!boxConfig({ radius: radiusLeft })) {
-    newStyle.borderTopLeftRadius = radiusLeft || undefined
-    newStyle.borderBottomLeftRadius = radiusLeft || undefined
+  if (radiusLeft && !boxConfig({ radius: radiusLeft })) {
+    newStyle.borderTopLeftRadius = radiusLeft
+    newStyle.borderBottomLeftRadius = radiusLeft
   }
-  if (!boxConfig({ radius: radiusBottom })) {
-    newStyle.borderBottomLeftRadius = radiusBottom || undefined
-    newStyle.borderBottomRightRadius = radiusBottom || undefined
+  if (radiusBottom && !boxConfig({ radius: radiusBottom })) {
+    newStyle.borderBottomLeftRadius = radiusBottom
+    newStyle.borderBottomRightRadius = radiusBottom
   }
-  if (!boxConfig({ radius: radiusTopLeft })) { newStyle.borderTopLeftRadius = radiusTopLeft || undefined }
-  if (!boxConfig({ radius: radiusTopRight })) { newStyle.borderTopRightRadius = radiusTopRight || undefined }
-  if (!boxConfig({ radius: radiusBottomLeft })) { newStyle.borderBottomLeftRadius = radiusBottomLeft || undefined }
-  if (!boxConfig({ radius: radiusBottomRight })) { newStyle.borderBottomRightRadius = radiusBottomRight || undefined }
+  if (radiusTopLeft && !boxConfig({ radius: radiusTopLeft })) { newStyle.borderTopLeftRadius = radiusTopLeft }
+  if (radiusTopRight && !boxConfig({ radius: radiusTopRight })) { newStyle.borderTopRightRadius = radiusTopRight }
+  if (radiusBottomLeft && !boxConfig({ radius: radiusBottomLeft })) { newStyle.borderBottomLeftRadius = radiusBottomLeft }
+  if (radiusBottomRight && !boxConfig({ radius: radiusBottomRight })) { newStyle.borderBottomRightRadius = radiusBottomRight }
 
-  if (!boxConfig({ shadow })) { newStyle.boxShadow = shadow || undefined }
-  if (!boxConfig({ shadowInner })) { newStyle.boxShadow = 'inset ' + shadowInner || undefined }
-  if (!boxConfig({ blur })) { newStyle.backdropFilter = blur ? `blur(${blur})` : undefined }
-  if (!boxConfig({ glow })) { newStyle.boxShadow = glow || undefined }
+  if (shadow && !boxConfig({ shadow })) { newStyle.boxShadow = shadow }
+  if (shadowInner && !boxConfig({ shadowInner })) { newStyle.boxShadow = 'inset ' + shadowInner }
+  if (blur && !boxConfig({ blur })) { newStyle.backdropFilter = `blur(${blur})` }
+  if (glow && !boxConfig({ glow })) { newStyle.boxShadow = glow }
 
 
   // Setting classNames

@@ -24,8 +24,6 @@ export default function (normalizedConfig: any) {
   border: none;
 }
 
-.t-box-fill-none {background: transparent;}
-
 .t-box-img {
   background-size: cover;
   background-position: center;
@@ -49,28 +47,10 @@ export default function (normalizedConfig: any) {
     }
   }
 
-
-  // Raduis
-  const defaultMaxRadius = '1000px'
-  styles += `
-.t-box-radius-none {border-radius: 0;}
-.t-box-radius-max {border-radius: ${defaultMaxRadius};}
-`
-
   for (const key in radius) {
     styles += `.t-box-radius-${key} {border-radius: ${radius[key]}}
 `
   }
-  styles += `
-.t-box-radius-top-none {border-top-left-radius: 0; border-top-right-radius: 0;}
-.t-box-radius-bottom-none {border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
-.t-box-radius-right-none {border-bottom-right-radius: 0; border-top-right-radius: 0;}
-.t-box-radius-left-none {border-bottom-left-radius: 0; border-top-left-radius: 0;}
-.t-box-radius-top-max {border-top-left-radius: ${defaultMaxRadius}; border-top-right-radius: ${defaultMaxRadius};}
-.t-box-radius-bottom-max {border-bottom-left-radius: ${defaultMaxRadius}; border-bottom-right-radius: ${defaultMaxRadius};}
-.t-box-radius-right-max {border-bottom-right-radius: ${defaultMaxRadius}; border-top-right-radius: ${defaultMaxRadius};}
-.t-box-radius-left-max {border-bottom-left-radius: ${defaultMaxRadius}; border-top-left-radius: ${defaultMaxRadius};}
-`
 
   for (const key in radius) {
     styles += `
@@ -94,16 +74,6 @@ export default function (normalizedConfig: any) {
 `
   }
 
-  styles += `
-.t-box-radius-tl-none {border-top-left-radius: 0;}
-.t-box-radius-tr-none {border-top-right-radius: 0;}
-.t-box-radius-br-none {border-bottom-right-radius: 0;}
-.t-box-radius-bl-none {border-bottom-left-radius: 0;}
-.t-box-radius-tl-max {border-top-left-radius: ${defaultMaxRadius};}
-.t-box-radius-tr-max {border-top-right-radius: ${defaultMaxRadius};}
-.t-box-radius-br-max {border-bottom-right-radius: ${defaultMaxRadius};}
-.t-box-radius-bl-max {border-bottom-left-radius: ${defaultMaxRadius};}
-`
   for (const key in radius) {
     styles += `
 .t-box-radius-tl-${key} {

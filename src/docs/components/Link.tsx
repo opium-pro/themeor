@@ -28,7 +28,7 @@ export default class Link extends React.PureComponent<LinkProps> {
     if (href.indexOf('#') > 0) {
       smoothScroll(href.split('#')[1])
     } else {
-      this.context.refContent.scrollTop = 0
+      this.context.refContent && (this.context.refContent.scrollTop = 0)
     }
   }
 
