@@ -9,6 +9,6 @@ export type TaglessProps = {
 }
 
 
-export type TaglessComponent<Props> = CommonComponent<Props> & {
+export type TaglessComponent<Props = any> = CommonComponent<Props> & {
   TryTagless: CommonComponent<TaglessProps & Props>
 }

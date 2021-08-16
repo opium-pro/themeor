@@ -1,13 +1,13 @@
 import React from 'react'
 import cn from '../utils/class-name'
-import { FitComponent } from './types'
+import { FitComponent, FitProps } from './types'
 import { minus } from '../utils/change-css-value'
 import { Common } from '../Common'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { withTagless } from '../with-tagless'
 
-const Fit: FitComponent= ({
+const Fit= React.forwardRef(({
   left,
   top,
   right,
@@ -29,7 +29,7 @@ const Fit: FitComponent= ({
   children,
   forwardRef,
   ...restProps
-}, ref) => {
+}: FitProps, ref: any) => {
 
   const context = useTheme()
   const { gapConfig } = useConfig(context)
@@ -47,7 +47,7 @@ const Fit: FitComponent= ({
   if (offsetLeft) { newStyle.marginLeft = minus(offsetLeft) }
 
   const componentProps = {
-    ref: ref || forwardRef,
+    forwardRef: ref || forwardRef,
     className: cn(
       `t-fit`,
       clip && `t-fit-clip`,
@@ -67,6 +67,6 @@ const Fit: FitComponent= ({
   }
 
   return Common(componentProps)
-}
+})
 
-export default withTagless(Fit)
+export default withTagless(Fit) as FitComponent

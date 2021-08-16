@@ -1,13 +1,13 @@
 import React from 'react'
 import cn from '../utils/class-name'
 import { half, minus } from '../utils/change-css-value'
-import { AlignComponent } from './types'
+import { AlignComponent, AlignProps } from './types'
 import { withTagless } from '../with-tagless'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { Common } from '../Common'
 
-const Align: AlignComponent = ({
+const Align = React.forwardRef(({
   row,
   vert = "top",
   hor = "stretch",
@@ -20,7 +20,7 @@ const Align: AlignComponent = ({
   forwardRef,
   children,
   ...restProps
-}, ref) => {
+}: AlignProps, ref: any) => {
   const { gapConfig } = useConfig(useTheme())
 
   const newStyle = { ...style }
@@ -58,7 +58,7 @@ const Align: AlignComponent = ({
     ),
     style: newStyle,
     children,
-    ref: ref || forwardRef,
+    forwardRef: ref || forwardRef,
   }
 
   const hasGap = !pattern && (gapVert || gapHor)
@@ -89,7 +89,7 @@ const Align: AlignComponent = ({
 
 
   return Common(componentProps)
-}
+})
 
 
-export default withTagless(Align)
+export default withTagless(Align) as AlignComponent

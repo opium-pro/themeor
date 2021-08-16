@@ -5,7 +5,7 @@ import { TaglessProps, TaglessComponent } from './types'
 import cn from '../utils/class-name'
 
 
-export const withTagless = (Component: any) => {
+export const withTagless = (Component: any): TaglessComponent => {
   function Tagless(props: TaglessProps) {
     const {
       children,
@@ -18,7 +18,13 @@ export const withTagless = (Component: any) => {
     function refuse(message?: string) {
       message && consoleMessage({ text: message, source: withTagless })
       const { FORCE_TAGLESS, ...originalProps } = props
-      return Component(originalProps)
+      if (Component.render) {
+        return Component.render(originalProps)
+      }
+
+      if (typeof Component === 'function') {
+        return Component(originalProps)
+      }
     }
 
     // Remove invalid children
@@ -82,19 +88,30 @@ export const withTagless = (Component: any) => {
       forwardRef && (mergedProps.ref = forwardRef)
     }
 
-    const passChildren = ({ className, children, style, ...rest }: any) =>
-      React.cloneElement(onlyChild, {
-        ...rest,
-        ...mergedProps,
-        className: cn(className, mergedProps.className),
-        style: { ...style, ...mergedProps.style },
-      })
-    
-    return Component({ ...parentProps, children: passChildren })
+    const passProps = {
+      ...parentProps, children: ({ className, children, style, ...rest }: any) =>
+        React.cloneElement(onlyChild, {
+          ...rest,
+          ...mergedProps,
+          className: cn(className, mergedProps.className),
+          style: { ...style, ...mergedProps.style },
+        })
+    }
+
+
+    if (Component.render) {
+      return Component.render(passProps)
+    }
+
+    if (typeof Component === 'function') {
+      return Component(passProps)
+    }
   }
 
   Tagless.displayName = `${Component.displayName || Component.name}.TryTagless`
 
-  Component.TryTagless = Tagless
-  return Component
+  const TaglessComponent: TaglessComponent = Component
+  TaglessComponent.TryTagless = Tagless
+
+  return TaglessComponent
 }

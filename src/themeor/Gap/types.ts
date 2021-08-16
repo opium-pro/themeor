@@ -1,4 +1,5 @@
 import { CommonProps, CommonComponent } from "../Common"
+import { TaglessComponent } from "../with-tagless"
 
 export type GapProps = CommonProps & {
   size?: string | 'none' | false,
@@ -9,13 +10,6 @@ export type GapProps = CommonProps & {
   bottom?: string | 'none' | false,
   left?: string | 'none' | false,
   inrow?: boolean,
-  width?: string | false | number,
-  height?: string | false | number,
-  maxWidth?: string | false | number,
-  maxHeight?: string | false | number,
-  minWidth?: string | false | number,
-  minHeight?: string | false | number,
-  forwardRef?: any,
 }
 
-export type GapComponent = CommonComponent<GapProps>
+export type GapComponent = TaglessComponent<GapProps>

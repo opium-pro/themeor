@@ -1,11 +1,12 @@
 import React from 'react'
 import Align from './Align'
-import { AlignSpanComponent } from './types'
+import { AlignSpanComponent, AlignSpanProps } from './types'
+import { withTagless } from '../with-tagless'
 
 
-export const Span: AlignSpanComponent = (
-  { col = 1, style, ...restProps },
-  ref
+const Span = React.forwardRef((
+  { col = 1, style, ...restProps }: AlignSpanProps,
+  ref: any
 ) => {
   const newStyle: any = {
     ...style,
@@ -19,6 +20,8 @@ export const Span: AlignSpanComponent = (
   }
 
   return Align(componentProps)
-}
+})
+
 
 Span.displayName = 'Align.Span'
+export default withTagless(Span) as AlignSpanComponent

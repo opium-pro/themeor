@@ -1,4 +1,5 @@
-import { CommonProps, CommonComponent } from '../Common'
+import { CommonProps } from '../Common'
+import { TaglessComponent } from "../with-tagless"
 
 export type FontProps = CommonProps & {
   fill?: string | false,
@@ -15,7 +16,6 @@ export type FontProps = CommonProps & {
   inline?: boolean,
   noselect?: boolean,
   nowrap?: boolean,
-  forwardRef?: any,
 }
 
-export type FontCompoennt = CommonComponent<FontProps>
+export type FontCompoennt = TaglessComponent<FontProps>

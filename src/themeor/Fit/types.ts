@@ -1,4 +1,5 @@
-import { CommonProps, CommonComponent } from "../Common"
+import { CommonProps } from "../Common"
+import { TaglessComponent } from "../with-tagless"
 
 export type FitProps = CommonProps & {
   cover?: 'parent' | 'screen' | false,
@@ -17,7 +18,6 @@ export type FitProps = CommonProps & {
   inline?: boolean,
   scroll?: boolean,
   clip?: boolean,
-  forwardRef?: any,
 }
 
-export type FitComponent = CommonComponent<FitProps>
+export type FitComponent = TaglessComponent<FitProps>

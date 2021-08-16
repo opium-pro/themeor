@@ -1,12 +1,6 @@
-import { default as SourceAlign } from './Align'
-import { Span } from './Span'
+import { default as Align } from './Align'
+import { default as Span } from './Span'
 export * from './types'
 
-type Align = typeof SourceAlign & {
-  Span?: any
-}
-
-const Align: Align = SourceAlign
 Align.Span = Span
-
 export { Align }

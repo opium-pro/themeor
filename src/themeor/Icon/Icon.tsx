@@ -1,7 +1,6 @@
 import React from 'react'
 import {useTheme} from '../context'
 import cn from '../utils/class-name'
-import {isCustomValue, isCustomVariable} from '../utils/is-custom'
 import consoleMessage from '../utils/console-message'
 import {IconProps} from "./types"
 import {useConfig} from '../utils/use-config'

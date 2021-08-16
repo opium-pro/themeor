@@ -35,7 +35,7 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
 
     return (
       <Reaction smooth className={className} track={disabled ? undefined : ['focus', 'hover']} cursor={disabled ? 'default' : 'text'}>
-        {(rProps: any, r: any) => (
+        {(rProps: any, r: any) => (<>
           <Fit {...rProps}>
             <Box
               height="60px"
@@ -95,13 +95,13 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
               </Fit.TryTagless>
 
             </Box>
-
-            {typeof error === 'string' && (<>
-              <Gap size="x2s" />
-              <Font size="xs" fill="critic">{error}</Font>
-            </>)}
           </Fit>
-        )}
+
+          {typeof error === 'string' && (<>
+            <Gap size="x2s" />
+            <Font size="xs" fill="critic">{error}</Font>
+          </>)}
+        </>)}
       </Reaction>
     )
   }

@@ -1,4 +1,5 @@
-import { CommonProps, CommonComponent } from '../Common'
+import { CommonProps } from '../Common'
+import { TaglessComponent } from '../with-tagless'
 
 export type AlignProps = CommonProps & {
   row?: boolean,
@@ -8,20 +9,14 @@ export type AlignProps = CommonProps & {
   hor?: 'stretch' | 'left' | 'center' | 'right' | false,
   gapVert?: string | false,
   gapHor?: string | false,
-  width?: string | false | number,
-  height?: string | false | number,
-  maxWidth?: string | false | number,
-  maxHeight?: string | false | number,
-  minWidth?: string | false | number,
-  minHeight?: string | false | number,
-  forwardRef?: any,
 }
 
+export type AlignComponent = TaglessComponent<AlignProps> & {
+  Span: AlignSpanComponent
+}
 
 export type AlignSpanProps = AlignProps & {
   col?: number,
 }
 
-export type AlignComponent = CommonComponent<AlignProps>
-
-export type AlignSpanComponent = CommonComponent<AlignSpanProps>
+export type AlignSpanComponent = TaglessComponent<AlignSpanProps>

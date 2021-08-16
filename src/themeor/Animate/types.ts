@@ -12,7 +12,6 @@ export type AnimateProps = CommonProps & {
   mounted?: boolean,
   // getTrigger?: (trigger?: (value: string) => void) => any,
   [X: string]: any,
-  forwardRef?: any,
 }
 
 export type AnimateComponent = CommonComponent<AnimateProps>

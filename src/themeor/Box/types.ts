@@ -1,4 +1,5 @@
-import { CommonProps, CommonComponent } from '../Common'
+import { CommonProps } from '../Common'
+import { TaglessComponent } from '../with-tagless'
 
 export type BoxProps = CommonProps & {
   fill?: string | false,
@@ -22,7 +23,6 @@ export type BoxProps = CommonProps & {
   img?: string | false,
   noContext?: boolean,
   blur?: string | 'none' | false,
-  forwardRef?: any,
 }
 
-export type BoxComponent = CommonComponent<BoxProps>
+export type BoxComponent = TaglessComponent<BoxProps>

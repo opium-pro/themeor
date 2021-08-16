@@ -1,4 +1,5 @@
 import { CommonProps, CommonComponent } from "../Common"
+import { TaglessComponent } from "../with-tagless"
 
 export type LineProps = CommonProps & {
   fill?: string | false,
@@ -8,7 +9,6 @@ export type LineProps = CommonProps & {
   right?: string | 'none' | false,
   bottom?: string | 'none' | false,
   left?: string | 'none' | false,
-  forwardRef?: any,
 }
 
-export type LineComponent = CommonComponent<LineProps>
+export type LineComponent = TaglessComponent<LineProps>

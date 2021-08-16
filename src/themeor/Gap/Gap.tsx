@@ -8,7 +8,7 @@ import { Common } from '../Common'
 import { withTagless, TaglessComponent } from '../with-tagless'
 
 
-const Gap: GapComponent = ({
+const Gap = React.forwardRef(({
   className,
   size,
   top,
@@ -22,7 +22,7 @@ const Gap: GapComponent = ({
   inrow,
   style = {},
   ...restProps
-}, ref) => {
+}: GapProps, ref: any) => {
 
   const [isInrow, setInrow] = React.useState(false)
   const { gapConfig } = useConfig(useTheme())
@@ -98,7 +98,7 @@ const Gap: GapComponent = ({
   }
 
   return Common(componentProps)
-}
+})
 
 
-export default withTagless(Gap) as TaglessComponent<GapProps>
+export default withTagless(Gap) as GapComponent

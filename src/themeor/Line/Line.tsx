@@ -1,13 +1,13 @@
 import React from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-name'
-import { LineComponent } from './types'
+import { LineComponent, LineProps } from './types'
 import { Common } from '../Common'
 import { useConfig } from '../utils/use-config'
 import { withTagless } from '../with-tagless'
 
 
-const Line: LineComponent = ({
+const Line = React.forwardRef(({
   className,
   inverse,
   weight,
@@ -20,7 +20,7 @@ const Line: LineComponent = ({
   children,
   style = {},
   ...restProps
-}, ref) => {
+}: LineProps, ref: any) => {
 
   const { TRY_TO_INVERSE } = useTheme()
   const { lineConfig } = useConfig(useTheme())
@@ -54,7 +54,7 @@ const Line: LineComponent = ({
   }
 
   return Common(componentProps)
-}
+})
 
 
-export default withTagless(Line)
+export default withTagless(Line) as LineComponent

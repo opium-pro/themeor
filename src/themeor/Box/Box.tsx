@@ -1,15 +1,15 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { useTheme, ThemeContext } from '../context'
 import cn from '../utils/class-name'
 import { Line } from '../Line'
-import { BoxComponent, BoxProps } from './types'
+import { BoxProps, BoxComponent } from './types'
 import splitFill from '../utils/split-fill'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'
-import { withTagless, TaglessComponent } from '../with-tagless'
+import { withTagless } from '../with-tagless'
 
 
-const Box: BoxComponent = (props: any, ref: any) => {
+const Box = React.forwardRef((props: BoxProps, ref: any) => {
   const {
     className,
     fill = "none",
@@ -33,6 +33,7 @@ const Box: BoxComponent = (props: any, ref: any) => {
     glow,
     img,
     noContext,
+    forwardRef,
     style = {},
     ...restProps
   } = props
@@ -88,6 +89,7 @@ const Box: BoxComponent = (props: any, ref: any) => {
 
   const componentProps = {
     ...restProps,
+    forwardRef: ref || forwardRef,
     className: cn(
       't-box',
       img && 't-box-img',
@@ -156,7 +158,7 @@ const Box: BoxComponent = (props: any, ref: any) => {
       {renderBoxComponent}
     </ThemeContext.Provider>
   )
-}
+})
 
 
-export default withTagless(Box) as TaglessComponent<BoxProps>
+export default withTagless(Box) as BoxComponent

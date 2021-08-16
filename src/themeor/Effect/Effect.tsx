@@ -23,7 +23,7 @@ export const Effect: EffectComponent = ({
 
   const componentProps = {
     ...restProps,
-    ref: ref || forwardRef,
+    forwardRef: ref || forwardRef,
     className: cn(
       css.effect,
       transparency && css[`transparency-${transparency}`],
