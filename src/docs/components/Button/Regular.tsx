@@ -20,28 +20,28 @@ export default function Regular({
 
           {/* This is stroke for focus */}
           <Fit.TryTagless cover="parent" offset="x2s">
-            <Line.TryTagless className={rProps.className} fill={reaction.focus ? "accent" : "none"}>
-              <Box radius={radius} />
-            </Line.TryTagless>
+            <Box
+              borderFill={reaction.focus ? "accent" : "none"}
+              radius={radius}
+            />
           </Fit.TryTagless>
 
 
           <Align.TryTagless vert="center" hor="center">
-            <Line.TryTagless fill="faint">
-              <Fit minWidth="220px" height="60px">
-                <Box.TryTagless
-                  fill={(reaction.active && "base") || (reaction.hover && "faint-up") || "faint"}
-                  strong={reaction.active}
-                  radius={radius}
-                >
-                  <Gap.TryTagless hor="md" vert="sm">
-                    <button type="button" {...rProps}>
-                      <Font noselect fill="base" size="lg">{children}</Font>
-                    </button>
-                  </Gap.TryTagless>
-                </Box.TryTagless>
-              </Fit>
-            </Line.TryTagless>
+            <Box.TryTagless
+              minWidth="220px"
+              height="60px"
+              borderFill="faint"
+              fill={(reaction.active && "base") || (reaction.hover && "faint-up") || "faint"}
+              strong={reaction.active}
+              radius={radius}
+            >
+              <Gap.TryTagless hor="md" vert="sm">
+                <button type="button" {...rProps}>
+                  <Font noselect fill="base" size="lg">{children}</Font>
+                </button>
+              </Gap.TryTagless>
+            </Box.TryTagless>
           </Align.TryTagless>
 
         </Fit>
