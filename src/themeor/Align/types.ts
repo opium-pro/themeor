@@ -1,4 +1,4 @@
-import { CommonProps, CommonComponent } from '../with-common'
+import { CommonProps, CommonComponent } from '../Common'
 
 export type AlignProps = CommonProps & {
   row?: boolean,
@@ -23,3 +23,5 @@ export type AlignSpanProps = AlignProps & {
 }
 
 export type AlignComponent = CommonComponent<AlignProps>
+
+export type AlignSpanComponent = CommonComponent<AlignSpanProps>

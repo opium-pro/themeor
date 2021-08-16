@@ -47,10 +47,10 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
             >
 
               {/* Label */}
-              <Align.TryTagless TRY_RECURSIVE_TAGLESS vert="center">
-                <Fit cover="parent" height={(r.focus || value) ? "60%" : "100%"}>
-                  <Gap hor="sm">
-                    <Font
+              <Align.TryTagless vert="center">
+                <Fit.TryTagless cover="parent" height={(r.focus || value) ? "60%" : "100%"}>
+                  <Gap.TryTagless hor="sm">
+                    <Font.TryTagless
                       size={r.focus || value ? 'xs' : 'md'}
                       fill={(error && 'critic') || (disabled && 'faint-down') || 'faint'}
                       style={{ transition: 'all 0.2s ease' }}
@@ -59,28 +59,28 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
                       <label htmlFor={id || this.id}>
                         {label}
                       </label>
-                    </Font>
-                  </Gap>
-                </Fit>
+                    </Font.TryTagless>
+                  </Gap.TryTagless>
+                </Fit.TryTagless>
               </Align.TryTagless>
 
               {placeholder && r.focus && !value && (
-                <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" height="60%" stick="bottom-left">
-                  <Align vert="center">
-                    <Gap hor="sm">
+                <Fit.TryTagless cover="parent" height="60%" stick="bottom-left">
+                  <Align.TryTagless vert="center">
+                    <Gap.TryTagless hor="sm">
                       <Font fill="faint" size="md">
                         {placeholder}
                       </Font>
-                    </Gap>
-                  </Align>
+                    </Gap.TryTagless>
+                  </Align.TryTagless>
                 </Fit.TryTagless>
               )}
 
               {/* Input */}
-              <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" height="60%" stick="bottom-left">
-                <Box>
-                  <Gap hor="sm">
-                    <Font fill={disabled ? 'faint' : 'base'} size="md">
+              <Fit.TryTagless cover="parent" height="60%" stick="bottom-left">
+                <Box.TryTagless>
+                  <Gap.TryTagless hor="sm">
+                    <Font.TryTagless fill={disabled ? 'faint' : 'base'} size="md">
                       <input
                         {...restProps}
                         id={id || this.id}
@@ -89,9 +89,9 @@ export default class TextInput extends React.PureComponent<TextInputProps> {
                         value={value}
                         type="text"
                       />
-                    </Font>
-                  </Gap>
-                </Box>
+                    </Font.TryTagless>
+                  </Gap.TryTagless>
+                </Box.TryTagless>
               </Fit.TryTagless>
 
             </Box>

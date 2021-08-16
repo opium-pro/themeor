@@ -1,4 +1,4 @@
-import React from "react"
+import React, {FC} from "react"
 
 export type CommonProps = {
   stretch?: boolean,
@@ -8,5 +8,8 @@ export type CommonProps = {
   maxHeight?: string | false | number,
   minWidth?: string | false | number,
   minHeight?: string | false | number,
-  ref?: React.Ref<any>,
+  forwardRef?: React.Ref<any>,
 } & React.HTMLAttributes<HTMLDivElement>
+
+
+export type CommonComponent<Props = CommonProps> = FC<Props>

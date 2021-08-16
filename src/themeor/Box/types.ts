@@ -1,4 +1,4 @@
-import { CommonProps } from '../with-common'
+import { CommonProps, CommonComponent } from '../Common'
 
 export type BoxProps = CommonProps & {
   fill?: string | false,
@@ -24,3 +24,5 @@ export type BoxProps = CommonProps & {
   blur?: string | 'none' | false,
   forwardRef?: any,
 }
+
+export type BoxComponent = CommonComponent<BoxProps>

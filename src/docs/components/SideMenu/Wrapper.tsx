@@ -71,13 +71,12 @@ export class Wrapper extends React.PureComponent<WrapperProps, State> {
                     <Reaction key={group} cursor="pointer" track="hover">
                       {(r: any) => (
                         <Box.TryTagless
-                          TRY_RECURSIVE_TAGLESS
                           radius="sm"
                           fill={group === activeGroup ? 'base' : 'none'}
                           strong={group === activeGroup}
                         >
-                          <Gap size="xs">
-                            <Font
+                          <Gap.TryTagless size="xs">
+                            <Font.TryTagless
                               align="center"
                               size="xs"
                               uppercase
@@ -92,8 +91,8 @@ export class Wrapper extends React.PureComponent<WrapperProps, State> {
                               >
                                 {group}
                               </button>
-                            </Font>
-                          </Gap>
+                            </Font.TryTagless>
+                          </Gap.TryTagless>
                         </Box.TryTagless>
                       )}
                     </Reaction>

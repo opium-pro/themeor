@@ -1,12 +1,14 @@
 import {FC} from 'react'
+import { CommonComponent } from '../Common'
 
-export type TryTaglessProps = {
+export type TaglessProps = {
   children?: any,
-  TRY_RECURSIVE_TAGLESS?: boolean,
   FORCE_TAGLESS?: boolean,
   forwardRef?: any,
-  [X: string]: any,
+  id?: any,
 }
 
 
-export type TryTagless<Props = TryTaglessProps> = FC<Props & TryTaglessProps>
+export type TaglessComponent<Props> = CommonComponent<Props> & {
+  TryTagless: CommonComponent<TaglessProps & Props>
+}

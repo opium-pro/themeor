@@ -2,9 +2,10 @@ import React from 'react'
 import cn from '../utils/class-name'
 import { FitComponent } from './types'
 import { minus } from '../utils/change-css-value'
-import { withCommon } from '../with-common'
+import { Common } from '../Common'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
+import { withTagless } from '../with-tagless'
 
 const Fit: FitComponent= ({
   left,
@@ -65,9 +66,7 @@ const Fit: FitComponent= ({
     ...restProps,
   }
 
-  return typeof children === 'function'
-    ? children(componentProps)
-    : <div {...componentProps} />
+  return Common(componentProps)
 }
 
-export default withCommon(Fit)
+export default withTagless(Fit)

@@ -1,16 +1,24 @@
 import React from 'react'
 import Align from './Align'
-import { AlignSpanProps } from './types'
-import { withCommon, CommonComponent } from '../with-common'
+import { AlignSpanComponent } from './types'
 
 
-export const Span: CommonComponent<AlignSpanProps> = withCommon((
-  { col = 1, style, ...restProps }: AlignSpanProps,
-  ref: React.Ref<any>
+export const Span: AlignSpanComponent = (
+  { col = 1, style, ...restProps },
+  ref
 ) => {
   const newStyle: any = {
     ...style,
     gridColumnEnd: `span ${col}`
   }
-  return (<Align {...restProps} ref={ref} style={newStyle} />)
-})
+
+  const componentProps = {
+    ...restProps,
+    ref,
+    style: newStyle
+  }
+
+  return Align(componentProps)
+}
+
+Span.displayName = 'Align.Span'

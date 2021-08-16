@@ -1,4 +1,4 @@
-import { CommonProps, CommonComponent } from "../with-common"
+import { CommonProps, CommonComponent } from "../Common"
 
 export type FitProps = CommonProps & {
   cover?: 'parent' | 'screen' | false,

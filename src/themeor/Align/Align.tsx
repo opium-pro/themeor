@@ -2,9 +2,10 @@ import React from 'react'
 import cn from '../utils/class-name'
 import { half, minus } from '../utils/change-css-value'
 import { AlignComponent } from './types'
-import { withCommon } from '../with-common'
+import { withTagless } from '../with-tagless'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
+import { Common } from '../Common'
 
 const Align: AlignComponent = ({
   row,
@@ -25,18 +26,18 @@ const Align: AlignComponent = ({
   const newStyle = { ...style }
   if (!!pattern) { newStyle.gridTemplateColumns = pattern }
 
-  if (!gapConfig({size: gapVert}) && !pattern) {
+  if (!gapConfig({ size: gapVert }) && !pattern) {
     newStyle.marginTop = minus(half(gapVert))
     newStyle.marginBottom = minus(half(gapVert))
   }
-  if (!gapConfig({size: gapHor}) && !pattern) {
+  if (!gapConfig({ size: gapHor }) && !pattern) {
     newStyle.marginRight = minus(half(gapHor))
     newStyle.marginLeft = minus(half(gapHor))
   }
-  if (!gapConfig({size: gapVert}) && !!pattern) {
+  if (!gapConfig({ size: gapVert }) && !!pattern) {
     newStyle.rowGap = gapVert || undefined
   }
-  if (!gapConfig({size: gapHor}) && !!pattern) {
+  if (!gapConfig({ size: gapHor }) && !!pattern) {
     newStyle.columnGap = gapHor || undefined
   }
 
@@ -48,8 +49,8 @@ const Align: AlignComponent = ({
       !row && !stack && !pattern && `t-align-col`,
       vert && `t-align-vert-${vert}`,
       hor && `t-align-hor-${hor}`,
-      gapConfig({size: gapVert}) && `t-align-vert-gap-${gapVert}`,
-      gapConfig({size: gapHor}) && `t-align-hor-gap-${gapHor}`,
+      gapConfig({ size: gapVert }) && `t-align-vert-gap-${gapVert}`,
+      gapConfig({ size: gapHor }) && `t-align-hor-gap-${gapHor}`,
       stack && `t-align-stack`,
       stack && `t-align-row`,
       !!pattern && `t-align-pattern`,
@@ -65,15 +66,15 @@ const Align: AlignComponent = ({
 
   function wrapChildren(children: any): React.ReactNode {
     const wrapChildClass = cn(
-      gapConfig({size: gapVert}) && `t-align-item-vert-gap-${gapVert}`,
-      gapConfig({size: gapHor}) && `t-align-item-hor-gap-${gapHor}`,
+      gapConfig({ size: gapVert }) && `t-align-item-vert-gap-${gapVert}`,
+      gapConfig({ size: gapHor }) && `t-align-item-hor-gap-${gapHor}`,
     )
 
     const wrapChildStyle = {
-      paddingRight: (!gapConfig({size: gapHor}) && half(gapHor)) || undefined,
-      paddingLeft: (!gapConfig({size: gapHor}) && half(gapHor)) || undefined,
-      paddingTop: (!gapConfig({size: gapVert}) && half(gapVert)) || undefined,
-      paddingBottom: (!gapConfig({size: gapVert}) && half(gapVert)) || undefined,
+      paddingRight: (!gapConfig({ size: gapHor }) && half(gapHor)) || undefined,
+      paddingLeft: (!gapConfig({ size: gapHor }) && half(gapHor)) || undefined,
+      paddingTop: (!gapConfig({ size: gapVert }) && half(gapVert)) || undefined,
+      paddingBottom: (!gapConfig({ size: gapVert }) && half(gapVert)) || undefined,
       boxSizing: 'border-box' as any,
     }
 
@@ -87,10 +88,8 @@ const Align: AlignComponent = ({
   }
 
 
-  return typeof children === 'function'
-    ? children(componentProps)
-    : <div {...componentProps} />
+  return Common(componentProps)
 }
 
 
-export default withCommon(Align)
+export default withTagless(Align)

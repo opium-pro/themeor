@@ -38,7 +38,6 @@ export default class Code extends React.PureComponent<CodeProps> {
 
     return (
       <Box.TryTagless
-        TRY_RECURSIVE_TAGLESS
         fill={boxFill}
         radius="sm"
         strong={inverse || TRY_TO_INVERSE}

@@ -8,8 +8,4 @@ export type IconProps = React.HTMLAttributes<SVGElement> & {
   forceLine?: boolean,
   forceFill?: boolean,
   forwardRef?: (node: any) => void,
-
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  TRY_TAGLESS?: boolean,
 }

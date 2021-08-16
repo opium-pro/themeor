@@ -1,15 +1,14 @@
 import React, { FC } from 'react'
 import consoleMessage from '../utils/console-message'
 import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate } from '../index'
-import { TryTaglessProps, TryTagless } from './types'
+import { TaglessProps, TaglessComponent } from './types'
 import cn from '../utils/class-name'
 
 
-export const withTagless = (Component: any): TryTagless => {
-  return function Tagless (props: TryTaglessProps) {
+export const withTagless = (Component: any) => {
+  function Tagless(props: TaglessProps) {
     const {
       children,
-      TRY_RECURSIVE_TAGLESS,
       FORCE_TAGLESS,
       forwardRef,
       id: parentId,
@@ -18,8 +17,8 @@ export const withTagless = (Component: any): TryTagless => {
 
     function refuse(message?: string) {
       message && consoleMessage({ text: message, source: withTagless })
-      const { TRY_RECURSIVE_TAGLESS, FORCE_TAGLESS, ...originalProps } = props
-      return <Component {...originalProps} />
+      const { FORCE_TAGLESS, ...originalProps } = props
+      return Component(originalProps)
     }
 
     // Remove invalid children
@@ -59,17 +58,10 @@ export const withTagless = (Component: any): TryTagless => {
       return refuse(`OnlyChild hasn't merged his child because it met another "id" attribute\nParent id "${parentId}", child's id "${childProps.id}"`)
     }
 
-    // Don't TRY_TAGLESS if child starts a new chain
-    if (!FORCE_TAGLESS && childProps.TRY_RECURSIVE_TAGLESS) {
-      return refuse()
-    }
-
     const OnlyChildComponent = onlyChild.type
     const mergingComponents = [Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate]
     let child_is_themeor_component = mergingComponents.includes(OnlyChildComponent)
       || !!mergingComponents.find((mergingComponent: any) => mergingComponent.TryTagless === OnlyChildComponent)
-
-    const child_is_not_against = childProps.TRY_TAGLESS !== false
 
     const mergedProps = {
       ...childProps,
@@ -90,26 +82,19 @@ export const withTagless = (Component: any): TryTagless => {
       forwardRef && (mergedProps.ref = forwardRef)
     }
 
-    let Child = onlyChild.type
+    const passChildren = ({ className, children, style, ...rest }: any) =>
+      React.cloneElement(onlyChild, {
+        ...rest,
+        ...mergedProps,
+        className: cn(className, mergedProps.className),
+        style: { ...style, ...mergedProps.style },
+      })
 
-    if (child_is_themeor_component && child_is_not_against && onlyChild.type.TryTagless) {
-      Child = onlyChild.type.TryTagless
-      mergedProps.TRY_RECURSIVE_TAGLESS = TRY_RECURSIVE_TAGLESS || childProps.TRY_RECURSIVE_TAGLESS
-      mergedProps.FORCE_TAGLESS = FORCE_TAGLESS || childProps.FORCE_TAGLESS
-    }
-
-    return (
-      <Component {...parentProps}>
-        {({ className, style, ...rest }: any) => (
-          <Child
-            // {...rest}
-            {...mergedProps}
-            className={cn(className, mergedProps.className)}
-            style={{ ...style, ...mergedProps.style }}
-          />
-        )
-        }
-      </Component>
-    )
+    return Component({ ...parentProps, children: passChildren })
   }
+
+  Tagless.displayName = `Tagless(${Component.displayName || Component.name})`
+
+  Component.TryTagless = Tagless
+  return Component
 }

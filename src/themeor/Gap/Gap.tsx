@@ -1,10 +1,11 @@
 import React from 'react'
 import cn from '../utils/class-name'
 import consoleMessage from '../utils/console-message'
-import { GapComponent } from './types'
+import { GapComponent, GapProps } from './types'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
-import { withCommon } from '../with-common'
+import { Common } from '../Common'
+import { withTagless, TaglessComponent } from '../with-tagless'
 
 
 const Gap: GapComponent = ({
@@ -96,10 +97,8 @@ const Gap: GapComponent = ({
     ...restProps,
   }
 
-  return typeof children === 'function'
-    ? children(componentProps)
-    : <div {...componentProps} />
+  return Common(componentProps)
 }
 
 
-export default withCommon(Gap)
+export default withTagless(Gap) as TaglessComponent<GapProps>

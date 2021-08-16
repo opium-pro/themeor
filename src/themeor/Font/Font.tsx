@@ -1,9 +1,10 @@
 import React from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-name'
-import { FontCompoennt } from './types'
+import { FontCompoennt, FontProps } from './types'
 import { useConfig } from '../utils/use-config'
-import { withCommon } from '../with-common'
+import { Common } from '../Common'
+import { withTagless, TaglessComponent } from '../with-tagless'
 
 
 const Font: FontCompoennt = ({
@@ -43,6 +44,7 @@ const Font: FontCompoennt = ({
   const forceInverse = (inverse !== false) && (inverse || TRY_TO_INVERSE)
 
   const componentProps = {
+    ...restProps,
     className: cn(
       't-font',
       underline && 't-font-underline',
@@ -67,13 +69,10 @@ const Font: FontCompoennt = ({
     style: newStyle,
     ref: ref || forwardRef,
     children,
-    ...restProps,
   }
 
-  return typeof children === 'function'
-    ? children(componentProps)
-    : <div {...componentProps} />
+  return Common(componentProps)
 }
 
 
-export default withCommon(Font)
+export default withTagless(Font) as TaglessComponent<FontProps>

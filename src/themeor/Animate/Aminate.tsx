@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { AnimateProps } from './types'
+import { AnimateComponent } from './types'
 import cn from '../utils/class-name'
 import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
 import newId from '../utils/new-id'
-import {withCommon, CommonComponent} from '../with-common'
+import {Common} from '../Common'
 
 
 // TryTagless Element Tag
-export const Animate: CommonComponent<AnimateProps> = withCommon(function Aminate(props: AnimateProps, ref) {
+export const Animate: AnimateComponent = (props, ref) => {
   const {
     onMount,
     onUnmount,
@@ -90,7 +90,5 @@ export const Animate: CommonComponent<AnimateProps> = withCommon(function Aminat
     return null
   }
 
-  return typeof children === 'function'
-    ? children(componentProps)
-    : <div {...componentProps} />
-})
+  return Common(componentProps)
+}

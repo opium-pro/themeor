@@ -2,8 +2,9 @@ import React from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-name'
 import { LineComponent } from './types'
-import { withCommon } from '../with-common'
+import { Common } from '../Common'
 import { useConfig } from '../utils/use-config'
+import { withTagless } from '../with-tagless'
 
 
 const Line: LineComponent = ({
@@ -52,10 +53,8 @@ const Line: LineComponent = ({
     ref: ref || forwardRef,
   }
 
-  return typeof children === 'function'
-    ? children(componentProps)
-    : <div {...componentProps} />
+  return Common(componentProps)
 }
 
 
-export default withCommon(Line)
+export default withTagless(Line)

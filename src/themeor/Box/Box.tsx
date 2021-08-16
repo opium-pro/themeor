@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { useTheme, ThemeContext } from '../context'
 import cn from '../utils/class-name'
 import { Line } from '../Line'
-import { BoxProps } from './types'
+import { BoxComponent, BoxProps } from './types'
 import splitFill from '../utils/split-fill'
 import { useConfig } from '../utils/use-config'
-import { withCommon, CommonComponent } from '../with-common'
+import { Common } from '../Common'
+import { withTagless, TaglessComponent } from '../with-tagless'
 
 
-export const Box: CommonComponent<BoxProps> = withCommon(function Box(props: BoxProps, ref?: React.Ref<any>) {
+const Box: BoxComponent = (props: any, ref: any) => {
   const {
     className,
     fill = "none",
@@ -30,7 +31,6 @@ export const Box: CommonComponent<BoxProps> = withCommon(function Box(props: Box
     shadowInner,
     blur,
     glow,
-    children,
     img,
     noContext,
     style = {},
@@ -110,7 +110,6 @@ export const Box: CommonComponent<BoxProps> = withCommon(function Box(props: Box
       (inverse !== false) && (inverse || context.TRY_TO_INVERSE) && boxConfig({ fill }) && 't-box-inverse',
       className
     ),
-    children,
     style: newStyle,
   }
 
@@ -125,9 +124,7 @@ export const Box: CommonComponent<BoxProps> = withCommon(function Box(props: Box
     )
   }
 
-  const renderBoxComponent = typeof children === 'function'
-    ? children(componentProps)
-    : <div {...componentProps} />
+  const renderBoxComponent = Common(componentProps)
 
   if (noContext || !context.shallInverseOn) {
     return renderBoxComponent
@@ -158,4 +155,7 @@ export const Box: CommonComponent<BoxProps> = withCommon(function Box(props: Box
       {renderBoxComponent}
     </ThemeContext.Provider>
   )
-})
+}
+
+
+export default withTagless(Box) as TaglessComponent<BoxProps>

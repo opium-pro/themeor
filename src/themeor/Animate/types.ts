@@ -1,4 +1,4 @@
-import { CommonProps } from '../with-common'
+import { CommonProps, CommonComponent } from '../Common'
 
 export type AnimateProps = CommonProps & {
   onMount?: string,
@@ -14,3 +14,5 @@ export type AnimateProps = CommonProps & {
   [X: string]: any,
   forwardRef?: any,
 }
+
+export type AnimateComponent = CommonComponent<AnimateProps>

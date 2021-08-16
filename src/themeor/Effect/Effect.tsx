@@ -1,23 +1,20 @@
 import React from 'react'
 import css from './Effect.module.css'
 import cn from '../utils/class-name'
-import { EffectProps } from './types'
+import { EffectComponent } from './types'
 import { isCustomValue } from '../utils/is-custom'
-import { withCommon, CommonComponent } from '../with-common'
+import { Common } from '../Common'
 
 
-export const Effect: CommonComponent<EffectProps> = withCommon(function Effect({
+export const Effect: EffectComponent = ({
   className,
   hidden,
-  TRY_TAGLESS,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
   transparency,
   forwardRef,
   children,
   style={},
   ...restProps
-}: EffectProps, ref: React.Ref<any>) {
+}, ref) => {
   const newStyle = { ...style }
 
   if (transparency && isCustomValue(transparency)) {
@@ -36,7 +33,5 @@ export const Effect: CommonComponent<EffectProps> = withCommon(function Effect({
     style: newStyle,
   }
 
-  return typeof children === 'function'
-    ? children(componentProps)
-    : <div {...componentProps} />
-})
+  return Common(componentProps)
+}

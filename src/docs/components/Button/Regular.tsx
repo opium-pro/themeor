@@ -19,29 +19,29 @@ export default function Regular({
         <Fit width="fit-content">
 
           {/* This is stroke for focus */}
-          <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" offset="x2s">
-            <Line className={rProps.className} fill={reaction.focus ? "accent" : "none"}>
+          <Fit.TryTagless cover="parent" offset="x2s">
+            <Line.TryTagless className={rProps.className} fill={reaction.focus ? "accent" : "none"}>
               <Box radius={radius} />
-            </Line>
+            </Line.TryTagless>
           </Fit.TryTagless>
 
 
-          <Align.TryTagless TRY_RECURSIVE_TAGLESS vert="center" hor="center">
-            <Line fill="faint">
+          <Align.TryTagless vert="center" hor="center">
+            <Line.TryTagless fill="faint">
               <Fit minWidth="220px" height="60px">
-                <Box
+                <Box.TryTagless
                   fill={(reaction.active && "base") || (reaction.hover && "faint-up") || "faint"}
                   strong={reaction.active}
                   radius={radius}
                 >
-                  <Gap hor="md" vert="sm">
+                  <Gap.TryTagless hor="md" vert="sm">
                     <button type="button" {...rProps}>
                       <Font noselect fill="base" size="lg">{children}</Font>
                     </button>
-                  </Gap>
-                </Box>
+                  </Gap.TryTagless>
+                </Box.TryTagless>
               </Fit>
-            </Line>
+            </Line.TryTagless>
           </Align.TryTagless>
 
         </Fit>
