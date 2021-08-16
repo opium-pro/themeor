@@ -60,7 +60,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
 
                   <Align.TryTagless>
                     <Fit.TryTagless height="100vh" scroll>
-                      <Box fill="faint" forwardRef={this.refAside}>
+                      <Box.TryTagless fill="faint" forwardRef={this.refAside}>
                         <Gap size="xs">
                           <Box.TryTagless fill="faint" strong radius="sm">
                             <Font.TryTagless FORCE_TAGLESS fill="base" inline={false}>
@@ -82,7 +82,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                           component={SideMenu}
                           jumpTo="content-top-id"
                         />
-                      </Box>
+                      </Box.TryTagless>
                     </Fit.TryTagless>
                   </Align.TryTagless>
 

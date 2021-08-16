@@ -89,11 +89,11 @@ export const withTagless = (Component: any) => {
         className: cn(className, mergedProps.className),
         style: { ...style, ...mergedProps.style },
       })
-
+    
     return Component({ ...parentProps, children: passChildren })
   }
 
-  Tagless.displayName = `Tagless(${Component.displayName || Component.name})`
+  Tagless.displayName = `${Component.displayName || Component.name}.TryTagless`
 
   Component.TryTagless = Tagless
   return Component
