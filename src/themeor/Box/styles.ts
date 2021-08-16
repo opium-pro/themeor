@@ -35,16 +35,16 @@ export default function (normalizedConfig: any) {
 
   // Fills
   for (const key in fill) {
-    styles += `.t-box-fill-${key} {background-color: ${fill[key]}};
+    styles += `.t-box-fill-${key} {background-color: ${fill[key]}}
 `
 
     for (const key in fillFancy) {
-      styles += `.t-box-fill-${key}.t-box-fancy {background-image: ${fillFancy[key]}};
+      styles += `.t-box-fill-${key}.t-box-fancy {background-image: ${fillFancy[key]}}
 `
     }
 
     for (const key in fillInversed) {
-      styles += `.t-box-fill-${key}.t-box-inverse {background-color: ${fillInversed[key]}};
+      styles += `.t-box-fill-${key}.t-box-inverse {background-color: ${fillInversed[key]}}
 `
     }
   }
@@ -58,7 +58,7 @@ export default function (normalizedConfig: any) {
 `
 
   for (const key in radius) {
-    styles += `.t-box-radius-${key} {border-radius: ${radius[key]}};
+    styles += `.t-box-radius-${key} {border-radius: ${radius[key]}}
 `
   }
   styles += `

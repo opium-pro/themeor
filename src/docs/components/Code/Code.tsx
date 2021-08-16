@@ -31,7 +31,7 @@ export default class Code extends React.PureComponent<CodeProps> {
     } = this.props
     const { TRY_TO_INVERSE, template } = this.context
 
-    const style = (inverse || TRY_TO_INVERSE || template.includes('dark') || template.includes('corona')) ? darkTheme : lightTheme
+    const style = (inverse || TRY_TO_INVERSE || template?.includes('dark') || template?.includes('corona')) ? darkTheme : lightTheme
     const gapVert = (plain && "none") || (inline && "x2s") || "sm"
     const gapHor = (inline && "x2s") || "none"
     const boxFill = (plain && "none") || (inverse && "base") || "faint"

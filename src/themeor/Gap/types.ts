@@ -1,4 +1,4 @@
-import { CommonProps } from "../with-common"
+import { CommonProps, CommonComponent } from "../with-common"
 
 export type GapProps = CommonProps & {
   size?: string | 'none' | false,
@@ -17,3 +17,5 @@ export type GapProps = CommonProps & {
   minHeight?: string | false | number,
   forwardRef?: any,
 }
+
+export type GapComponent = CommonComponent<GapProps>

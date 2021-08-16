@@ -2,10 +2,11 @@ import React, { FC } from 'react'
 import consoleMessage from '../utils/console-message'
 import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate } from '../index'
 import { TryTaglessProps, TryTagless } from './types'
+import cn from '../utils/class-name'
 
 
-export const withTagless = (Component: FC): TryTagless => {
-  function TryTagless(props: TryTaglessProps) {
+export const withTagless = (Component: any): TryTagless => {
+  return function Tagless (props: TryTaglessProps) {
     const {
       children,
       TRY_RECURSIVE_TAGLESS,
@@ -89,20 +90,27 @@ export const withTagless = (Component: FC): TryTagless => {
       forwardRef && (mergedProps.ref = forwardRef)
     }
 
-    if (child_is_themeor_component && child_is_not_against) {
+    let Child = onlyChild.type
+
+    if (child_is_themeor_component && child_is_not_against && onlyChild.type.TryTagless) {
+      Child = onlyChild.type.TryTagless
       mergedProps.TRY_RECURSIVE_TAGLESS = TRY_RECURSIVE_TAGLESS || childProps.TRY_RECURSIVE_TAGLESS
       mergedProps.FORCE_TAGLESS = FORCE_TAGLESS || childProps.FORCE_TAGLESS
     }
 
+    // Component.displayName = undefined
+
     return (
       <Component {...parentProps}>
-        {(passedProps: any) => (
-          <OnlyChildComponent {...passedProps} {...mergedProps} />
-        )}
+        {({ className, style }: any) => (
+          <Child
+            {...mergedProps}
+            className={cn(className, mergedProps.className)}
+            style={{ ...style, ...mergedProps.style }}
+          />
+        )
+        }
       </Component>
     )
-
   }
-
-  return TryTagless
 }

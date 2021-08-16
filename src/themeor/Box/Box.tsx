@@ -91,7 +91,7 @@ export const Box: CommonComponent<BoxProps> = withCommon(function Box(props: Box
     className: cn(
       't-box',
       img && 't-box-img',
-      boxConfig({ fill }) && `t-box-fill-${fill}${strong ? '-strong' : '-weak'}`,
+      boxConfig({ fill }) && `t-box-fill-${fill}`,
       (strong || inverse) && (!fill || fill === 'none') && `t-box-fill-base`,
       fancy && 't-box-fancy',
       boxConfig({ shadow }) && `t-box-shadow-${shadow}`,

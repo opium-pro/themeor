@@ -1,4 +1,4 @@
-import { CommonProps } from '../with-common'
+import { CommonProps, CommonComponent } from '../with-common'
 
 export type FontProps = CommonProps & {
   fill?: string | false,
@@ -17,3 +17,5 @@ export type FontProps = CommonProps & {
   nowrap?: boolean,
   forwardRef?: any,
 }
+
+export type FontCompoennt = CommonComponent<FontProps>

@@ -1,12 +1,12 @@
 import React from 'react'
-import {useTheme} from '../context'
+import { useTheme } from '../context'
 import cn from '../utils/class-name'
-import {isCustomValue, isCustomVariable} from '../utils/is-custom'
-import {LineProps} from './types'
-import { withCommon, CommonComponent } from '../with-common'
+import { isCustomValue, isCustomVariable } from '../utils/is-custom'
+import { LineComponent } from './types'
+import { withCommon } from '../with-common'
 
 
-export const Line: CommonComponent<LineProps> = withCommon(({
+const Line: LineComponent = ({
   className,
   inverse,
   weight,
@@ -19,20 +19,20 @@ export const Line: CommonComponent<LineProps> = withCommon(({
   children,
   style = {},
   ...restProps
-}: LineProps, ref: React.Ref<any>) => {
+}, ref) => {
 
-  const {TRY_TO_INVERSE} = useTheme()
+  const { TRY_TO_INVERSE } = useTheme()
 
-  const newStyle = {...style}
+  const newStyle = { ...style }
 
   if (isCustomVariable(fill)) { newStyle.borderColor = `var(${fill})` }
 
-  if (isCustomValue(fill)) { newStyle.borderColor = fill || undefined}
-  if (isCustomValue(weight)) { newStyle.borderWidth = weight || undefined}
-  if (isCustomValue(top)) { newStyle.borderTopWidth = top || undefined}
-  if (isCustomValue(right)) { newStyle.borderRightWidth = right || undefined}
-  if (isCustomValue(bottom)) { newStyle.borderBottomWidth = bottom || undefined}
-  if (isCustomValue(left)) { newStyle.borderLeftWidth = left || undefined}
+  if (isCustomValue(fill)) { newStyle.borderColor = fill || undefined }
+  if (isCustomValue(weight)) { newStyle.borderWidth = weight || undefined }
+  if (isCustomValue(top)) { newStyle.borderTopWidth = top || undefined }
+  if (isCustomValue(right)) { newStyle.borderRightWidth = right || undefined }
+  if (isCustomValue(bottom)) { newStyle.borderBottomWidth = bottom || undefined }
+  if (isCustomValue(left)) { newStyle.borderLeftWidth = left || undefined }
 
   const componentProps = {
     ...restProps,
@@ -56,4 +56,7 @@ export const Line: CommonComponent<LineProps> = withCommon(({
   return typeof children === 'function'
     ? children(componentProps)
     : <div {...componentProps} />
-})
+}
+
+
+export default withCommon(Line)

@@ -99,6 +99,25 @@ export default function (normalizedConfig: any) {
     }
   }
 
+  styles += `
+  .fill-none {
+  * {
+    fill: none !important;
+    stroke: none !important;
+  }
+}
+
+.icon {
+  *[fill="none"] {
+    fill: none !important;
+  }
+
+  *[stroke="none"] {
+    stroke: none !important;
+  }
+}
+`
+
 
   setStyles(id, styles)
 

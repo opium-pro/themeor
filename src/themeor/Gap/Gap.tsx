@@ -1,12 +1,13 @@
 import React from 'react'
 import cn from '../utils/class-name'
 import consoleMessage from '../utils/console-message'
-import {GapProps} from './types'
-import {isCustomValue} from '../utils/is-custom'
-import {CommonComponent, withCommon} from '../with-common'
+import { GapComponent } from './types'
+import { useConfig } from '../utils/use-config'
+import { useTheme } from '../context'
+import { withCommon } from '../with-common'
 
 
-export const Gap: CommonComponent<GapProps> = withCommon(({
+const Gap: GapComponent = ({
   className,
   size,
   top,
@@ -18,31 +19,32 @@ export const Gap: CommonComponent<GapProps> = withCommon(({
   children,
   forwardRef,
   inrow,
-  style={},
+  style = {},
   ...restProps
-}: GapProps, ref: React.Ref<any>) => {
+}, ref) => {
 
   const [isInrow, setInrow] = React.useState(false)
+  const { gapConfig } = useConfig(useTheme())
 
-  const newStyle = {...style}
+  const newStyle = { ...style }
 
-  if (isCustomValue(size)) { newStyle.padding = size || undefined }
-  if (isCustomValue(vert)) {
+  if (size && !gapConfig({size})) { newStyle.padding = size || undefined }
+  if (vert && !gapConfig({size: vert})) {
     newStyle.paddingTop = vert || undefined
     newStyle.paddingBottom = vert || undefined
   }
-  if (isCustomValue(hor)) {
+  if (hor && !gapConfig({size: hor})) {
     newStyle.paddingRight = hor || undefined
     newStyle.paddingLeft = hor || undefined
   }
-  if (isCustomValue(top)) { newStyle.paddingTop = top || undefined }
-  if (isCustomValue(right)) { newStyle.paddingRight = right || undefined }
-  if (isCustomValue(bottom)) { newStyle.paddingBottom = bottom || undefined }
-  if (isCustomValue(left)) { newStyle.paddingLeft = left || undefined }
+  if (top && !gapConfig({size: top})) { newStyle.paddingTop = top || undefined }
+  if (right && !gapConfig({size: right})) { newStyle.paddingRight = right || undefined }
+  if (bottom && !gapConfig({size: bottom})) { newStyle.paddingBottom = bottom || undefined }
+  if (left && !gapConfig({size: left})) { newStyle.paddingLeft = left || undefined }
 
   // If is inside of flexbox row, make inrow automatically
   function handleRef(node: any) {
-    if (!node) {return}
+    if (!node) { return }
     typeof forwardRef === 'function' && forwardRef(node)
     typeof ref === 'function' && ref(node)
 
@@ -78,13 +80,13 @@ export const Gap: CommonComponent<GapProps> = withCommon(({
       `t-gap`,
       !children && useInrow && notSpecified && `t-gap-left-${size || defaultGap}`,
       !children && !useInrow && notSpecified && `t-gap-top-${size || defaultGap}`,
-      !isCustomValue(top) && `t-gap-top-${top}`,
-      !isCustomValue(right) && `t-gap-right-${right}`,
-      !isCustomValue(bottom) && `t-gap-bottom-${bottom}`,
-      !isCustomValue(left) && `t-gap-left-${left}`,
-      !isCustomValue(size) && !!children && `t-gap-size-${size}`,
-      !isCustomValue(vert) && `t-gap-vert-${vert}`,
-      !isCustomValue(hor) && `t-gap-hor-${hor}`,
+      gapConfig({size: top}) && `t-gap-top-${top}`,
+      gapConfig({size: right}) && `t-gap-right-${right}`,
+      gapConfig({size: bottom}) && `t-gap-bottom-${bottom}`,
+      gapConfig({size: left}) && `t-gap-left-${left}`,
+      gapConfig({size: size}) && !!children && `t-gap-size-${size}`,
+      gapConfig({size: vert}) && `t-gap-vert-${vert}`,
+      gapConfig({size: hor}) && `t-gap-hor-${hor}`,
       !size && !!children && notSpecified && `t-gap-size-${defaultGap}`,
       className
     ),
@@ -97,4 +99,7 @@ export const Gap: CommonComponent<GapProps> = withCommon(({
   return typeof children === 'function'
     ? children(componentProps)
     : <div {...componentProps} />
-})
+}
+
+
+export default withCommon(Gap)

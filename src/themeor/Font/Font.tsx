@@ -1,13 +1,12 @@
 import React from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-name'
-import { isCustomVariable } from '../utils/is-custom'
-import { FontProps } from './types'
+import { FontCompoennt } from './types'
 import { useConfig } from '../utils/use-config'
-import { withCommon, CommonComponent } from '../with-common'
+import { withCommon } from '../with-common'
 
 
-export const Font: CommonComponent<FontProps> = withCommon(function Font({
+const Font: FontCompoennt = ({
   className,
   fill,
   inverse,
@@ -27,7 +26,7 @@ export const Font: CommonComponent<FontProps> = withCommon(function Font({
   letterSpacing,
   children,
   ...restProps
-}: FontProps, ref?: React.Ref<any>) {
+}, ref) => {
   const context = useTheme()
   const { TRY_TO_INVERSE } = context
   const { fontConfig } = useConfig(context)
@@ -50,9 +49,9 @@ export const Font: CommonComponent<FontProps> = withCommon(function Font({
       underline === false && 't-font-non-underline',
       inline && 't-font-inline',
       inline === false && 't-font-block',
-      fontConfig({ fill }) && !isCustomVariable(fill) && `t-font-fill-${fill}`,
+      fontConfig({ fill }) && `t-font-fill-${fill}`,
       forceInverse && !fill && `t-font-fill-base`,
-      forceInverse && !isCustomVariable(fill) && 't-font-inverse',
+      forceInverse && 't-font-inverse',
       (uppercase && 't-font-uppercase') || ((uppercase === false) && 't-font-non-uppercase'),
       (italic && 't-font-italic') || ((italic === false) && 't-font-non-italic'),
       noselect && 't-font-noselect',
@@ -66,11 +65,15 @@ export const Font: CommonComponent<FontProps> = withCommon(function Font({
       className,
     ),
     style: newStyle,
+    ref: ref || forwardRef,
     children,
     ...restProps,
   }
 
-  return (
-    <div ref={forwardRef} {...componentProps} />
-  )
-})
+  return typeof children === 'function'
+    ? children(componentProps)
+    : <div {...componentProps} />
+}
+
+
+export default withCommon(Font)

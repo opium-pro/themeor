@@ -1,6 +1,5 @@
 import { setStyles } from '../utils/styles'
 import newId from '../utils/new-id'
-import { minus } from '../utils/change-css-value'
 
 export const id = newId()
 
@@ -10,7 +9,7 @@ export default function (normalizedConfig: any) {
   } = normalizedConfig
 
   let styles = `
-.gap {
+.t-gap {
   box-sizing: border-box;
 }
 `
@@ -18,37 +17,37 @@ export default function (normalizedConfig: any) {
 
   for (const key in size) {
     styles += `
-.size-${key} {padding: ${size[key]};}
+.t-gap-size-${key} {padding: ${size[key]};}
 `
   }
   styles += `
-.size-none {padding: 0;}
+.t-gap-size-none {padding: 0;}
 `
 
 for (const key in size) {
     styles += `
-.vert-${key} {padding-top: ${size[key]};padding-bottom: ${size[key]};}
-.hor-${key} {padding-left: ${size[key]};padding-right: ${size[key]};}
+.t-gap-vert-${key} {padding-top: ${size[key]};padding-bottom: ${size[key]};}
+.t-gap-hor-${key} {padding-left: ${size[key]};padding-right: ${size[key]};}
 `
   }
   styles += `
-.vert-none {padding-top: 0;padding-bottom: 0;}
-.hor-none {padding-left: 0;padding-right: 0;}
+.t-gap-vert-none {padding-top: 0;padding-bottom: 0;}
+.t-gap-hor-none {padding-left: 0;padding-right: 0;}
 `
 
 for (const key in size) {
     styles += `
-.top-${key} {padding-top: ${size[key]};}
-.right-${key} {padding-right: ${size[key]};}
-.bottom-${key} {padding-bottom: ${size[key]};}
-.left-${key} {padding-left: ${size[key]};}
+.t-gap-top-${key} {padding-top: ${size[key]};}
+.t-gap-right-${key} {padding-right: ${size[key]};}
+.t-gap-bottom-${key} {padding-bottom: ${size[key]};}
+.t-gap-left-${key} {padding-left: ${size[key]};}
 `
   }
   styles += `
-.top-none {padding-top: 0;}
-.right-none {padding-right: 0;}
-.bottom-none {padding-bottom: 0;}
-.left-none {padding-left: 0;}
+.t-gap-top-none {padding-top: 0;}
+.t-gap-right-none {padding-right: 0;}
+.t-gap-bottom-none {padding-bottom: 0;}
+.t-gap-left-none {padding-left: 0;}
 `
 
   setStyles(id, styles)

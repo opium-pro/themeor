@@ -1,4 +1,4 @@
-import { CommonProps } from "../with-common"
+import { CommonProps, CommonComponent } from "../with-common"
 
 export type LineProps = CommonProps & {
   fill?: string | false,
@@ -10,3 +10,5 @@ export type LineProps = CommonProps & {
   left?: string | 'none' | false,
   forwardRef?: any,
 }
+
+export type LineComponent = CommonComponent<LineProps>

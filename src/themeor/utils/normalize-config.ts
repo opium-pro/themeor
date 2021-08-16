@@ -1,9 +1,11 @@
 import { ThemeContext } from '../context'
 import { ThemeConfig } from '../config-types'
+import { allFills } from './opium-fill'
 
 
 export function normalizeConfig (config: ThemeConfig): ThemeContext {
   const newConfig = { ...config.themeContext, ...config }
+  const opiumFill = config?.fill?.base?.strong
 
   newConfig.fill = makeFlat(config.fill)
   newConfig.fillFancy = makeFlat({...config['fancy-fill'], ...config.fancyFill})
@@ -17,7 +19,7 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     shadow: makeFlat(config.box?.shadow),
     shadowInner: makeFlat(config.box?.shadowInner),
     glow: makeFlat(config.box?.glow),
-    fill: makeFlat({ ...config.fill, ...config.box?.fill }),
+    fill: {...newConfig.fill, ...makeFlat(config.box?.fill)},
     fillFancy: makeFlat(newConfig.fillFancy),
   }
   newConfig.font = {
@@ -35,7 +37,7 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
       ...makeFlat(config.font?.weight),
     },
     family: makeFlat(config.font?.family),
-    fill: makeFlat(config.font?.fill),
+    fill: {...newConfig.fill, ...makeFlat(config.font?.fill)},
     lineHeight: makeFlat(config.font?.['line-height']),
     letterSpacing: makeFlat(config.font?.['letter-spacing']),
   }
@@ -44,8 +46,27 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     weight: makeFlat(config.font?.fill),
   }
   newConfig.gap = {
-    size: makeFlat(config.font?.size),
+    size: makeFlat(config.gap?.size || config.gap),
   }
+  newConfig.icon = {
+    fill: {...newConfig.fill, ...makeFlat(config.icon?.fill )},
+    size: makeFlat(config.icon?.size),
+  }
+
+  if (opiumFill) {
+    const boxFill: any = {}
+
+    for (const opiumFill of allFills) {
+      const splitFill = opiumFill.split('-')
+      boxFill[opiumFill] = newConfig.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      newConfig.font.fill[opiumFill] = newConfig.font.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      newConfig.line.fill[opiumFill] = newConfig.line.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      newConfig.icon.fill[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    }
+
+    newConfig.box.fill = boxFill
+  }
+
 
   return newConfig
 }
