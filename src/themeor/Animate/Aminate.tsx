@@ -8,7 +8,7 @@ import {Common} from '../Common'
 
 
 // TryTagless Element Tag
-export const Animate: AnimateComponent = (props) => {
+export const Animate: AnimateComponent = React.forwardRef((props, ref) => {
   const {
     onMount,
     onUnmount,
@@ -43,6 +43,8 @@ export const Animate: AnimateComponent = (props) => {
   const styleId = 'style-' + thisId
 
   const componentProps = {
+    forwardRef: ref,
+    ...restProps,
     id: thisId,
     children,
     onMouseEnter: (() => { onHover && setAnimationName(onHover); onHover && remove() }),
@@ -51,7 +53,6 @@ export const Animate: AnimateComponent = (props) => {
       css['animated'],
       css[animationName],
     ),
-    ...restProps,
   }
 
   function remove() {
@@ -90,4 +91,4 @@ export const Animate: AnimateComponent = (props) => {
   }
 
   return Common(componentProps)
-}
+})

@@ -5,7 +5,7 @@ import consoleMessage from '../utils/console-message'
 import {IconProps} from "./types"
 import {useConfig} from '../utils/use-config'
 
-export const Icon = ({
+const Icon = ({
   className,
   fill = "base",
   inverse,
@@ -17,7 +17,7 @@ export const Icon = ({
   forceFill,
   forwardRef,
   ...restProps
-}: IconProps) => {
+}: IconProps, ref: any) => {
   const newStyle = {...style}
   const {icons, TRY_TO_INVERSE} = useTheme()
 
@@ -27,6 +27,7 @@ export const Icon = ({
     if (!node) {return}
 
     typeof forwardRef === 'function' && forwardRef(node)
+    typeof ref === 'function' && ref(node)
 
     const pathList = node.querySelectorAll('path')
 
@@ -105,3 +106,5 @@ export const Icon = ({
     <FinalIcon {...componentProps} />
   )
 }
+
+export default React.forwardRef(Icon)

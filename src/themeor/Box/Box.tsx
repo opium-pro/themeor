@@ -8,7 +8,7 @@ import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
 
 
-const Box = (props: BoxProps) => {
+const Box = (props: BoxProps, ref: any) => {
   const {
     className,
     fill = "none",
@@ -86,6 +86,7 @@ const Box = (props: BoxProps) => {
   // Setting classNames
 
   const componentProps = {
+    forwardRef: ref,
     ...restProps,
     className: cn(
       't-box',
@@ -166,4 +167,4 @@ const Box = (props: BoxProps) => {
 }
 
 
-export default withTagless(Box) as BoxComponent
+export default withTagless(React.forwardRef(Box)) as BoxComponent

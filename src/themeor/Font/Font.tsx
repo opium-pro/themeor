@@ -26,7 +26,7 @@ const Font = ({
   letterSpacing,
   children,
   ...restProps
-}: FontProps) => {
+}: FontProps, ref: any) => {
   const context = useTheme()
   const { fontConfig } = useConfig(context)
 
@@ -42,6 +42,7 @@ const Font = ({
   const forceInverse = (inverse !== false) && (inverse || context.TRY_TO_INVERSE)
 
   const componentProps = {
+    forwardRef: ref,
     ...restProps,
     className: cn(
       't-font',
@@ -72,4 +73,4 @@ const Font = ({
 }
 
 
-export default withTagless(Font) as FontCompoennt
+export default withTagless(React.forwardRef(Font)) as FontCompoennt

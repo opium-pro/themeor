@@ -19,7 +19,7 @@ const Align = ({
   stack,
   children,
   ...restProps
-}: AlignProps) => {
+}: AlignProps, ref: any) => {
   const { gapConfig } = useConfig(useTheme())
 
   const newStyle = { ...style }
@@ -41,6 +41,7 @@ const Align = ({
   }
 
   const componentProps = {
+    forwardRef: ref,
     ...restProps,
     className: cn(
       `t-align`,
@@ -90,4 +91,4 @@ const Align = ({
 }
 
 
-export default withTagless(Align) as AlignComponent
+export default withTagless(React.forwardRef(Align)) as AlignComponent

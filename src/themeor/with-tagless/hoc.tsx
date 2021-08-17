@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { forwardRef } from 'react'
 import consoleMessage from '../utils/console-message'
 import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate } from '../index'
 import { TaglessProps, TaglessComponent } from './types'
@@ -108,7 +108,7 @@ export const withTagless = (Component: any): TaglessComponent => {
     }
   }
 
-  Tagless.displayName = `${Component.displayName || Component.name}.TryTagless`
+  Tagless.displayName = `${Component.displayName || Component.name || Component.render?.displayName || Component.render?.name}.TryTagless`
 
   const TaglessComponent: TaglessComponent = Component
   TaglessComponent.TryTagless = Tagless

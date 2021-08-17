@@ -6,14 +6,14 @@ import { Common } from '../Common'
 import { useTheme } from '../context'
 
 
-export const Effect: EffectComponent = ({
+export const Effect: EffectComponent = React.forwardRef(({
   className,
   hidden,
   transparency,
   children,
   style = {},
   ...restProps
-}) => {
+}, ref) => {
   const newStyle = { ...style }
   const { effectConfig } = useConfig(useTheme())
 
@@ -22,6 +22,7 @@ export const Effect: EffectComponent = ({
   }
 
   const componentProps = {
+    forwardRef: ref,
     ...restProps,
     className: cn(
       `t-effect`,
@@ -34,4 +35,4 @@ export const Effect: EffectComponent = ({
   }
 
   return Common(componentProps)
-}
+})

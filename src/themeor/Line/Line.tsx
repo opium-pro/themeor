@@ -19,7 +19,7 @@ const Line = ({
   children,
   style = {},
   ...restProps
-}: LineProps) => {
+}: LineProps, ref: any) => {
 
   const { TRY_TO_INVERSE } = useTheme()
   const { lineConfig } = useConfig(useTheme())
@@ -34,6 +34,7 @@ const Line = ({
   if (left && !lineConfig({weight: left})) { newStyle.borderLeftWidth = left || undefined }
 
   const componentProps = {
+    forwardRef: ref,
     ...restProps,
     className: cn(
       `t-line`,
@@ -55,4 +56,4 @@ const Line = ({
 }
 
 
-export default withTagless(Line) as LineComponent
+export default withTagless(React.forwardRef(Line)) as LineComponent

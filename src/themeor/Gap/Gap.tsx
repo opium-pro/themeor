@@ -22,7 +22,7 @@ const Gap = ({
   inrow,
   style = {},
   ...restProps
-}: GapProps) => {
+}: GapProps, ref: any) => {
 
   const [isInrow, setInrow] = React.useState(false)
   const { gapConfig } = useConfig(useTheme())
@@ -47,6 +47,7 @@ const Gap = ({
   function handleRef(node: any) {
     if (!node) { return }
     typeof forwardRef === 'function' && forwardRef(node)
+    typeof ref === 'function' && ref(node)
 
     if (inrow === true) {
       setInrow(true)
@@ -76,6 +77,7 @@ const Gap = ({
   const notSpecified = !right && !left && !top && !bottom && !vert && !hor
 
   const componentProps = {
+    ...restProps,
     className: cn(
       `t-gap`,
       !children && useInrow && notSpecified && `t-gap-left-${size || defaultGap}`,
@@ -93,11 +95,10 @@ const Gap = ({
     style: newStyle,
     children,
     forwardRef: handleRef,
-    ...restProps,
   }
 
   return Common(componentProps)
 }
 
 
-export default withTagless(Gap) as GapComponent
+export default withTagless(React.forwardRef(Gap)) as GapComponent
