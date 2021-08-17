@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link as RouterLink} from 'react-router-dom'
 import {Font, Line} from '../../themeor'
-import smoothScroll from '../../themeor/utils/smooth-scroll'
+import smoothScroll from '../utils/smooth-scroll'
 import {AppContext} from '../context'
 
 export interface LinkProps extends React.HTMLAttributes<HTMLAnchorElement> {

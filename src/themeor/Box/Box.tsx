@@ -3,7 +3,6 @@ import { useTheme, ThemeContext } from '../context'
 import cn from '../utils/class-name'
 import { Line } from '../Line'
 import { BoxProps, BoxComponent } from './types'
-import splitFill from '../utils/split-fill'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
@@ -40,6 +39,7 @@ const Box = (props: BoxProps) => {
   const context = useTheme()
   const { boxConfig } = useConfig(context)
   const newStyle = { ...style }
+  const { normalizedConfig } = context
 
 
   // Setting inline styles
@@ -133,7 +133,7 @@ const Box = (props: BoxProps) => {
 
   // Automatically inverse text and other stuff on this background
   let inverseStatus: boolean | undefined
-  inverseStatus = context.shallInverseOn?.includes(splitFill(fill)) && (!boxConfig({ fill }) || strong)
+  inverseStatus = !!fill && normalizedConfig?.shallInverseOn?.includes(fill)
 
 
   if (context.TRY_TO_INVERSE && !inverse) {

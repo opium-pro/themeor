@@ -1,7 +1,6 @@
 import { setStyles } from '../utils/styles'
-import newId from '../utils/new-id'
 
-export const id = newId()
+export const id = 'themeor-gap'
 
 export default function (normalizedConfig: any) {
   const {

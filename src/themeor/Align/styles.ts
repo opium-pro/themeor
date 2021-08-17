@@ -1,8 +1,7 @@
 import { setStyles } from '../utils/styles'
-import newId from '../utils/new-id'
 import { minus, half } from '../utils/change-css-value'
 
-export const id = newId()
+export const id = 'themeor-align'
 
 export default function (normalizedConfig: any) {
   const {

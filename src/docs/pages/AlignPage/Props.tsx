@@ -1,7 +1,7 @@
 import React from 'react'
 import { Code, Link } from '../../components'
 import { Wrapper, Group, Item, Value } from '../../components/Props'
-import opiumScale from '../../../themeor/utils/opium-scale'
+import opiumScale from '../../utils/opium-scale'
 
 export default class BoxPage_Props extends React.PureComponent {
   render() {

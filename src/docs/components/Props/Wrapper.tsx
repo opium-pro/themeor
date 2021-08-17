@@ -1,7 +1,7 @@
 import React from 'react'
 import { Font, Line, Gap, Align } from '../../../themeor'
 import { ContentWrapper, Code, Tag } from '../index'
-import smoothScroll from '../../../themeor/utils/smooth-scroll'
+import smoothScroll from '../../utils/smooth-scroll'
 
 export interface Props {}
 
