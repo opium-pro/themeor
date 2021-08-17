@@ -17,7 +17,14 @@ import { normalizeConfig } from '../utils/normalize-config'
 import jss from 'jss'
 import preset from 'jss-preset-default'
 
-jss.setup(preset())
+const createGenerateId = () => {
+  let counter = 0
+  return (rule: any, {options}: any) => {
+    return `${options.classNamePrefix || ''}__${rule.key}__t${counter++}`
+  }
+}
+
+jss.setup({...preset(), createGenerateId})
 
 
 export const Theme: FC<ThemeProps> = ({

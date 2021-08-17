@@ -52,7 +52,7 @@ export default function (normalizedConfig: any) {
   if (styleSheet) {
     styleSheet.update(styles)
   } else {
-    styleSheet = jss.createStyleSheet(styles)
+    styleSheet = jss.createStyleSheet(styles, { classNamePrefix: 'gap' })
     styleSheet.attach()
   }
   css = styleSheet.classes

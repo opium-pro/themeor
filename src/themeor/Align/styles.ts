@@ -58,13 +58,13 @@ export default function (normalizedConfig: any) {
       marginBottom: minus(half(size[key])),
     }
 
-    styles[`item-hor-gap-${key}`] = {
+    styles[`item__hor-gap-${key}`] = {
       paddingLeft: half(size[key]),
       paddingRight: half(size[key]),
       boxSizing: 'border-box',
     }
 
-    styles[`item-vert-gap-${key}`] = {
+    styles[`item__vert-gap-${key}`] = {
       paddingTop: half(size[key]),
       paddingBottom: half(size[key]),
       boxSizing: 'border-box',
@@ -94,7 +94,7 @@ export default function (normalizedConfig: any) {
   if (styleSheet) {
     styleSheet.update(styles)
   } else {
-    styleSheet = jss.createStyleSheet(styles)
+    styleSheet = jss.createStyleSheet(styles, { classNamePrefix: 'align' })
     styleSheet.attach()
   }
 
