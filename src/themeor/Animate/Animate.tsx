@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { AnimateComponent } from './types'
+import { AnimateComponent, AnimateProps } from './types'
 import cn from '../utils/class-name'
 import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
 import newId from '../utils/new-id'
 import {Common} from '../Common'
+import { withTagless } from '../with-tagless'
 
 
 // TryTagless Element Tag
-export const Animate: AnimateComponent = React.forwardRef((props, ref) => {
+const Animate = (props: AnimateProps, ref: any) => {
   const {
     onMount,
     onUnmount,
@@ -91,4 +92,7 @@ export const Animate: AnimateComponent = React.forwardRef((props, ref) => {
   }
 
   return Common(componentProps)
-})
+}
+
+
+export default withTagless(React.forwardRef(Animate)) as AnimateComponent

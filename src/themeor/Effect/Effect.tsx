@@ -1,19 +1,20 @@
 import React from 'react'
 import cn from '../utils/class-name'
-import { EffectComponent } from './types'
+import { EffectComponent, EffectProps } from './types'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'
 import { useTheme } from '../context'
+import { withTagless } from '../with-tagless'
 
 
-export const Effect: EffectComponent = React.forwardRef(({
+const Effect = ({
   className,
   hidden,
   transparency,
   children,
   style = {},
   ...restProps
-}, ref) => {
+}: EffectProps, ref: any) => {
   const newStyle = { ...style }
   const { effectConfig } = useConfig(useTheme())
 
@@ -35,4 +36,7 @@ export const Effect: EffectComponent = React.forwardRef(({
   }
 
   return Common(componentProps)
-})
+}
+
+
+export default withTagless(React.forwardRef(Effect)) as EffectComponent
