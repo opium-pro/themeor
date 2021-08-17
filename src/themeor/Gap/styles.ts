@@ -1,53 +1,60 @@
-import { setStyles } from '../utils/styles'
+import jss, { Classes, Styles, StyleSheet } from 'jss'
 
-export const id = 'themeor-gap'
+
+export let css: Classes = {}
+export let styleSheet: StyleSheet
+
 
 export default function (normalizedConfig: any) {
   const {
     gap: { size }
   } = normalizedConfig
 
-  let styles = `
-.t-gap {
-  box-sizing: border-box;
-}
-`
+  const styles: Styles = {}
 
+  styles[`gap`] = { boxSizing: 'border-box' }
 
   for (const key in size) {
-    styles += `
-.t-gap-size-${key} {padding: ${size[key]};}
-`
+    styles[`size-${key}`] = { padding: size[key] }
   }
-  styles += `
-.t-gap-size-none {padding: 0;}
-`
+  styles[`size-none`] = { padding: 0 }
 
-for (const key in size) {
-    styles += `
-.t-gap-vert-${key} {padding-top: ${size[key]};padding-bottom: ${size[key]};}
-.t-gap-hor-${key} {padding-left: ${size[key]};padding-right: ${size[key]};}
-`
+  for (const key in size) {
+    styles[`vert-${key}`] = {
+      paddingTop: size[key],
+      paddingBottom: size[key],
+    }
+    styles[`hor-${key}`] = {
+      paddingLeft: size[key],
+      paddingRight: size[key],
+    }
   }
-  styles += `
-.t-gap-vert-none {padding-top: 0;padding-bottom: 0;}
-.t-gap-hor-none {padding-left: 0;padding-right: 0;}
-`
-
-for (const key in size) {
-    styles += `
-.t-gap-top-${key} {padding-top: ${size[key]};}
-.t-gap-right-${key} {padding-right: ${size[key]};}
-.t-gap-bottom-${key} {padding-bottom: ${size[key]};}
-.t-gap-left-${key} {padding-left: ${size[key]};}
-`
+  styles[`vert-none`] = {
+    paddingTop: 0,
+    paddingBottom: 0,
   }
-  styles += `
-.t-gap-top-none {padding-top: 0;}
-.t-gap-right-none {padding-right: 0;}
-.t-gap-bottom-none {padding-bottom: 0;}
-.t-gap-left-none {padding-left: 0;}
-`
+  styles[`hor-none`] = {
+    paddingLeft: 0,
+    paddingRight: 0,
+  }
 
-  setStyles(id, styles)
+  for (const key in size) {
+    styles[`top-${key}`] = { paddingTop: size[key] }
+    styles[`right-${key}`] = { paddingRight: size[key] }
+    styles[`bottom-${key}`] = { paddingBottom: size[key] }
+    styles[`left-${key}`] = { paddingLeft: size[key] }
+  }
+  styles[`top-none`] = { paddingTop: 0 }
+  styles[`right-none`] = { paddingRight: 0 }
+  styles[`bottom-none`] = { paddingBottom: 0 }
+  styles[`left-none`] = { paddingLeft: 0 }
+
+  if (styleSheet) {
+    styleSheet.update(styles)
+  } else {
+    styleSheet = jss.createStyleSheet(styles)
+    styleSheet.attach()
+  }
+  css = styleSheet.classes
+  return styleSheet
 }

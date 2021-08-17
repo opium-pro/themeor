@@ -6,6 +6,7 @@ import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
+import { css } from './styles'
 
 
 const Gap = ({
@@ -79,17 +80,17 @@ const Gap = ({
   const componentProps = {
     ...restProps,
     className: cn(
-      `t-gap`,
-      !children && useInrow && notSpecified && `t-gap-left-${size || defaultGap}`,
-      !children && !useInrow && notSpecified && `t-gap-top-${size || defaultGap}`,
-      gapConfig({size: top}) && `t-gap-top-${top}`,
-      gapConfig({size: right}) && `t-gap-right-${right}`,
-      gapConfig({size: bottom}) && `t-gap-bottom-${bottom}`,
-      gapConfig({size: left}) && `t-gap-left-${left}`,
-      gapConfig({size: size}) && !!children && `t-gap-size-${size}`,
-      gapConfig({size: vert}) && `t-gap-vert-${vert}`,
-      gapConfig({size: hor}) && `t-gap-hor-${hor}`,
-      !size && !!children && notSpecified && `t-gap-size-${defaultGap}`,
+      css[`gap`],
+      !children && useInrow && notSpecified && css[`left-${size || defaultGap}`],
+      !children && !useInrow && notSpecified && css[`top-${size || defaultGap}`],
+      gapConfig({size: top}) && css[`top-${top}`],
+      gapConfig({size: right}) && css[`right-${right}`],
+      gapConfig({size: bottom}) && css[`bottom-${bottom}`],
+      gapConfig({size: left}) && css[`left-${left}`],
+      gapConfig({size: size}) && !!children && css[`size-${size}`],
+      gapConfig({size: vert}) && css[`vert-${vert}`],
+      gapConfig({size: hor}) && css[`hor-${hor}`],
+      !size && !!children && notSpecified && css[`size-${defaultGap}`],
       className
     ),
     style: newStyle,

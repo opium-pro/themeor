@@ -14,6 +14,10 @@ import setReactionStyle from '../Reaction/styles'
 import setFitStyle from '../Fit/styles'
 import setEffectStyle from '../Effect/styles'
 import { normalizeConfig } from '../utils/normalize-config'
+import jss from 'jss'
+import preset from 'jss-preset-default'
+
+jss.setup(preset())
 
 
 export const Theme: FC<ThemeProps> = ({

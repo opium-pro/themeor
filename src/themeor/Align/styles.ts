@@ -1,151 +1,103 @@
-import { setStyles } from '../utils/styles'
 import { minus, half } from '../utils/change-css-value'
+import jss, { Classes, Styles, StyleSheet } from 'jss'
 
-export const id = 'themeor-align'
+
+export let css: Classes = {}
+export let styleSheet: StyleSheet
+
 
 export default function (normalizedConfig: any) {
   const {
     gap: { size }
   } = normalizedConfig
 
-  let styles = `
-.t-align {
-  display: flex;
-}
+  const styles: Styles = {}
 
-.t-align-col {
-  flex-direction: column;
-}
-.t-align-col.t-align-vert-center {
-    justify-content: center;
+  styles[`align`] = { display: 'flex' }
+
+
+  for (const vert of ['center', 'top', 'bottom', 'stretch']) {
+    styles[`vert-${vert}`] = {}
   }
-.t-align-col.t-align-vert-top {
-  justify-content: flex-start;
-}
-.t-align-col.t-align-vert-bottom {
-  justify-content: flex-end;
-}
-.t-align-col.t-align-vert-stretch {
-  justify-content: stretch;
-}
 
-.t-align-col.t-align-hor-center {
-  align-items: center;
-}
-.t-align-col.t-align-hor-right {
-  align-items: flex-end;
-}
-.t-align-col.t-align-hor-left {
-  align-items: flex-start;
-}
-.t-align-col.t-align-hor-stretch {
-  align-items: stretch;
-}
+  for (const hor of ['center', 'right', 'left', 'stretch']) {
+    styles[`hor-${hor}`] = {}
+  }
 
-.t-align-stack {
-  flex-wrap: wrap;
-}
+  styles[`col`] = { flexDirection: 'column' }
+    ; (styles[`col`] as any)[`&$vert-center`] = { justifyContent: 'center' }
+    ; (styles[`col`] as any)[`&$vert-top`] = { justifyContent: 'flex-start' }
+    ; (styles[`col`] as any)[`&$vert-bottom`] = { justifyContent: 'flex-end' }
+    ; (styles[`col`] as any)[`&$vert-stretch`] = { justifyContent: 'stretch' }
+    ; (styles[`col`] as any)[`&$hor-center`] = { alignItems: 'center' }
+    ; (styles[`col`] as any)[`&$hor-right`] = { alignItems: 'flex-end' }
+    ; (styles[`col`] as any)[`&$hor-left`] = { alignItems: 'flex-start' }
+    ; (styles[`col`] as any)[`&$hor-stretch`] = { alignItems: 'stretch' }
 
-.t-align-row {
-  flex-direction: row;
-}
-.t-align-row.t-align-hor-left {
-  justify-content: flex-start;
-}
-.t-align-row.t-align-hor-center {
-  justify-content: center;
-}
-.t-align-row.t-align-hor-right {
-  justify-content: flex-end;
-}
-.t-align-row.t-align-hor-stretch {
-  justify-content: stretch;
-}
+  styles[`stack`] = { flexWrap: 'wrap' }
 
-.t-align-row.t-align-vert-top {
-  align-items: flex-start;
-}
-.t-align-row.t-align-vert-center {
-  align-items: center;
-}
-.t-align-row.t-align-vert-bottom {
-  align-items: flex-end;
-}
-.t-align-row.t-align-vert-stretch {
-  align-items: stretch;
-}
-`
+  styles[`row`] = { flexDirection: 'row' }
+    ; (styles[`row`] as any)[`&$vert-center`] = { alignItems: 'center' }
+    ; (styles[`row`] as any)[`&$vert-top`] = { alignItems: 'flex-start' }
+    ; (styles[`row`] as any)[`&$vert-bottom`] = { alignItems: 'flex-end' }
+    ; (styles[`row`] as any)[`&$vert-stretch`] = { alignItems: 'stretch' }
+    ; (styles[`row`] as any)[`&$hor-center`] = { justifyContent: 'center' }
+    ; (styles[`row`] as any)[`&$hor-right`] = { justifyContent: 'flex-end' }
+    ; (styles[`row`] as any)[`&$hor-left`] = { justifyContent: 'flex-start' }
+    ; (styles[`row`] as any)[`&$hor-stretch`] = { justifyContent: 'stretch' }
 
 
   // Gaps
   for (const key in size) {
-    styles += `
-.t-align-hor-gap-${key} {
-  margin-left: ${minus(half(size[key]))};
-  margin-right: ${minus(half(size[key]))};
-}
-.t-align-vert-gap-${key} {
-  margin-top: ${minus(half(size[key]))};
-  margin-bottom: ${minus(half(size[key]))};
-}
+    styles[`hor-gap-${key}`] = {
+      marginLeft: minus(half(size[key])),
+      marginRight: minus(half(size[key])),
+    }
+    styles[`vert-gap-${key}`] = {
+      marginTop: minus(half(size[key])),
+      marginBottom: minus(half(size[key])),
+    }
 
-.t-align-item-hor-gap-${key} {
-  padding-left: ${half(size[key])};
-  padding-right: ${half(size[key])};
-  box-sizing: border-box;
-}
-.t-align-item-vert-gap-${key} {
-  padding-top: ${half(size[key])};
-  padding-bottom: ${half(size[key])};
-  box-sizing: border-box;
-}
-`
+    styles[`item-hor-gap-${key}`] = {
+      paddingLeft: half(size[key]),
+      paddingRight: half(size[key]),
+      boxSizing: 'border-box',
+    }
+
+    styles[`item-vert-gap-${key}`] = {
+      paddingTop: half(size[key]),
+      paddingBottom: half(size[key]),
+      boxSizing: 'border-box',
+    }
   }
 
-  styles += `
-.t-align-pattern {
-  display: grid;
-  grid-template-rows: auto;
-  margin: 0;
-}
-
-.t-align-pattern.t-align-hor-left {
-  justify-items: left;
-}
-.t-align-pattern.t-align-hor-center {
-  justify-items: center;
-}
-.t-align-pattern.t-align-hor-right {
-  justify-items: end;
-}
-.t-align-pattern.t-align-hor-stretch {
-  justify-items: stretch;
-}
-
-.t-align-pattern.t-align-vert-top {
-  align-items: start;
-}
-.t-align-pattern.t-align-vert-center {
-  align-items: center;
-}
-.t-align-pattern.t-align-vert-bottom {
-  align-items: end;
-}
-.t-align-pattern.t-align-vert-stretch {
-  align-items: stretch;
-}
-`
+  // Pattern
+  styles[`pattern`] = {
+    display: 'grid',
+    gridTemplateRows: 'auto',
+  }
+    ; (styles[`pattern`] as any)[`&$vert-center`] = { alignItems: 'center' }
+    ; (styles[`pattern`] as any)[`&$vert-top`] = { alignItems: 'start' }
+    ; (styles[`pattern`] as any)[`&$vert-bottom`] = { alignItems: 'end' }
+    ; (styles[`pattern`] as any)[`&$vert-stretch`] = { alignItems: 'stretch' }
+    ; (styles[`pattern`] as any)[`&$hor-center`] = { justifyItems: 'center' }
+    ; (styles[`pattern`] as any)[`&$hor-right`] = { justifyItems: 'end' }
+    ; (styles[`pattern`] as any)[`&$hor-left`] = { justifyItems: 'start' }
+    ; (styles[`pattern`] as any)[`&$hor-stretch`] = { justifyItems: 'stretch' }
 
   for (const key in size) {
-    styles += `
-.t-align-pattern.t-align-hor-gap-${key} {
-  column-gap: ${size[key]};
-}
-.t-align-pattern.t-align-vert-gap-${key} {
-  row-gap: ${size[key]};
-}
-`
+    ; (styles[`pattern`] as any)[`&$hor-gap-${key}`] = { columnGap: size[key] }
+      ; (styles[`pattern`] as any)[`&$vert-gap-${key}`] = { rowGap: size[key] }
   }
 
-  setStyles(id, styles)
+
+  if (styleSheet) {
+    styleSheet.update(styles)
+  } else {
+    styleSheet = jss.createStyleSheet(styles)
+    styleSheet.attach()
+  }
+
+  css = styleSheet.classes
+  return styleSheet
 }
