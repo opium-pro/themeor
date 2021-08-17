@@ -66,22 +66,41 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     size: makeFlat(config.icon?.size),
   }
 
+  newConfig.reaction = {
+    speed: {
+      none: '0',
+      ...makeFlat(config.reaction?.speed)
+    },
+  }
+
+  newConfig.effect = {
+    transparency: {
+      none: '1',
+      max: '0',
+      ...makeFlat(config.effect?.transparency)
+    },
+  }
+
   if (opiumFill) {
     const boxFill: any = {}
     const lineFill: any = {}
+    const fontFill: any = {}
+    const iconFill: any = {}
 
     for (const opiumFill of allFills) {
       const splitFill = opiumFill.split('-')
       boxFill[opiumFill] = newConfig.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-      newConfig.font.fill[opiumFill] = newConfig.font.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      fontFill[opiumFill] = newConfig.font.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
       lineFill[opiumFill] = newConfig.line.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-      newConfig.icon.fill[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      iconFill[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
     }
 
-    boxFill.none = lineFill.none = 'transparent'
+    boxFill.none = fontFill.none = lineFill.none = iconFill.none = 'transparent'
 
     newConfig.box.fill = boxFill
+    newConfig.font.fill = fontFill
     newConfig.line.fill = lineFill
+    newConfig.icon.fill = iconFill
   }
 
 

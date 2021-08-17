@@ -14,7 +14,7 @@ export default function (normalizedConfig: any) {
   } = normalizedConfig
 
   let styles = `
-.icon {
+.t-icon {
   box-sizing: content-box !important;
 }
 `
@@ -46,7 +46,7 @@ export default function (normalizedConfig: any) {
   // Fills
   for (const key in fill) {
     styles += `
-.fill-${key} {
+.t-icon-fill-${key} {
   *[fill] {
     fill: var(--t-icon-fill-${key}-strong, var(--t-fill-${key}-strong));
   }
@@ -55,7 +55,7 @@ export default function (normalizedConfig: any) {
     stroke: var(--t-icon-fill-${key}-strong, var(--t-fill-${key}-strong));
   }
 }
-.inverse.fill-${key} {
+.t-icon-inverse.t-icon-fill-${key} {
   *[fill] {
     fill: var(--t-icon-fill-${key}-weak, var(--t-fill-${key}-weak));
   }
@@ -70,7 +70,7 @@ export default function (normalizedConfig: any) {
 
   for (const key of ['stroke', 'fill']) {
     styles += `
-.force-#{$force} {
+.t-icon-force-#{$force} {
   &.inverse {
     *[class],
     *[stroke],
@@ -81,14 +81,14 @@ export default function (normalizedConfig: any) {
 `
     for (const key in fill) {
       styles += `
-&.fill-${key} {
+&.t-icon-fill-${key} {
   *[class],
   *[stroke],
   *[fill] {
     #{$force}: var(--t-icon-fill-${key}-strong, var(--t-fill-${key}-strong));
   }
 }
-&.inverse.fill-${key} {
+&.t-icon-inverse.t-icon-fill-${key} {
   *[class],
   *[stroke],
   *[fill] {
@@ -100,14 +100,14 @@ export default function (normalizedConfig: any) {
   }
 
   styles += `
-  .fill-none {
+.t-icon-fill-none {
   * {
     fill: none !important;
     stroke: none !important;
   }
 }
 
-.icon {
+.t-icon-icon {
   *[fill="none"] {
     fill: none !important;
   }

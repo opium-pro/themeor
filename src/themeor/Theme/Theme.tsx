@@ -12,6 +12,7 @@ import setLineStyle from '../Line/styles'
 import setIconStyle from '../Icon/styles'
 import setReactionStyle from '../Reaction/styles'
 import setFitStyle from '../Fit/styles'
+import setEffectStyle from '../Effect/styles'
 import { normalizeConfig } from '../utils/normalize-config'
 
 
@@ -33,10 +34,9 @@ export const Theme: FC<ThemeProps> = ({
     }
   }
 
-  const normalizedConfig = normalizeConfig(currentConfig)
-
   // Update
   useEffect(() => {
+    const normalizedConfig = normalizeConfig(currentConfig)
     setBoxStyle(normalizedConfig)
     setFontStyle(normalizedConfig)
     setAlignStyle(normalizedConfig)
@@ -45,6 +45,7 @@ export const Theme: FC<ThemeProps> = ({
     setLineStyle(normalizedConfig)
     setReactionStyle(normalizedConfig)
     setIconStyle(normalizedConfig)
+    setEffectStyle(normalizedConfig)
   }, [currentConfig])
 
 
@@ -64,7 +65,7 @@ export const Theme: FC<ThemeProps> = ({
     icons,
     themeId: id,
     darkMode: isDarkMode(),
-    normalizedConfig,
+    normalizedConfig: normalizeConfig(currentConfig),
   }
 
   return (
