@@ -12,7 +12,7 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     ...makeFlat(config.fill),
   }
   newConfig.fillFancy = makeFlat({...config['fancy-fill'], ...config.fancyFill})
-  newConfig.fillInversed = makeFlat({...config['inverse-fill'], ...config.inverseFill})
+  newConfig.fillInversed = makeFlat(config.fillInversed)
 
   newConfig.box = {
     radius: {
@@ -24,7 +24,7 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     shadowInner: makeFlat(config.box?.shadowInner),
     glow: makeFlat(config.box?.glow),
     fill: {...newConfig.fill, ...makeFlat(config.box?.fill)},
-    fillInversed: {...newConfig.fillInverse, ...makeFlat(config.box?.fillInverse)},
+    fillInversed: {...newConfig.fillInversed, ...makeFlat(config.box?.fillInversed)},
     fillFancy: {...newConfig.fillFancy, ...makeFlat(config.box?.fillFancy)},
   }
 
@@ -104,12 +104,12 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
       lineFill[opiumFill] = newConfig.line.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
       iconFill[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
 
-      boxFillInv[opiumFill] = newConfig.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      boxFillInv[opiumFill] = newConfig.box.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
       fontFillInv[opiumFill] = newConfig.font.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
       lineFillInv[opiumFill] = newConfig.line.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
       iconFillInv[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
 
-      boxFillStrogn[opiumFill] = newConfig.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      boxFillStrogn[opiumFill] = newConfig.box.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
     }
 
     boxFill.none = fontFill.none = lineFill.none = iconFill.none = 'transparent'

@@ -5,10 +5,10 @@
     "contact": "Denis Elianovsky http://opium.pro",
     "description": ""
   },
+  "template": ["corona"],
 
   "themeContext": {
     "shallInverseOn": ["base", "accent"],
-    "template": ["corona"],
     "defaultIconName": "placeholder",
     "_randomContectValue": "HERE YOU CAN SET VALUES FOR ThemeContext, BUT PLEASE START THEM WITH UNDERSCORE",
     "_formAttemtionFill": "accent"

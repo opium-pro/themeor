@@ -34,6 +34,10 @@ export const Theme: FC<ThemeProps> = ({
     }
   }
 
+  useEffect(() => {
+    changeColorMode()
+  }, [config, darkConfig])
+
   // Update
   useEffect(() => {
     const normalizedConfig = normalizeConfig(currentConfig)
