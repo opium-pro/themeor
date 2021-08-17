@@ -9,7 +9,7 @@ import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
 
 
-const Box = React.forwardRef((props: BoxProps, ref: any) => {
+const Box = (props: BoxProps) => {
   const {
     className,
     fill = "none",
@@ -33,7 +33,6 @@ const Box = React.forwardRef((props: BoxProps, ref: any) => {
     glow,
     img,
     noContext,
-    forwardRef,
     style = {},
     ...restProps
   } = props
@@ -89,7 +88,6 @@ const Box = React.forwardRef((props: BoxProps, ref: any) => {
 
   const componentProps = {
     ...restProps,
-    forwardRef: ref || forwardRef,
     className: cn(
       't-box',
       img && 't-box-img',
@@ -158,7 +156,7 @@ const Box = React.forwardRef((props: BoxProps, ref: any) => {
       {renderBoxComponent}
     </ThemeContext.Provider>
   )
-})
+}
 
 
 export default withTagless(Box) as BoxComponent

@@ -7,7 +7,7 @@ import { useConfig } from '../utils/use-config'
 import { withTagless } from '../with-tagless'
 
 
-const Line = React.forwardRef(({
+const Line = ({
   className,
   inverse,
   weight,
@@ -16,11 +16,10 @@ const Line = React.forwardRef(({
   right,
   bottom,
   left,
-  forwardRef,
   children,
   style = {},
   ...restProps
-}: LineProps, ref: any) => {
+}: LineProps) => {
 
   const { TRY_TO_INVERSE } = useTheme()
   const { lineConfig } = useConfig(useTheme())
@@ -50,11 +49,10 @@ const Line = React.forwardRef(({
     ),
     style: newStyle,
     children,
-    ref: ref || forwardRef,
   }
 
   return Common(componentProps)
-})
+}
 
 
 export default withTagless(Line) as LineComponent

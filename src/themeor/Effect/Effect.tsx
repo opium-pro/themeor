@@ -10,11 +10,10 @@ export const Effect: EffectComponent = ({
   className,
   hidden,
   transparency,
-  forwardRef,
   children,
   style={},
   ...restProps
-}, ref) => {
+}) => {
   const newStyle = { ...style }
 
   if (transparency && isCustomValue(transparency)) {
@@ -23,7 +22,6 @@ export const Effect: EffectComponent = ({
 
   const componentProps = {
     ...restProps,
-    forwardRef: ref || forwardRef,
     className: cn(
       css.effect,
       transparency && css[`transparency-${transparency}`],

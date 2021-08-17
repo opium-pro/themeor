@@ -5,10 +5,10 @@ import { GapComponent, GapProps } from './types'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { Common } from '../Common'
-import { withTagless, TaglessComponent } from '../with-tagless'
+import { withTagless } from '../with-tagless'
 
 
-const Gap = React.forwardRef(({
+const Gap = ({
   className,
   size,
   top,
@@ -22,7 +22,7 @@ const Gap = React.forwardRef(({
   inrow,
   style = {},
   ...restProps
-}: GapProps, ref: any) => {
+}: GapProps) => {
 
   const [isInrow, setInrow] = React.useState(false)
   const { gapConfig } = useConfig(useTheme())
@@ -47,7 +47,6 @@ const Gap = React.forwardRef(({
   function handleRef(node: any) {
     if (!node) { return }
     typeof forwardRef === 'function' && forwardRef(node)
-    typeof ref === 'function' && ref(node)
 
     if (inrow === true) {
       setInrow(true)
@@ -93,12 +92,12 @@ const Gap = React.forwardRef(({
     ),
     style: newStyle,
     children,
-    ref: handleRef,
+    forwardRef: handleRef,
     ...restProps,
   }
 
   return Common(componentProps)
-})
+}
 
 
 export default withTagless(Gap) as GapComponent

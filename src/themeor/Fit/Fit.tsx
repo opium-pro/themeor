@@ -7,7 +7,7 @@ import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { withTagless } from '../with-tagless'
 
-const Fit= React.forwardRef(({
+const Fit= ({
   left,
   top,
   right,
@@ -27,9 +27,8 @@ const Fit= React.forwardRef(({
   clip,
   className,
   children,
-  forwardRef,
   ...restProps
-}: FitProps, ref: any) => {
+}: FitProps) => {
 
   const context = useTheme()
   const { gapConfig } = useConfig(context)
@@ -47,7 +46,6 @@ const Fit= React.forwardRef(({
   if (offsetLeft) { newStyle.marginLeft = minus(offsetLeft) }
 
   const componentProps = {
-    forwardRef: ref || forwardRef,
     className: cn(
       `t-fit`,
       clip && `t-fit-clip`,
@@ -67,6 +65,6 @@ const Fit= React.forwardRef(({
   }
 
   return Common(componentProps)
-})
+}
 
 export default withTagless(Fit) as FitComponent

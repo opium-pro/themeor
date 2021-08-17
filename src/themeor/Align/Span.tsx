@@ -4,10 +4,7 @@ import { AlignSpanComponent, AlignSpanProps } from './types'
 import { withTagless } from '../with-tagless'
 
 
-const Span = React.forwardRef((
-  { col = 1, style, ...restProps }: AlignSpanProps,
-  ref: any
-) => {
+const Span = ({ col = 1, style, ...restProps }: AlignSpanProps) => {
   const newStyle: any = {
     ...style,
     gridColumnEnd: `span ${col}`
@@ -15,12 +12,11 @@ const Span = React.forwardRef((
 
   const componentProps = {
     ...restProps,
-    ref,
-    style: newStyle
+    style: newStyle,
   }
 
   return Align(componentProps)
-})
+}
 
 
 Span.displayName = 'Align.Span'

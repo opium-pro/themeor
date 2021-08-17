@@ -30,10 +30,9 @@ export const Common: CommonComponent = ({
     ...restProps,
     style: newStyle,
     children,
-    ref: forwardRef,
   }
 
   return typeof children === 'function'
     ? children(componentProps)
-    : <div {...componentProps} />
+    : <div {...componentProps} ref={forwardRef} />
 }

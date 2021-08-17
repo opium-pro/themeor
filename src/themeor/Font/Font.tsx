@@ -7,7 +7,7 @@ import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
 
 
-const Font = React.forwardRef(({
+const Font = ({
   className,
   fill,
   inverse,
@@ -23,11 +23,10 @@ const Font = React.forwardRef(({
   style = {},
   noselect,
   lineHeight,
-  forwardRef,
   letterSpacing,
   children,
   ...restProps
-}: FontProps, ref: React.Ref<any>) => {
+}: FontProps) => {
   const context = useTheme()
   const { TRY_TO_INVERSE } = context
   const { fontConfig } = useConfig(context)
@@ -67,12 +66,11 @@ const Font = React.forwardRef(({
       className,
     ),
     style: newStyle,
-    forwardRef: ref || forwardRef,
     children,
   }
 
   return Common(componentProps)
-})
+}
 
 
 export default withTagless(Font) as FontCompoennt

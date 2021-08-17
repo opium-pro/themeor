@@ -7,7 +7,7 @@ import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { Common } from '../Common'
 
-const Align = React.forwardRef(({
+const Align = ({
   row,
   vert = "top",
   hor = "stretch",
@@ -17,10 +17,9 @@ const Align = React.forwardRef(({
   gapHor,
   style = {},
   stack,
-  forwardRef,
   children,
   ...restProps
-}: AlignProps, ref: any) => {
+}: AlignProps) => {
   const { gapConfig } = useConfig(useTheme())
 
   const newStyle = { ...style }
@@ -58,7 +57,6 @@ const Align = React.forwardRef(({
     ),
     style: newStyle,
     children,
-    forwardRef: ref || forwardRef,
   }
 
   const hasGap = !pattern && (gapVert || gapHor)
@@ -89,7 +87,7 @@ const Align = React.forwardRef(({
 
 
   return Common(componentProps)
-})
+}
 
 
 export default withTagless(Align) as AlignComponent
