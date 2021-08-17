@@ -76,20 +76,20 @@ export default function (normalizedConfig: any) {
   for (const key in fill) {
     styles += `.t-font-fill-${key} {color: ${fill[key]}}
 `
+  }
 
-    for (const key in fillFancy) {
-      styles += `
+  for (const key in fillFancy) {
+    styles += `
 .t-font-fill-${key}.t-font-fancy {
   background-image: ${fillFancy[key]}};
   background-clip: text;
 }
 `
-    }
+  }
 
-    for (const key in fillInversed) {
-      styles += `.t-font-fill-${key}.t-font-inverse {color: ${fillInversed[key]}}
+  for (const key in fillInversed) {
+    styles += `.t-font-fill-${key}.t-font-inverse {color: ${fillInversed[key]}}
 `
-    }
   }
 
 

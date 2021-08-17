@@ -28,7 +28,6 @@ const Font = ({
   ...restProps
 }: FontProps) => {
   const context = useTheme()
-  const { TRY_TO_INVERSE } = context
   const { fontConfig } = useConfig(context)
 
   const newStyle = { ...style }
@@ -40,7 +39,7 @@ const Font = ({
   if (!fontConfig({ lineHeight })) { newStyle.lineHeight = lineHeight || undefined }
   if (!fontConfig({ family })) { newStyle.fontFamily = family || undefined }
 
-  const forceInverse = (inverse !== false) && (inverse || TRY_TO_INVERSE)
+  const forceInverse = (inverse !== false) && (inverse || context.TRY_TO_INVERSE)
 
   const componentProps = {
     ...restProps,

@@ -83,7 +83,6 @@ const Box = (props: BoxProps) => {
   if (blur && !boxConfig({ blur })) { newStyle.backdropFilter = `blur(${blur})` }
   if (glow && !boxConfig({ glow })) { newStyle.boxShadow = glow }
 
-
   // Setting classNames
 
   const componentProps = {
@@ -92,6 +91,7 @@ const Box = (props: BoxProps) => {
       't-box',
       img && 't-box-img',
       boxConfig({ fill }) && `t-box-fill-${fill}`,
+      strong && `t-box-strong`,
       (strong || inverse) && (!fill || fill === 'none') && `t-box-fill-base`,
       fancy && 't-box-fancy',
       boxConfig({ shadow }) && `t-box-shadow-${shadow}`,
@@ -127,13 +127,20 @@ const Box = (props: BoxProps) => {
     )
   }
 
-  if (noContext || !context.shallInverseOn) {
+  if (noContext || !normalizedConfig?.shallInverseOn) {
     return renderBoxComponent
   }
+
+  // @ts-ignore
+  const useOpiumFill: boolean = normalizedConfig?.fill?.[`base-strong`]
 
   // Automatically inverse text and other stuff on this background
   let inverseStatus: boolean | undefined
   inverseStatus = !!fill && normalizedConfig?.shallInverseOn?.includes(fill)
+  
+  if (useOpiumFill && !strong) {
+    inverseStatus = false
+  }
 
 
   if (context.TRY_TO_INVERSE && !inverse) {

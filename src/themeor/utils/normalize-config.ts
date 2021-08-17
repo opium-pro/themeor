@@ -12,7 +12,7 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     ...makeFlat(config.fill),
   }
   newConfig.fillFancy = makeFlat({...config['fancy-fill'], ...config.fancyFill})
-  newConfig.fillInverse = makeFlat({...config['inverse-fill'], ...config.inverseFill})
+  newConfig.fillInversed = makeFlat({...config['inverse-fill'], ...config.inverseFill})
 
   newConfig.box = {
     radius: {
@@ -24,7 +24,8 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     shadowInner: makeFlat(config.box?.shadowInner),
     glow: makeFlat(config.box?.glow),
     fill: {...newConfig.fill, ...makeFlat(config.box?.fill)},
-    fillFancy: makeFlat(newConfig.fillFancy),
+    fillInversed: {...newConfig.fillInverse, ...makeFlat(config.box?.fillInverse)},
+    fillFancy: {...newConfig.fillFancy, ...makeFlat(config.box?.fillFancy)},
   }
 
   newConfig.font = {
@@ -48,6 +49,7 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     },
     family: makeFlat(config.font?.family),
     fill: {...newConfig.fill, ...makeFlat(config.font?.fill)},
+    fillInversed: {...newConfig.fillInversed, ...makeFlat(config.font?.fillInversed)},
     lineHeight: makeFlat(config.font?.['line-height']),
     letterSpacing: makeFlat(config.font?.['letter-spacing']),
   }
@@ -81,11 +83,19 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     },
   }
 
+  // If use opium fill, then correct values to old config
   if (opiumFill) {
     const boxFill: any = {}
-    const lineFill: any = {}
     const fontFill: any = {}
+    const lineFill: any = {}
     const iconFill: any = {}
+
+    const boxFillInv: any = {}
+    const fontFillInv: any = {}
+    const lineFillInv: any = {}
+    const iconFillInv: any = {}
+
+    const boxFillStrogn: any = {}
 
     for (const opiumFill of allFills) {
       const splitFill = opiumFill.split('-')
@@ -93,6 +103,13 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
       fontFill[opiumFill] = newConfig.font.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
       lineFill[opiumFill] = newConfig.line.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
       iconFill[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+
+      boxFillInv[opiumFill] = newConfig.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      fontFillInv[opiumFill] = newConfig.font.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      lineFillInv[opiumFill] = newConfig.line.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+      iconFillInv[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+
+      boxFillStrogn[opiumFill] = newConfig.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
     }
 
     boxFill.none = fontFill.none = lineFill.none = iconFill.none = 'transparent'
@@ -101,6 +118,13 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     newConfig.font.fill = fontFill
     newConfig.line.fill = lineFill
     newConfig.icon.fill = iconFill
+
+    newConfig.box.fillInversed = boxFillInv
+    newConfig.font.fillInversed = fontFillInv
+    newConfig.line.fillInversed = lineFillInv
+    newConfig.icon.fillInversed = iconFillInv
+
+    newConfig.box.fillStrong = boxFillStrogn
   }
 
 

@@ -8,6 +8,7 @@ export default function (normalizedConfig: any) {
       fill,
       fillFancy,
       fillInversed,
+      fillStrong,
       radius,
       shadow,
       glow,
@@ -34,17 +35,24 @@ export default function (normalizedConfig: any) {
   for (const key in fill) {
     styles += `.t-box-fill-${key} {background-color: ${fill[key]}}
 `
-
-    for (const key in fillFancy) {
-      styles += `.t-box-fill-${key}.t-box-fancy {background-image: ${fillFancy[key]}}
-`
-    }
-
-    for (const key in fillInversed) {
-      styles += `.t-box-fill-${key}.t-box-inverse {background-color: ${fillInversed[key]}}
-`
-    }
   }
+
+  for (const key in fillStrong) {
+    styles += `.t-box-fill-${key}.t-box-strong {background-color: ${fillStrong[key]}}
+`
+  }
+
+  for (const key in fillFancy) {
+    styles += `.t-box-fill-${key}.t-box-fancy {background-image: ${fillFancy[key]}}
+`
+  }
+
+  for (const key in fillInversed) {
+    styles += `.t-box-fill-${key}.t-box-inverse {background-color: ${fillInversed[key]}}
+`
+  }
+
+  // Radius
 
   for (const key in radius) {
     styles += `.t-box-radius-${key} {border-radius: ${radius[key]}}
