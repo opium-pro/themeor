@@ -3,7 +3,7 @@ import preset from 'jss-preset-default'
 
 
 export let obfuscate = false
-export let isNative = true
+export let isNative = false
 
 export function setObfuscate(value: boolean) {
   obfuscate = value

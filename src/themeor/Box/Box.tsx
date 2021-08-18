@@ -6,12 +6,13 @@ import { BoxProps, BoxComponent } from './types'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
+import {useCss} from './styles'
 
 
 const Box = (props: BoxProps, ref: any) => {
   const {
     className,
-    fill = "none",
+    fill = "default",
     borderFill,
     borderWeight,
     inverse,
@@ -40,6 +41,7 @@ const Box = (props: BoxProps, ref: any) => {
   const { boxConfig } = useConfig(context)
   const newStyle = { ...style }
   const { normalizedConfig } = context
+  const css = useCss()
 
 
   // Setting inline styles
@@ -85,30 +87,31 @@ const Box = (props: BoxProps, ref: any) => {
 
   // Setting classNames
 
+  const forceInverse = (inverse !== false) && (inverse || context.TRY_TO_INVERSE)
+
   const componentProps = {
     forwardRef: ref,
     ...restProps,
     className: cn(
-      't-box',
-      img && 't-box-img',
-      boxConfig({ fill }) && `t-box-fill-${fill}`,
-      strong && `t-box-strong`,
-      (strong || inverse) && (!fill || fill === 'none') && `t-box-fill-base`,
-      fancy && 't-box-fancy',
-      boxConfig({ shadow }) && `t-box-shadow-${shadow}`,
-      boxConfig({ blur }) && `t-box-blur-${blur}`,
-      boxConfig({ shadowInner }) && `t-box-shadow-inner-${shadowInner}`,
-      boxConfig({ glow }) && `t-box-glow-${shadowInner}`,
-      boxConfig({ radius }) && `t-box-radius-${radius}`,
-      boxConfig({ radius: radiusTop }) && `t-box-radius-top-${radiusTop}`,
-      boxConfig({ radius: radiusRight }) && `t-box-radius-right-${radiusRight}`,
-      boxConfig({ radius: radiusLeft }) && `t-box-radius-left-${radiusLeft}`,
-      boxConfig({ radius: radiusBottom }) && `t-box-radius-bottom-${radiusBottom}`,
-      boxConfig({ radius: radiusTopLeft }) && `t-box-radius-tl-${radiusTopLeft}`,
-      boxConfig({ radius: radiusTopRight }) && `t-box-radius-tr-${radiusTopRight}`,
-      boxConfig({ radius: radiusBottomLeft }) && `t-box-radius-bl-${radiusBottomLeft}`,
-      boxConfig({ radius: radiusBottomRight }) && `t-box-radius-br-${radiusBottomRight}`,
-      (inverse !== false) && (inverse || context.TRY_TO_INVERSE) && boxConfig({ fill }) && 't-box-inverse',
+      css['box'],
+      img && css['img'],
+      boxConfig({ fill }) && css[`fill-${fill}`],
+      forceInverse && boxConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
+      strong && boxConfig({ fillStrong: fill }) && css[`fill-strong-${fill}`],
+      fancy && boxConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
+      boxConfig({ shadow }) && css[`shadow-${shadow}`],
+      boxConfig({ blur }) && css[`blur-${blur}`],
+      boxConfig({ shadowInner }) && css[`shadow-inner-${shadowInner}`],
+      boxConfig({ glow }) && css[`glow-${shadowInner}`],
+      boxConfig({ radius }) && css[`radius-${radius}`],
+      boxConfig({ radius: radiusTop }) && css[`radius-top-${radiusTop}`],
+      boxConfig({ radius: radiusRight }) && css[`radius-right-${radiusRight}`],
+      boxConfig({ radius: radiusLeft }) && css[`radius-left-${radiusLeft}`],
+      boxConfig({ radius: radiusBottom }) && css[`radius-bottom-${radiusBottom}`],
+      boxConfig({ radius: radiusTopLeft }) && css[`radius-tl-${radiusTopLeft}`],
+      boxConfig({ radius: radiusTopRight }) && css[`radius-tr-${radiusTopRight}`],
+      boxConfig({ radius: radiusBottomLeft }) && css[`radius-bl-${radiusBottomLeft}`],
+      boxConfig({ radius: radiusBottomRight }) && css[`radius-br-${radiusBottomRight}`],
       className
     ),
     style: newStyle,

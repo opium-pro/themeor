@@ -40,7 +40,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build:docs": "react-scripts build",
-    "build": "rm -fr ./dist && tsc -p tsconfig.dist.json",
+    "build": "rm -fr ./dist && tsc -p tsconfig.dist.json && npm run css",
+    "css": "cd ./src/themeor && rsync -R ./**/*.css ../../dist && cd ../../",
     "publish": "npm run build && npm publish"
   },
   "eslintConfig": {

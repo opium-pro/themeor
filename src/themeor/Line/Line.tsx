@@ -63,8 +63,8 @@ const Line = ({
       !separator && lineConfig({ weight: bottom }) && css[`weight-bottom-${bottom}`],
       !separator && lineConfig({ weight: left }) && css[`weight-left-${left}`],
       lineConfig({ fill }) && css[`fill-${fill}`],
-      lineConfig({ fillInversed: fill }) && forseInverse && css[`fill-inversed-${fill}`],
-      lineConfig({ fillFancy: fill }) && fancy && css[`fill-fancy-${fill}`],
+      forseInverse && lineConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
+      fancy && lineConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
       className
     ),
     style: newStyle,

@@ -1,6 +1,8 @@
-import { setStyles } from '../utils/styles'
+import { createStyleSheet, getClasses } from '../utils/styles'
+import { Classes, Styles } from 'jss'
 
-export const id = 'themeor-box'
+export const useCss: () => Classes = () => getClasses('box')
+
 
 export default function (normalizedConfig: any) {
   const {
@@ -17,115 +19,94 @@ export default function (normalizedConfig: any) {
     }
   } = normalizedConfig
 
-  let styles = `
-.t-box {
-  border-radius: 0;
-  outline: none;
-  border: none;
-}
+  const styles: Styles = {}
 
-.t-box-img {
-  background-size: cover;
-  background-position: center;
-}
-`
+  styles[`box`] = {
+    borderRadius: 0,
+    outline: 'none',
+    vorder: 'none',
+  }
+
+  styles[`img`] = {
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }
 
 
   // Fills
   for (const key in fill) {
-    styles += `.t-box-fill-${key} {background-color: ${fill[key]}}
-`
+    styles[`fill-${key}`] = { backgroundColor: fill[key] }
   }
-
-  for (const key in fillStrong) {
-    styles += `.t-box-fill-${key}.t-box-strong {background-color: ${fillStrong[key]}}
-`
-  }
-
   for (const key in fillFancy) {
-    styles += `.t-box-fill-${key}.t-box-fancy {background-image: ${fillFancy[key]}}
-`
+    styles[`fill-fancy-${key}`] = { backgroundImage: fillFancy[key] }
+  }
+  for (const key in fillInversed) {
+    styles[`fill-inversed-${key}`] = { backgroundColor: fillInversed[key] }
+  }
+  for (const key in fillStrong) {
+    styles[`fill-strong-${key}`] = { backgroundColor: fillStrong[key] }
   }
 
-  for (const key in fillInversed) {
-    styles += `.t-box-fill-${key}.t-box-inverse {background-color: ${fillInversed[key]}}
-`
-  }
+
 
   // Radius
-
   for (const key in radius) {
-    styles += `.t-box-radius-${key} {border-radius: ${radius[key]}}
-`
+    styles[`radius-${key}`] = { borderRadius: radius[key] }
   }
-
   for (const key in radius) {
-    styles += `
-.t-box-radius-top-${key} {
-  border-top-left-radius: ${radius[key]};
-  border-top-right-radius: ${radius[key]};
-}
-
-.t-box-radius-bottom-${key} {
-  border-bottom-left-radius: ${radius[key]};
-  border-bottom-right-radius: ${radius[key]};
-}
-.t-box-radius-right-${key} {
-  border-bottom-right-radius: ${radius[key]};
-  border-top-right-radius: ${radius[key]};
-}
-.t-box-radius-left-${key} {
-  border-bottom-left-radius: ${radius[key]};
-  border-top-left-radius: ${radius[key]};
-}
-`
+    styles[`radius-top-${key}`] = {
+      borderTopLeftRadius: radius[key],
+      borderTopRightRadius: radius[key],
+    }
+    styles[`radius-bottom-${key}`] = {
+      borderBottomLeftRadius: radius[key],
+      borderBottomRightRadius: radius[key],
+    }
+    styles[`radius-right-${key}`] = {
+      borderTopRightRadius: radius[key],
+      borderBottomRightRadius: radius[key],
+    }
+    styles[`radius-left-${key}`] = {
+      borderTopLeftRadius: radius[key],
+      borderBottomLeftRadius: radius[key],
+    }
   }
-
   for (const key in radius) {
-    styles += `
-.t-box-radius-tl-${key} {
-  border-top-left-radius: ${radius[key]};
-}
-.t-box-radius-tr-${key} {
-  border-top-right-radius: ${radius[key]};
-}
-.t-box-radius-br-${key} {
-  border-bottom-right-radius: ${radius[key]};
-}
-.t-box-radius-bl-${key} {
-  border-bottom-left-radius: ${radius[key]};
-}
-`
+    styles[`radius-tl-${key}`] = {
+      borderTopLeftRadius: radius[key],
+    }
+    styles[`radius-tr-${key}`] = {
+      borderTopRightRadius: radius[key],
+    }
+    styles[`radius-br-${key}`] = {
+      borderBottomRightRadius: radius[key],
+    }
+    styles[`radius-bl-${key}`] = {
+      borderBottomLeftRadius: radius[key],
+    }
   }
 
 
   // Shadows
-  styles += `.t-box-shadow-none {box-shadow: none;}
-`
   for (const key in shadow) {
-    styles += `.t-box-shadow-${key} {box-shadow: ${shadow[key]};}
-`
+    styles[`shadow-${key}`] = { boxShadow: shadow[key] }
   }
 
   // Inner Shadows
   for (const key in shadowInner) {
-    styles += `.t-box-shadow-inner-${key} {box-shadow: inset ${shadowInner[key]};}
-`
+    styles[`shadow-inner-${key}`] = { boxShadow: `inset ${shadowInner[key]}` }
   }
 
   // Glows
   for (const key in glow) {
-    styles += `.t-box-glow-${key} {box-shadow: ${glow[key]};}
-`
+    styles[`glow-${key}`] = { boxShadow: glow[key] }
   }
 
   // Blurs
-  styles += `.t-box-blur-none {backdrop-filter: none;}
-`
   for (const key in blur) {
-    styles += `.t-box-blur-${key} {backdrop-filter: blur(${blur[key]});}
-`
+    styles[`blur-${key}`] = { backdropFilter: `blur(${blur[key]})` }
   }
 
-  setStyles(id, styles)
+
+  return createStyleSheet('box', styles)
 }

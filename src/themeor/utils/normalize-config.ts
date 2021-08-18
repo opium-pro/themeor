@@ -7,33 +7,69 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
   const newConfig = { ...config.themeContext, ...config }
   const opiumFill = config?.fill?.base?.strong
 
+
   newConfig.fill = {
     none: 'transparent',
     ...makeFlat(config.fill),
   }
-  newConfig.fillFancy = makeFlat({...config['fancy-fill'], ...config.fancyFill})
-  newConfig.fillInversed = makeFlat(config.fillInversed)
+  newConfig.fillFancy = makeFlat({
+    ...config['fancy-fill'],
+    ...config.fancyFill,
+  })
+  newConfig.fillInversed = makeFlat({
+    ...config.fillInversed,
+  })
+
 
   newConfig.box = {
     radius: {
+      default: '0',
       none: '0',
       max: '1000px',
       ...makeFlat(config.box?.radius),
     },
-    shadow: makeFlat(config.box?.shadow),
-    shadowInner: makeFlat(config.box?.shadowInner),
-    glow: makeFlat(config.box?.glow),
+    shadow: {
+      default: 'none',
+      none: 'none',
+      ...makeFlat(config.box?.shadow)
+    },
+    shadowInner: {
+      default: 'none',
+      none: 'none',
+      ...makeFlat(config.box?.shadowInner)
+    },
+    glow: {
+      default: 'none',
+      none: 'none',
+      ...makeFlat(config.box?.glow)
+    },
+    blur: {
+      default: 'none',
+      none: 'none',
+      ...makeFlat(config.box?.blur)
+    },
     fill: {
       default: 'transparent',
       ...newConfig.fill,
       ...makeFlat(config.box?.fill)
     },
-    fillInversed: {...newConfig.fillInversed, ...makeFlat(config.box?.fillInversed)},
-    fillFancy: {...newConfig.fillFancy, ...makeFlat(config.box?.fillFancy)},
+    fillInversed: {
+      default: 'transparent',
+      ...newConfig.fillInversed,
+      ...makeFlat(config.box?.fillInversed)
+    },
+    fillFancy: {
+      default: 'transparent',
+      ...newConfig.fillFancy,
+      ...makeFlat(config.box?.fillFancy)
+    },
   }
 
+
   newConfig.font = {
-    size: makeFlat(config.font?.size),
+    size: {
+      ...makeFlat(config.font?.size),
+    },
     weight: {
       '100': '100',
       '200': '200',
@@ -51,16 +87,32 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
       left: 'left',
       right: 'right',
     },
-    family: makeFlat(config.font?.family),
+    family: {
+      ...makeFlat(config.font?.family),
+    },
     fill: {
       default: '#000',
       ...newConfig.fill,
       ...makeFlat(config.font?.fill),
     },
-    fillInversed: {...newConfig.fillInversed, ...makeFlat(config.font?.fillInversed)},
-    lineHeight: makeFlat(config.font?.['line-height']),
-    letterSpacing: makeFlat(config.font?.['letter-spacing']),
+    fillInversed: {
+      default: '#fff',
+      ...newConfig.fillInversed,
+      ...makeFlat(config.font?.fillInversed),
+    },
+    fillFancy: {
+      default: '#000',
+      ...newConfig.fillFancy,
+      ...makeFlat(config.font?.fillFancy),
+    },
+    lineHeight: {
+      ...makeFlat(config.font?.['line-height']),
+    },
+    letterSpacing: {
+      ...makeFlat(config.font?.['letter-spacing'])
+    },
   }
+
 
   newConfig.line = {
     fill: {
@@ -68,12 +120,23 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
       ...newConfig.fill,
       ...makeFlat(config.line?.fill),
     },
+    fillInversed: {
+      default: '#fff',
+      ...newConfig.fillInversed,
+      ...makeFlat(config.line?.fillInversed),
+    },
+    fillFancy: {
+      default: '#000',
+      ...newConfig.fillFancy,
+      ...makeFlat(config.line?.fillFancy),
+    },
     weight: {
       default: '1px',
       none: '0',
-      ...makeFlat(config.line?.weight)
+      ...makeFlat(config.line?.weight),
     },
   }
+
 
   newConfig.gap = {
     size: {
@@ -82,21 +145,42 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     },
   }
 
+
   newConfig.icon = {
     fill: {
       default: '#000',
       ...newConfig.fill,
       ...makeFlat(config.icon?.fill )
     },
-    size: makeFlat(config.icon?.size),
+    fillInversed: {
+      default: '#fff',
+      ...newConfig.fillInversed,
+      ...makeFlat(config.icon?.fillInversed),
+    },
+    fillFancy: {
+      default: '#000',
+      ...newConfig.fillFancy,
+      ...makeFlat(config.icon?.fillFancy),
+    },
+    size: {
+      default: '24px',
+      ...makeFlat(config.icon?.size),
+    },
   }
+
 
   newConfig.reaction = {
     speed: {
+      default: '0',
       none: '0',
-      ...makeFlat(config.reaction?.speed)
+      ...makeFlat(config.reaction?.speed),
+    },
+    property: {
+      default: 'color, background, fill, font-size, font-weight, width, height, top, left, right, bottom, opacity',
+      ...makeFlat(config.reaction?.property),
     },
   }
+
 
   newConfig.effect = {
     transparency: {
@@ -136,6 +220,18 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     }
 
     boxFill.none = fontFill.none = lineFill.none = iconFill.none = 'transparent'
+
+    boxFill.default = boxFill.none
+    fontFill.default = fontFill[`base`]
+    lineFill.default = lineFill[`base`]
+    iconFill.default = iconFill[`base`]
+
+    boxFillInv.default = boxFillInv.none
+    fontFillInv.default = fontFillInv[`base`]
+    lineFillInv.default = lineFillInv[`base`]
+    iconFillInv.default = iconFillInv[`base`]
+
+    boxFillStrogn.default = boxFill.none
 
     newConfig.box.fill = boxFill
     newConfig.font.fill = fontFill

@@ -39,14 +39,12 @@ export default function (normalizedConfig: any) {
   // Fills
   for (const key in fill) {
     styles[`fill-${key}`] = { borderColor: fill[key] }
-
-    for (const key in fillFancy) {
-      styles[`fill-fancy-${key}`] = { borderImage: fillFancy[key] }
-    }
-
-    for (const key in fillInversed) {
-      styles[`fill-inversed-${key}`] = { borderColor: fillInversed[key] }
-    }
+  }
+  for (const key in fillFancy) {
+    styles[`fill-fancy-${key}`] = { borderImage: fillFancy[key] }
+  }
+  for (const key in fillInversed) {
+    styles[`fill-inversed-${key}`] = { borderColor: fillInversed[key] }
   }
 
 
