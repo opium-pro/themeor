@@ -1,17 +1,17 @@
 
 function getConfig(context: any, component: any, param: any, reverse?: boolean) {
-  const { customrmalizedConfig } = context
+  const { normalizedConfig } = context
 
   const result = []
   for (const key in param) {
-    const isDefined = (customrmalizedConfig[component]?.[key]?.[param[key]] !== undefined)
+    const isDefined = (normalizedConfig[component]?.[key]?.[param[key]] !== undefined)
 
     if (!reverse) {
-      result.push(customrmalizedConfig[component][key][param[key]])
+      result.push(normalizedConfig[component][key][param[key]])
 
     } else {
-      const customtPassed = param[key] === undefined || param[key] === false
-      result.push(customtPassed ? false : !isDefined)
+      const wrongType = !['string', 'number'].includes(typeof param[key])
+      result.push(wrongType ? false : !isDefined)
     }
   }
   if (result.length <= 1) {
