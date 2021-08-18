@@ -52,8 +52,10 @@ const Align = ({
       css[mode],
       vert && css[`${mode}-vert-${vert}`],
       hor && css[`${mode}-hor-${hor}`],
-      gapConfig({ size: gapVert }) && css[`vert-gap-${gapVert}`],
-      gapConfig({ size: gapHor }) && css[`hor-gap-${gapHor}`],
+      !pattern && gapConfig({ size: gapVert }) && css[`vert-gap-${gapVert}`],
+      !pattern && gapConfig({ size: gapHor }) && css[`hor-gap-${gapHor}`],
+      pattern && gapConfig({ size: gapVert }) && css[`pattern-vert-gap-${gapVert}`],
+      pattern && gapConfig({ size: gapHor }) && css[`pattern-hor-gap-${gapHor}`],
       className
     ),
     style: newStyle,
