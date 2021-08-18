@@ -30,7 +30,6 @@
     "@types/react-dom": "^17.0.4",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-syntax-highlighter": "^13.5.2",
-    "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
@@ -39,11 +38,9 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
-    "start": "npm run css && react-scripts start",
+    "start": "react-scripts start",
     "build:docs": "react-scripts build",
-    "css": "node-sass ./src/themeor -o ./src/themeor --output-style compressed",
-    "css:watch": "node-sass ./src/themeor -o ./src/themeor -wr ./src/themeor --output-style compressed",
-    "build": "npm run css && rm -fr ./dist && cd ./src/themeor && rsync -R ./**/*.css ../../dist && cd ../../ && tsc -p tsconfig.dist.json",
+    "build": "rm -fr ./dist && tsc -p tsconfig.dist.json",
     "publish": "npm run build && npm publish"
   },
   "eslintConfig": {
