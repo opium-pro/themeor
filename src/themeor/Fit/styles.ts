@@ -1,93 +1,129 @@
-import { setStyles } from '../utils/styles'
 import { minus } from '../utils/change-css-value'
+import { createStyleSheet, getClasses } from '../utils/styles'
+import { Classes, Styles } from 'jss'
+import { FIT_NAME } from './types'
 
-export const id = 'themeor-fit'
+
+export const useCss: () => Classes = () => getClasses(FIT_NAME)
 
 export default function (normalizedConfig: any) {
   const {
-    gap: { size }
+    fit: { offset, zIndex, shift }
   } = normalizedConfig
 
-  let styles = `
-.t-fit {
-  position: relative;
-}
+  const styles: Styles = {}
 
-.t-fit-is-not-parent {
-  position: static;
-}
+  styles[`fit`] = { position: 'relative' }
+  styles[`not-parent`] = { position: 'static' }
+  styles[`inline`] = { display: 'inline-block' }
 
-.t-fit-inline {
-  display: inline-block;
-}
+  styles[`cover-screen`] = {
+    position: 'fixed',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+  }
 
-.t-fit-cover-screen {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
+  styles[`cover-parent`] = {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+  }
 
-.t-fit-cover-parent {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
+  styles[`clip`] = {
+    overflow: 'hidden',
+  }
 
-.t-fit-stick-parent {
-  position: absolute;
-}
+  styles[`block`] = {
+    display: 'block',
+  }
 
-.t-fit-clip {
-  overflow: hidden;
-}
+  styles[`scroll`] = {
+    overflow: 'auto',
+  }
 
-.t-fit-block {
-  display: block;
-}
+  styles[`stick-parent`] = {
+    position: 'absolute',
+  }
 
-.t-fit-scroll {
-  overflow: auto;
-  // scroll-behavior: smooth;
-}
-
-.t-fit-stick-top-left{left: 0; top: 0; right: unset; bottom: unset;}
-.t-fit-stick-top{left: unset; top: 0; right: unset; bottom: unset;}
-.t-fit-stick-top-right{left: unset; top: 0; right: 0; bottom: unset;}
-.t-fit-stick-right{left: unset; top: unset; right: 0; bottom: unset;}
-.t-fit-stick-bottom-right{left: unset; top: unset; right: 0; bottom: 0;}
-.t-fit-stick-bottom{left: unset; top: unset; right: unset; bottom: 0;}
-.t-fit-stick-bottom-left{left: 0; top: unset; right: unset; bottom: 0;}
-.t-fit-stick-left{left: 0; top: unset; right: unset; bottom: unset;}
-`
+  styles[`stick-top-left`] = {
+    left: 0, top: 0,
+    right: 'unset', bottom: 'unset',
+  }
+  styles[`stick-top`] = {
+    left: 'unset', top: 0,
+    right: 'unset', bottom: 'unset',
+  }
+  styles[`stick-top-right`] = {
+    left: 'unset', top: 0,
+    right: 0, bottom: 'unset',
+  }
+  styles[`stick-right`] = {
+    left: 'unset', top: 'unset',
+    right: 0, bottom: 'unset',
+  }
+  styles[`stick-bottom-right`] = {
+    left: 'unset', top: 'unset',
+    right: 0, bottom: 0,
+  }
+  styles[`stick-bottom`] = {
+    left: 'unset', top: 'unset',
+    right: 'unset', bottom: 0,
+  }
+  styles[`stick-bottom-left`] = {
+    left: 0, top: 'unset',
+    right: 'unset', bottom: 0,
+  }
+  styles[`stick-left`] = {
+    left: 0, top: 'unset',
+    right: 'unset', bottom: 'unset',
+  }
 
 
   // Offset
-  for (const key in size) {
-    styles += `
-.t-fit-offset-${key} {
-  top: ${minus(size[key])};
-  left: ${minus(size[key])};
-  right: ${minus(size[key])};
-  bottom: ${minus(size[key])};
-}
-.t-fit-offset-top-${key} {top: ${size[key]};}
-.t-fit-offset-right-${key} {right: ${size[key]};}
-.t-fit-offset-bottom-${key} {bottom: ${size[key]};}
-.t-fit-offset-left-${key} {left: ${size[key]};}
-`
+  for (const key in offset) {
+    styles[`offset-${key}`] = {
+      marginTop: minus(offset[key]),
+      marginLeft: minus(offset[key]),
+      marginRight: minus(offset[key]),
+      marginBottom: minus(offset[key]),
+    }
   }
 
-  styles += `
-.t-fit-offset-none {top: 0; left: 0; right: 0; bottom: 0;}
-.t-fit-offset-top-none {top: 0;}
-.t-fit-offset-right-none {right: 0;}
-.t-fit-offset-bottom-none {bottom: 0;}
-.t-fit-offset-left-none {left: 0;}
-`
+  for (const key in offset) {
+    styles[`offset-top-${key}`] = {
+      marginTop: minus(offset[key]),
+    }
+    styles[`offset-right-${key}`] = {
+      marginRight: minus(offset[key]),
+    }
+    styles[`offset-bottom-${key}`] = {
+      marginBottom: minus(offset[key]),
+    }
+    styles[`offset-left-${key}`] = {
+      marginLeft: minus(offset[key]),
+    }
+  }
 
-  setStyles(id, styles)
+
+  for (const key in shift) {
+    styles[`shift-top-${key}`] = {
+      top: shift[key],
+    }
+    styles[`shift-right-${key}`] = {
+      right: shift[key],
+    }
+    styles[`shift-bottom-${key}`] = {
+      bottom: shift[key],
+    }
+    styles[`shift-left-${key}`] = {
+      left: shift[key],
+    }
+  }
+
+
+  return createStyleSheet(FIT_NAME, styles)
 }

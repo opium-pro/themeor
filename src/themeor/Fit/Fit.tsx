@@ -6,6 +6,7 @@ import { Common } from '../Common'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { withTagless } from '../with-tagless'
+import {useCss} from './styles'
 
 const Fit = ({
   left,
@@ -31,34 +32,44 @@ const Fit = ({
 }: FitProps, ref: any) => {
 
   const context = useTheme()
-  const { gapConfig } = useConfig(context)
+  const { fitConfig, customFitValue } = useConfig(context)
+  const css = useCss()
 
   const newStyle = { ...style }
-  if (left || offset) { newStyle.left = left || offset || undefined }
-  if (top || offset) { newStyle.top = top || offset || undefined }
-  if (right || offset) { newStyle.right = right || offset || undefined }
-  if (bottom || offset) { newStyle.bottom = bottom || offset || undefined }
-  if (zIndex) { newStyle.zIndex = zIndex }
-  if (!gapConfig({size: offset})) { newStyle.margin = minus(offset) }
-  if (offsetTop) { newStyle.marginTop = minus(offsetTop) }
-  if (offsetBottom) { newStyle.marginBottom = minus(offsetBottom) }
-  if (offsetRight) { newStyle.marginRight = minus(offsetRight) }
-  if (offsetLeft) { newStyle.marginLeft = minus(offsetLeft) }
+  if (customFitValue({shift: left})) { newStyle.left = left || undefined }
+  if (customFitValue({shift: top})) { newStyle.top = top || undefined }
+  if (customFitValue({shift: right})) { newStyle.right = right || undefined }
+  if (customFitValue({shift: bottom})) { newStyle.bottom = bottom || undefined }
+  if (customFitValue({zIndex})) { newStyle.zIndex = zIndex || undefined }
+  if (customFitValue({offset})) { newStyle.margin = minus(offset) }
+  if (customFitValue({offset: offsetTop})) { newStyle.marginTop = minus(offsetTop) }
+  if (customFitValue({offset: offsetBottom})) { newStyle.marginBottom = minus(offsetBottom) }
+  if (customFitValue({offset: offsetRight})) { newStyle.marginRight = minus(offsetRight) }
+  if (customFitValue({offset: offsetLeft})) { newStyle.marginLeft = minus(offsetLeft) }
 
   const componentProps = {
     forwardRef: ref,
     ...restProps,
     className: cn(
-      `t-fit`,
-      clip && `t-fit-clip`,
-      scroll && `t-fit-scroll`,
-      inline && `t-fit-inline`,
-      stick && `t-fit-stick-${stick}`,
-      cover && `t-fit-cover-${cover}`,
-      stick && !cover && `t-fit-stick-parent`,
-      offset && `t-fit-offset-${offset}`,
-      isNotParent && `t-fit-is-not-parent`,
-      inline === false && `t-fit-block`,
+      css[`fit`],
+      clip && css[`clip`],
+      scroll && css[`scroll`],
+      inline && css[`inline`],
+      stick && css[`stick-${stick}`],
+      cover && css[`cover-${cover}`],
+      stick && !cover && css[`stick-parent`],
+      fitConfig({zIndex}) && css[`z-index-${zIndex}`],
+      fitConfig({offset}) && css[`offset-${offset}`],
+      fitConfig({offset: offsetTop}) && css[`offset-top-${offsetTop}`],
+      fitConfig({offset: offsetBottom}) && css[`offset-bottom-${offsetBottom}`],
+      fitConfig({offset: offsetRight}) && css[`offset-right-${offsetRight}`],
+      fitConfig({offset: offsetLeft}) && css[`offset-left-${offsetLeft}`],
+      fitConfig({shift: top}) && css[`shift-top-${top}`],
+      fitConfig({shift: bottom}) && css[`shift-bottom-${bottom}`],
+      fitConfig({shift: right}) && css[`shift-right-${right}`],
+      fitConfig({shift: left}) && css[`shift-left-${left}`],
+      isNotParent && css[`not-parent`],
+      inline === false && css[`block`],
       className
     ),
     style: newStyle,

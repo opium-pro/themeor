@@ -140,6 +140,7 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
   newConfig.gap = {
     size: {
       default: '16px',
+      none: '0',
       ...makeFlat(config.gap?.size || config.gap),
     },
   }
@@ -186,6 +187,21 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
       none: '1',
       max: '0',
       ...makeFlat(config.effect?.transparency)
+    },
+  }
+
+
+  newConfig.fit = {
+    zIndex: {
+      ...makeFlat(config.fit?.zIndex),
+    },
+    offset: {
+      none: '0',
+      ...makeFlat(config.fit?.offset),
+    },
+    shift: {
+      none: '0',
+      ...makeFlat(config.fit?.shift),
     },
   }
 
