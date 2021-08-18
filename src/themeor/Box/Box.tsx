@@ -117,7 +117,7 @@ const Box = (props: BoxProps, ref: any) => {
     style: newStyle,
   }
 
-  let renderBoxComponent = Common(componentProps)
+  let renderBoxComponent = Common(componentProps, 'box')
 
   const hasBorder = borderFill || borderWeight
 
@@ -126,7 +126,7 @@ const Box = (props: BoxProps, ref: any) => {
 
     renderBoxComponent = (
       <Line.TryTagless fill={borderFill} weight={borderWeight}>
-        {Common(componentProps)}
+        {Common(componentProps, 'box')}
       </Line.TryTagless>
     )
   }

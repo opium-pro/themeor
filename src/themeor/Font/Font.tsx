@@ -5,12 +5,14 @@ import { FontCompoennt, FontProps } from './types'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
+import {useCss} from './styles'
 
 
 const Font = ({
   className,
-  fill,
+  fill = 'default',
   inverse,
+  fancy,
   inline,
   weight,
   size,
@@ -29,15 +31,15 @@ const Font = ({
 }: FontProps, ref: any) => {
   const context = useTheme()
   const { fontConfig } = useConfig(context)
-
+  const css = useCss()
   const newStyle = { ...style }
 
-  if (!fontConfig({ fill })) { newStyle.color = fill || undefined }
-  if (!fontConfig({ size })) { newStyle.fontSize = size || undefined }
-  if (!fontConfig({ weight })) { newStyle.fontWeight = weight as any }
-  if (!fontConfig({ letterSpacing })) { newStyle.letterSpacing = letterSpacing || undefined }
-  if (!fontConfig({ lineHeight })) { newStyle.lineHeight = lineHeight || undefined }
-  if (!fontConfig({ family })) { newStyle.fontFamily = family || undefined }
+  if (fill && !fontConfig({ fill })) { newStyle.color = fill }
+  if (size && !fontConfig({ size })) { newStyle.fontSize = size }
+  if (weight && !fontConfig({ weight })) { newStyle.fontWeight = weight as any }
+  if (letterSpacing && !fontConfig({ letterSpacing })) { newStyle.letterSpacing = letterSpacing }
+  if (lineHeight && !fontConfig({ lineHeight })) { newStyle.lineHeight = lineHeight }
+  if (family && !fontConfig({ family })) { newStyle.fontFamily = family }
 
   const forceInverse = (inverse !== false) && (inverse || context.TRY_TO_INVERSE)
 
@@ -45,24 +47,23 @@ const Font = ({
     forwardRef: ref,
     ...restProps,
     className: cn(
-      't-font',
-      underline && 't-font-underline',
-      underline === false && 't-font-non-underline',
-      inline && 't-font-inline',
-      inline === false && 't-font-block',
-      fontConfig({ fill }) && `t-font-fill-${fill}`,
-      forceInverse && !fill && `t-font-fill-base`,
-      forceInverse && 't-font-inverse',
-      (uppercase && 't-font-uppercase') || ((uppercase === false) && 't-font-non-uppercase'),
-      (italic && 't-font-italic') || ((italic === false) && 't-font-non-italic'),
-      noselect && 't-font-noselect',
-      fontConfig({ letterSpacing }) && `t-font-letter-spacing-${letterSpacing}`,
-      fontConfig({ lineHeight }) && `t-font-line-height-${lineHeight}`,
-      fontConfig({ size }) && `t-font-size-${size}`,
-      fontConfig({ weight }) && `t-font-weight-${weight}`,
-      fontConfig({ family }) && `t-font-family-${family}`,
-      align && `t-font-align-${align}`,
-      nowrap && 't-font-nowrap',
+      css['font'],
+      (underline && css['underline']) || (underline === false && css['nounderline']),
+      inline && css['inline'],
+      inline === false && css['block'],
+      fontConfig({ fill }) && css[`fill-${fill}`],
+      forceInverse && fontConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
+      fancy && fontConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
+      (uppercase && css['uppercase']) || ((uppercase === false) && css['nouppercase']),
+      (italic && css['italic']) || ((italic === false) && css['noitalic']),
+      noselect && css['noselect'],
+      fontConfig({ letterSpacing }) && css[`letter-spacing-${letterSpacing}`],
+      fontConfig({ lineHeight }) && css[`line-height-${lineHeight}`],
+      fontConfig({ size }) && css[`size-${size}`],
+      fontConfig({ weight }) && css[`weight-${weight}`],
+      fontConfig({ family }) && css[`family-${family}`],
+      align && css[`align-${align}`],
+      nowrap && css['nowrap'],
       className,
     ),
     style: newStyle,

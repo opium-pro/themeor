@@ -91,17 +91,17 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
       ...makeFlat(config.font?.family),
     },
     fill: {
-      default: '#000',
+      default: 'inherit',
       ...newConfig.fill,
       ...makeFlat(config.font?.fill),
     },
     fillInversed: {
-      default: '#fff',
+      default: 'inherit',
       ...newConfig.fillInversed,
       ...makeFlat(config.font?.fillInversed),
     },
     fillFancy: {
-      default: '#000',
+      default: 'inherit',
       ...newConfig.fillFancy,
       ...makeFlat(config.font?.fillFancy),
     },
