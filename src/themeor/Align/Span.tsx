@@ -16,7 +16,7 @@ const Span = ({ col = 1, style, ...restProps }: AlignSpanProps, ref: any) => {
     style: newStyle,
   }
 
-  return Align(componentProps)
+  return <Align {...componentProps} />
 }
 
 

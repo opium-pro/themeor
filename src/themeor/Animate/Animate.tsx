@@ -4,7 +4,7 @@ import cn from '../utils/class-name'
 import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
 import newId from '../utils/new-id'
-import {Common} from '../Common'
+import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
 
 
@@ -19,7 +19,7 @@ const Animate = (props: AnimateProps, ref: any) => {
     delay = 0,
     repeat = 1,
     children,
-    mounted:initialMounted = true,
+    mounted: initialMounted = true,
     ...restProps
   } = props
 

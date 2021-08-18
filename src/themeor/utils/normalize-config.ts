@@ -18,12 +18,16 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     radius: {
       none: '0',
       max: '1000px',
-      ...makeFlat(config.box?.radius)
+      ...makeFlat(config.box?.radius),
     },
     shadow: makeFlat(config.box?.shadow),
     shadowInner: makeFlat(config.box?.shadowInner),
     glow: makeFlat(config.box?.glow),
-    fill: {...newConfig.fill, ...makeFlat(config.box?.fill)},
+    fill: {
+      default: 'transparent',
+      ...newConfig.fill,
+      ...makeFlat(config.box?.fill)
+    },
     fillInversed: {...newConfig.fillInversed, ...makeFlat(config.box?.fillInversed)},
     fillFancy: {...newConfig.fillFancy, ...makeFlat(config.box?.fillFancy)},
   }
@@ -48,23 +52,42 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
       right: 'right',
     },
     family: makeFlat(config.font?.family),
-    fill: {...newConfig.fill, ...makeFlat(config.font?.fill)},
+    fill: {
+      default: '#000',
+      ...newConfig.fill,
+      ...makeFlat(config.font?.fill),
+    },
     fillInversed: {...newConfig.fillInversed, ...makeFlat(config.font?.fillInversed)},
     lineHeight: makeFlat(config.font?.['line-height']),
     letterSpacing: makeFlat(config.font?.['letter-spacing']),
   }
 
   newConfig.line = {
-    fill: {...newConfig.fill, ...makeFlat(config.line?.fill)},
-    weight: makeFlat(config.line?.weight),
+    fill: {
+      default: '#000',
+      ...newConfig.fill,
+      ...makeFlat(config.line?.fill),
+    },
+    weight: {
+      default: '1px',
+      none: '0',
+      ...makeFlat(config.line?.weight)
+    },
   }
 
   newConfig.gap = {
-    size: makeFlat(config.gap?.size || config.gap),
+    size: {
+      default: '16px',
+      ...makeFlat(config.gap?.size || config.gap),
+    },
   }
 
   newConfig.icon = {
-    fill: {...newConfig.fill, ...makeFlat(config.icon?.fill )},
+    fill: {
+      default: '#000',
+      ...newConfig.fill,
+      ...makeFlat(config.icon?.fill )
+    },
     size: makeFlat(config.icon?.size),
   }
 

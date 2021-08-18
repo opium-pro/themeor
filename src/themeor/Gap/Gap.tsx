@@ -74,7 +74,7 @@ const Gap = ({
   }
   const useInrow = !children && (isInrow || inrow)
 
-  const defaultGap = 'md'
+  const defaultGap = 'default'
 
   const notSpecified = !right && !left && !top && !bottom && !vert && !hor
 
@@ -82,7 +82,7 @@ const Gap = ({
     ...restProps,
     className: cn(
       css[`gap`],
-      !children && useInrow && notSpecified && css[`left-${size || defaultGap}`],
+      useInrow && notSpecified && css[`left-${size || defaultGap}`],
       !children && !useInrow && notSpecified && css[`top-${size || defaultGap}`],
       gapConfig({size: top}) && css[`top-${top}`],
       gapConfig({size: right}) && css[`right-${right}`],

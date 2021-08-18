@@ -4,6 +4,7 @@ import { TaglessComponent } from "../with-tagless"
 export type LineProps = CommonProps & {
   fill?: string | false,
   inverse?: boolean,
+  fancy?: boolean,
   weight?: string | 'none' | false,
   top?: string | 'none' | false,
   right?: string | 'none' | false,
