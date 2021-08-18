@@ -7,7 +7,7 @@ export function Reaction({
   children,
   track = ['hover', 'focus'],
   cursor = 'pointer',
-  speed = 'md',
+  speed = 'default',
   className,
   smooth,
   ...restProps

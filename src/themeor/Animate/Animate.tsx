@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AnimateComponent, AnimateProps } from './types'
+import { AnimateComponent, AnimateProps, AnimateCSS } from './types'
 import cn from '../utils/class-names'
 import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
@@ -7,8 +7,10 @@ import newId from '../utils/new-id'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
 
+/*
+  This is beta-component. Works only on web. Based on animate.css
+*/
 
-// TryTagless Element Tag
 const Animate = (props: AnimateProps, ref: any) => {
   const {
     onMount,
@@ -19,6 +21,7 @@ const Animate = (props: AnimateProps, ref: any) => {
     delay = 0,
     repeat = 1,
     children,
+    getTrigger,
     mounted: initialMounted = true,
     ...restProps
   } = props
@@ -29,6 +32,15 @@ const Animate = (props: AnimateProps, ref: any) => {
   const [mounted, setMounted]: any = useState(true)
 
   const timeTillUnmount = duration + delay
+
+  function trigger(name: AnimateCSS) {
+    setAnimationName(name)
+    remove()
+  }
+
+  useEffect(() => {
+    getTrigger && getTrigger(trigger)
+  }, [])
 
   useEffect(() => {
     if (initialMounted === false) {
@@ -49,7 +61,7 @@ const Animate = (props: AnimateProps, ref: any) => {
     id: thisId,
     children,
     onMouseEnter: (() => { onHover && setAnimationName(onHover); onHover && remove() }),
-    onClick: onClick && (() => { setAnimationName(onClick); remove() }),
+    onClick: (() => { onClick && setAnimationName(onClick); onClick && remove() }),
     className: cn(
       css['animated'],
       css[animationName],
