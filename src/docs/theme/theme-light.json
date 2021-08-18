@@ -133,6 +133,12 @@
     }
   },
 
+  "fit": {
+    "offset": {
+      "x2s": "4px"
+    }
+  },
+
   "line": {
     "fill": {
       "faint": {

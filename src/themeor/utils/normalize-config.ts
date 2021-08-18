@@ -170,10 +170,36 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
 
 
   newConfig.reaction = {
-    speed: {
-      default: '0ms',
+    duration: {
+      default: '250ms',
       none: '0ms',
       ...makeFlat(config.reaction?.speed),
+    },
+    cursor: {
+      pointer: 'pointer',
+      text: 'text',
+      help: 'help',
+      wait: 'wait',
+      crosshair: 'crosshair',
+      'not-allowed': 'not-allowed',
+      'zoom-in': 'zoom-in',
+      'zoom-out': 'zoom-out',
+      grab: 'grab',
+      default: 'default',
+      none: 'none',
+      auto: 'auto',
+      cell: 'cell',
+      alias: 'alias',
+      copy: 'copy',
+      move: 'move',
+      grabbing: 'grabbing',
+      'col-resize': 'col-resize',
+      'row-resize': 'row-resize',
+    },
+    timingFunction: {
+      default: 'ease',
+      ease: 'ease',
+      linear: 'linear',
     },
     property: {
       default: 'color, background, fill, font-size, font-weight, width, height, top, left, right, bottom, opacity',
@@ -283,12 +309,12 @@ function mutateToOpiumFill(newConfig: any) {
   boxFill.none = fontFill.none = lineFill.none = iconFill.none = 'transparent'
 
   boxFill.default = boxFill.none
-  fontFill.default = fontFill[`base`]
+  fontFill.default = `inherit`
   lineFill.default = lineFill[`base`]
   iconFill.default = iconFill[`base`]
 
   boxFillFancy.default = boxFillFancy.none
-  fontFillFancy.default = fontFillFancy[`base`]
+  fontFillFancy.default = `inherit`
   lineFillFancy.default = lineFillFancy[`base`]
   iconFillFancy.default = iconFillFancy[`base`]
 

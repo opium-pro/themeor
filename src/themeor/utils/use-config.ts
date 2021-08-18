@@ -7,7 +7,7 @@ function getConfig(context: any, component: any, param: any, reverse?: boolean) 
     const isDefined = (normalizedConfig[component]?.[key]?.[param[key]] !== undefined)
 
     if (!reverse) {
-      result.push(normalizedConfig[component][key][param[key]])
+      result.push(normalizedConfig[component][key][param[key]]?.toString())
 
     } else {
       const wrongType = !['string', 'number'].includes(typeof param[key])

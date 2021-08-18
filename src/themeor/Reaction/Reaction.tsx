@@ -9,7 +9,7 @@ export function Reaction({
   children,
   track = ['hover', 'focus'],
   cursor = 'pointer',
-  speed = 'default',
+  duration = 'default',
   className,
   smooth,
   ...restProps
@@ -76,7 +76,7 @@ export function Reaction({
     className: cn(
       `t-reaction`,
       cursor && `t-reaction-cursor-${cursor}`,
-      smooth && speed && `t-reaction-speed-${speed}`,
+      smooth && duration && `t-reaction-speed-${duration}`,
       className,
     ),
     ...restProps,

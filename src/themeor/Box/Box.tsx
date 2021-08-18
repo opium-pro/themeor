@@ -38,7 +38,7 @@ const Box = (props: BoxProps, ref: any) => {
   } = props
 
   const context = useTheme()
-  const { boxConfig } = useConfig(context)
+  const { boxConfig, customBoxValue } = useConfig(context)
   const newStyle = { ...style }
   const { normalizedConfig } = context
   const css = useCss()
@@ -58,32 +58,32 @@ const Box = (props: BoxProps, ref: any) => {
     }
   }
 
-  if (radius && !boxConfig({ radius })) { newStyle.borderRadius = radius }
-  if (radiusTop && !boxConfig({ radiusTop })) {
-    newStyle.borderTopLeftRadius = radiusTop
-    newStyle.borderTopRightRadius = radiusTop
+  if (customBoxValue({ radius })) { newStyle.borderRadius = radius || undefined }
+  if (customBoxValue({ radiusTop })) {
+    newStyle.borderTopLeftRadius = radiusTop || undefined
+    newStyle.borderTopRightRadius = radiusTop || undefined
   }
-  if (radiusRight && !boxConfig({ radius: radiusRight })) {
-    newStyle.borderTopRightRadius = radiusRight
-    newStyle.borderBottomRightRadius = radiusRight
+  if (customBoxValue({ radius: radiusRight })) {
+    newStyle.borderTopRightRadius = radiusRight || undefined
+    newStyle.borderBottomRightRadius = radiusRight || undefined
   }
-  if (radiusLeft && !boxConfig({ radius: radiusLeft })) {
-    newStyle.borderTopLeftRadius = radiusLeft
-    newStyle.borderBottomLeftRadius = radiusLeft
+  if (customBoxValue({ radius: radiusLeft })) {
+    newStyle.borderTopLeftRadius = radiusLeft || undefined
+    newStyle.borderBottomLeftRadius = radiusLeft || undefined
   }
-  if (radiusBottom && !boxConfig({ radius: radiusBottom })) {
-    newStyle.borderBottomLeftRadius = radiusBottom
-    newStyle.borderBottomRightRadius = radiusBottom
+  if (customBoxValue({ radius: radiusBottom })) {
+    newStyle.borderBottomLeftRadius = radiusBottom || undefined
+    newStyle.borderBottomRightRadius = radiusBottom || undefined
   }
-  if (radiusTopLeft && !boxConfig({ radius: radiusTopLeft })) { newStyle.borderTopLeftRadius = radiusTopLeft }
-  if (radiusTopRight && !boxConfig({ radius: radiusTopRight })) { newStyle.borderTopRightRadius = radiusTopRight }
-  if (radiusBottomLeft && !boxConfig({ radius: radiusBottomLeft })) { newStyle.borderBottomLeftRadius = radiusBottomLeft }
-  if (radiusBottomRight && !boxConfig({ radius: radiusBottomRight })) { newStyle.borderBottomRightRadius = radiusBottomRight }
+  if (customBoxValue({ radius: radiusTopLeft })) { newStyle.borderTopLeftRadius = radiusTopLeft || undefined }
+  if (customBoxValue({ radius: radiusTopRight })) { newStyle.borderTopRightRadius = radiusTopRight || undefined }
+  if (customBoxValue({ radius: radiusBottomLeft })) { newStyle.borderBottomLeftRadius = radiusBottomLeft || undefined }
+  if (customBoxValue({ radius: radiusBottomRight })) { newStyle.borderBottomRightRadius = radiusBottomRight || undefined }
 
-  if (shadow && !boxConfig({ shadow })) { newStyle.boxShadow = shadow }
-  if (shadowInner && !boxConfig({ shadowInner })) { newStyle.boxShadow = 'inset ' + shadowInner }
-  if (blur && !boxConfig({ blur })) { newStyle.backdropFilter = `blur(${blur})` }
-  if (glow && !boxConfig({ glow })) { newStyle.boxShadow = glow }
+  if (customBoxValue({ shadow })) { newStyle.boxShadow = shadow || undefined }
+  if (customBoxValue({ shadowInner })) { newStyle.boxShadow = 'inset ' + shadowInner }
+  if (customBoxValue({ blur })) { newStyle.backdropFilter = `blur(${blur})` }
+  if (customBoxValue({ glow })) { newStyle.boxShadow = glow || undefined }
 
   // Setting classNames
 

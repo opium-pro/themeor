@@ -1,46 +1,56 @@
-import { setStyles } from '../utils/styles'
+import { createStyleSheet, getClasses } from '../utils/styles'
+import { Classes, Styles } from 'jss'
+import { REACTION_NAME } from './types'
 
-export const id = 'themeor-reaction'
+export const useCss: () => Classes = () => getClasses(REACTION_NAME)
+
 
 export default function (normalizedConfig: any) {
   const {
     reaction: {
-      speed,
+      duration,
+      property,
+      cursor,
+      timingFunction,
     }
   } = normalizedConfig
 
-  let styles = `
-.t-reaction {
-  pointer-events: all;
-}
-.t-reaction:focus {
-    outline: none;
+  const styles: Styles = {}
+
+  styles[`reaction`] = {
+    pointerEvents: 'all',
+    outline: 'none',
   }
 
-.t-reaction-cursor-pointer {
-  cursor: pointer;
-}
+  for (const key in cursor) {
+    styles[`cursor-${key}`] = {
+      cursor: cursor[key],
+    }
+  }
 
-.t-reaction-cursor-text {
-  cursor: text;
-}
-
-.t-reaction-ignore {
-  pointer-events: none;
-}
-`
-
-
-  for (const key in speed) {
-    styles += `
-.t-reaction-speed-${key} {
-  transition-duration: ${speed[key]};
-  transition-property: color, background, fill, font-size, font-weight, width, height, top, left, right, bottom, opacity;
-  transition-timing-function: ease;
-}
-`
+  styles[`ignore`] = {
+    pointerEvents: 'none',
   }
 
 
-  setStyles(id, styles)
+  for (const key in duration) {
+    styles[`speed-${key}`] = {
+      transitionDuration: duration[key],
+    }
+  }
+
+  for (const key in property) {
+    styles[`property-${key}`] = {
+      transitionProperty: property[key],
+    }
+  }
+
+  for (const key in timingFunction) {
+    styles[`timing-function-${key}`] = {
+      transitionProperty: timingFunction[key],
+    }
+  }
+
+
+  return createStyleSheet(REACTION_NAME, styles)
 }

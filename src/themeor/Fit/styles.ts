@@ -124,6 +124,11 @@ export default function (normalizedConfig: any) {
     }
   }
 
+  // Z Index
+  for (const key in zIndex) {
+    styles[`z-index-${key}`] = { zIndex: zIndex[key] }
+  }
+
 
   return createStyleSheet(FIT_NAME, styles)
 }
