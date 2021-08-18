@@ -39,4 +39,5 @@ const Effect = ({
 }
 
 
+Effect.displayName = EFFECT_NAME
 export default withTagless(React.forwardRef(Effect)) as EffectComponent

@@ -106,5 +106,5 @@ const Animate = (props: AnimateProps, ref: any) => {
   return Common(componentProps, ANIMATE_NAME)
 }
 
-
+Animate.displayName = ANIMATE_NAME
 export default withTagless(React.forwardRef(Animate)) as AnimateComponent

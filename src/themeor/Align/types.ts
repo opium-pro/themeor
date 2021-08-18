@@ -1,7 +1,8 @@
 import { CommonProps } from '../Common'
 import { TaglessComponent } from '../with-tagless'
+import { obfuscate, hash } from '../config'
 
-export const ALIGN_NAME = 'Align'
+export const ALIGN_NAME = obfuscate ? hash('Align') : 'Align'
 
 export type AlignProps = CommonProps & {
   row?: boolean,

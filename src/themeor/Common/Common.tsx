@@ -1,6 +1,5 @@
 import React from 'react'
 import { CommonComponent } from './types'
-import { obfuscate } from '../config'
 
 let CommonTag: any = 'div'
 
@@ -40,7 +39,7 @@ export const Common: CommonComponent = ({
     children,
   }
 
-  const dontPassName = typeof CommonTag === 'string' && obfuscate
+  const dontPassName = typeof CommonTag === 'string'
 
   return typeof children === 'function'
     ? children(componentProps)

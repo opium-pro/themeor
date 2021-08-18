@@ -104,4 +104,6 @@ const Icon = ({
   )
 }
 
+
+Icon.displayName = ICON_NAME
 export default React.forwardRef(Icon) as IconComponent

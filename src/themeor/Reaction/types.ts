@@ -1,6 +1,8 @@
-export type TrackType = 'active' | 'focus' | 'hover'
+import { obfuscate, hash } from "../config"
 
-export const REACTION_NAME = 'Reaction'
+export const REACTION_NAME = obfuscate ? hash('Reaction') : 'Reaction'
+
+export type TrackType = 'active' | 'focus' | 'hover'
 
 export type ReactionProps = React.AllHTMLAttributes<HTMLElement> & {
   cursor?: 'pointer' | 'default' | 'text' | false,

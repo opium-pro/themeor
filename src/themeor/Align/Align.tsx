@@ -97,4 +97,5 @@ const Align = ({
 }
 
 
+Align.displayName = ALIGN_NAME
 export default withTagless(React.forwardRef(Align)) as AlignComponent

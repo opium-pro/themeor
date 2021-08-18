@@ -68,4 +68,5 @@ const Fit = ({
   return Common(componentProps, FIT_NAME)
 }
 
+Fit.displayName = FIT_NAME
 export default withTagless(React.forwardRef(Fit)) as FitComponent

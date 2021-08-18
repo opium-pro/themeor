@@ -2,7 +2,7 @@ import React, { useEffect, useState, FC } from 'react'
 import newId from '../utils/new-id'
 import { ThemeContext } from '../context'
 import isDarkMode from '../utils/is-dark-mode'
-import { ThemeProps } from './types'
+import { ThemeProps, THEME_NAME } from './types'
 import setBoxStyle from '../Box/styles'
 import setFontStyle from '../Font/styles'
 import setGapStyle from '../Gap/styles'
@@ -78,3 +78,6 @@ export const Theme: FC<ThemeProps> = ({
     </ThemeContext.Provider>
   )
 }
+
+
+Theme.displayName = THEME_NAME

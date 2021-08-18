@@ -74,5 +74,5 @@ const Line = ({
   return Common(componentProps, LINE_NAME)
 }
 
-
+Line.displayName = LINE_NAME
 export default withTagless(React.forwardRef(Line)) as LineComponent

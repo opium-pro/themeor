@@ -170,4 +170,5 @@ const Box = (props: BoxProps, ref: any) => {
 }
 
 
+Box.displayName = BOX_NAME
 export default withTagless(React.forwardRef(Box)) as BoxComponent

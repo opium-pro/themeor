@@ -102,4 +102,5 @@ const Gap = ({
 }
 
 
+Gap.displayName = GAP_NAME
 export default withTagless(React.forwardRef(Gap)) as GapComponent

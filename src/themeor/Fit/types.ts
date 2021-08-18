@@ -1,7 +1,8 @@
 import { CommonProps } from "../Common"
 import { TaglessComponent } from "../with-tagless"
+import { obfuscate, hash } from "../config"
 
-export const FIT_NAME = 'Fit'
+export const FIT_NAME = obfuscate ? hash('Fit') : 'Fit'
 
 export type FitProps = CommonProps & {
   cover?: 'parent' | 'screen' | false,

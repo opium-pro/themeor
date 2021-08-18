@@ -74,4 +74,5 @@ const Font = ({
 }
 
 
+Font.displayName = FONT_NAME
 export default withTagless(React.forwardRef(Font)) as FontCompoennt
