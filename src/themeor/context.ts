@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeIcons } from './config-types'
+import { ThemeIcons } from './types'
 
 export interface ThemeContext {
   shallInverseOn?: string[],

@@ -1,5 +1,5 @@
 import { ThemeContext } from '../context'
-import { ThemeConfig } from '../config-types'
+import { ThemeConfig } from '../types'
 import { allFills } from './opium-fill'
 
 

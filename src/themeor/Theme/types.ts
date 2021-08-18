@@ -1,4 +1,4 @@
-import { ThemeConfig, ThemeIcons } from '../config-types'
+import { ThemeConfig, ThemeIcons } from '../types'
 
 export type ThemeProps = {
   config?: ThemeConfig,

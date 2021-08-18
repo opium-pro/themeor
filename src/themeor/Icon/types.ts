@@ -1,11 +1,9 @@
-import * as Types from '../config-types'
-
-export type IconProps = React.HTMLAttributes<SVGElement> & {
+export type IconProps = {
   fill?: string | false,
   inverse?: boolean,
-  size?: string | Types.Scale | false,
+  size?: string | false,
   name?: string | false,
   forceLine?: boolean,
   forceFill?: boolean,
   forwardRef?: (node: any) => void,
-}
+} & React.HTMLAttributes<SVGElement>

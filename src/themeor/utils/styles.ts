@@ -3,26 +3,26 @@ import preset from 'jss-preset-default'
 
 
 export let obfuscate = false
-export let transformClassName = true
+export let isNative = true
 
 export function setObfuscate(value: boolean) {
   obfuscate = value
 }
 
-export function setTransformClassName(value: boolean) {
-  transformClassName = value
+export function setIsNative(value: boolean) {
+  isNative = value
 }
 
 const createGenerateId = () => {
   let counter = 0
   return (rule: any, {options}: any) => {
+    if (isNative) {
+      return `${rule.key}`
+    }
     if (obfuscate) {
       return `t${counter++}`
     }
-    if (transformClassName) {
-      return `${options.classNamePrefix || ''}__${rule.key}__t${counter++}`
-    }
-    return `${rule.key}`
+    return `${options.classNamePrefix || ''}__${rule.key}__t${counter++}`
   }
 }
 
