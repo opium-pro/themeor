@@ -10,6 +10,7 @@ export * from './utils/styles'
 export * from './utils/use-config'
 
 export * from './with-tagless'
+export * from './config'
 
 export * from './Theme'
 export * from './Box'

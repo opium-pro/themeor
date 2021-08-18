@@ -1,5 +1,6 @@
 import React from 'react'
 import { CommonComponent } from './types'
+import { obfuscate } from '../config'
 
 let CommonTag: any = 'div'
 
@@ -39,7 +40,9 @@ export const Common: CommonComponent = ({
     children,
   }
 
+  const dontPassName = typeof CommonTag === 'string' && obfuscate
+
   return typeof children === 'function'
     ? children(componentProps)
-    : <CommonTag data-name={name} {...componentProps} ref={forwardRef} />
+    : <CommonTag data-themeor={dontPassName ? undefined : name} {...componentProps} ref={forwardRef} />
 }

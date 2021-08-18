@@ -2,6 +2,9 @@ import React from 'react'
 import cn from '../utils/class-names'
 import { ReactionProps, ReactionState } from './types'
 import { ReactionContext } from './context'
+import { obfuscate, hash } from '../config'
+
+obfuscate && (Reaction.displayName = hash('LENIN_NOT_DEAD'))
 
 export function Reaction({
   children,
