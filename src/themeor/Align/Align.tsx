@@ -6,7 +6,7 @@ import { withTagless } from '../with-tagless'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { Common } from '../Common'
-import { css } from './styles'
+import { useCss } from './styles'
 
 const Align = ({
   row,
@@ -22,6 +22,7 @@ const Align = ({
   ...restProps
 }: AlignProps, ref: any) => {
   const { gapConfig } = useConfig(useTheme())
+  const css = useCss()
 
   const newStyle = { ...style }
   if (!!pattern) { newStyle.gridTemplateColumns = pattern }
@@ -41,20 +42,18 @@ const Align = ({
     newStyle.columnGap = gapHor || undefined
   }
 
+  const mode = (!!pattern && 'pattern') || ((row || stack) && 'row') || 'col'
+
   const componentProps = {
     forwardRef: ref,
     ...restProps,
     className: cn(
       css[`align`],
-      row && css[`row`],
-      !row && !stack && !pattern && css[`col`],
-      vert && css[`vert-${vert}`],
-      hor && css[`hor-${hor}`],
+      css[mode],
+      vert && css[`${mode}-vert-${vert}`],
+      hor && css[`${mode}-hor-${hor}`],
       gapConfig({ size: gapVert }) && css[`vert-gap-${gapVert}`],
       gapConfig({ size: gapHor }) && css[`hor-gap-${gapHor}`],
-      stack && css[`stack`],
-      stack && css[`row`],
-      !!pattern && css[`pattern`],
       className
     ),
     style: newStyle,
@@ -79,7 +78,11 @@ const Align = ({
     }
 
     return React.Children.map(children, (child: any) => {
-      return <div className={wrapChildClass} style={wrapChildStyle}>{child}</div>
+      return Common({
+        className: wrapChildClass,
+        style: wrapChildStyle,
+        children: child,
+      })
     })
   }
 

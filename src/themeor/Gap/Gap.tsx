@@ -6,7 +6,7 @@ import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
-import { css } from './styles'
+import { useCss } from './styles'
 
 
 const Gap = ({
@@ -27,6 +27,7 @@ const Gap = ({
 
   const [isInrow, setInrow] = React.useState(false)
   const { gapConfig } = useConfig(useTheme())
+  const css = useCss()
 
   const newStyle = { ...style }
 

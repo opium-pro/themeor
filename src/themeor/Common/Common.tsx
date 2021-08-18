@@ -1,6 +1,13 @@
 import React from 'react'
 import { CommonComponent } from './types'
 
+let CommonTag: any = 'div'
+
+
+export function setCommonTag(tag: any) {
+  CommonTag = tag
+}
+
 
 export const Common: CommonComponent = ({
   stretch,
@@ -34,5 +41,5 @@ export const Common: CommonComponent = ({
 
   return typeof children === 'function'
     ? children(componentProps)
-    : <div {...componentProps} ref={forwardRef} />
+    : <CommonTag {...componentProps} ref={forwardRef} />
 }
