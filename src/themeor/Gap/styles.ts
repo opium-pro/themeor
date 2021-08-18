@@ -49,6 +49,7 @@ export default function (normalizedConfig: any) {
   styles[`bottom-none`] = { paddingBottom: 0 }
   styles[`left-none`] = { paddingLeft: 0 }
 
+
   if (styleSheet) {
     styleSheet.update(styles)
   } else {
