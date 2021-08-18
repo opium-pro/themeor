@@ -4,8 +4,6 @@ import { isNative, obfuscate, hash } from '../config'
 
 
 const createGenerateId = () => {
-  
-
   return (rule: any, { options }: any) => {
     const unicName = `${options.classNamePrefix || ''}__${rule.key}`
     const hashed = hash(unicName)
@@ -37,18 +35,14 @@ export function getInitialStyles(name: string): Styles {
 
 
 export function createStyleSheet(name: string, styles: Styles) {
+  const styleSheet: StyleSheet = jss.createStyleSheet(styles, { classNamePrefix: name, })
+
   if (styleSheets[name]) {
-    styleSheets[name].update(styles)
-  } else {
-    styleSheets[name] = jss.createStyleSheet(
-      styles,
-      {
-        classNamePrefix: name,
-        link: true,
-      })
-    styleSheets[name].attach()
+    styleSheets[name].detach()
   }
 
+  styleSheet.attach()
+  styleSheets[name] = styleSheet
   initialStyles[name] = styles
   return styleSheets[name]
 }

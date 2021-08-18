@@ -27,12 +27,22 @@ export const Theme: FC<ThemeProps> = ({
   const [currentConfig, setCurrentConfig] = React.useState(config)
 
   function changeColorMode() {
-    if (darkConfig && isDarkMode()) {
+    if (darkConfig && isDarkMode() && currentConfig != darkConfig) {
       setCurrentConfig(darkConfig)
     } else if (currentConfig != config) {
       setCurrentConfig(config)
     }
   }
+
+  // Track dark mode
+  useEffect(() => {
+    const colorScheme = window?.matchMedia('(prefers-color-scheme: dark)')
+    colorScheme.addEventListener && colorScheme.addEventListener('change', changeColorMode)
+    return () => {
+      const colorScheme = window?.matchMedia('(prefers-color-scheme: dark)')
+      colorScheme.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
+    }
+  }, [currentConfig])
 
   useEffect(() => {
     changeColorMode()
@@ -51,16 +61,6 @@ export const Theme: FC<ThemeProps> = ({
     setIconStyle(normalizedConfig)
     setEffectStyle(normalizedConfig)
   }, [currentConfig])
-
-
-  // Track dark mode
-  useEffect(() => {
-    const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
-    darkConfig && colorScheme.addEventListener && colorScheme.addEventListener('change', changeColorMode)
-    return () => {
-      colorScheme.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
-    }
-  }, [])
 
   reset && import('./reset')
 
