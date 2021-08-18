@@ -1,5 +1,5 @@
 import React from 'react'
-import cn from '../utils/class-name'
+import cn from '../utils/class-names'
 import { EffectComponent, EffectProps } from './types'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'

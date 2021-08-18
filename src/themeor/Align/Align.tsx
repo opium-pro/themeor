@@ -1,5 +1,5 @@
 import React from 'react'
-import cn from '../utils/class-name'
+import cn from '../utils/class-names'
 import { half, minus } from '../utils/change-css-value'
 import { AlignComponent, AlignProps } from './types'
 import { withTagless } from '../with-tagless'

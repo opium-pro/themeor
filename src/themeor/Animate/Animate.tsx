@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AnimateComponent, AnimateProps } from './types'
-import cn from '../utils/class-name'
+import cn from '../utils/class-names'
 import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
 import newId from '../utils/new-id'

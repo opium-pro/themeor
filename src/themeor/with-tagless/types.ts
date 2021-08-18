@@ -1,4 +1,3 @@
-import {FC} from 'react'
 import { CommonComponent } from '../Common'
 
 export type TaglessProps = {

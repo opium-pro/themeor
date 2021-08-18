@@ -1,8 +1,8 @@
-import React, { forwardRef } from 'react'
-import consoleMessage from '../utils/console-message'
+import React from 'react'
+import * as console from '../utils/console'
 import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate } from '../index'
 import { TaglessProps, TaglessComponent } from './types'
-import cn from '../utils/class-name'
+import cn from '../utils/class-names'
 
 
 export const withTagless = (Component: any): TaglessComponent => {
@@ -16,7 +16,7 @@ export const withTagless = (Component: any): TaglessComponent => {
     } = props
 
     function refuse(message?: string) {
-      message && consoleMessage({ text: message, source: withTagless })
+      message && console.warn(message, withTagless)
       const { FORCE_TAGLESS, ...originalProps } = props
       if (Component.render) {
         return Component.render(originalProps)

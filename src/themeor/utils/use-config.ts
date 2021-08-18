@@ -17,7 +17,13 @@ function getConfig(context: any, component: any, param: any) {
 
 export function useConfig(context: any) {
   const result = {} as {
-    [key: string]: (params: { [key: string]: any }) => any
+    boxConfig: (params: { [key: string]: any }) => any
+    fontConfig: (params: { [key: string]: any }) => any
+    gapConfig: (params: { [key: string]: any }) => any
+    lineConfig: (params: { [key: string]: any }) => any
+    iconConfig: (params: { [key: string]: any }) => any
+    reactionConfig: (params: { [key: string]: any }) => any
+    effectConfig: (params: { [key: string]: any }) => any
   }
 
   result.boxConfig = (params) => {

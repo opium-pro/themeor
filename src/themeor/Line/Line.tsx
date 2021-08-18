@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from '../context'
-import cn from '../utils/class-name'
+import cn from '../utils/class-names'
 import { LineComponent, LineProps } from './types'
 import { Common } from '../Common'
 import { useConfig } from '../utils/use-config'

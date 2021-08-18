@@ -1,6 +1,6 @@
 import React from 'react'
-import cn from '../utils/class-name'
-import consoleMessage from '../utils/console-message'
+import cn from '../utils/class-names'
+import * as console from '../utils/console'
 import { GapComponent, GapProps } from './types'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
@@ -66,11 +66,10 @@ const Gap = ({
   }
 
   if (inrow && !!children) {
-    consoleMessage({
-      source: Gap,
-      text: "Prop 'inrow' will be neglected because it work only when there is no children",
-      type: 'error',
-    })
+    console.error(
+      "Prop 'inrow' will be neglected because it work only when there is no children",
+      Gap
+    )
   }
   const useInrow = !children && (isInrow || inrow)
 

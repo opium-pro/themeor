@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme, ThemeContext } from '../context'
-import cn from '../utils/class-name'
+import cn from '../utils/class-names'
 import { Line } from '../Line'
 import { BoxProps, BoxComponent } from './types'
 import { useConfig } from '../utils/use-config'

@@ -21,7 +21,7 @@ export const Common: CommonComponent = ({
   children,
   forwardRef,
   ...restProps
-}) => {
+}, name?: string) => {
   const newStyle = { ...style }
 
   if (stretch) { newStyle.flexGrow = 1 }
@@ -41,5 +41,5 @@ export const Common: CommonComponent = ({
 
   return typeof children === 'function'
     ? children(componentProps)
-    : <CommonTag {...componentProps} ref={forwardRef} />
+    : <CommonTag name={name} {...componentProps} ref={forwardRef} />
 }

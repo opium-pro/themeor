@@ -1,5 +1,5 @@
 import React from 'react'
-import cn from '../utils/class-name'
+import cn from '../utils/class-names'
 import { FitComponent, FitProps } from './types'
 import { minus } from '../utils/change-css-value'
 import { Common } from '../Common'

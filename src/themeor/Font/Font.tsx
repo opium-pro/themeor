@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from '../context'
-import cn from '../utils/class-name'
+import cn from '../utils/class-names'
 import { FontCompoennt, FontProps } from './types'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'
@@ -69,7 +69,7 @@ const Font = ({
     children,
   }
 
-  return Common(componentProps)
+  return Common(componentProps, 'font')
 }
 
 

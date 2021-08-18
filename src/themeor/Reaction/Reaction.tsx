@@ -1,5 +1,5 @@
 import React from 'react'
-import cn from '../utils/class-name'
+import cn from '../utils/class-names'
 import { ReactionProps, ReactionState } from './types'
 import { ReactionContext } from './context'
 

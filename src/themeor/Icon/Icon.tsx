@@ -1,7 +1,7 @@
 import React from 'react'
 import {useTheme} from '../context'
-import cn from '../utils/class-name'
-import consoleMessage from '../utils/console-message'
+import cn from '../utils/class-names'
+import * as console from '../utils/console'
 import {IconProps} from "./types"
 import {useConfig} from '../utils/use-config'
 
@@ -44,11 +44,10 @@ const Icon = ({
   }
 
   if (children) {
-    consoleMessage({
-      text: 'Prop "children" is prohibited, it will be ignored',
-      type: 'error',
-      source: Icon,
-    })
+    console.error(
+      'Prop "children" is prohibited, it will be ignored',
+      Icon
+    )
   }
 
   // if (!name) {
@@ -64,11 +63,10 @@ const Icon = ({
 
   // @ts-ignore
   if (!size || !icons[size]) {
-    consoleMessage({
-      text: `There is no such size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
-      type: 'error',
-      source: Icon,
-    })
+    console.error(
+      `There is no such size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
+      Icon
+    )
     return null
   }
 
@@ -76,11 +74,10 @@ const Icon = ({
   const FinalIcon = name && icons[size]?.[name]
 
   if (!FinalIcon) {
-    consoleMessage({
-      text: `There is no such Icon like "${name}" with size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
-      type: 'error',
-      source: Icon,
-    })
+    console.error(
+      `There is no such Icon like "${name}" with size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
+      Icon
+    )
     return null
   }
 
