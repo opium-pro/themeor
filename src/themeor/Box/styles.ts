@@ -1,7 +1,8 @@
 import { createStyleSheet, getClasses } from '../utils/styles'
 import { Classes, Styles } from 'jss'
+import {BOX_NAME} from './types'
 
-export const useCss: () => Classes = () => getClasses('box')
+export const useCss: () => Classes = () => getClasses(BOX_NAME)
 
 
 export default function (normalizedConfig: any) {
@@ -24,7 +25,7 @@ export default function (normalizedConfig: any) {
   styles[`box`] = {
     borderRadius: 0,
     outline: 'none',
-    vorder: 'none',
+    border: 'none',
   }
 
   styles[`img`] = {
@@ -108,5 +109,5 @@ export default function (normalizedConfig: any) {
   }
 
 
-  return createStyleSheet('box', styles)
+  return createStyleSheet(BOX_NAME, styles)
 }

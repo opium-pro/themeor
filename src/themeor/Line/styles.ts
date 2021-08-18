@@ -1,7 +1,8 @@
 import { createStyleSheet, getClasses } from '../utils/styles'
 import { Classes, Styles } from 'jss'
+import { LINE_NAME } from './types'
 
-export const useCss: () => Classes = () => getClasses('line')
+export const useCss: () => Classes = () => getClasses(LINE_NAME)
 
 
 export default function (normalizedConfig: any) {
@@ -49,5 +50,5 @@ export default function (normalizedConfig: any) {
 
 
 
-  return createStyleSheet('line', styles)
+  return createStyleSheet(LINE_NAME, styles)
 }

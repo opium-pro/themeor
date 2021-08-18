@@ -1,9 +1,10 @@
 import { minus, half } from '../utils/change-css-value'
 import { createStyleSheet, getClasses } from '../utils/styles'
 import { Classes, Styles } from 'jss'
+import { ALIGN_NAME } from './types'
 
 
-export const useCss: () => Classes = () => getClasses('align')
+export const useCss: () => Classes = () => getClasses(ALIGN_NAME)
 
 
 export default function (normalizedConfig: any) {
@@ -77,9 +78,9 @@ export default function (normalizedConfig: any) {
   styles[`pattern-hor-stretch`] = { justifyItems: 'stretch' }
 
   for (const key in size) {
-  styles[`pattern-hor-gap-${key}`] = { columnGap: size[key] }
+    styles[`pattern-hor-gap-${key}`] = { columnGap: size[key] }
     styles[`pattern-vert-gap-${key}`] = { rowGap: size[key] }
   }
 
-  return createStyleSheet('align', styles)
+  return createStyleSheet(ALIGN_NAME, styles)
 }

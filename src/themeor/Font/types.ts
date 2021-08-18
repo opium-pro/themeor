@@ -1,6 +1,9 @@
 import { CommonProps } from '../Common'
 import { TaglessComponent } from "../with-tagless"
 
+
+export const FONT_NAME = 'Font'
+
 export type FontProps = CommonProps & {
   fill?: string | false,
   inverse?: boolean,

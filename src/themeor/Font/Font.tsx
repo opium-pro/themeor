@@ -1,11 +1,11 @@
 import React from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-names'
-import { FontCompoennt, FontProps } from './types'
+import { FontCompoennt, FontProps, FONT_NAME } from './types'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
-import {useCss} from './styles'
+import { useCss } from './styles'
 
 
 const Font = ({
@@ -70,7 +70,7 @@ const Font = ({
     children,
   }
 
-  return Common(componentProps, 'font')
+  return Common(componentProps, FONT_NAME)
 }
 
 

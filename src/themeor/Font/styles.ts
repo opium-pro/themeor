@@ -1,8 +1,9 @@
 import { createStyleSheet, getClasses } from '../utils/styles'
 import { Classes, Styles } from 'jss'
+import {FONT_NAME} from './types'
 
 
-export const useCss: () => Classes = () => getClasses('font')
+export const useCss: () => Classes = () => getClasses(FONT_NAME)
 
 
 export default function (normalizedConfig: any) {
@@ -93,5 +94,5 @@ export default function (normalizedConfig: any) {
   }
 
 
-  return createStyleSheet('font', styles)
+  return createStyleSheet(FONT_NAME, styles)
 }

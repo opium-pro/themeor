@@ -41,5 +41,5 @@ export const Common: CommonComponent = ({
 
   return typeof children === 'function'
     ? children(componentProps)
-    : <CommonTag name={name} {...componentProps} ref={forwardRef} />
+    : <CommonTag data-name={name} {...componentProps} ref={forwardRef} />
 }

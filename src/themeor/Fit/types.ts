@@ -1,6 +1,8 @@
 import { CommonProps } from "../Common"
 import { TaglessComponent } from "../with-tagless"
 
+export const FIT_NAME = 'Fit'
+
 export type FitProps = CommonProps & {
   cover?: 'parent' | 'screen' | false,
   left?: string | false,

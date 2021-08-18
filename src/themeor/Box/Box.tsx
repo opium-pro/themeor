@@ -2,7 +2,7 @@ import React from 'react'
 import { useTheme, ThemeContext } from '../context'
 import cn from '../utils/class-names'
 import { Line } from '../Line'
-import { BoxProps, BoxComponent } from './types'
+import { BoxProps, BoxComponent, BOX_NAME } from './types'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
@@ -117,7 +117,7 @@ const Box = (props: BoxProps, ref: any) => {
     style: newStyle,
   }
 
-  let renderBoxComponent = Common(componentProps, 'box')
+  let renderBoxComponent = Common(componentProps, BOX_NAME)
 
   const hasBorder = borderFill || borderWeight
 
@@ -126,7 +126,7 @@ const Box = (props: BoxProps, ref: any) => {
 
     renderBoxComponent = (
       <Line.TryTagless fill={borderFill} weight={borderWeight}>
-        {Common(componentProps, 'box')}
+        {Common(componentProps, BOX_NAME)}
       </Line.TryTagless>
     )
   }

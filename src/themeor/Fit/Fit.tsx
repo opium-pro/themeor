@@ -1,13 +1,13 @@
 import React from 'react'
 import cn from '../utils/class-names'
-import { FitComponent, FitProps } from './types'
+import { FitComponent, FitProps, FIT_NAME } from './types'
 import { minus } from '../utils/change-css-value'
 import { Common } from '../Common'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { withTagless } from '../with-tagless'
 
-const Fit= ({
+const Fit = ({
   left,
   top,
   right,
@@ -65,7 +65,7 @@ const Fit= ({
     children,
   }
 
-  return Common(componentProps)
+  return Common(componentProps, FIT_NAME)
 }
 
 export default withTagless(React.forwardRef(Fit)) as FitComponent

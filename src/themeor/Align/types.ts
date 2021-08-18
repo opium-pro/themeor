@@ -1,6 +1,8 @@
 import { CommonProps } from '../Common'
 import { TaglessComponent } from '../with-tagless'
 
+export const ALIGN_NAME = 'Align'
+
 export type AlignProps = CommonProps & {
   row?: boolean,
   stack?: boolean,

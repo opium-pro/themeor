@@ -1,5 +1,7 @@
-import { CommonProps, CommonComponent } from "../Common"
+import { CommonProps } from "../Common"
 import { TaglessComponent } from "../with-tagless"
+
+export const GAP_NAME = 'Gap'
 
 export type GapProps = CommonProps & {
   size?: string | 'none' | false,

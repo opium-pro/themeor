@@ -1,4 +1,5 @@
 import { setStyles } from '../utils/styles'
+import { ICON_NAME } from './types'
 
 export const id = 'themeor-icon'
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AnimateComponent, AnimateProps, AnimateCSS } from './types'
+import { AnimateComponent, AnimateProps, AnimateCSS, ANIMATE_NAME } from './types'
 import cn from '../utils/class-names'
 import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
@@ -103,7 +103,7 @@ const Animate = (props: AnimateProps, ref: any) => {
     return null
   }
 
-  return Common(componentProps)
+  return Common(componentProps, ANIMATE_NAME)
 }
 
 

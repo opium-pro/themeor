@@ -1,6 +1,7 @@
 import { CommonProps } from '../Common'
 import { TaglessComponent } from '../with-tagless'
 
+export const BOX_NAME = 'Box'
 
 export type BoxProps = CommonProps & {
   fill?: string | false,

@@ -1,16 +1,16 @@
 import React from 'react'
-import {useTheme} from '../context'
+import { useTheme } from '../context'
 import cn from '../utils/class-names'
 import * as console from '../utils/console'
-import {IconProps} from "./types"
-import {useConfig} from '../utils/use-config'
+import { IconProps, ICON_NAME, IconComponent } from "./types"
+import { useConfig } from '../utils/use-config'
 
 const Icon = ({
   className,
-  fill = "base",
+  fill = "default",
   inverse,
-  size = "md",
-  style={},
+  size = "default",
+  style = {},
   children,
   name,
   forceLine,
@@ -18,27 +18,27 @@ const Icon = ({
   forwardRef,
   ...restProps
 }: IconProps, ref: any) => {
-  const newStyle = {...style}
-  const {icons, TRY_TO_INVERSE} = useTheme()
+  const newStyle = { ...style }
+  const { icons, TRY_TO_INVERSE } = useTheme()
 
-  const {iconConfig} = useConfig(useTheme())
+  const { iconConfig } = useConfig(useTheme())
 
-  function handleRef (node: any) {
-    if (!node) {return}
+  function handleRef(node: any) {
+    if (!node) { return }
 
     typeof forwardRef === 'function' && forwardRef(node)
     typeof ref === 'function' && ref(node)
 
     const pathList = node.querySelectorAll('path')
 
-    if (!iconConfig({fill})) {
+    if (!iconConfig({ fill })) {
       for (let path of pathList) {
         path.style.fill = fill
       }
     }
   }
 
-  if (!iconConfig({size})) {
+  if (!iconConfig({ size })) {
     newStyle.width = size || undefined
     newStyle.height = size || undefined
   }
@@ -91,9 +91,9 @@ const Icon = ({
       `t-icon`,
       // makeItLined && css['force-stroke'],
       // makeItFilled && css['force-fill'],
-      iconConfig({fill}) && `t-icon-fill-${fill}`,
-      iconConfig({size}) && `t-icon-size-${size}`,
-      (inverse !== false) && (inverse || TRY_TO_INVERSE) && iconConfig({fill}) && `t-icon-inverse`,
+      iconConfig({ fill }) && `t-icon-fill-${fill}`,
+      iconConfig({ size }) && `t-icon-size-${size}`,
+      (inverse !== false) && (inverse || TRY_TO_INVERSE) && iconConfig({ fill }) && `t-icon-inverse`,
       className
     ),
     ref: handleRef,
@@ -104,4 +104,4 @@ const Icon = ({
   )
 }
 
-export default React.forwardRef(Icon)
+export default React.forwardRef(Icon) as IconComponent

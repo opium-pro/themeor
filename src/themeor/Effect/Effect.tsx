@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from '../utils/class-names'
-import { EffectComponent, EffectProps } from './types'
+import { EffectComponent, EffectProps, EFFECT_NAME } from './types'
 import { useConfig } from '../utils/use-config'
 import { Common } from '../Common'
 import { useTheme } from '../context'
@@ -35,7 +35,7 @@ const Effect = ({
     style: newStyle,
   }
 
-  return Common(componentProps)
+  return Common(componentProps, EFFECT_NAME)
 }
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from '../utils/class-names'
 import * as console from '../utils/console'
-import { GapComponent, GapProps } from './types'
+import { GapComponent, GapProps, GAP_NAME } from './types'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
 import { Common } from '../Common'
@@ -98,7 +98,7 @@ const Gap = ({
     forwardRef: handleRef,
   }
 
-  return Common(componentProps)
+  return Common(componentProps, GAP_NAME)
 }
 
 

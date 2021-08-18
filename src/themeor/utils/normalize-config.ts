@@ -1,6 +1,6 @@
 import { ThemeContext } from '../context'
 import { ThemeConfig } from '../types'
-import { allFills } from './opium-fill'
+import { allFills, baseFills } from './opium-fill'
 
 
 export function normalizeConfig(config: ThemeConfig): ThemeContext {
@@ -190,8 +190,14 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
   }
 
   // If use opium fill, then correct values to old config
-  const useOpiumFill = config?.fill?.base?.strong
+  const useOpiumFill = config.fill?.base?.strong && config.useOpiumFillShorthand !== false
   if (useOpiumFill) {
+    for (const fill of baseFills) {
+      if (newConfig.shallInverseOn.includes(fill)) {
+        newConfig.shallInverseOn.push(`${fill}-up`)
+        newConfig.shallInverseOn.push(`${fill}-down`)
+      }
+    }
     mutateToOpiumFill(newConfig)
   }
 
@@ -245,7 +251,7 @@ function mutateToOpiumFill(newConfig: any) {
     lineFill[opiumFill] = newConfig.line.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
     iconFill[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
 
-    boxFillInv[opiumFill] = newConfig.box.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    boxFillInv[opiumFill] = newConfig.box.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
     fontFillInv[opiumFill] = newConfig.font.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
     lineFillInv[opiumFill] = newConfig.line.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
     iconFillInv[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]

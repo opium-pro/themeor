@@ -1,3 +1,7 @@
+import {FC} from 'react'
+
+export const ICON_NAME = 'Icon'
+
 export type IconProps = {
   fill?: string | false,
   inverse?: boolean,
@@ -7,3 +11,6 @@ export type IconProps = {
   forceFill?: boolean,
   forwardRef?: (node: any) => void,
 } & React.HTMLAttributes<SVGElement>
+
+
+export type IconComponent = FC<IconProps>

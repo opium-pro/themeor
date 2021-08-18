@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-names'
-import { LineComponent, LineProps } from './types'
+import { LineComponent, LineProps, LINE_NAME } from './types'
 import { Common } from '../Common'
 import { useConfig } from '../utils/use-config'
 import { withTagless } from '../with-tagless'
@@ -71,7 +71,7 @@ const Line = ({
     children,
   }
 
-  return Common(componentProps)
+  return Common(componentProps, LINE_NAME)
 }
 
 

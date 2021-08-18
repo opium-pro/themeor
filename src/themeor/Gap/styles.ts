@@ -1,8 +1,9 @@
 import { createStyleSheet, getClasses } from '../utils/styles'
 import { Classes, Styles } from 'jss'
+import { GAP_NAME } from './types'
 
 
-export const useCss: () => Classes = () => getClasses('gap')
+export const useCss: () => Classes = () => getClasses(GAP_NAME)
 
 
 export default function (normalizedConfig: any) {
@@ -50,5 +51,5 @@ export default function (normalizedConfig: any) {
   styles[`left-none`] = { paddingLeft: 0 }
 
 
-  return createStyleSheet('gap', styles)
+  return createStyleSheet(GAP_NAME, styles)
 }

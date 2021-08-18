@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from '../utils/class-names'
 import { half, minus } from '../utils/change-css-value'
-import { AlignComponent, AlignProps } from './types'
+import { AlignComponent, AlignProps, ALIGN_NAME } from './types'
 import { withTagless } from '../with-tagless'
 import { useConfig } from '../utils/use-config'
 import { useTheme } from '../context'
@@ -84,7 +84,7 @@ const Align = ({
         className: wrapChildClass,
         style: wrapChildStyle,
         children: child,
-      })
+      }, 'align-item')
     })
   }
 
@@ -93,7 +93,7 @@ const Align = ({
   }
 
 
-  return Common(componentProps)
+  return Common(componentProps, ALIGN_NAME)
 }
 
 

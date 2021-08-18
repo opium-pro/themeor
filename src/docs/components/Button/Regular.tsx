@@ -27,22 +27,24 @@ export default function Regular({
           </Fit.TryTagless>
 
 
-          <Align.TryTagless vert="center" hor="center">
-            <Box.TryTagless
-              minWidth="220px"
-              height="60px"
-              borderFill="faint"
-              fill={(reaction.active && "base") || (reaction.hover && "faint-up") || "faint"}
-              strong={reaction.active}
-              radius={radius}
-            >
-              <Gap.TryTagless hor="md" vert="sm">
-                <button type="button" {...rProps}>
-                  <Font noselect fill="base" size="lg">{children}</Font>
-                </button>
-              </Gap.TryTagless>
-            </Box.TryTagless>
-          </Align.TryTagless>
+          <Fit>
+            <Align.TryTagless vert="center" hor="center">
+              <Box.TryTagless
+                minWidth="220px"
+                height="60px"
+                borderFill="faint"
+                fill={(reaction.active && "base") || (reaction.hover && "faint-up") || "faint"}
+                strong={reaction.active}
+                radius={radius}
+              >
+                <Gap.TryTagless hor="md" vert="sm">
+                  <button type="button" {...rProps}>
+                    <Font noselect fill="base" size="lg">{children}</Font>
+                  </button>
+                </Gap.TryTagless>
+              </Box.TryTagless>
+            </Align.TryTagless>
+          </Fit>
 
         </Fit>
       )}
