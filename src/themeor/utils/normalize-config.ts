@@ -3,10 +3,8 @@ import { ThemeConfig } from '../types'
 import { allFills } from './opium-fill'
 
 
-export function normalizeConfig (config: ThemeConfig): ThemeContext {
+export function normalizeConfig(config: ThemeConfig): ThemeContext {
   const newConfig = { ...config.themeContext, ...config }
-  const opiumFill = config?.fill?.base?.strong
-
 
   newConfig.fill = {
     none: 'transparent',
@@ -15,6 +13,7 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
   newConfig.fillFancy = makeFlat({
     ...config['fancy-fill'],
     ...config.fancyFill,
+    ...config.fillFancy,
   })
   newConfig.fillInversed = makeFlat({
     ...config.fillInversed,
@@ -150,7 +149,7 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
     fill: {
       default: '#000',
       ...newConfig.fill,
-      ...makeFlat(config.icon?.fill )
+      ...makeFlat(config.icon?.fill)
     },
     fillInversed: {
       default: '#fff',
@@ -171,8 +170,8 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
 
   newConfig.reaction = {
     speed: {
-      default: '0',
-      none: '0',
+      default: '0ms',
+      none: '0ms',
       ...makeFlat(config.reaction?.speed),
     },
     property: {
@@ -191,59 +190,9 @@ export function normalizeConfig (config: ThemeConfig): ThemeContext {
   }
 
   // If use opium fill, then correct values to old config
-  if (opiumFill) {
-    const boxFill: any = {}
-    const fontFill: any = {}
-    const lineFill: any = {}
-    const iconFill: any = {}
-
-    const boxFillInv: any = {}
-    const fontFillInv: any = {}
-    const lineFillInv: any = {}
-    const iconFillInv: any = {}
-
-    const boxFillStrogn: any = {}
-
-    for (const opiumFill of allFills) {
-      const splitFill = opiumFill.split('-')
-      boxFill[opiumFill] = newConfig.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-      fontFill[opiumFill] = newConfig.font.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-      lineFill[opiumFill] = newConfig.line.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-      iconFill[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-
-      boxFillInv[opiumFill] = newConfig.box.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-      fontFillInv[opiumFill] = newConfig.font.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-      lineFillInv[opiumFill] = newConfig.line.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-      iconFillInv[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-
-      boxFillStrogn[opiumFill] = newConfig.box.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
-    }
-
-    boxFill.none = fontFill.none = lineFill.none = iconFill.none = 'transparent'
-
-    boxFill.default = boxFill.none
-    fontFill.default = fontFill[`base`]
-    lineFill.default = lineFill[`base`]
-    iconFill.default = iconFill[`base`]
-
-    boxFillInv.default = boxFillInv.none
-    fontFillInv.default = fontFillInv[`base`]
-    lineFillInv.default = lineFillInv[`base`]
-    iconFillInv.default = iconFillInv[`base`]
-
-    boxFillStrogn.default = boxFill.none
-
-    newConfig.box.fill = boxFill
-    newConfig.font.fill = fontFill
-    newConfig.line.fill = lineFill
-    newConfig.icon.fill = iconFill
-
-    newConfig.box.fillInversed = boxFillInv
-    newConfig.font.fillInversed = fontFillInv
-    newConfig.line.fillInversed = lineFillInv
-    newConfig.icon.fillInversed = iconFillInv
-
-    newConfig.box.fillStrong = boxFillStrogn
+  const useOpiumFill = config?.fill?.base?.strong
+  if (useOpiumFill) {
+    mutateToOpiumFill(newConfig)
   }
 
 
@@ -268,4 +217,80 @@ function makeFlat(value: any, prefix?: string, original?: any) {
   for (const key in value) {
     makeFlat(value[key], `${prefix}-${key}`, original)
   }
+}
+
+
+function mutateToOpiumFill(newConfig: any) {
+  const boxFill: any = {}
+  const fontFill: any = {}
+  const lineFill: any = {}
+  const iconFill: any = {}
+
+  const boxFillInv: any = {}
+  const fontFillInv: any = {}
+  const lineFillInv: any = {}
+  const iconFillInv: any = {}
+
+  const boxFillFancy: any = {}
+  const fontFillFancy: any = {}
+  const lineFillFancy: any = {}
+  const iconFillFancy: any = {}
+
+  const boxFillStrogn: any = {}
+
+  for (const opiumFill of allFills) {
+    const splitFill = opiumFill.split('-')
+    boxFill[opiumFill] = newConfig.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    fontFill[opiumFill] = newConfig.font.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    lineFill[opiumFill] = newConfig.line.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    iconFill[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+
+    boxFillInv[opiumFill] = newConfig.box.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    fontFillInv[opiumFill] = newConfig.font.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    lineFillInv[opiumFill] = newConfig.line.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    iconFillInv[opiumFill] = newConfig.icon.fill[`${splitFill[0]}-weak${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+
+    boxFillFancy[opiumFill] = newConfig.box.fillFancy[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    fontFillFancy[opiumFill] = newConfig.font.fillFancy[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    lineFillFancy[opiumFill] = newConfig.line.fillFancy[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+    iconFillFancy[opiumFill] = newConfig.icon.fillFancy[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+
+    boxFillStrogn[opiumFill] = newConfig.box.fill[`${splitFill[0]}-strong${splitFill[1] ? `-${splitFill[1]}` : ''}`]
+  }
+
+  boxFill.none = fontFill.none = lineFill.none = iconFill.none = 'transparent'
+
+  boxFill.default = boxFill.none
+  fontFill.default = fontFill[`base`]
+  lineFill.default = lineFill[`base`]
+  iconFill.default = iconFill[`base`]
+
+  boxFillFancy.default = boxFillFancy.none
+  fontFillFancy.default = fontFillFancy[`base`]
+  lineFillFancy.default = lineFillFancy[`base`]
+  iconFillFancy.default = iconFillFancy[`base`]
+
+  boxFillInv.default = boxFillInv.none
+  fontFillInv.default = fontFillInv[`base`]
+  lineFillInv.default = lineFillInv[`base`]
+  iconFillInv.default = iconFillInv[`base`]
+
+  boxFillStrogn.default = boxFillStrogn.none
+
+  newConfig.box.fill = boxFill
+  newConfig.font.fill = fontFill
+  newConfig.line.fill = lineFill
+  newConfig.icon.fill = iconFill
+
+  newConfig.box.fillInversed = boxFillInv
+  newConfig.font.fillInversed = fontFillInv
+  newConfig.line.fillInversed = lineFillInv
+  newConfig.icon.fillInversed = iconFillInv
+
+  newConfig.box.fillFancy = boxFillFancy
+  newConfig.font.fillFancy = fontFillFancy
+  newConfig.line.fillFancy = lineFillFancy
+  newConfig.icon.fillFancy = iconFillFancy
+
+  newConfig.box.fillStrong = boxFillStrogn
 }
