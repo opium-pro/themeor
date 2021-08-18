@@ -2,6 +2,7 @@ import React from 'react'
 import cn from '../utils/class-names'
 import { ReactionProps, ReactionState, REACTION_NAME } from './types'
 import { ReactionContext } from './context'
+import {useCss} from './styles'
 
 Reaction.displayName = REACTION_NAME
 
@@ -21,6 +22,8 @@ export function Reaction({
     focus: false,
     hoverOrFocus: false,
   })
+
+  const css = useCss()
 
   function handleMouseOver(event: React.MouseEvent<HTMLElement>) {
     restProps.onMouseOver && restProps.onMouseOver(event)
@@ -66,17 +69,17 @@ export function Reaction({
 
   const passState = {
     className: {
-      ignoreEvents: `t-reaction-ignore`,
-      sursor: cursor && `t-reaction-cursor-${cursor}`,
+      ignoreEvents: css[`ignore`],
+      sursor: cursor && css[`cursor-${cursor}`],
     },
     ...state,
   }
 
   const passProps = {
     className: cn(
-      `t-reaction`,
-      cursor && `t-reaction-cursor-${cursor}`,
-      smooth && duration && `t-reaction-speed-${duration}`,
+      css[`reaction`],
+      cursor && css[`cursor-${cursor}`],
+      smooth && duration && css[`duration-${duration}`],
       className,
     ),
     ...restProps,
