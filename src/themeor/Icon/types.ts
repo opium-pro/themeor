@@ -10,6 +10,7 @@ export type IconProps = {
   name?: string | false,
   forceLine?: boolean,
   forceFill?: boolean,
+  fancy?: boolean,
   forwardRef?: (node: any) => void,
 } & React.HTMLAttributes<SVGElement>
 

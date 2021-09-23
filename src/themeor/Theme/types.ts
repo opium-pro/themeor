@@ -6,6 +6,6 @@ export const THEME_NAME = obfuscate ? hash('Theme') : 'Theme'
 export type ThemeProps = {
   config?: ThemeConfig,
   darkConfig?: ThemeConfig | false,
-  icons?: ThemeIcons | false,
+  icons?: ThemeIcons,
   reset?: boolean,
 }

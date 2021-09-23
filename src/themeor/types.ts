@@ -64,6 +64,6 @@ export type ThemeConfig = any | {
   }
 }
 
-export type ThemeIcons = {[X in Scale]?: {
+export type ThemeIcons = {[size: string]: {
   [Name: string]: any,
 }}

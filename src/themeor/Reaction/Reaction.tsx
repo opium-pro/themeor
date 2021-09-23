@@ -13,6 +13,12 @@ export function Reaction({
   duration = 'default',
   className,
   smooth,
+  onFocus,
+  onBlur,
+  onMouseOver,
+  onMouseOut,
+  onMouseDown,
+  onMouseUp,
   ...restProps
 }: ReactionProps) {
 
@@ -26,42 +32,42 @@ export function Reaction({
   const css = useCss()
 
   function handleMouseOver(event: React.MouseEvent<HTMLElement>) {
-    restProps.onMouseOver && restProps.onMouseOver(event)
+    onMouseOver && onMouseOver(event)
     if (!state.hover || !state.hoverOrFocus) {
       setState({ ...state, hover: true, hoverOrFocus: true } as ReactionState)
     }
   }
 
   function handleMouseOut(event: React.MouseEvent<HTMLElement>) {
-    restProps.onMouseOut && restProps.onMouseOut(event)
+    onMouseOut && onMouseOut(event)
     if (state.hover || state.hoverOrFocus) {
       setState({ ...state, hover: false, active: false, hoverOrFocus: state.focus } as ReactionState)
     }
   }
 
   function handleMouseDown(event: React.MouseEvent<HTMLElement>) {
-    restProps.onMouseDown && restProps.onMouseDown(event)
+    onMouseDown && onMouseDown(event)
     if (!state.active) {
       setState({ ...state, active: true } as ReactionState)
     }
   }
 
   function handleMouseUp(event: React.MouseEvent<HTMLElement>) {
-    restProps.onMouseUp && restProps.onMouseUp(event)
+    onMouseUp && onMouseUp(event)
     if (state.active) {
       setState({ ...state, active: false } as ReactionState)
     }
   }
 
   function handleFocus(event: React.FocusEvent<HTMLElement>) {
-    restProps.onFocus && restProps.onFocus(event)
+    onFocus && onFocus(event)
     if (!state.focus || !state.hoverOrFocus) {
       setState({ ...state, focus: true, hoverOrFocus: true } as ReactionState)
     }
   }
 
   function handleBlur(event: React.FocusEvent<HTMLElement>) {
-    restProps.onBlur && restProps.onBlur(event)
+    onBlur && onBlur(event)
     if (state.focus || state.hoverOrFocus) {
       setState({ ...state, focus: false, hoverOrFocus: state.hover } as ReactionState)
     }
@@ -75,7 +81,7 @@ export function Reaction({
     ...state,
   }
 
-  const passProps = {
+  const passProps: any = {
     className: cn(
       css[`reaction`],
       cursor && css[`cursor-${cursor}`],

@@ -16,6 +16,7 @@ export type AlignProps = CommonProps & {
 
 export type AlignComponent = TaglessComponent<AlignProps> & {
   Span: AlignSpanComponent
+  Spacer: any
 }
 
 export type AlignSpanProps = AlignProps & {

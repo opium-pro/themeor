@@ -29,7 +29,7 @@ const Animate = (props: AnimateProps, ref: any) => {
   const [animationName, setAnimationName]: any = useState()
   const [isRemoving, setIsRemoving]: any = useState()
   const [thisId]: any = useState(newId())
-  const [mounted, setMounted]: any = useState(true)
+  const [mounted, setMounted]: any = useState(initialMounted)
 
   const timeTillUnmount = duration + delay
 
@@ -50,6 +50,8 @@ const Animate = (props: AnimateProps, ref: any) => {
       setTimeout(() => {
         setMounted(false)
       }, timeTillUnmount)
+    } else {
+      !mounted && setMounted(true)
     }
   })
 

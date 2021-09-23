@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-names'
 import * as console from '../utils/console'
 import { IconProps, ICON_NAME, IconComponent } from "./types"
 import { useConfig } from '../utils/use-config'
+import { useCss } from './styles'
+
 
 const Icon = ({
   className,
@@ -16,12 +18,14 @@ const Icon = ({
   forceLine,
   forceFill,
   forwardRef,
+  fancy,
   ...restProps
 }: IconProps, ref: any) => {
   const newStyle = { ...style }
   const { icons, TRY_TO_INVERSE } = useTheme()
+  const css = useCss()
 
-  const { iconConfig } = useConfig(useTheme())
+  const { iconConfig, customIconValue } = useConfig(useTheme())
 
   function handleRef(node: any) {
     if (!node) { return }
@@ -38,7 +42,7 @@ const Icon = ({
     }
   }
 
-  if (!iconConfig({ size })) {
+  if (customIconValue({ size })) {
     newStyle.width = size || undefined
     newStyle.height = size || undefined
   }
@@ -81,6 +85,8 @@ const Icon = ({
     return null
   }
 
+  const forseInverse = (inverse !== false) && (inverse || TRY_TO_INVERSE)
+
   const componentProps = {
     ...restProps,
     width: undefined,
@@ -88,15 +94,15 @@ const Icon = ({
     fill: undefined,
     style: newStyle,
     className: cn(
-      `t-icon`,
+      css[`icon`],
       // makeItLined && css['force-stroke'],
       // makeItFilled && css['force-fill'],
-      iconConfig({ fill }) && `t-icon-fill-${fill}`,
-      iconConfig({ size }) && `t-icon-size-${size}`,
-      (inverse !== false) && (inverse || TRY_TO_INVERSE) && iconConfig({ fill }) && `t-icon-inverse`,
+      iconConfig({ fill }) && css[`fill-${fill}`],
+      iconConfig({ size }) && css[`size-${size}`],
+      forseInverse && iconConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
+      fancy && iconConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
       className
     ),
-    ref: handleRef,
   }
 
   return (

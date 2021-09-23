@@ -1,7 +1,9 @@
-import { setStyles } from '../utils/styles'
+import { createStyleSheet, getClasses } from '../utils/styles'
+import { Classes, Styles } from 'jss'
 import { ICON_NAME } from './types'
 
-export const id = 'themeor-icon'
+
+export const useCss: () => Classes = () => getClasses(ICON_NAME)
 
 export default function (normalizedConfig: any) {
   const {
@@ -13,112 +15,76 @@ export default function (normalizedConfig: any) {
     }
   } = normalizedConfig
 
-  let styles = `
-.t-icon {
-  box-sizing: content-box !important;
-}
-`
+  const styles: Styles = {}
+
+  styles[`icon`] = { boxSizing: 'content-box' }
 
   for (const key in size) {
-    styles += `
-.t-icon-size-${key} {
-  width: ${size[key]};
-  height: ${size[key]};
-  min-width: ${size[key]};
-  min-height: ${size[key]};
-}
-`
+    styles[`size-${key}`] = {
+      width: size[key],
+      height: size[key],
+      minWidth: size[key],
+      minHeight: size[key],
+    }
   }
 
-  styles += `
-.t-icon.inverse {
-  *[fill] {
-    fill: var(--t-fill-base-weak);
-  }
-
-  *[stroke] {
-    stroke: var(--t-fill-base-weak);
-  }
-}
-`
-
+  styles[`fill-inversed-${fill}`] = {}
 
   // Fills
   for (const key in fill) {
-    styles += `
-.t-icon-fill-${key} {
-  *[fill] {
-    fill: var(--t-icon-fill-${key}-strong, var(--t-fill-${key}-strong));
-  }
-
-  *[stroke] {
-    stroke: var(--t-icon-fill-${key}-strong, var(--t-fill-${key}-strong));
-  }
-}
-.t-icon-inverse.t-icon-fill-${key} {
-  *[fill] {
-    fill: var(--t-icon-fill-${key}-weak, var(--t-fill-${key}-weak));
-  }
-
-  *[stroke] {
-    stroke: var(--t-icon-fill-${key}-weak, var(--t-fill-${key}-weak));
-  }
-}
-`
-  }
-
-
-  for (const key of ['stroke', 'fill']) {
-    styles += `
-.t-icon-force-#{$force} {
-  &.inverse {
-    *[class],
-    *[stroke],
-    *[fill] {
-      #{$force}: var(--t-fill-base-weak);
+    styles[`fill-${key}`] = {
+      '& *[fill]': { fill: fill[key] },
+      '& *[stroke]': { stroke: fill[key] },
+      '& *[fill="none"]': { fill: 'none' },
+      '& *[stroke="none"]': { stroke: 'none' },
     }
   }
-`
+
+  for (const key in fillFancy) {
+    styles[`fill-fancy-${key}`] = {
+      '& *[fill]': { fill: fillFancy[key] },
+      '& *[stroke]': { stroke: fillFancy[key] },
+      '& *[fill="none"]': { fill: 'none' },
+      '& *[stroke="none"]': { stroke: 'none' },
+    }
+  }
+
+  for (const key in fillInversed) {
+    styles[`fill-inversed-${key}`] = {
+      '& *[fill]': { fill: fillInversed[key] },
+      '& *[stroke]': { stroke: fillInversed[key] },
+      '& *[fill="none"]': { fill: 'none' },
+      '& *[stroke="none"]': { stroke: 'none' },
+    }
+  }
+
+  // Forced fills
+  for (const force of ['stroke', 'fill']) {
     for (const key in fill) {
-      styles += `
-&.t-icon-fill-${key} {
-  *[class],
-  *[stroke],
-  *[fill] {
-    #{$force}: var(--t-icon-fill-${key}-strong, var(--t-fill-${key}-strong));
-  }
-}
-&.t-icon-inverse.t-icon-fill-${key} {
-  *[class],
-  *[stroke],
-  *[fill] {
-    #{$force}: var(--t-icon-fill-${key}-weak, var(--t-fill-${key}-weak));
-  }
-}
-`
+      styles[`force-${force}`] = {
+        '& *[class]': { [key]: fill[key] },
+        '& *[stroke]': { [key]: fill[key] },
+        '& *[fill]': { [key]: fill[key] },
+      }
     }
+
+    for (const key in fillFancy) {
+      styles[`force-${force}-fancy`] = {
+        '& *[class]': { [key]: fillFancy[key] },
+        '& *[stroke]': { [key]: fillFancy[key] },
+        '& *[fill]': { [key]: fillFancy[key] },
+      }
+    }
+
+    for (const key in fillInversed) {
+      styles[`force-${force}-inversed`] = {
+        '& *[class]': { [key]: fillInversed[key] },
+        '& *[stroke]': { [key]: fillInversed[key] },
+        '& *[fill]': { [key]: fillInversed[key] },
+      }
+    }
+
   }
 
-  styles += `
-.t-icon-fill-none {
-  * {
-    fill: none !important;
-    stroke: none !important;
-  }
-}
-
-.t-icon-icon {
-  *[fill="none"] {
-    fill: none !important;
-  }
-
-  *[stroke="none"] {
-    stroke: none !important;
-  }
-}
-`
-
-
-  setStyles(id, styles)
-
+  return createStyleSheet(ICON_NAME, styles)
 }

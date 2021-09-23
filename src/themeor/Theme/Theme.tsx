@@ -25,6 +25,7 @@ export const Theme: FC<ThemeProps> = ({
 }) => {
   const [id] = useState(newId())
   const [currentConfig, setCurrentConfig] = React.useState(config)
+  const [isReady, setIsReady] = React.useState(false)
 
   function changeColorMode() {
     if (darkConfig && isDarkMode() && currentConfig != darkConfig) {
@@ -51,18 +52,25 @@ export const Theme: FC<ThemeProps> = ({
   // Update
   useEffect(() => {
     const normalizedConfig = normalizeConfig(currentConfig)
+    setFitStyle(normalizedConfig)
     setBoxStyle(normalizedConfig)
     setFontStyle(normalizedConfig)
-    setAlignStyle(normalizedConfig)
     setGapStyle(normalizedConfig)
-    setFitStyle(normalizedConfig)
     setLineStyle(normalizedConfig)
     setReactionStyle(normalizedConfig)
     setIconStyle(normalizedConfig)
     setEffectStyle(normalizedConfig)
+    setAlignStyle(normalizedConfig)
+    setIsReady(true)
   }, [currentConfig])
 
   reset && import('./reset')
+
+  useEffect(() => {
+    if (!icons?.default && icons?.md) {
+      icons.default = icons.md
+    }
+  }, [icons])
 
   const context = {
     ...currentConfig,
@@ -70,6 +78,10 @@ export const Theme: FC<ThemeProps> = ({
     themeId: id,
     darkMode: isDarkMode(),
     normalizedConfig: normalizeConfig(currentConfig),
+  }
+
+  if (!isReady) {
+    return null
   }
 
   return (
