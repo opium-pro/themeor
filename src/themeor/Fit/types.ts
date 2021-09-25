@@ -22,6 +22,8 @@ export type FitProps = CommonProps & {
   scroll?: boolean,
   clip?: boolean,
   sticky?: boolean,
+  fixed?: boolean,
+  absolute?: boolean,
 }
 
 export type FitComponent = TaglessComponent<FitProps>

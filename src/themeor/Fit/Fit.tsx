@@ -29,6 +29,8 @@ const Fit = ({
   className,
   children,
   sticky,
+  fixed,
+  absolute,
   ...restProps
 }: FitProps, ref: any) => {
 
@@ -71,6 +73,8 @@ const Fit = ({
       fitConfig({shift: left}) && css[`shift-left-${left}`],
       isNotParent && css[`not-parent`],
       sticky && css[`sticky`],
+      fixed && css[`fixed`],
+      absolute && css[`absolute`],
       inline === false && css[`block`],
       className
     ),
