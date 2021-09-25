@@ -16,6 +16,7 @@ export default function (normalizedConfig: any) {
   styles[`fit`] = { position: 'relative' }
   styles[`not-parent`] = { position: 'static' }
   styles[`inline`] = { display: 'inline-block' }
+  styles[`sticky`] = { position: 'sticky' }
 
   styles[`cover-screen`] = {
     position: 'fixed',

@@ -17,7 +17,7 @@ const Animate = (props: AnimateProps, ref: any) => {
     onUnmount,
     onHover,
     onClick,
-    duration = 1000,
+    duration = 300,
     delay = 0,
     repeat = 1,
     children,
@@ -35,55 +35,10 @@ const Animate = (props: AnimateProps, ref: any) => {
 
   function trigger(name: AnimateCSS) {
     setAnimationName(name)
-    remove()
   }
 
   useEffect(() => {
-    getTrigger && getTrigger(trigger)
-  }, [])
-
-  useEffect(() => {
-    if (initialMounted === false) {
-      onUnmount && setAnimationName(onUnmount)
-      remove()
-
-      setTimeout(() => {
-        setMounted(false)
-      }, timeTillUnmount)
-    } else {
-      !mounted && setMounted(true)
-    }
-  })
-
-  const styleId = 'style-' + thisId
-
-  const componentProps = {
-    forwardRef: ref,
-    ...restProps,
-    id: thisId,
-    children,
-    onMouseEnter: (() => { onHover && setAnimationName(onHover); onHover && remove() }),
-    onClick: (() => { onClick && setAnimationName(onClick); onClick && remove() }),
-    className: cn(
-      css['animated'],
-      css[animationName],
-    ),
-  }
-
-  function remove() {
-    if (isRemoving) {
-      return
-    }
-
-    setIsRemoving(true)
-
-    setTimeout(() => {
-      setAnimationName()
-      setIsRemoving(false)
-    }, timeTillUnmount)
-  }
-
-  useEffect(() => {
+    getTrigger?.(trigger)
     cssVar.set({
       id: styleId,
       prefix: 't',
@@ -96,10 +51,51 @@ const Animate = (props: AnimateProps, ref: any) => {
     })
   }, [])
 
+  const styleId = 'style-' + thisId
+
+  const componentProps = {
+    forwardRef: ref,
+    ...restProps,
+    id: thisId,
+    children,
+    onMouseEnter: (() => { onHover && setAnimationName(onHover); onHover }),
+    onClick: (() => { onClick && setAnimationName(onClick); onClick }),
+    className: cn(
+      css['animated'],
+      css[animationName],
+    ),
+  }
+
   useEffect(() => {
-    onMount && setAnimationName(onMount)
-    remove()
-  }, [])
+    if (initialMounted) {
+      setMounted(true)
+    } else if (mounted) {
+      if (onUnmount) {
+        setAnimationName(onUnmount)
+        setTimeout(() => {
+          setMounted(false)
+        }, timeTillUnmount)
+      } else {
+        setMounted(false)
+      }
+    }
+  }, [initialMounted])
+
+  // Remove animation after setting
+  useEffect(() => {
+    if (isRemoving || !animationName) {
+      return
+    }
+    setIsRemoving(true)
+    setTimeout(() => {
+      setAnimationName()
+      setIsRemoving(false)
+    }, timeTillUnmount)
+  }, [animationName])
+
+  useEffect(() => {
+    mounted && onMount && setAnimationName(onMount)
+  }, [mounted])
 
   if (!mounted) {
     return null

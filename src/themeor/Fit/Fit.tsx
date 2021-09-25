@@ -28,6 +28,7 @@ const Fit = ({
   clip,
   className,
   children,
+  sticky,
   ...restProps
 }: FitProps, ref: any) => {
 
@@ -69,6 +70,7 @@ const Fit = ({
       fitConfig({shift: right}) && css[`shift-right-${right}`],
       fitConfig({shift: left}) && css[`shift-left-${left}`],
       isNotParent && css[`not-parent`],
+      sticky && css[`sticky`],
       inline === false && css[`block`],
       className
     ),

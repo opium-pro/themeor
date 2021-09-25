@@ -102,7 +102,7 @@ const Box = (props: BoxProps, ref: any) => {
       boxConfig({ shadow }) && css[`shadow-${shadow}`],
       boxConfig({ blur }) && css[`blur-${blur}`],
       boxConfig({ shadowInner }) && css[`shadow-inner-${shadowInner}`],
-      boxConfig({ glow }) && css[`glow-${shadowInner}`],
+      boxConfig({ glow }) && css[`glow-${glow}`],
       boxConfig({ radius }) && css[`radius-${radius}`],
       boxConfig({ radius: radiusTop }) && css[`radius-top-${radiusTop}`],
       boxConfig({ radius: radiusRight }) && css[`radius-right-${radiusRight}`],

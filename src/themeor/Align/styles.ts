@@ -33,6 +33,7 @@ export default function (normalizedConfig: any) {
   styles[`row-vert-top`] = { alignItems: 'flex-start' }
   styles[`row-vert-bottom`] = { alignItems: 'flex-end' }
   styles[`row-vert-stretch`] = { alignItems: 'stretch' }
+  styles[`row-vert-baseline`] = { alignItems: 'baseline' }
   styles[`row-hor-center`] = { justifyContent: 'center' }
   styles[`row-hor-right`] = { justifyContent: 'flex-end' }
   styles[`row-hor-left`] = { justifyContent: 'flex-start' }

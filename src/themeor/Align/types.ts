@@ -8,7 +8,7 @@ export type AlignProps = CommonProps & {
   row?: boolean,
   stack?: boolean,
   pattern?: string | false,
-  vert?: 'stretch' | 'top' | 'center' | 'bottom' | false,
+  vert?: 'stretch' | 'top' | 'center' | 'bottom' | 'baseline' | false,
   hor?: 'stretch' | 'left' | 'center' | 'right' | false,
   gapVert?: string | false,
   gapHor?: string | false,
