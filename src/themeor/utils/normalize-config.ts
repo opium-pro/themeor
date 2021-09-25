@@ -6,6 +6,12 @@ import { allFills, baseFills } from './opium-fill'
 export function normalizeConfig(config: ThemeConfig): ThemeContext {
   const newConfig = { ...config.themeContext, ...config }
 
+  const customFills = config.customVariables || {}
+  newConfig.customFills = {}
+  for (const key in customFills) {
+    newConfig.customFills[`--${key}`] = customFills[key]
+  }
+
   newConfig.fill = {
     none: 'transparent',
     ...makeFlat(config.fill),
@@ -243,7 +249,6 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
     mutateToOpiumFill(newConfig)
   }
 
-
   return newConfig
 }
 
@@ -325,10 +330,12 @@ function mutateToOpiumFill(newConfig: any) {
 
   boxFillStrogn.default = boxFillStrogn.none
 
-  newConfig.box.fill = boxFill
-  newConfig.font.fill = fontFill
-  newConfig.line.fill = lineFill
-  newConfig.icon.fill = iconFill
+  const { customFills } = newConfig
+
+  newConfig.box.fill = {...customFills, ...boxFill}
+  newConfig.font.fill = {...customFills, ...fontFill}
+  newConfig.line.fill = {...customFills, ...lineFill}
+  newConfig.icon.fill = {...customFills, ...iconFill}
 
   newConfig.box.fillInversed = boxFillInv
   newConfig.font.fillInversed = fontFillInv

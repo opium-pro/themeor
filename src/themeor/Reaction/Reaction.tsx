@@ -2,7 +2,9 @@ import React from 'react'
 import cn from '../utils/class-names'
 import { ReactionProps, ReactionState, REACTION_NAME } from './types'
 import { ReactionContext } from './context'
-import {useCss} from './styles'
+import { useCss } from './styles'
+import { useConfig } from '../utils/use-config'
+import { useTheme } from '../context'
 
 Reaction.displayName = REACTION_NAME
 
@@ -11,25 +13,32 @@ export function Reaction({
   track = ['hover', 'focus'],
   cursor = 'pointer',
   duration = 'default',
-  className,
   smooth,
+  property = smooth ? 'all' : undefined,
+  timingFunction = 'ease',
+  className,
   onFocus,
   onBlur,
   onMouseOver,
   onMouseOut,
   onMouseDown,
   onMouseUp,
+  style = {},
   ...restProps
 }: ReactionProps) {
-
   const [state, setState] = React.useState({
     hover: false,
     active: false,
     focus: false,
     hoverOrFocus: false,
   })
-
+  const { reactionConfig, customReactionValue } = useConfig(useTheme())
   const css = useCss()
+  const newStyle = style
+
+  if (property) { newStyle.transitionProperty = property }
+  if (timingFunction) { newStyle.transitionTimingFunction = timingFunction }
+  if (customReactionValue({duration})) { newStyle.transitionDuration = duration as any }
 
   function handleMouseOver(event: React.MouseEvent<HTMLElement>) {
     onMouseOver && onMouseOver(event)
@@ -76,7 +85,7 @@ export function Reaction({
   const passState = {
     className: {
       ignoreEvents: css[`ignore`],
-      sursor: cursor && css[`cursor-${cursor}`],
+      sursor: reactionConfig({cursor}) && css[`cursor-${cursor}`],
     },
     ...state,
   }
@@ -84,10 +93,11 @@ export function Reaction({
   const passProps: any = {
     className: cn(
       css[`reaction`],
-      cursor && css[`cursor-${cursor}`],
-      smooth && duration && css[`duration-${duration}`],
+      reactionConfig({cursor}) && css[`cursor-${cursor}`],
+      reactionConfig({duration}) && css[`duration-${duration}`],
       className,
     ),
+    style: newStyle,
     ...restProps,
   }
 

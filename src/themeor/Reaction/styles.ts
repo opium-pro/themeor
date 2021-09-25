@@ -9,9 +9,7 @@ export default function (normalizedConfig: any) {
   const {
     reaction: {
       duration,
-      property,
       cursor,
-      timingFunction,
     }
   } = normalizedConfig
 
@@ -32,22 +30,9 @@ export default function (normalizedConfig: any) {
     pointerEvents: 'none',
   }
 
-
   for (const key in duration) {
-    styles[`speed-${key}`] = {
+    styles[`duration-${key}`] = {
       transitionDuration: duration[key],
-    }
-  }
-
-  for (const key in property) {
-    styles[`property-${key}`] = {
-      transitionProperty: property[key],
-    }
-  }
-
-  for (const key in timingFunction) {
-    styles[`timing-function-${key}`] = {
-      transitionProperty: timingFunction[key],
     }
   }
 
