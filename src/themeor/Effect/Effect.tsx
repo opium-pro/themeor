@@ -12,6 +12,11 @@ const Effect = ({
   hidden,
   transparency,
   children,
+  rotate,
+  smooth,
+  property = smooth ? 'all' : undefined,
+  timingFunction = 'ease',
+  duration = '300ms',
   style = {},
   ...restProps
 }: EffectProps, ref: any) => {
@@ -21,6 +26,11 @@ const Effect = ({
   if (transparency && !effectConfig({transparency})) {
     newStyle.opacity = transparency
   }
+
+  if (rotate) { newStyle.transform = `rotate(${rotate})` }
+  if (property) { newStyle.transitionProperty = property }
+  if (timingFunction) { newStyle.transitionTimingFunction = timingFunction as any }
+  if (duration) { newStyle.transitionDuration = duration as any }
 
   const componentProps = {
     forwardRef: ref,

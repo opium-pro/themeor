@@ -7,6 +7,11 @@ export const EFFECT_NAME = obfuscate ? hash('Effect') : 'Effect'
 export type EffectProps = CommonProps & {
   transparency?: string | 'none' | 'max' | false,
   hidden?: boolean,
+  rotate?: string | boolean
+  property?: string | boolean
+  timingFunction?: string | boolean
+  duration?: string | boolean
+  smooth?: boolean
 }
 
 export type EffectComponent = TaglessComponent<EffectProps>
