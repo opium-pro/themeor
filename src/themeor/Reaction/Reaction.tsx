@@ -85,7 +85,7 @@ export function Reaction({
   const passState = {
     className: {
       ignoreEvents: css[`ignore`],
-      sursor: reactionConfig({cursor}) && css[`cursor-${cursor}`],
+      cursor: reactionConfig({cursor}) && css[`cursor-${cursor}`],
     },
     ...state,
   }
