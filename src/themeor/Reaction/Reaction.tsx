@@ -118,7 +118,7 @@ export function Reaction({
 
   return (
     <ReactionContext.Provider value={{
-      reaction: state,
+      ...passState,
       passProps,
     }}>
       {(typeof children === 'function') ? (

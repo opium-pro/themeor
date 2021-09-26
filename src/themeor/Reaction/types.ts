@@ -19,3 +19,8 @@ export type ReactionState = {
   focus: boolean,
   hoverOrFocus: boolean,
 }
+
+export type ReactionContextType = ReactionState & {
+  passProps?: any
+  className?: any
+}
