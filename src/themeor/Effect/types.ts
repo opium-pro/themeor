@@ -12,6 +12,7 @@ export type EffectProps = CommonProps & {
   timingFunction?: string | boolean
   duration?: string | boolean
   smooth?: boolean
+  zoom?: number | boolean
 }
 
 export type EffectComponent = TaglessComponent<EffectProps>

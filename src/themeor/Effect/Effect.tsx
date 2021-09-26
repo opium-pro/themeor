@@ -17,6 +17,7 @@ const Effect = ({
   property = smooth ? 'all' : undefined,
   timingFunction = 'ease',
   duration = '300ms',
+  zoom,
   style = {},
   ...restProps
 }: EffectProps, ref: any) => {
@@ -31,6 +32,7 @@ const Effect = ({
   if (property) { newStyle.transitionProperty = property }
   if (timingFunction) { newStyle.transitionTimingFunction = timingFunction as any }
   if (duration) { newStyle.transitionDuration = duration as any }
+  if (zoom) { newStyle.transform = `scale(${zoom})` }
 
   const componentProps = {
     forwardRef: ref,
