@@ -20,6 +20,7 @@ export type FontProps = CommonProps & {
   inline?: boolean,
   noselect?: boolean,
   nowrap?: boolean,
+  wrap?: boolean,
 }
 
 export type FontCompoennt = TaglessComponent<FontProps>
