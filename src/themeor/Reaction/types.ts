@@ -23,4 +23,5 @@ export type ReactionState = {
 export type ReactionContextType = ReactionState & {
   passProps?: any
   className?: any
+  cursor?: string | false
 }
