@@ -13,6 +13,7 @@ export function Reaction({
   track = ['hover', 'focus'],
   cursor = 'pointer',
   duration = 'default',
+  disabled = false,
   smooth,
   property = smooth ? 'all' : undefined,
   timingFunction = 'ease',
@@ -120,7 +121,8 @@ export function Reaction({
   return (
     <ReactionContext.Provider value={{
       ...passState,
-      passProps,
+      passProps: disabled ? {} : passProps,
+      disabled,
     }}>
       {(typeof children === 'function') ? (
         children(passProps, passState)

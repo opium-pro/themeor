@@ -18,6 +18,7 @@ export type FitProps = CommonProps & {
   offsetLeft?: string | false,
   zIndex?: number | false,
   isNotParent?: boolean,
+  static?: boolean,
   inline?: boolean,
   scroll?: boolean,
   clip?: boolean,

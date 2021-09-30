@@ -11,6 +11,7 @@ export type ReactionProps = React.AllHTMLAttributes<HTMLElement> & {
   smooth?: boolean,
   timingFunction?: string | false,
   property?: string | false,
+  disabled?: boolean
 }
 
 export type ReactionState = {
@@ -24,4 +25,5 @@ export type ReactionContextType = ReactionState & {
   passProps?: any
   className?: any
   cursor?: string | false
+  disabled?: boolean
 }

@@ -16,7 +16,6 @@ export default function (normalizedConfig: any) {
   const styles: Styles = {}
 
   styles[`reaction`] = {
-    pointerEvents: 'all',
     outline: 'none',
   }
 
