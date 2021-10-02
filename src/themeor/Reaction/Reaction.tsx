@@ -20,8 +20,8 @@ export function Reaction({
   className,
   onFocus,
   onBlur,
-  onMouseOver,
-  onMouseOut,
+  onMouseMove,
+  onMouseLeave,
   onMouseDown,
   onMouseUp,
   style = {},
@@ -41,15 +41,15 @@ export function Reaction({
   if (timingFunction) { newStyle.transitionTimingFunction = timingFunction }
   if (customReactionValue({duration})) { newStyle.transitionDuration = duration as any }
 
-  function handleMouseOver(event: React.MouseEvent<HTMLElement>) {
-    onMouseOver && onMouseOver(event)
+  function handleMouseMove(event: React.MouseEvent<HTMLElement>) {
+    onMouseMove && onMouseMove(event)
     if (!state.hover || !state.hoverOrFocus) {
       setState({ ...state, hover: true, hoverOrFocus: true } as ReactionState)
     }
   }
 
-  function handleMouseOut(event: React.MouseEvent<HTMLElement>) {
-    onMouseOut && onMouseOut(event)
+  function handleMouseLeave(event: React.MouseEvent<HTMLElement>) {
+    onMouseLeave && onMouseLeave(event)
     if (state.hover || state.hoverOrFocus) {
       setState({ ...state, hover: false, active: false, hoverOrFocus: state.focus } as ReactionState)
     }
@@ -104,8 +104,8 @@ export function Reaction({
   }
 
   if (track && track.includes('hover')) {
-    passProps.onMouseOver = handleMouseOver
-    passProps.onMouseOut = handleMouseOut
+    passProps.onMouseMove = handleMouseMove
+    passProps.onMouseLeave = handleMouseLeave
   }
 
   if (track && track.includes('active')) {
