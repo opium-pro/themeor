@@ -11,9 +11,9 @@ Reaction.displayName = REACTION_NAME
 export function Reaction({
   children,
   track = ['hover', 'focus'],
-  cursor = 'pointer',
   duration = 'default',
   disabled = false,
+  cursor = disabled ? 'default' : 'pointer',
   smooth,
   property = smooth ? 'all' : undefined,
   timingFunction = 'ease',
@@ -125,7 +125,7 @@ export function Reaction({
       disabled,
     }}>
       {(typeof children === 'function') ? (
-        children(passProps, passState)
+        children(disabled ? {} : passProps, passState)
       ) : (children)}
     </ReactionContext.Provider>
   )
