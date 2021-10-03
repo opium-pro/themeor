@@ -1,4 +1,5 @@
 import { obfuscate, hash } from "../config"
+import { CommonProps } from '../Common'
 
 export const REACTION_NAME = obfuscate ? hash('Reaction') : 'Reaction'
 

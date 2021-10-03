@@ -15,6 +15,10 @@ const Box = (props: BoxProps, ref: any) => {
     fill = "default",
     borderFill,
     borderWeight,
+    borderRight,
+    borderLeft,
+    borderTop,
+    borderBottom,
     inverse,
     radius,
     radiusTop,
@@ -125,7 +129,14 @@ const Box = (props: BoxProps, ref: any) => {
     const { borderFill, borderWeight } = props
 
     renderBoxComponent = (
-      <Line.TryTagless fill={borderFill} weight={borderWeight}>
+      <Line.TryTagless
+        fill={borderFill}
+        weight={borderWeight}
+        left={borderLeft}
+        right={borderRight}
+        top={borderTop}
+        bottom={borderBottom}
+      >
         {Common(componentProps, BOX_NAME)}
       </Line.TryTagless>
     )

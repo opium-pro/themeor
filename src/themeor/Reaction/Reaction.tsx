@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import cn from '../utils/class-names'
 import { ReactionProps, ReactionState, REACTION_NAME } from './types'
 import { ReactionContext } from './context'

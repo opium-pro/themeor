@@ -19,7 +19,10 @@ export default function (normalizedConfig: any) {
 
   styles[`line`] = {
     borderStyle: 'solid',
-    borderWidth: 0,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 0,
   }
 
 
@@ -30,9 +33,14 @@ export default function (normalizedConfig: any) {
     styles[`weight-bottom-${key}`] = { borderBottomWidth: weight[key] }
     styles[`weight-left-${key}`] = { borderLeftWidth: weight[key] }
 
-    styles[`separator-weight-${key}`] = {
+    styles[`separator-hor-${key}`] = {
       borderWidth: 0,
       borderTopWidth: weight[key]
+    }
+
+    styles[`separator-vert-${key}`] = {
+      borderWidth: 0,
+      borderRightWidth: weight[key]
     }
   }
 

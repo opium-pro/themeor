@@ -19,28 +19,29 @@ const Line = ({
   left,
   children,
   fancy,
+  vert,
   style = {},
   ...restProps
 }: LineProps, ref: any) => {
 
   const { TRY_TO_INVERSE } = useTheme()
-  const { lineConfig } = useConfig(useTheme())
+  const { lineConfig, customLineValue } = useConfig(useTheme())
   const css = useCss()
 
   const newStyle = { ...style }
 
-  if (fill && !lineConfig({ fill })) {
+  if (fill && customLineValue({ fill })) {
     if (fancy) {
       newStyle.borderImage = lineConfig({ fillFancy: fill })
     } else {
       newStyle.borderColor = fill
     }
   }
-  if (weight && !lineConfig({ weight })) { newStyle.borderWidth = weight }
-  if (top && !lineConfig({ weight: top })) { newStyle.borderTopWidth = top }
-  if (right && !lineConfig({ weight: right })) { newStyle.borderRightWidth = right }
-  if (bottom && !lineConfig({ weight: bottom })) { newStyle.borderBottomWidth = bottom }
-  if (left && !lineConfig({ weight: left })) { newStyle.borderLeftWidth = left }
+  if (weight && customLineValue({ weight })) { newStyle.borderWidth = weight }
+  if (top && customLineValue({ weight: top })) { newStyle.borderTopWidth = top }
+  if (right && customLineValue({ weight: right })) { newStyle.borderRightWidth = right }
+  if (bottom && customLineValue({ weight: bottom })) { newStyle.borderBottomWidth = bottom }
+  if (left && customLineValue({ weight: left })) { newStyle.borderLeftWidth = left }
 
   const separator = !children
   const noSpecificWeight = !right && !left && !top && !bottom
@@ -56,12 +57,13 @@ const Line = ({
     ...restProps,
     className: cn(
       css[`line`],
-      separator && lineConfig({ weight }) && css[`separator-weight-${weight}`],
+      (separator && !vert) && lineConfig({ weight }) && css[`separator-hor-${weight}`],
+      (separator && vert) && lineConfig({ weight }) && css[`separator-vert-${weight}`],
       !separator && lineConfig({ weight }) && css[`weight-${weight}`],
-      !separator && lineConfig({ weight: top }) && css[`weight-top-${top}`],
-      !separator && lineConfig({ weight: right }) && css[`weight-right-${right}`],
-      !separator && lineConfig({ weight: bottom }) && css[`weight-bottom-${bottom}`],
-      !separator && lineConfig({ weight: left }) && css[`weight-left-${left}`],
+      lineConfig({ weight: top }) && css[`weight-top-${top}`],
+      lineConfig({ weight: right }) && css[`weight-right-${right}`],
+      lineConfig({ weight: bottom }) && css[`weight-bottom-${bottom}`],
+      lineConfig({ weight: left }) && css[`weight-left-${left}`],
       lineConfig({ fill }) && css[`fill-${fill}`],
       forseInverse && lineConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
       fancy && lineConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
