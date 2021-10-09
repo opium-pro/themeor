@@ -24,8 +24,8 @@ export const Theme: FC<ThemeProps> = ({
   config = {},
 }) => {
   const [id] = useState(newId())
-  const [currentConfig, setCurrentConfig] = React.useState(config)
-  const [isReady, setIsReady] = React.useState(false)
+  const [currentConfig, setCurrentConfig] = useState(config)
+  const [isReady, setIsReady] = useState(false)
 
   function changeColorMode() {
     if (darkConfig && isDarkMode() && currentConfig != darkConfig) {

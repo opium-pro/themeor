@@ -13,6 +13,8 @@ export default function (normalizedConfig: any) {
 
   const styles: Styles = {}
 
+  styles[`fit`] = { position: 'relative' }
+
   styles[`cover-screen`] = {
     position: 'fixed',
     left: 0,
@@ -29,7 +31,6 @@ export default function (normalizedConfig: any) {
     bottom: 0,
   }
 
-  styles[`fit`] = { position: 'relative' }
   styles[`static`] = { position: 'static' }
   styles[`inline`] = { display: 'inline-block' }
   styles[`sticky`] = { position: 'sticky' }

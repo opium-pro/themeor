@@ -229,10 +229,12 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
     },
     offset: {
       none: '0',
+      ...newConfig.gap.size,
       ...makeFlat(config.fit?.offset),
     },
     shift: {
       none: '0',
+      ...newConfig.gap.size,
       ...makeFlat(config.fit?.shift),
     },
   }
