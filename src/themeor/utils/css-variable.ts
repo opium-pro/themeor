@@ -1,17 +1,6 @@
-function createNode(id: string) {
-  const styleNode = document.createElement('style')
-  styleNode.type = 'text/css'
-  styleNode.id = id
-  document.head.appendChild(styleNode)
-  return styleNode
-}
+import {createStyleNode, unsetStyles} from './styles'
 
-function unset(id: string) {
-  const styleNode = document.getElementById(id)
-  if (styleNode) {
-    styleNode.innerHTML = ''
-  }
-}
+const unset = unsetStyles
 
 function set (params: {
   json?: any,
@@ -27,7 +16,7 @@ function set (params: {
 
   let styleNode = document.getElementById(params.id)
   if (!styleNode) {
-    styleNode = createNode(params.id)
+    styleNode = createStyleNode(params.id)
   }
 
   if (params.selector === undefined) {

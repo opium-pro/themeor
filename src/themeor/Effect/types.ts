@@ -1,17 +1,18 @@
-import * as Types from '../config-types'
+import { CommonProps } from "../Common"
+import { TaglessComponent } from "../with-tagless"
+import { obfuscate, hash } from "../config"
 
-export type PureEffectProps = {
-  transparency?: string | Types.Scale | 'none' | 'max' | false,
+export const EFFECT_NAME = obfuscate ? hash('Effect') : 'Effect'
+
+export type EffectProps = CommonProps & {
+  transparency?: string | 'none' | 'max' | false,
   hidden?: boolean,
+  rotate?: string | boolean
+  property?: string | boolean
+  timingFunction?: string | boolean
+  duration?: string | boolean
+  smooth?: boolean
+  zoom?: number | boolean
 }
 
-export type TaglessEffectProps = PureEffectProps & React.HTMLAttributes<HTMLDivElement> & {
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  children?: React.ReactNode,
-  forwardRef?: any,
-}
-
-export type EffectProps = TaglessEffectProps & {
-  TRY_TAGLESS?: boolean,
-}
+export type EffectComponent = TaglessComponent<EffectProps>

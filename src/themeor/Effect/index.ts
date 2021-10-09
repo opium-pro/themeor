@@ -1,2 +1,2 @@
-export * from './Effect'
+export { default as Effect } from './Effect'
 export * from './types'

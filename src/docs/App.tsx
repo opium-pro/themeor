@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Theme, Box, Font, Align, Fit, ConfigTypes, Icon, Line, Gap } from '../themeor'
+import { Theme, Box, Font, Align, Fit, ThemeConfig, ThemeIcons, Icon, Line, Gap } from '../themeor'
 import { AppContext } from './context'
 import { MenuAdapter } from './adapters'
 import { SideMenu } from './components'
@@ -17,8 +17,8 @@ interface AppProps { }
 interface AppState {
   refContent?: any,
   refAside?: any,
-  theme?: ConfigTypes.ThemeConfig,
-  themeChange?: (theme: ConfigTypes.ThemeConfig) => void,
+  theme?: ThemeConfig,
+  themeChange?: (theme: ThemeConfig) => void,
   autoDetectTheme?: boolean,
   autoDetectChange?: (value: boolean) => void,
 }
@@ -34,7 +34,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
     this.setState({ ...this.state, refAside: ref })
   }
 
-  themeChange = (theme: ConfigTypes.ThemeConfig) => {
+  themeChange = (theme: ThemeConfig) => {
     this.setState({ ...this.state, theme })
   }
 
@@ -52,7 +52,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        <Theme reset config={this.state.theme} darkConfig={this.state.autoDetectTheme && darkTheme} icons={icons as ConfigTypes.ThemeIcons}>
+        <Theme reset config={this.state.theme} darkConfig={this.state.autoDetectTheme && darkTheme} icons={icons as ThemeIcons}>
           <Font size="md" family="regular" fill="base" align="left" lineHeight="md">
             <Box.TryTagless fill="base">
               <Align.TryTagless pattern="240px 1fr">
@@ -67,7 +67,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                               <a target="_blank" href="https://github.com/opium-pro/themeor">
                                 <Gap size="xs">
                                   <Align row vert="center">
-                                    <Icon size="lg" name="github" forceFill={true} />
+                                    <Icon size="lg" name="github" forceFill />
                                     <Gap size="x2s" />
                                   Go to Github
                                 </Align>

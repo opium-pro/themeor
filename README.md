@@ -1,5 +1,12 @@
 # Create sophisticated themes in React JS. Fast. Without even knowing CSS
 
+## Version #2 main changes:
+1. Fully custom config. Not necessary to use 'md', 'sm', 'lg', 'faint', 'base' etc as variable names any more. You can add your own name in config file and use it.
+
+2. Almost completely removed usage of css files. Now styles are being attached directly to header.
+
+3. Get rid of CSS variables. Now we use variables directly from JS.
+
 ## [Documentation and demo](http://themeor.opium.pro/)
 
 ## Documentation is in progress.

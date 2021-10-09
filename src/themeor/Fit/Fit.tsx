@@ -1,21 +1,14 @@
 import React from 'react'
-import css from './Fit.module.css'
-import cn from '../utils/class-name'
-import {TryTagless} from '../TryTagless'
-import {FitProps, TaglessFitProps} from './types'
-import {isCustomValue} from '../utils/is-custom'
-import {minus} from '../utils/change-css-value'
+import cn from '../utils/class-names'
+import { FitComponent, FitProps, FIT_NAME } from './types'
+import { minus } from '../utils/change-css-value'
+import { Common } from '../Common'
+import { useConfig } from '../utils/use-config'
+import { useTheme } from '../context'
+import { withTagless } from '../with-tagless'
+import {useCss} from './styles'
 
-
-Fit.TryTagless = (props: TaglessFitProps) => <Fit {...props} TRY_TAGLESS/>
-
-export function Fit({
-  width,
-  height,
-  maxWidth,
-  maxHeight,
-  minWidth,
-  minHeight,
+const Fit = ({
   left,
   top,
   right,
@@ -28,6 +21,7 @@ export function Fit({
   zIndex,
   stick,
   isNotParent,
+  static: isStatic,
   cover,
   scroll,
   style = {},
@@ -35,55 +29,62 @@ export function Fit({
   clip,
   className,
   children,
-  forwardRef,
-  TRY_TAGLESS,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
+  sticky,
+  fixed,
+  absolute,
   ...restProps
-}: FitProps, ref: React.Ref<any>) {
+}: FitProps, ref: any) => {
 
-  const newStyle = {...style}
-  if (left || offset) { newStyle.left = left || offset || undefined }
-  if (top || offset) { newStyle.top = top || offset || undefined }
-  if (right || offset) { newStyle.right = right || offset || undefined }
-  if (bottom || offset) { newStyle.bottom = bottom || offset || undefined }
-  if (zIndex) { newStyle.zIndex = zIndex }
-  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
-  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
-  if (width) { newStyle.width = width }
-  if (height) { newStyle.height = height }
-  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
-  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
-  if (isCustomValue(offset)) { newStyle.margin = minus(offset)}
-  if (offsetTop) { newStyle.marginTop = minus(offsetTop)}
-  if (offsetBottom) { newStyle.marginBottom = minus(offsetBottom)}
-  if (offsetRight) { newStyle.marginRight = minus(offsetRight)}
-  if (offsetLeft) { newStyle.marginLeft = minus(offsetLeft)}
+  const context = useTheme()
+  const { fitConfig, customFitValue } = useConfig(context)
+  const css = useCss()
+
+  const newStyle = { ...style }
+  if (customFitValue({shift: left})) { newStyle.left = left || undefined }
+  if (customFitValue({shift: top})) { newStyle.top = top || undefined }
+  if (customFitValue({shift: right})) { newStyle.right = right || undefined }
+  if (customFitValue({shift: bottom})) { newStyle.bottom = bottom || undefined }
+  if (customFitValue({zIndex})) { newStyle.zIndex = zIndex || undefined }
+  if (customFitValue({offset})) { newStyle.margin = minus(offset) }
+  if (customFitValue({offset: offsetTop})) { newStyle.marginTop = minus(offsetTop) }
+  if (customFitValue({offset: offsetBottom})) { newStyle.marginBottom = minus(offsetBottom) }
+  if (customFitValue({offset: offsetRight})) { newStyle.marginRight = minus(offsetRight) }
+  if (customFitValue({offset: offsetLeft})) { newStyle.marginLeft = minus(offsetLeft) }
 
   const componentProps = {
+    forwardRef: ref,
+    ...restProps,
     className: cn(
-      css.fit,
-      clip && css.clip,
-      scroll && css.scroll,
-      inline && css.inline,
+      css[`fit`],
+      clip && css[`clip`],
+      scroll && css[`scroll`],
+      inline && css[`inline`],
       stick && css[`stick-${stick}`],
       cover && css[`cover-${cover}`],
       stick && !cover && css[`stick-parent`],
-      offset && css[`offset-${offset}`],
-      isNotParent && css.isNotParent,
-      inline === false && css.block,
-      (!!height || cover || stick || offset) && !inline && css.block,
+      fitConfig({zIndex}) && css[`z-index-${zIndex}`],
+      fitConfig({offset}) && css[`offset-${offset}`],
+      fitConfig({offset: offsetTop}) && css[`offset-top-${offsetTop}`],
+      fitConfig({offset: offsetBottom}) && css[`offset-bottom-${offsetBottom}`],
+      fitConfig({offset: offsetRight}) && css[`offset-right-${offsetRight}`],
+      fitConfig({offset: offsetLeft}) && css[`offset-left-${offsetLeft}`],
+      fitConfig({shift: top}) && css[`shift-top-${top}`],
+      fitConfig({shift: bottom}) && css[`shift-bottom-${bottom}`],
+      fitConfig({shift: right}) && css[`shift-right-${right}`],
+      fitConfig({shift: left}) && css[`shift-left-${left}`],
+      (isNotParent || isStatic) && css[`static`],
+      sticky && css[`sticky`],
+      fixed && css[`fixed`],
+      absolute && css[`absolute`],
+      inline === false && css[`block`],
       className
     ),
     style: newStyle,
     children,
-    ...restProps,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-  if (tryTagless) {
-    return <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  }
-
-  return <div ref={forwardRef} {...componentProps} />
+  return Common(componentProps, FIT_NAME)
 }
+
+Fit.displayName = FIT_NAME
+export default withTagless(React.forwardRef(Fit)) as FitComponent

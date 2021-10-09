@@ -1,15 +1,18 @@
-import * as Types from '../config-types'
+import {FC} from 'react'
+import { obfuscate, hash } from '../config'
 
-export type IconProps = React.HTMLAttributes<SVGElement> & {
+export const ICON_NAME = obfuscate ? hash('Icon') : 'Icon'
+
+export type IconProps = {
   fill?: string | false,
   inverse?: boolean,
-  size?: string | Types.Scale | false,
+  size?: string | false,
   name?: string | false,
   forceLine?: boolean,
   forceFill?: boolean,
+  fancy?: boolean,
   forwardRef?: (node: any) => void,
+} & React.HTMLAttributes<SVGElement>
 
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  TRY_TAGLESS?: boolean,
-}
+
+export type IconComponent = FC<IconProps>

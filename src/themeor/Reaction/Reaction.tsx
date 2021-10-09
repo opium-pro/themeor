@@ -1,90 +1,111 @@
-import React from 'react'
-import cn from '../utils/class-name'
-import css from './Reaction.module.css'
-import consoleMessage from '../utils/console-message'
-import { ReactionProps, ReactionState } from './types'
+import React, { useEffect } from 'react'
+import cn from '../utils/class-names'
+import { ReactionProps, ReactionState, REACTION_NAME } from './types'
 import { ReactionContext } from './context'
+import { useCss } from './styles'
+import { useConfig } from '../utils/use-config'
+import { useTheme } from '../context'
+
+Reaction.displayName = REACTION_NAME
 
 export function Reaction({
   children,
   track = ['hover', 'focus'],
-  cursor = 'pointer',
-  speed = 'md',
-  className,
+  duration = 'default',
+  disabled = false,
+  cursor = disabled ? 'default' : 'pointer',
   smooth,
+  property = smooth ? 'all' : undefined,
+  timingFunction = 'ease',
+  className,
+  onFocus,
+  onBlur,
+  onMouseMove,
+  onMouseLeave,
+  onMouseDown,
+  onMouseUp,
+  style = {},
   ...restProps
 }: ReactionProps) {
-
   const [state, setState] = React.useState({
     hover: false,
     active: false,
     focus: false,
     hoverOrFocus: false,
   })
+  const { reactionConfig, customReactionValue } = useConfig(useTheme())
+  const css = useCss()
+  const newStyle = style
 
-  function handleMouseOver(event: React.MouseEvent<HTMLElement>) {
-    restProps.onMouseOver && restProps.onMouseOver(event)
+  if (property) { newStyle.transitionProperty = property }
+  if (timingFunction) { newStyle.transitionTimingFunction = timingFunction }
+  if (customReactionValue({duration})) { newStyle.transitionDuration = duration as any }
+
+  function handleMouseMove(event: React.MouseEvent<HTMLElement>) {
+    onMouseMove && onMouseMove(event)
     if (!state.hover || !state.hoverOrFocus) {
       setState({ ...state, hover: true, hoverOrFocus: true } as ReactionState)
     }
   }
 
-  function handleMouseOut(event: React.MouseEvent<HTMLElement>) {
-    restProps.onMouseOut && restProps.onMouseOut(event)
+  function handleMouseLeave(event: React.MouseEvent<HTMLElement>) {
+    onMouseLeave && onMouseLeave(event)
     if (state.hover || state.hoverOrFocus) {
       setState({ ...state, hover: false, active: false, hoverOrFocus: state.focus } as ReactionState)
     }
   }
 
   function handleMouseDown(event: React.MouseEvent<HTMLElement>) {
-    restProps.onMouseDown && restProps.onMouseDown(event)
+    onMouseDown && onMouseDown(event)
     if (!state.active) {
       setState({ ...state, active: true } as ReactionState)
     }
   }
 
   function handleMouseUp(event: React.MouseEvent<HTMLElement>) {
-    restProps.onMouseUp && restProps.onMouseUp(event)
+    onMouseUp && onMouseUp(event)
     if (state.active) {
       setState({ ...state, active: false } as ReactionState)
     }
   }
 
   function handleFocus(event: React.FocusEvent<HTMLElement>) {
-    restProps.onFocus && restProps.onFocus(event)
+    onFocus && onFocus(event)
     if (!state.focus || !state.hoverOrFocus) {
       setState({ ...state, focus: true, hoverOrFocus: true } as ReactionState)
     }
   }
 
   function handleBlur(event: React.FocusEvent<HTMLElement>) {
-    restProps.onBlur && restProps.onBlur(event)
+    onBlur && onBlur(event)
     if (state.focus || state.hoverOrFocus) {
       setState({ ...state, focus: false, hoverOrFocus: state.hover } as ReactionState)
     }
   }
 
   const passState = {
+    cursor,
     className: {
-      ignoreEvents: css.ignore,
-      sursor: cursor && css[`cursor-${cursor}`],
+      ignoreEvents: css[`ignore`],
+      cursor: reactionConfig({cursor}) && css[`cursor-${cursor}`],
     },
     ...state,
   }
 
-  const passProps = {
+  const passProps: any = {
     className: cn(
-      css.reaction,
-      cursor && css[`cursor-${cursor}`],
-      smooth && speed && css[`speed-${speed}`],
+      css[`reaction`],
+      reactionConfig({cursor}) && css[`cursor-${cursor}`],
+      reactionConfig({duration}) && css[`duration-${duration}`],
       className,
     ),
+    style: newStyle,
     ...restProps,
   }
 
   if (track && track.includes('hover')) {
-    passProps.onMouseOver = handleMouseOver
-    passProps.onMouseOut = handleMouseOut
+    passProps.onMouseMove = handleMouseMove
+    passProps.onMouseLeave = handleMouseLeave
   }
 
   if (track && track.includes('active')) {
@@ -99,11 +120,12 @@ export function Reaction({
 
   return (
     <ReactionContext.Provider value={{
-      reaction: state,
-      passProps,
+      ...passState,
+      passProps: disabled ? {} : passProps,
+      disabled,
     }}>
       {(typeof children === 'function') ? (
-        children(passProps, passState)
+        children(disabled ? {} : passProps, passState)
       ) : (children)}
     </ReactionContext.Provider>
   )

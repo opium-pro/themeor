@@ -1,46 +1,55 @@
 import React from 'react'
-import css from './Effect.module.css'
-import cn from '../utils/class-name'
-import {TryTagless} from '../TryTagless'
-import {EffectProps, TaglessEffectProps} from './types'
-import {isCustomValue} from '../utils/is-custom'
+import cn from '../utils/class-names'
+import { EffectComponent, EffectProps, EFFECT_NAME } from './types'
+import { useConfig } from '../utils/use-config'
+import { Common } from '../Common'
+import { useTheme } from '../context'
+import { withTagless } from '../with-tagless'
 
 
-Effect.TryTagless = (props: TaglessEffectProps) => <Effect {...props} TRY_TAGLESS />
-
-export function Effect({
+const Effect = ({
   className,
   hidden,
-  TRY_TAGLESS,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
   transparency,
-  forwardRef,
   children,
-  style={},
+  rotate,
+  smooth,
+  property = smooth ? 'all' : undefined,
+  timingFunction = 'ease',
+  duration = '300ms',
+  zoom,
+  style = {},
   ...restProps
-}: EffectProps, ref: React.Ref<any>) {
-  const newStyle = {...style}
+}: EffectProps, ref: any) => {
+  const newStyle = { ...style }
+  const { effectConfig } = useConfig(useTheme())
 
-  if (transparency && isCustomValue(transparency)) {
+  if (transparency && !effectConfig({transparency})) {
     newStyle.opacity = transparency
   }
 
+  if (rotate) { newStyle.transform = `rotate(${rotate})` }
+  if (property) { newStyle.transitionProperty = property }
+  if (timingFunction) { newStyle.transitionTimingFunction = timingFunction as any }
+  if (duration) { newStyle.transitionDuration = duration as any }
+  if (zoom) { newStyle.transform = `scale(${zoom})` }
+
   const componentProps = {
+    forwardRef: ref,
     ...restProps,
     className: cn(
-      css.effect,
-      transparency && css[`transparency-${transparency}`],
+      `t-effect`,
+      hidden && `t-effect-hidden`,
+      effectConfig({transparency}) && `t-effect-transparency-${transparency}`,
       className
     ),
     children,
     style: newStyle,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-  if (tryTagless) {
-    return <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  }
-
-  return <div ref={forwardRef} {...componentProps} />
+  return Common(componentProps, EFFECT_NAME)
 }
+
+
+Effect.displayName = EFFECT_NAME
+export default withTagless(React.forwardRef(Effect)) as EffectComponent

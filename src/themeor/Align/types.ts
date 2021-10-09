@@ -1,32 +1,26 @@
-import * as Types from '../config-types'
+import { CommonProps } from '../Common'
+import { TaglessComponent } from '../with-tagless'
+import { obfuscate, hash } from '../config'
 
-export type PureAlignProps = {
+export const ALIGN_NAME = obfuscate ? hash('Align') : 'Align'
+
+export type AlignProps = CommonProps & {
   row?: boolean,
   stack?: boolean,
   pattern?: string | false,
-  vert?: 'stretch' | 'top' | 'center' | 'bottom' | false,
+  vert?: 'stretch' | 'top' | 'center' | 'bottom' | 'baseline' | false,
   hor?: 'stretch' | 'left' | 'center' | 'right' | false,
-  gapVert?: string | Types.Scale | false,
-  gapHor?: string | Types.Scale | false,
-  width?: string | false | number,
-  height?: string | false | number,
-  maxWidth?: string | false | number,
-  maxHeight?: string | false | number,
-  minWidth?: string | false | number,
-  minHeight?: string | false | number,
+  gapVert?: string | false,
+  gapHor?: string | false,
 }
 
-export type TaglessAlignProps = PureAlignProps & React.HTMLAttributes<HTMLDivElement> & {
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  children?: React.ReactNode,
-  forwardRef?: any,
-}
-
-export type AlignProps = TaglessAlignProps & {
-  TRY_TAGLESS?: boolean,
+export type AlignComponent = TaglessComponent<AlignProps> & {
+  Span: AlignSpanComponent
+  Spacer: any
 }
 
 export type AlignSpanProps = AlignProps & {
   col?: number,
 }
+
+export type AlignSpanComponent = TaglessComponent<AlignSpanProps>

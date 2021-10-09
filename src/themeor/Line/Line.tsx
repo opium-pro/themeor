@@ -1,67 +1,80 @@
 import React from 'react'
-import css from './Line.module.css'
-import {useTheme} from '../context'
-import cn from '../utils/class-name'
-import {TryTagless} from '../TryTagless'
-import {isCustomValue, isCustomVariable} from '../utils/is-custom'
-import {LineProps, TaglessLineProps} from './types'
+import { useTheme } from '../context'
+import cn from '../utils/class-names'
+import { LineComponent, LineProps, LINE_NAME } from './types'
+import { Common } from '../Common'
+import { useConfig } from '../utils/use-config'
+import { withTagless } from '../with-tagless'
+import { useCss } from './styles'
 
 
-Line.TryTagless = (props: TaglessLineProps) => <Line {...props} TRY_TAGLESS />
-
-export function Line({
+const Line = ({
   className,
-  TRY_TAGLESS,
   inverse,
   weight,
-  fill,
+  fill = 'default',
   top,
   right,
   bottom,
   left,
-  forwardRef,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
   children,
+  fancy,
+  vert,
   style = {},
   ...restProps
-}: LineProps, ref: React.Ref<any>) {
+}: LineProps, ref: any) => {
 
-  const {TRY_TO_INVERSE} = useTheme()
+  const { TRY_TO_INVERSE } = useTheme()
+  const { lineConfig, customLineValue } = useConfig(useTheme())
+  const css = useCss()
 
-  const newStyle = {...style}
+  const newStyle = { ...style }
 
-  if (isCustomVariable(fill)) { newStyle.borderColor = `var(${fill})` }
+  if (fill && customLineValue({ fill })) {
+    if (fancy) {
+      newStyle.borderImage = lineConfig({ fillFancy: fill })
+    } else {
+      newStyle.borderColor = fill
+    }
+  }
+  if (weight && customLineValue({ weight })) { newStyle.borderWidth = weight }
+  if (top && customLineValue({ weight: top })) { newStyle.borderTopWidth = top }
+  if (right && customLineValue({ weight: right })) { newStyle.borderRightWidth = right }
+  if (bottom && customLineValue({ weight: bottom })) { newStyle.borderBottomWidth = bottom }
+  if (left && customLineValue({ weight: left })) { newStyle.borderLeftWidth = left }
 
-  if (isCustomValue(fill)) { newStyle.borderColor = fill || undefined}
-  if (isCustomValue(weight)) { newStyle.borderWidth = weight || undefined}
-  if (isCustomValue(top)) { newStyle.borderTopWidth = top || undefined}
-  if (isCustomValue(right)) { newStyle.borderRightWidth = right || undefined}
-  if (isCustomValue(bottom)) { newStyle.borderBottomWidth = bottom || undefined}
-  if (isCustomValue(left)) { newStyle.borderLeftWidth = left || undefined}
+  const separator = !children
+  const noSpecificWeight = !right && !left && !top && !bottom
+
+  if (noSpecificWeight && !weight) {
+    weight = 'default'
+  }
+
+  const forseInverse = (inverse !== false) && (inverse || TRY_TO_INVERSE)
 
   const componentProps = {
+    forwardRef: ref,
     ...restProps,
     className: cn(
-      css.line,
-      (weight || (!right && !left && !top && !bottom)) && css[`weight-${weight || 'md'}`],
-      !isCustomValue(top) && css[`top-${top}`],
-      !isCustomValue(right) && css[`right-${right}`],
-      !isCustomValue(bottom) && css[`bottom-${bottom}`],
-      !isCustomValue(left) && css[`left-${left}`],
-      !isCustomValue(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
-      (inverse !== false) && (inverse || TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
-      React.Children.count(children) === 0 && css.separator,
+      css[`line`],
+      (separator && !vert) && lineConfig({ weight }) && css[`separator-hor-${weight}`],
+      (separator && vert) && lineConfig({ weight }) && css[`separator-vert-${weight}`],
+      !separator && lineConfig({ weight }) && css[`weight-${weight}`],
+      lineConfig({ weight: top }) && css[`weight-top-${top}`],
+      lineConfig({ weight: right }) && css[`weight-right-${right}`],
+      lineConfig({ weight: bottom }) && css[`weight-bottom-${bottom}`],
+      lineConfig({ weight: left }) && css[`weight-left-${left}`],
+      lineConfig({ fill }) && css[`fill-${fill}`],
+      forseInverse && lineConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
+      fancy && lineConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
       className
     ),
     style: newStyle,
     children,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-  if (tryTagless) {
-    return <TryTagless {...componentProps} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} />
-  }
-
-  return <div ref={forwardRef} {...componentProps} />
+  return Common(componentProps, LINE_NAME)
 }
+
+Line.displayName = LINE_NAME
+export default withTagless(React.forwardRef(Line)) as LineComponent

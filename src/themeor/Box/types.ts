@@ -1,42 +1,35 @@
-import * as Types from '../config-types'
+import { CommonProps } from '../Common'
+import { TaglessComponent } from '../with-tagless'
+import { obfuscate, hash } from '../config'
 
-export type PureBoxProps = {
+export const BOX_NAME = obfuscate ? hash('Box') : 'Box'
+
+export type BoxProps = CommonProps & {
   fill?: string | false,
   strong?: boolean,
   inverse?: boolean,
   fancy?: boolean,
   borderFill?: string | false,
-  borderWeight?: string | Types.Scale | 'none' | false,
-  radius?: string | Types.Scale | 'none' | 'max' | false,
-  radiusTop?: string | Types.Scale | 'none' | 'max' | false,
-  radiusBottom?: string | Types.Scale | 'none' | 'max' | false,
-  radiusRight?: string | Types.Scale | 'none' | 'max' | false,
-  radiusLeft?: string | Types.Scale | 'none' | 'max' | false,
-  radiusTopLeft?: string | Types.Scale | 'none' | 'max' | false,
-  radiusTopRight?: string | Types.Scale | 'none' | 'max' | false,
-  radiusBottomRight?: string | Types.Scale | 'none' | 'max' | false,
-  radiusBottomLeft?: string | Types.Scale | 'none' | 'max' | false,
-  shadow?: string | Types.Scale | 'none' | false,
-  shadowInner?: string | Types.Scale | 'none' | false,
-  glow?: string | Types.Scale | 'none' | false,
+  borderWeight?: string | 'none' | false,
+  borderRight?: string | 'none' | false,
+  borderLeft?: string | 'none' | false,
+  borderTop?: string | 'none' | false,
+  borderBottom?: string | 'none' | false,
+  radius?: string | 'none' | 'max' | false,
+  radiusTop?: string | 'none' | 'max' | false,
+  radiusBottom?: string | 'none' | 'max' | false,
+  radiusRight?: string | 'none' | 'max' | false,
+  radiusLeft?: string | 'none' | 'max' | false,
+  radiusTopLeft?: string | 'none' | 'max' | false,
+  radiusTopRight?: string | 'none' | 'max' | false,
+  radiusBottomRight?: string | 'none' | 'max' | false,
+  radiusBottomLeft?: string | 'none' | 'max' | false,
+  shadow?: string | 'none' | false,
+  shadowInner?: string | 'none' | false,
+  glow?: string | 'none' | false,
   img?: string | false,
   noContext?: boolean,
-  blur?: string | Types.Scale | 'none' | false,
-  width?: string | false | number,
-  height?: string | false | number,
-  maxWidth?: string | false | number,
-  maxHeight?: string | false | number,
-  minWidth?: string | false | number,
-  minHeight?: string | false | number,
+  blur?: string | 'none' | false,
 }
 
-export type TaglessBoxProps = PureBoxProps & React.HTMLAttributes<HTMLDivElement> & {
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  children?: React.ReactNode,
-  forwardRef?: any,
-}
-
-export type BoxProps = TaglessBoxProps & {
-  TRY_TAGLESS?: boolean,
-}
+export type BoxComponent = TaglessComponent<BoxProps>

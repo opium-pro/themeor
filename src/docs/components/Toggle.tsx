@@ -31,21 +31,20 @@ export default class Toggle extends React.PureComponent<ToggleProps> {
                     </Fit.TryTagless>
 
                     {/* This is stroke for focus */}
-                    <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" offset="x2s">
-                      <Line style={{transition: 'all 0.2s ease'}} fill={(r.focus || r.hover) ? "accent" : "none"}>
+                    <Fit.TryTagless cover="parent" offset="x2s">
+                      <Line.TryTagless style={{transition: 'all 0.2s ease'}} fill={(r.focus || r.hover) ? "accent" : "none"}>
                         <Box radius="max" />
-                      </Line>
+                      </Line.TryTagless>
                     </Fit.TryTagless>
 
                     <Fit.TryTagless
-                      TRY_RECURSIVE_TAGLESS
                       width="24px"
                       height="24px"
                       left={on ? '21px' : '0'}
                     >
-                      <Line fill={on ? "none" : "faint"}>
+                      <Line.TryTagless fill={on ? "none" : "faint"}>
                         <Box style={{transition: 'all 0.2s ease'}} fill="base" radius="max"/>
-                      </Line>
+                      </Line.TryTagless>
                     </Fit.TryTagless>
                   </label>
                 </Gap>

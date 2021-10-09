@@ -1,22 +1,24 @@
 import React from 'react'
-import css from './Box.module.css'
-import {useTheme, ThemeContext} from '../context'
-import cn from '../utils/class-name'
-import {TryTagless} from '../TryTagless'
-import {Line} from '../Line'
-import {BoxProps, TaglessBoxProps} from './types'
-import splitFill from '../utils/split-fill'
-import {isCustomFill, isCustomVariable, isCustomValue} from '../utils/is-custom'
+import { useTheme, ThemeContext } from '../context'
+import cn from '../utils/class-names'
+import { Line } from '../Line'
+import { BoxProps, BoxComponent, BOX_NAME } from './types'
+import { useConfig } from '../utils/use-config'
+import { Common } from '../Common'
+import { withTagless } from '../with-tagless'
+import {useCss} from './styles'
 
 
-Box.TryTagless = (props: TaglessBoxProps) => <Box {...props} TRY_TAGLESS />
-
-export function Box(props: BoxProps, ref?: React.Ref<any>) {
+const Box = (props: BoxProps, ref: any) => {
   const {
     className,
-    fill = "none",
+    fill = "default",
     borderFill,
     borderWeight,
+    borderRight,
+    borderLeft,
+    borderTop,
+    borderBottom,
     inverse,
     radius,
     radiusTop,
@@ -27,142 +29,133 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     radiusTopRight,
     radiusBottomRight,
     radiusBottomLeft,
-    FORCE_TAGLESS,
-    TRY_TAGLESS,
     fancy,
     strong,
     shadow,
     shadowInner,
     blur,
     glow,
-    children,
-    forwardRef,
     img,
     noContext,
-    TRY_RECURSIVE_TAGLESS,
     style = {},
-    width,
-    height,
-    maxWidth,
-    maxHeight,
-    minWidth,
-    minHeight,
     ...restProps
   } = props
 
-  const newStyle = {...style}
+  const context = useTheme()
+  const { boxConfig, customBoxValue } = useConfig(context)
+  const newStyle = { ...style }
+  const { normalizedConfig } = context
+  const css = useCss()
+
+
+  // Setting inline styles
 
   if (img) {
     newStyle.backgroundImage = `url('${img}')`
   }
 
-  if (isCustomVariable(fill)) {
+  if (fill && !boxConfig({ fill })) {
     if (fancy) {
-      newStyle.backgroundImage = `var(${fill})`
+      newStyle.backgroundImage = fill
     } else {
-      newStyle.backgroundColor = `var(${fill})`
+      newStyle.backgroundColor = fill
     }
   }
 
-  if (isCustomFill(fill)) {
-    if (fancy) {
-      newStyle.backgroundImage = fill || undefined
-    } else {
-      newStyle.backgroundColor = fill || undefined
-    }
-  }
-
-  if (isCustomValue(radius)) { newStyle.borderRadius = radius || undefined}
-  if (isCustomValue(radiusTop)) {
+  if (customBoxValue({ radius })) { newStyle.borderRadius = radius || undefined }
+  if (customBoxValue({ radiusTop })) {
     newStyle.borderTopLeftRadius = radiusTop || undefined
     newStyle.borderTopRightRadius = radiusTop || undefined
   }
-  if (isCustomValue(radiusRight)) {
+  if (customBoxValue({ radius: radiusRight })) {
     newStyle.borderTopRightRadius = radiusRight || undefined
     newStyle.borderBottomRightRadius = radiusRight || undefined
   }
-  if (isCustomValue(radiusLeft)) {
+  if (customBoxValue({ radius: radiusLeft })) {
     newStyle.borderTopLeftRadius = radiusLeft || undefined
     newStyle.borderBottomLeftRadius = radiusLeft || undefined
   }
-  if (isCustomValue(radiusBottom)) {
+  if (customBoxValue({ radius: radiusBottom })) {
     newStyle.borderBottomLeftRadius = radiusBottom || undefined
     newStyle.borderBottomRightRadius = radiusBottom || undefined
   }
-  if (isCustomValue(radiusTopLeft)) { newStyle.borderTopLeftRadius = radiusTopLeft || undefined}
-  if (isCustomValue(radiusTopRight)) { newStyle.borderTopRightRadius = radiusTopRight || undefined}
-  if (isCustomValue(radiusBottomLeft)) { newStyle.borderBottomLeftRadius = radiusBottomLeft || undefined}
-  if (isCustomValue(radiusBottomRight)) { newStyle.borderBottomRightRadius = radiusBottomRight || undefined}
+  if (customBoxValue({ radius: radiusTopLeft })) { newStyle.borderTopLeftRadius = radiusTopLeft || undefined }
+  if (customBoxValue({ radius: radiusTopRight })) { newStyle.borderTopRightRadius = radiusTopRight || undefined }
+  if (customBoxValue({ radius: radiusBottomLeft })) { newStyle.borderBottomLeftRadius = radiusBottomLeft || undefined }
+  if (customBoxValue({ radius: radiusBottomRight })) { newStyle.borderBottomRightRadius = radiusBottomRight || undefined }
 
-  if (isCustomValue(shadow)) { newStyle.boxShadow = shadow || undefined}
-  if (isCustomValue(shadowInner)) { newStyle.boxShadow = 'inset ' + shadowInner || undefined}
-  if (isCustomValue(blur)) { newStyle.backdropFilter = blur ? `blur(${blur})` : undefined}
-  if (isCustomValue(glow)) { newStyle.boxShadow = glow || undefined}
+  if (customBoxValue({ shadow })) { newStyle.boxShadow = shadow || undefined }
+  if (customBoxValue({ shadowInner })) { newStyle.boxShadow = 'inset ' + shadowInner }
+  if (customBoxValue({ blur })) { newStyle.backdropFilter = `blur(${blur})` }
+  if (customBoxValue({ glow })) { newStyle.boxShadow = glow || undefined }
 
-  const context = useTheme()
+  // Setting classNames
 
-  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined}
-  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
-  if (width) { newStyle.width = width }
-  if (height) { newStyle.height = height }
-  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
-  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
+  const forceInverse = (inverse !== false) && (inverse || context.TRY_TO_INVERSE)
 
   const componentProps = {
+    forwardRef: ref,
+    ...restProps,
     className: cn(
-      css.box,
-      img && css.img,
-      !isCustomFill(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
-      (strong || inverse) && (!fill || fill === 'none') && css[`fill-base`],
-      fancy && css.fancy,
-      strong && css.strong,
-      !isCustomValue(shadow) && css[`shadow-${shadow}`],
-      !isCustomValue(blur) && css[`blur-${blur}`],
-      !isCustomValue(shadowInner) && css[`shadow-inner-${shadowInner}`],
-      !isCustomValue(glow) && css[`glow-${shadowInner}`],
-      !isCustomValue(radius) && css[`radius-${radius}`],
-      !isCustomValue(radiusTop) && css[`radius-top-${radiusTop}`],
-      !isCustomValue(radiusRight) && css[`radius-right-${radiusRight}`],
-      !isCustomValue(radiusLeft) && css[`radius-left-${radiusLeft}`],
-      !isCustomValue(radiusBottom) && css[`radius-bottom-${radiusBottom}`],
-      !isCustomValue(radiusTopLeft) && css[`radius-tl-${radiusTopLeft}`],
-      !isCustomValue(radiusTopRight) && css[`radius-tr-${radiusTopRight}`],
-      !isCustomValue(radiusBottomLeft) && css[`radius-bl-${radiusBottomLeft}`],
-      !isCustomValue(radiusBottomRight) && css[`radius-br-${radiusBottomRight}`],
-      (inverse !== false) && (inverse || context.TRY_TO_INVERSE) && !isCustomVariable(fill) && css.inverse,
+      css['box'],
+      img && css['img'],
+      boxConfig({ fill }) && css[`fill-${fill}`],
+      forceInverse && boxConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
+      strong && boxConfig({ fillStrong: fill }) && css[`fill-strong-${fill}`],
+      fancy && boxConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
+      boxConfig({ shadow }) && css[`shadow-${shadow}`],
+      boxConfig({ blur }) && css[`blur-${blur}`],
+      boxConfig({ shadowInner }) && css[`shadow-inner-${shadowInner}`],
+      boxConfig({ glow }) && css[`glow-${glow}`],
+      boxConfig({ radius }) && css[`radius-${radius}`],
+      boxConfig({ radius: radiusTop }) && css[`radius-top-${radiusTop}`],
+      boxConfig({ radius: radiusRight }) && css[`radius-right-${radiusRight}`],
+      boxConfig({ radius: radiusLeft }) && css[`radius-left-${radiusLeft}`],
+      boxConfig({ radius: radiusBottom }) && css[`radius-bottom-${radiusBottom}`],
+      boxConfig({ radius: radiusTopLeft }) && css[`radius-tl-${radiusTopLeft}`],
+      boxConfig({ radius: radiusTopRight }) && css[`radius-tr-${radiusTopRight}`],
+      boxConfig({ radius: radiusBottomLeft }) && css[`radius-bl-${radiusBottomLeft}`],
+      boxConfig({ radius: radiusBottomRight }) && css[`radius-br-${radiusBottomRight}`],
       className
     ),
-    children,
     style: newStyle,
-    ...restProps,
   }
+
+  let renderBoxComponent = Common(componentProps, BOX_NAME)
 
   const hasBorder = borderFill || borderWeight
 
   if (hasBorder) {
-    const {borderFill, borderWeight, ...boxProps} = props
-    return (
-      <Line.TryTagless fill={borderFill} weight={borderWeight}>
-        <Box {...boxProps} />
+    const { borderFill, borderWeight } = props
+
+    renderBoxComponent = (
+      <Line.TryTagless
+        fill={borderFill}
+        weight={borderWeight}
+        left={borderLeft}
+        right={borderRight}
+        top={borderTop}
+        bottom={borderBottom}
+      >
+        {Common(componentProps, BOX_NAME)}
       </Line.TryTagless>
     )
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-
-  const renderBoxComponent = tryTagless ? (
-    <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  ) : (
-    <div ref={forwardRef} {...componentProps} />
-  )
-
-  if (noContext || !context.shallInverseOn) {
+  if (noContext || !normalizedConfig?.shallInverseOn) {
     return renderBoxComponent
   }
 
+  // @ts-ignore
+  const useOpiumFill: boolean = normalizedConfig?.fill?.[`base-strong`]
+
   // Automatically inverse text and other stuff on this background
   let inverseStatus: boolean | undefined
-  inverseStatus = context.shallInverseOn?.includes(splitFill(fill)) && (isCustomFill(fill) || strong)
+  inverseStatus = !!fill && normalizedConfig?.shallInverseOn?.includes(fill)
+  
+  if (useOpiumFill && !strong) {
+    inverseStatus = false
+  }
 
 
   if (context.TRY_TO_INVERSE && !inverse) {
@@ -186,3 +179,7 @@ export function Box(props: BoxProps, ref?: React.Ref<any>) {
     </ThemeContext.Provider>
   )
 }
+
+
+Box.displayName = BOX_NAME
+export default withTagless(React.forwardRef(Box)) as BoxComponent

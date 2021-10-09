@@ -1,20 +1,19 @@
-import * as Types from '../config-types'
+import { CommonProps } from "../Common"
+import { TaglessComponent } from "../with-tagless"
+import { obfuscate, hash } from "../config"
 
-export type PureLineProps = {
-  fill?: string | false,
-  inverse?: boolean,
-  weight?: string | Types.Scale | 'none' | false,
-  top?: string | Types.Scale | 'none' | false,
-  right?: string | Types.Scale | 'none' | false,
-  bottom?: string | Types.Scale | 'none' | false,
-  left?: string | Types.Scale | 'none' | false,
+export const LINE_NAME = obfuscate ? hash('Line') : 'Line'
+
+export type LineProps = CommonProps & {
+  fill?: string | false
+  inverse?: boolean
+  fancy?: boolean
+  weight?: string | 'none' | false
+  top?: string | 'none' | false
+  right?: string | 'none' | false
+  bottom?: string | 'none' | false
+  left?: string | 'none' | false
+  vert?: boolean
 }
-export type TaglessLineProps = PureLineProps & React.HTMLAttributes<HTMLDivElement> & {
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  children?: React.ReactNode,
-  forwardRef?: any,
-}
-export type LineProps = TaglessLineProps & {
-  TRY_TAGLESS?: boolean,
-}
+
+export type LineComponent = TaglessComponent<LineProps>

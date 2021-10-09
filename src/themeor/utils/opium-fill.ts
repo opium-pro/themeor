@@ -1,9 +1,10 @@
+export const shifts = ["up", "down"]
+export const baseFills = ["base", "faint", "accent", "complement", "critic", "warning", "success"]
+
 export default function getFills (up: boolean = false, down: boolean = false, clean: boolean = true): string[] {
   const result: string[] = []
-  const parents = ["base", "faint", "accent", "complement", "critic", "warning", "success"]
-  const shifts = ["up", "down"]
 
-  for (let color of parents) {
+  for (let color of baseFills) {
     if (clean) {
       result.push(`${color}`)
     }
@@ -18,7 +19,6 @@ export default function getFills (up: boolean = false, down: boolean = false, cl
   return result
 }
 
-export const baseFills = getFills()
 export const allFills = [...getFills(true, true), 'none']
 
 export function isInFills (value?: string | number | boolean): boolean {

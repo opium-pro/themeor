@@ -1,144 +1,95 @@
-import React, { useEffect, useState } from 'react'
-import cssVariables from '../utils/css-variable'
+import React, { useEffect, useState, FC } from 'react'
 import newId from '../utils/new-id'
-import consoleMessage from '../utils/console-message'
-import {ThemeContext} from '../context'
-import {TryTagless} from '../TryTagless'
-import css from './Theme.module.css'
-import cn from '../utils/class-name'
+import { ThemeContext } from '../context'
 import isDarkMode from '../utils/is-dark-mode'
-import {ThemeProps, TaglessThemeProps} from './types'
+import { ThemeProps, THEME_NAME } from './types'
+import setBoxStyle from '../Box/styles'
+import setFontStyle from '../Font/styles'
+import setGapStyle from '../Gap/styles'
+import setAlignStyle from '../Align/styles'
+// import setAlimateStyle from '../Alimate/styles'
+import setLineStyle from '../Line/styles'
+import setIconStyle from '../Icon/styles'
+import setReactionStyle from '../Reaction/styles'
+import setFitStyle from '../Fit/styles'
+import setEffectStyle from '../Effect/styles'
+import { normalizeConfig } from '../utils/normalize-config'
 
 
-Theme.TryTagless = (props: TaglessThemeProps) => <Theme {...props} TRY_TAGLESS />
-
-export function Theme({
-  global,
+export const Theme: FC<ThemeProps> = ({
   children,
   icons,
-  TRY_TAGLESS,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
-  forwardRef,
-  className,
   darkConfig,
   reset,
   config = {},
-  ...restProps
-}: ThemeProps, ref: React.Ref<any>) {
+}) => {
   const [id] = useState(newId())
-
-  let useGlobal: boolean = !!global
-  const [currentConfig, setCurrentConfig] = React.useState(config)
-  const {themeId: parentThemeId} = React.useContext(ThemeContext)
-
-  let isTrackingDarkMode: boolean = false
+  const [currentConfig, setCurrentConfig] = useState(config)
+  const [isReady, setIsReady] = useState(false)
 
   function changeColorMode() {
-    if (isDarkMode()) {
+    if (darkConfig && isDarkMode() && currentConfig != darkConfig) {
       setCurrentConfig(darkConfig)
-    } else {
+    } else if (currentConfig != config) {
       setCurrentConfig(config)
     }
   }
 
-  function trackDarkMode() {
-    if (darkConfig && !isTrackingDarkMode) {
-      isTrackingDarkMode = true
-      const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
-      colorScheme.addEventListener && colorScheme.addEventListener('change', changeColorMode)
+  // Track dark mode
+  useEffect(() => {
+    const colorScheme = window?.matchMedia('(prefers-color-scheme: dark)')
+    colorScheme.addEventListener && colorScheme.addEventListener('change', changeColorMode)
+    return () => {
+      const colorScheme = window?.matchMedia('(prefers-color-scheme: dark)')
+      colorScheme.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
     }
-  }
+  }, [currentConfig])
 
-  function setVariables() {
-    const {themeContext, customVariables, meta, ...restVariables} = currentConfig
-    cssVariables.unset(`style-${id}`)
-    cssVariables.set({
-      json: restVariables,
-      prefix: 't',
-      selector: useGlobal ? ':root' : `#${id}`,
-      id: `style-${id}`,
-    })
-    cssVariables.set({
-      json: customVariables,
-      selector: useGlobal ? ':root' : `#${id}`,
-      id: `style-${id}`,
-    })
-  }
-
-  function setConfig() {
-    const newConfig = (darkConfig && isDarkMode()) ? darkConfig : config
-    
-    if (newConfig !== currentConfig) {
-      setCurrentConfig(newConfig)
-    }
-  }
+  useEffect(() => {
+    changeColorMode()
+  }, [config, darkConfig])
 
   // Update
   useEffect(() => {
-    trackDarkMode()
-    setConfig()
-    setVariables()
-  })
-
-  // Unmount
-  useEffect(() => () => {
-    const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
-    colorScheme.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
-  })
-
-  const {themeContext = {}} = currentConfig
-  const {shallInverseOn, template, ...customContext} = themeContext
+    const normalizedConfig = normalizeConfig(currentConfig)
+    setFitStyle(normalizedConfig)
+    setBoxStyle(normalizedConfig)
+    setFontStyle(normalizedConfig)
+    setGapStyle(normalizedConfig)
+    setLineStyle(normalizedConfig)
+    setReactionStyle(normalizedConfig)
+    setIconStyle(normalizedConfig)
+    setEffectStyle(normalizedConfig)
+    setAlignStyle(normalizedConfig)
+    setIsReady(true)
+  }, [currentConfig])
 
   reset && import('./reset')
 
-  if (parentThemeId && global) {
-    consoleMessage({
-      text: 'You can set "global" prop only once. All nested globals will be ignored',
-      type: 'error',
-      source: Theme,
-    })
-    useGlobal = false
-  }
+  useEffect(() => {
+    if (!icons?.default && icons?.md) {
+      icons.default = icons.md
+    }
+  }, [icons])
 
   const context = {
     ...currentConfig,
-    ...customContext,
-    shallInverseOn,
-    template,
     icons,
-    TRY_TO_INVERSE: false,
     themeId: id,
     darkMode: isDarkMode(),
+    normalizedConfig: normalizeConfig(currentConfig),
   }
 
-  const componentProps = {
-    ...restProps,
-    children,
-    id: id,
-    className: cn(
-      css.theme,
-      className
-    ),
-  }
-
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-
-  function renderTheme() {
-    if (useGlobal) {
-      return children
-    }
-
-    if (tryTagless) {
-      return <TryTagless {...componentProps} force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} />
-    }
-
-    return <div ref={forwardRef} {...componentProps} />
+  if (!isReady) {
+    return null
   }
 
   return (
     <ThemeContext.Provider value={context}>
-      {renderTheme()}
+      {children}
     </ThemeContext.Provider>
   )
 }
+
+
+Theme.displayName = THEME_NAME

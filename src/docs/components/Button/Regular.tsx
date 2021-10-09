@@ -19,30 +19,32 @@ export default function Regular({
         <Fit width="fit-content">
 
           {/* This is stroke for focus */}
-          <Fit.TryTagless TRY_RECURSIVE_TAGLESS cover="parent" offset="x2s">
-            <Line className={rProps.className} fill={reaction.focus ? "accent" : "none"}>
-              <Box radius={radius} />
-            </Line>
+          <Fit.TryTagless cover="parent" offset="x2s">
+            <Box
+              borderFill={reaction.focus ? "accent" : "none"}
+              radius={radius}
+            />
           </Fit.TryTagless>
 
 
-          <Align.TryTagless TRY_RECURSIVE_TAGLESS vert="center" hor="center">
-            <Line fill="faint">
-              <Fit minWidth="220px" height="60px">
-                <Box
-                  fill={(reaction.active && "base") || (reaction.hover && "faint-up") || "faint"}
-                  strong={reaction.active}
-                  radius={radius}
-                >
-                  <Gap hor="md" vert="sm">
-                    <button type="button" {...rProps}>
-                      <Font noselect fill="base" size="lg">{children}</Font>
-                    </button>
-                  </Gap>
-                </Box>
-              </Fit>
-            </Line>
-          </Align.TryTagless>
+          <Fit>
+            <Align.TryTagless vert="center" hor="center">
+              <Box.TryTagless
+                minWidth="220px"
+                height="60px"
+                borderFill="faint"
+                fill={(reaction.active && "base") || (reaction.hover && "faint-up") || "faint"}
+                strong={reaction.active}
+                radius={radius}
+              >
+                <Gap.TryTagless hor="md" vert="sm">
+                  <button type="button" {...rProps}>
+                    <Font noselect fill="base" size="lg">{children}</Font>
+                  </button>
+                </Gap.TryTagless>
+              </Box.TryTagless>
+            </Align.TryTagless>
+          </Fit>
 
         </Fit>
       )}

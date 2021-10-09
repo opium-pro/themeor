@@ -95,7 +95,7 @@ export class Wrapper extends React.PureComponent<Props> {
         {children}
       </Switch>
 
-      <Align.Spacer />
+      <Gap stretch />
 
       <Line fill="faint-down" />
 
@@ -103,9 +103,9 @@ export class Wrapper extends React.PureComponent<Props> {
         <Gap size="xl" />
           <ContentWrapper>
             <Align row vert="center">
-              <Align.Spacer>
+              <Align stretch>
                 {this.menu}
-              </Align.Spacer>
+              </Align>
               <Gap size="xl" />
               {prev && <Align hor="center"><Link href={prev}><Font size="lg" weight="700">&lt; Previous</Font></Link></Align>}
               <Gap size="xl" />

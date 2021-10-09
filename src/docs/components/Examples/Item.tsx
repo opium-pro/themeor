@@ -9,7 +9,7 @@ export interface Props {
 }
 
 export class Item extends React.PureComponent<Props> {
-  static defaultProps = {code: ''}
+  static defaultProps = { code: '' }
 
   render() {
     const {
@@ -30,14 +30,14 @@ export class Item extends React.PureComponent<Props> {
 
       {children && (<>
         <Gap />
-        <Line.TryTagless TRY_RECURSIVE_TAGLESS fill="faint">
-          <Fit clip>
+        <Line.TryTagless fill="faint">
+          <Fit.TryTagless clip>
             <Box radius="md">
               <Box fill="faint">
                 <Gap size="xs">
                   <Font size="xs" uppercase letterSpacing="lg" weight="700" fill="faint">
                     Result
-            </Font>
+                  </Font>
                 </Gap>
               </Box>
 
@@ -47,7 +47,7 @@ export class Item extends React.PureComponent<Props> {
                 </Fit.TryTagless>
               </Gap>
             </Box>
-          </Fit>
+          </Fit.TryTagless>
         </Line.TryTagless>
       </>)}
 

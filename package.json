@@ -1,6 +1,6 @@
 {
   "name": "themeor",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
@@ -20,28 +20,33 @@
     "opium pro"
   ],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "jss": "^10.7.1",
+    "jss-preset-default": "^10.7.1"
+  },
   "devDependencies": {
     "@types/node": "^12.12.37",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.4",
     "@types/react-router-dom": "^5.1.7",
-    "@types/react-syntax-highlighter": "^13.5.0",
+    "@types/react-syntax-highlighter": "^13.5.2",
+    "copyfiles": "^2.4.1",
+    "nodemon": "^2.0.12",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "node-sass": "^6.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "react-syntax-highlighter": "^15.4.3",
+    "react-syntax-highlighter": "^15.4.4",
     "typescript": "^4.2.4"
   },
   "scripts": {
-    "start": "npm run css && react-scripts start",
+    "start": "react-scripts start",
+    "watch": "npm run clear && nodemon -e ts,tsx,css -w ./src -x npm run build",
+    "clear": "rm -fr ./dist",
     "build:docs": "react-scripts build",
-    "css": "node-sass ./src/themeor -o ./src/themeor --output-style compressed",
-    "css:watch": "node-sass ./src/themeor -o ./src/themeor -wr ./src/themeor --output-style compressed",
-    "build": "npm run css && rm -fr ./dist && cd ./src/themeor && rsync -R ./**/*.css ../../dist && cd ../../ && tsc -p tsconfig.dist.json",
-    "publish": "npm run build && npm publish"
+    "build": "tsc -p tsconfig.dist.json && npm run css",
+    "css": "cd ./src/themeor && copyfiles -V ./**/*.css ../../dist && cd ../../",
+    "publish": "npm run clear && npm run build && npm publish"
   },
   "eslintConfig": {
     "extends": "react-app"

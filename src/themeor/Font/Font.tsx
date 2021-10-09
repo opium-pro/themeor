@@ -1,18 +1,18 @@
 import React from 'react'
-import css from './Font.module.css'
-import {useTheme} from '../context'
-import cn from '../utils/class-name'
-import {isCustomVariable, isCustomValue, isCustomFill} from '../utils/is-custom'
-import {TryTagless} from '../TryTagless'
-import {FontProps, TaglessFontProps} from './types'
+import { useTheme } from '../context'
+import cn from '../utils/class-names'
+import { FontCompoennt, FontProps, FONT_NAME } from './types'
+import { useConfig } from '../utils/use-config'
+import { Common } from '../Common'
+import { withTagless } from '../with-tagless'
+import { useCss } from './styles'
 
 
-Font.TryTagless = (props: TaglessFontProps) => <Font {...props} TRY_TAGLESS />
-
-export function Font({
+const Font = ({
   className,
-  fill,
+  fill = 'default',
   inverse,
+  fancy,
   inline,
   weight,
   size,
@@ -21,78 +21,60 @@ export function Font({
   italic,
   family,
   nowrap,
+  wrap,
   align,
   style = {},
-  TRY_TAGLESS,
-  TRY_RECURSIVE_TAGLESS,
-  FORCE_TAGLESS,
   noselect,
   lineHeight,
-  forwardRef,
   letterSpacing,
   children,
-  width,
-  height,
-  maxWidth,
-  maxHeight,
-  minWidth,
-  minHeight,
   ...restProps
-}: FontProps, ref?: React.Ref<any>) {
-  const {TRY_TO_INVERSE} = useTheme()
+}: FontProps, ref: any) => {
+  const context = useTheme()
+  const { fontConfig } = useConfig(context)
+  const css = useCss()
+  const newStyle = { ...style }
 
-  const newStyle = {...style}
+  if (fill && !fontConfig({ fill })) { newStyle.color = fill }
+  if (size && !fontConfig({ size })) { newStyle.fontSize = size }
+  if (weight && !fontConfig({ weight })) { newStyle.fontWeight = weight as any }
+  if (letterSpacing && !fontConfig({ letterSpacing })) { newStyle.letterSpacing = letterSpacing }
+  if (lineHeight && !fontConfig({ lineHeight })) { newStyle.lineHeight = lineHeight }
+  if (family && !fontConfig({ family })) { newStyle.fontFamily = family }
 
-  if(isCustomVariable(fill)) { newStyle.color = `var(${fill})` }
-
-  if(isCustomValue(fill)) { newStyle.color = fill || undefined }
-  if(isCustomValue(size)) { newStyle.fontSize = size || undefined }
-  if(isCustomValue(weight)) { newStyle.fontWeight = weight as any }
-  if(isCustomValue(letterSpacing)) { newStyle.letterSpacing = letterSpacing || undefined }
-  if(isCustomValue(lineHeight)) { newStyle.lineHeight = lineHeight || undefined }
-  if(isCustomValue(family)) { newStyle.fontFamily = family || undefined }
-
-  if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
-  if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
-  if (width) { newStyle.width = width }
-  if (height) { newStyle.height = height }
-  if (maxHeight || height) { newStyle.maxHeight = maxHeight || height || undefined }
-  if (minHeight || height) { newStyle.minHeight = minHeight || (maxHeight ? undefined : height) || undefined }
-
-  const forceInverse = (inverse !== false) && (inverse || TRY_TO_INVERSE)
+  const forceInverse = (inverse !== false) && (inverse || context.TRY_TO_INVERSE)
 
   const componentProps = {
+    forwardRef: ref,
+    ...restProps,
     className: cn(
-      css.font,
-      underline && css.underline,
-      underline === false && css[`non-underline`],
-      inline && css.inline,
-      inline === false && css.block,
-      !isCustomValue(fill) && !isCustomVariable(fill) && css[`fill-${fill}`],
-      forceInverse && !fill && css[`fill-base`],
-      forceInverse && !isCustomVariable(fill) && css.inverse,
-      (uppercase && css.uppercase) || ((uppercase === false) && css['non-uppercase']),
-      (italic && css.italic )|| ((italic === false) && css['non-italic']),
-      noselect && css.noselect,
-      !isCustomValue(letterSpacing) && css[`letter-spacing-${letterSpacing}`],
-      !isCustomValue(lineHeight) && css[`line-height-${lineHeight}`],
-      !isCustomValue(size) && css[`size-${size}`],
-      !isCustomValue(weight) && css[`weight-${weight}`],
-      !isCustomValue(family) && css[`family-${family}`],
+      css['font'],
+      (underline && css['underline']) || (underline === false && css['nounderline']),
+      inline && css['inline'],
+      inline === false && css['block'],
+      fontConfig({ fill }) && css[`fill-${fill}`],
+      forceInverse && fontConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
+      fancy && fontConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
+      (uppercase && css['uppercase']) || ((uppercase === false) && css['nouppercase']),
+      (italic && css['italic']) || ((italic === false) && css['noitalic']),
+      noselect && css['noselect'],
+      fontConfig({ letterSpacing }) && css[`letter-spacing-${letterSpacing}`],
+      fontConfig({ lineHeight }) && css[`line-height-${lineHeight}`],
+      fontConfig({ size }) && css[`size-${size}`],
+      fontConfig({ weight }) && css[`weight-${weight}`],
+      fontConfig({ family }) && css[`family-${family}`],
       align && css[`align-${align}`],
-      nowrap && css.nowrap,
+      nowrap && css['nowrap'],
+      wrap && css['wrap'],
       className,
     ),
     style: newStyle,
     children,
-    ...restProps,
   }
 
-  const tryTagless = TRY_TAGLESS || TRY_RECURSIVE_TAGLESS || FORCE_TAGLESS
-
-  return tryTagless ? (
-    <TryTagless force={FORCE_TAGLESS} recursive={TRY_RECURSIVE_TAGLESS} {...componentProps} />
-  ) : (
-    <div ref={forwardRef} {...componentProps} />
-  )
+  return Common(componentProps, FONT_NAME)
 }
+
+
+Font.displayName = FONT_NAME
+export default withTagless(React.forwardRef(Font)) as FontCompoennt

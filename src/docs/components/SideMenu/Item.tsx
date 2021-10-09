@@ -16,16 +16,14 @@ export class Item extends React.PureComponent<ItemProps> {
         {(rProps: any, r: any) => (
 
             <Gap.TryTagless
-              TRY_RECURSIVE_TAGLESS
               vert="12px"
               hor="md"
             >
-              <Box
-                {...rProps}
+              <Box.TryTagless
                 radius="xs"
                 fill={!active && (r.hover || r.focus) ? 'faint-up' : 'none'}
               >
-                  <Font
+                  <Font.TryTagless
                     size={active ? "lg" : "sm"}
                     fill={active ? 'accent' : 'base'}
                     weight={active ? '700' : '500'}
@@ -33,11 +31,12 @@ export class Item extends React.PureComponent<ItemProps> {
                     tabIndex={0}
                     FORCE_TAGLESS
                     noselect
+                    {...rProps}
                     style={{transition: 'all 0.2s ease'}}
                   >
                     {children}
-                  </Font>
-              </Box>
+                  </Font.TryTagless>
+              </Box.TryTagless>
             </Gap.TryTagless>
 
         )}

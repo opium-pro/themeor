@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link as RouterLink} from 'react-router-dom'
 import {Font, Line} from '../../themeor'
-import smoothScroll from '../../themeor/utils/smooth-scroll'
+import smoothScroll from '../utils/smooth-scroll'
 import {AppContext} from '../context'
 
 export interface LinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
@@ -28,7 +28,7 @@ export default class Link extends React.PureComponent<LinkProps> {
     if (href.indexOf('#') > 0) {
       smoothScroll(href.split('#')[1])
     } else {
-      this.context.refContent.scrollTop = 0
+      this.context.refContent && (this.context.refContent.scrollTop = 0)
     }
   }
 
@@ -59,10 +59,10 @@ export default class Link extends React.PureComponent<LinkProps> {
     }
 
     return (
-      <Line.TryTagless TRY_RECURSIVE_TAGLESS fill="accent" bottom="md">
-        <Font FORCE_TAGLESS fill="accent" inline>
+      <Line.TryTagless fill="accent" bottom="md">
+        <Font.TryTagless FORCE_TAGLESS fill="accent" inline>
           {render}
-        </Font>
+        </Font.TryTagless>
       </Line.TryTagless>
     )
   }

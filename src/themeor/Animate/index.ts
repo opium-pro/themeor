@@ -1,2 +1,2 @@
-export * from './Aminate'
+export { default as Animate} from './Animate'
 export * from './types'

@@ -1,20 +1,11 @@
-import {ThemeConfig, ThemeIcons} from '../config-types'
+import { ThemeConfig, ThemeIcons } from '../types'
+import { obfuscate, hash } from '../config'
 
-export type PureThemeProps = {
+export const THEME_NAME = obfuscate ? hash('Theme') : 'Theme'
+
+export type ThemeProps = {
   config?: ThemeConfig,
   darkConfig?: ThemeConfig | false,
-  icons?: ThemeIcons | false,
-  global?: boolean,
+  icons?: ThemeIcons,
   reset?: boolean,
-}
-
-export type TaglessThemeProps = PureThemeProps & React.HTMLAttributes<HTMLDivElement> & {
-  TRY_RECURSIVE_TAGLESS?: true,
-  FORCE_TAGLESS?: true,
-  children?: React.ReactNode,
-  forwardRef?: any,
-}
-
-export type ThemeProps = TaglessThemeProps & {
-  TRY_TAGLESS?: boolean,
 }
