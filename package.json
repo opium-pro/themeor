@@ -42,11 +42,13 @@
   "scripts": {
     "start": "react-scripts start",
     "watch": "npm run clear && nodemon -e ts,tsx,css -w ./src -x npm run build",
+    "watch:dist": "npm run clear && nodemon -e ts,tsx,css -w ./src -x npm run dist",
     "clear": "rm -fr ./dist",
     "build:docs": "react-scripts build",
     "build": "tsc -p tsconfig.dist.json && npm run css",
     "css": "cd ./src/themeor && copyfiles -V ./**/*.css ../../dist && cd ../../",
-    "publish": "npm run clear && npm run build && npm publish"
+    "publish": "npm run clear && npm run build",
+    "dist": "npm run build && copyfiles -V ./dist/* ./dist/**/* ../3p5-mobile/node_modules/themeor"
   },
   "eslintConfig": {
     "extends": "react-app"

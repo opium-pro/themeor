@@ -18,6 +18,7 @@ tsconfig.dist.json
 /build
 /src
 /public
+/scripts
 
 # misc
 .DS_Store
