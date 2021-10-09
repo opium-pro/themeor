@@ -61,26 +61,29 @@ export default function (normalizedConfig: any) {
   // Forced fills
   for (const force of ['stroke', 'fill']) {
     for (const key in fill) {
-      styles[`force-${force}`] = {
-        '& *[class]': { [key]: fill[key] },
-        '& *[stroke]': { [key]: fill[key] },
-        '& *[fill]': { [key]: fill[key] },
+      styles[`force-${force}-${key}`] = {
+        '& *': { [force]: fill[key] },
+        // '& *[class]': { [key]: fill[key] },
+        // '& *[stroke]': { [key]: fill[key] },
+        // '& *[fill]': { [key]: fill[key] },
       }
     }
 
     for (const key in fillFancy) {
-      styles[`force-${force}-fancy`] = {
-        '& *[class]': { [key]: fillFancy[key] },
-        '& *[stroke]': { [key]: fillFancy[key] },
-        '& *[fill]': { [key]: fillFancy[key] },
+      styles[`force-${force}-${key}-fancy`] = {
+        '& *': { [force]: fillFancy[key] },
+        // '& *[class]': { [key]: fillFancy[key] },
+        // '& *[stroke]': { [key]: fillFancy[key] },
+        // '& *[fill]': { [key]: fillFancy[key] },
       }
     }
 
     for (const key in fillInversed) {
-      styles[`force-${force}-inversed`] = {
-        '& *[class]': { [key]: fillInversed[key] },
-        '& *[stroke]': { [key]: fillInversed[key] },
-        '& *[fill]': { [key]: fillInversed[key] },
+      styles[`force-${force}-${key}-inversed`] = {
+        '& *': { [force]: fillInversed[key] },
+        // '& *[class]': { [key]: fillInversed[key] },
+        // '& *[stroke]': { [key]: fillInversed[key] },
+        // '& *[fill]': { [key]: fillInversed[key] },
       }
     }
 

@@ -58,8 +58,8 @@ const Animate = (props: AnimateProps, ref: any) => {
     ...restProps,
     id: thisId,
     children,
-    onMouseEnter: (() => { onHover && setAnimationName(onHover); onHover }),
-    onClick: (() => { onClick && setAnimationName(onClick); onClick }),
+    onMouseEnter: (() => onHover && setAnimationName(onHover)),
+    onClick: (() => onClick && setAnimationName(onClick)),
     className: cn(
       css['animated'],
       css[animationName],

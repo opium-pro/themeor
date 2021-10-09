@@ -54,13 +54,6 @@ const Icon = ({
     )
   }
 
-  // if (!name) {
-  //   name = defaultIconName
-  // }
-
-  // const makeItLined = forceLine === true || lineIcons === true
-  // const makeItFilled = forceFill === true || lineIcons === false
-
   if (!icons) {
     return null
   }
@@ -95,8 +88,8 @@ const Icon = ({
     style: newStyle,
     className: cn(
       css[`icon`],
-      // makeItLined && css['force-stroke'],
-      // makeItFilled && css['force-fill'],
+      forceLine && css[`force-stroke-${fill}${forseInverse ? '-inversed' : fancy ? '-fancy' : ''}`],
+      forceFill && css[`force-fill-${fill}${forseInverse ? '-inversed' : fancy ? '-fancy' : ''}`],
       iconConfig({ fill }) && css[`fill-${fill}`],
       iconConfig({ size }) && css[`size-${size}`],
       forseInverse && iconConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],

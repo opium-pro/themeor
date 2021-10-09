@@ -67,7 +67,7 @@ export default class App extends React.PureComponent<AppProps, AppState> {
                               <a target="_blank" href="https://github.com/opium-pro/themeor">
                                 <Gap size="xs">
                                   <Align row vert="center">
-                                    <Icon size="lg" name="github" forceFill={true} />
+                                    <Icon size="lg" name="github" forceFill />
                                     <Gap size="x2s" />
                                   Go to Github
                                 </Align>
