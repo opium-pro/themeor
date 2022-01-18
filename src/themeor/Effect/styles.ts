@@ -2,7 +2,7 @@ import { setStyles } from '../utils/styles'
 
 export const id = 'themeor-effect'
 
-export default function (normalizedConfig: any) {
+export default function (normalizedConfig: any, insertionPoint?: string) {
   const {
     effect: { transparency }
   } = normalizedConfig
@@ -22,6 +22,6 @@ export default function (normalizedConfig: any) {
 }
 `
 
-    setStyles(id, styles)
+    // setStyles(id, styles, insertionPoint)
   }
 }
