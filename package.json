@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "watch": "npm run clear && nodemon -e ts,tsx,css -w ./src -x npm run build",
+    "watch": "nodemon -e ts,tsx,css -w ./src -x npm run build",
     "watch:dist": "npm run clear && nodemon -e ts,tsx,css -w ./src -x npm run dist",
     "clear": "rm -fr ./dist",
     "build:docs": "react-scripts build",

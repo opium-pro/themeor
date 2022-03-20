@@ -17,7 +17,10 @@ export default function (normalizedConfig: any) {
 
   const styles: Styles = {}
 
-  styles[`icon`] = { boxSizing: 'content-box' }
+  styles[`icon`] = {
+    boxSizing: 'content-box',
+    '& svg': { width: '100%', height: '100%' },
+  }
 
   for (const key in size) {
     styles[`size-${key}`] = {

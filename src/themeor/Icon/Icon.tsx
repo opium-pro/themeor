@@ -45,6 +45,7 @@ const Icon = ({
   if (customIconValue({ size })) {
     newStyle.width = size || undefined
     newStyle.height = size || undefined
+    size = 'default'
   }
 
   if (children) {

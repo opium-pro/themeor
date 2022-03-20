@@ -24,14 +24,19 @@ const Gap = ({
   style = {},
   ...restProps
 }: GapProps, ref: any) => {
-
   const [isInrow, setInrow] = React.useState(false)
   const { gapConfig } = useConfig(useTheme())
   const css = useCss()
 
   const newStyle = { ...style }
 
-  if (size && !gapConfig({size})) { newStyle.padding = size || undefined }
+  const useInrow = !children && (isInrow || inrow)
+  const defaultGap = 'default'
+  const notSpecified = !right && !left && !top && !bottom && !vert && !hor
+  const sizeIsTop = !children && !useInrow && notSpecified
+
+  if (size && !sizeIsTop && !gapConfig({size})) { newStyle.padding = size || undefined }
+  if (size && sizeIsTop && !gapConfig({size})) { newStyle.paddingTop = size || undefined }
   if (vert && !gapConfig({size: vert})) {
     newStyle.paddingTop = vert || undefined
     newStyle.paddingBottom = vert || undefined
@@ -71,23 +76,18 @@ const Gap = ({
       Gap
     )
   }
-  const useInrow = !children && (isInrow || inrow)
-
-  const defaultGap = 'default'
-
-  const notSpecified = !right && !left && !top && !bottom && !vert && !hor
 
   const componentProps = {
     ...restProps,
     className: cn(
       css[`gap`],
       useInrow && notSpecified && css[`left-${size || defaultGap}`],
-      !children && !useInrow && notSpecified && css[`top-${size || defaultGap}`],
+      sizeIsTop && css[`top-${size || defaultGap}`],
       gapConfig({size: top}) && css[`top-${top}`],
       gapConfig({size: right}) && css[`right-${right}`],
       gapConfig({size: bottom}) && css[`bottom-${bottom}`],
       gapConfig({size: left}) && css[`left-${left}`],
-      gapConfig({size: size}) && !!children && css[`size-${size}`],
+      !sizeIsTop && gapConfig({size: size}) && !!children && css[`size-${size}`],
       gapConfig({size: vert}) && css[`vert-${vert}`],
       gapConfig({size: hor}) && css[`hor-${hor}`],
       !size && !!children && notSpecified && css[`size-${defaultGap}`],
