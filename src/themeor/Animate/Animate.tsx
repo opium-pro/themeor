@@ -31,7 +31,8 @@ const Animate = (props: AnimateProps, ref: any) => {
   const [thisId]: any = useState(newId())
   const [mounted, setMounted]: any = useState(initialMounted)
 
-  const timeTillUnmount = duration + delay
+  const timeTillUnmount = duration * repeat + delay
+  
 
   function trigger(name: AnimateCSS) {
     setAnimationName(name)
