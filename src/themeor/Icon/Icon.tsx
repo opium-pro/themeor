@@ -1,11 +1,13 @@
-import React, { forwardRef } from 'react'
+import React, { useRef } from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-names'
 import * as console from '../utils/console'
 import { IconProps, ICON_NAME, IconComponent } from "./types"
 import { useConfig } from '../utils/use-config'
 import { useCss } from './styles'
+import { setStyles } from '../utils/styles'
 
+let id = 0
 
 const Icon = ({
   className,
@@ -21,6 +23,7 @@ const Icon = ({
   fancy,
   ...restProps
 }: IconProps, ref: any) => {
+  const thisId = useRef(++id)
   const newStyle = { ...style }
   const { icons, TRY_TO_INVERSE } = useTheme()
   const css = useCss()
@@ -48,6 +51,15 @@ const Icon = ({
     newStyle.minWidth = size || undefined
     newStyle.minHeight = size || undefined
     size = 'default'
+  }
+
+  let additionalClassName
+  if (customIconValue({ fill })) {
+    additionalClassName = `t-icon-fill-${thisId.current}`
+    setStyles(additionalClassName, `
+      .${additionalClassName} *[fill]:not([fill="none"]) {fill: ${fill}}
+      .${additionalClassName} *[stroke]:not([stroke="none"]) {stroke: ${fill}}
+    `)
   }
 
   if (children) {
@@ -97,6 +109,7 @@ const Icon = ({
       iconConfig({ size }) && css[`size-${size}`],
       forseInverse && iconConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
       fancy && iconConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
+      additionalClassName,
       className
     ),
   }
