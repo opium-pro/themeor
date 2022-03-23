@@ -36,8 +36,10 @@ export default function (normalizedConfig: any) {
   // Fills
   for (const key in fill) {
     styles[`fill-${key}`] = {
-      '& *[fill]:not([fill="none"])': { fill: fill[key] },
-      '& *[stroke]:not([stroke="none"])': { stroke: fill[key] },
+      '& *[fill]': { fill: fill[key] },
+      '& *[stroke]': { stroke: fill[key] },
+      '& *[fill="none"]': { fill: 'none' },
+      '& *[stroke="none"]': { stroke: 'none' },
     }
   }
 
