@@ -15,6 +15,8 @@ export default function (normalizedConfig: any) {
 
   styles[`gap`] = { boxSizing: 'border-box' }
 
+  styles[`inline`] = { display: 'inline-block' }
+
   for (const key in size) {
     styles[`size-${key}`] = { padding: size[key] }
   }

@@ -12,7 +12,7 @@ export type GapProps = CommonProps & {
   right?: string | 'none' | false,
   bottom?: string | 'none' | false,
   left?: string | 'none' | false,
-  inrow?: boolean,
+  inline?: boolean,
 }
 
 export type GapComponent = TaglessComponent<GapProps>

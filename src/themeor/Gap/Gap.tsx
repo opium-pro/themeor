@@ -20,20 +20,20 @@ const Gap = ({
   left,
   children,
   forwardRef,
-  inrow,
+  inline,
   style = {},
   ...restProps
 }: GapProps, ref: any) => {
-  const [isInrow, setInrow] = React.useState(false)
+  const [isinline, setinline] = React.useState(false)
   const { gapConfig } = getConfig(useTheme())
   const css = useCss()
 
   const newStyle = { ...style }
 
-  const useInrow = !children && (isInrow || inrow)
+  const useinline = !children && (isinline || inline)
   const defaultGap = 'default'
   const notSpecified = !right && !left && !top && !bottom && !vert && !hor
-  const sizeIsTop = !children && !useInrow && notSpecified
+  const sizeIsTop = !children && !useinline && notSpecified
 
   if (size && !sizeIsTop && !gapConfig({size})) { newStyle.padding = size || undefined }
   if (size && sizeIsTop && !gapConfig({size})) { newStyle.paddingTop = size || undefined }
@@ -50,29 +50,29 @@ const Gap = ({
   if (bottom && !gapConfig({size: bottom})) { newStyle.paddingBottom = bottom || undefined }
   if (left && !gapConfig({size: left})) { newStyle.paddingLeft = left || undefined }
 
-  // If is inside of flexbox row, make inrow automatically
+  // If is inside of flexbox row, make inline automatically
   function handleRef(node: any) {
     if (!node) { return }
     typeof forwardRef === 'function' && forwardRef(node)
     typeof ref === 'function' && ref(node)
 
-    if (inrow === true) {
-      setInrow(true)
-    } else if (inrow === false) {
-      setInrow(false)
+    if (inline === true) {
+      setinline(true)
+    } else if (inline === false) {
+      setinline(false)
     }
 
     const parentStyles = getComputedStyle(node.parentElement)
     if (parentStyles.flexDirection === 'row' && parentStyles.display === 'flex') {
-      setInrow(true)
+      setinline(true)
     } else {
-      setInrow(false)
+      setinline(false)
     }
   }
 
-  if (inrow && !!children) {
+  if (inline && !!children) {
     console.error(
-      "Prop 'inrow' will be neglected because it work only when there is no children",
+      "Prop 'inline' will be neglected because it work only when there is no children",
       Gap
     )
   }
@@ -81,8 +81,9 @@ const Gap = ({
     ...restProps,
     className: cn(
       css[`gap`],
-      useInrow && notSpecified && css[`left-${size || defaultGap}`],
+      useinline && notSpecified && css[`left-${size || defaultGap}`],
       sizeIsTop && css[`top-${size || defaultGap}`],
+      inline && css[`inline`],
       gapConfig({size: top}) && css[`top-${top}`],
       gapConfig({size: right}) && css[`right-${right}`],
       gapConfig({size: bottom}) && css[`bottom-${bottom}`],
