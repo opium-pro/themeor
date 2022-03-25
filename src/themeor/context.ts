@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeIcons } from './types'
+import { ThemeIcons, ThemeConfig } from './types'
 
 export interface ThemeContext {
   shallInverseOn?: string[],
@@ -24,5 +24,16 @@ export interface ThemeContext {
 }
 
 export const ThemeContext: React.Context<ThemeContext> = React.createContext({})
-
 export const useTheme = () => React.useContext(ThemeContext)
+
+export type ConfigContext = {
+  config?: ThemeConfig,
+  darkConfig?: ThemeConfig,
+  icons?: ThemeIcons,
+  currentConfig?: ThemeConfig,
+  setCurrentConfig?: (config: ThemeConfig) => any,
+}
+
+
+export const ConfigContext: React.Context<ConfigContext> = React.createContext({})
+export const useConfig = () => React.useContext(ConfigContext)

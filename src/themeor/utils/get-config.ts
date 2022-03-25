@@ -1,5 +1,5 @@
 
-function getConfig(context: any, component: any, param: any, reverse?: boolean) {
+function selectConfig(context: any, component: any, param: any, reverse?: boolean) {
   const { normalizedConfig } = context
 
   const result = []
@@ -21,7 +21,7 @@ function getConfig(context: any, component: any, param: any, reverse?: boolean) 
 }
 
 
-export function useConfig(context: any) {
+export function getConfig(context: any) {
   const result = {} as {
     boxConfig: (params: { [key: string]: any }) => any
     fontConfig: (params: { [key: string]: any }) => any
@@ -43,66 +43,66 @@ export function useConfig(context: any) {
 
 
   result.boxConfig = (params) => {
-    return getConfig(context, 'box', params)
+    return selectConfig(context, 'box', params)
   }
   result.customBoxValue = (params) => {
-    return getConfig(context, 'box', params, true)
+    return selectConfig(context, 'box', params, true)
   }
 
 
   result.fontConfig = (params) => {
-    return getConfig(context, 'font', params)
+    return selectConfig(context, 'font', params)
   }
   result.customFontValue = (params) => {
-    return getConfig(context, 'font', params, true)
+    return selectConfig(context, 'font', params, true)
   }
 
 
   result.gapConfig = (params) => {
-    return getConfig(context, 'gap', params)
+    return selectConfig(context, 'gap', params)
   }
   result.customGapValue = (params) => {
-    return getConfig(context, 'gap', params, true)
+    return selectConfig(context, 'gap', params, true)
   }
 
 
   result.lineConfig = (params) => {
-    return getConfig(context, 'line', params)
+    return selectConfig(context, 'line', params)
   }
   result.customLineValue = (params) => {
-    return getConfig(context, 'line', params, true)
+    return selectConfig(context, 'line', params, true)
   }
 
 
   result.iconConfig = (params) => {
-    return getConfig(context, 'icon', params)
+    return selectConfig(context, 'icon', params)
   }
   result.customIconValue = (params) => {
-    return getConfig(context, 'icon', params, true)
+    return selectConfig(context, 'icon', params, true)
   }
 
 
   result.reactionConfig = (params) => {
-    return getConfig(context, 'reaction', params)
+    return selectConfig(context, 'reaction', params)
   }
   result.customReactionValue = (params) => {
-    return getConfig(context, 'reaction', params, true)
+    return selectConfig(context, 'reaction', params, true)
   }
 
 
   result.effectConfig = (params) => {
-    return getConfig(context, 'effect', params)
+    return selectConfig(context, 'effect', params)
   }
   result.customEffectValue = (params) => {
-    return getConfig(context, 'effect', params, true)
+    return selectConfig(context, 'effect', params, true)
   }
 
 
   result.fitConfig = (params) => {
-    return getConfig(context, 'fit', params)
+    return selectConfig(context, 'fit', params)
   }
   result.customFitValue = (params) => {
-    return getConfig(context, 'fit', params, true)
+    return selectConfig(context, 'fit', params, true)
   }
 
   return result

@@ -7,7 +7,7 @@ export * as console from './utils/console'
 export { default as cn } from './utils/class-names'
 export { normalizeConfig } from './utils/normalize-config'
 export * from './utils/styles'
-export * from './utils/use-config'
+export * from './utils/get-config'
 
 export * from './with-tagless'
 export * from './config'

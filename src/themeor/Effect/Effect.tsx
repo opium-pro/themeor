@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from '../utils/class-names'
 import { EffectComponent, EffectProps, EFFECT_NAME } from './types'
-import { useConfig } from '../utils/use-config'
+import { getConfig } from '../utils/get-config'
 import { Common } from '../Common'
 import { useTheme } from '../context'
 import { withTagless } from '../with-tagless'
@@ -22,7 +22,7 @@ const Effect = ({
   ...restProps
 }: EffectProps, ref: any) => {
   const newStyle = { ...style }
-  const { effectConfig } = useConfig(useTheme())
+  const { effectConfig } = getConfig(useTheme())
 
   if (transparency && !effectConfig({transparency})) {
     newStyle.opacity = transparency

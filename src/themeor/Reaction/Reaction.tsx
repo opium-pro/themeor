@@ -3,7 +3,7 @@ import cn from '../utils/class-names'
 import { ReactionProps, ReactionState, REACTION_NAME } from './types'
 import { ReactionContext } from './context'
 import { useCss } from './styles'
-import { useConfig } from '../utils/use-config'
+import { getConfig } from '../utils/get-config'
 import { useTheme } from '../context'
 
 Reaction.displayName = REACTION_NAME
@@ -33,7 +33,7 @@ export function Reaction({
     focus: false,
     hoverOrFocus: false,
   })
-  const { reactionConfig, customReactionValue } = useConfig(useTheme())
+  const { reactionConfig, customReactionValue } = getConfig(useTheme())
   const css = useCss()
   const newStyle = style
 

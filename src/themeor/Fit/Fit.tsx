@@ -3,7 +3,7 @@ import cn from '../utils/class-names'
 import { FitComponent, FitProps, FIT_NAME } from './types'
 import { minus } from '../utils/change-css-value'
 import { Common } from '../Common'
-import { useConfig } from '../utils/use-config'
+import { getConfig } from '../utils/get-config'
 import { useTheme } from '../context'
 import { withTagless } from '../with-tagless'
 import {useCss} from './styles'
@@ -36,7 +36,7 @@ const Fit = ({
 }: FitProps, ref: any) => {
 
   const context = useTheme()
-  const { fitConfig, customFitValue } = useConfig(context)
+  const { fitConfig, customFitValue } = getConfig(context)
   const css = useCss()
 
   const newStyle = { ...style }

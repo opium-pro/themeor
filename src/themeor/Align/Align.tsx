@@ -3,7 +3,7 @@ import cn from '../utils/class-names'
 import { half, minus } from '../utils/change-css-value'
 import { AlignComponent, AlignProps, ALIGN_NAME } from './types'
 import { withTagless } from '../with-tagless'
-import { useConfig } from '../utils/use-config'
+import { getConfig } from '../utils/get-config'
 import { useTheme } from '../context'
 import { Common } from '../Common'
 import { useCss } from './styles'
@@ -21,7 +21,7 @@ const Align = ({
   children,
   ...restProps
 }: AlignProps, ref: any) => {
-  const { gapConfig } = useConfig(useTheme())
+  const { gapConfig } = getConfig(useTheme())
   const css = useCss()
 
   const newStyle = { ...style }

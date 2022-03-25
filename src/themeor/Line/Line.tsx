@@ -3,7 +3,7 @@ import { useTheme } from '../context'
 import cn from '../utils/class-names'
 import { LineComponent, LineProps, LINE_NAME } from './types'
 import { Common } from '../Common'
-import { useConfig } from '../utils/use-config'
+import { getConfig } from '../utils/get-config'
 import { withTagless } from '../with-tagless'
 import { useCss } from './styles'
 
@@ -25,7 +25,7 @@ const Line = ({
 }: LineProps, ref: any) => {
 
   const { TRY_TO_INVERSE } = useTheme()
-  const { lineConfig, customLineValue } = useConfig(useTheme())
+  const { lineConfig, customLineValue } = getConfig(useTheme())
   const css = useCss()
 
   const newStyle = { ...style }

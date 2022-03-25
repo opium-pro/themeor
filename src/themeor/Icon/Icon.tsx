@@ -3,7 +3,7 @@ import { useTheme } from '../context'
 import cn from '../utils/class-names'
 import * as console from '../utils/console'
 import { IconProps, ICON_NAME, IconComponent } from "./types"
-import { useConfig } from '../utils/use-config'
+import { getConfig } from '../utils/get-config'
 import { useCss } from './styles'
 import { setStyles } from '../utils/styles'
 
@@ -28,7 +28,7 @@ const Icon = ({
   const { icons, TRY_TO_INVERSE } = useTheme()
   const css = useCss()
 
-  const { iconConfig, customIconValue } = useConfig(useTheme())
+  const { iconConfig, customIconValue } = getConfig(useTheme())
 
   function handleRef(node: any) {
     if (!node) { return }

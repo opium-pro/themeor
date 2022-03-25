@@ -1,6 +1,6 @@
 import React, { useEffect, useState, FC } from 'react'
 import newId from '../utils/new-id'
-import { ThemeContext } from '../context'
+import { ThemeContext, ConfigContext } from '../context'
 import isDarkMode from '../utils/is-dark-mode'
 import { ThemeProps, THEME_NAME } from './types'
 import setBoxStyle from '../Box/styles'
@@ -85,9 +85,11 @@ export const Theme: FC<ThemeProps> = ({
   }
 
   return (
-    <ThemeContext.Provider value={context}>
-      {children}
-    </ThemeContext.Provider>
+    <ConfigContext.Provider value={{ config, darkConfig, icons, currentConfig, setCurrentConfig }}>
+      <ThemeContext.Provider value={context}>
+        {children}
+      </ThemeContext.Provider>
+    </ConfigContext.Provider>
   )
 }
 

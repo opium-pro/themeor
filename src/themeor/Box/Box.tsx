@@ -3,7 +3,7 @@ import { useTheme, ThemeContext } from '../context'
 import cn from '../utils/class-names'
 import { Line } from '../Line'
 import { BoxProps, BoxComponent, BOX_NAME } from './types'
-import { useConfig } from '../utils/use-config'
+import { getConfig } from '../utils/get-config'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
 import {useCss} from './styles'
@@ -42,7 +42,7 @@ const Box = (props: BoxProps, ref: any) => {
   } = props
 
   const context = useTheme()
-  const { boxConfig, customBoxValue } = useConfig(context)
+  const { boxConfig, customBoxValue } = getConfig(context)
   const newStyle = { ...style }
   const { normalizedConfig } = context
   const css = useCss()

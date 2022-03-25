@@ -2,7 +2,7 @@ import React from 'react'
 import { useTheme } from '../context'
 import cn from '../utils/class-names'
 import { FontCompoennt, FontProps, FONT_NAME } from './types'
-import { useConfig } from '../utils/use-config'
+import { getConfig } from '../utils/get-config'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
 import { useCss } from './styles'
@@ -31,7 +31,7 @@ const Font = ({
   ...restProps
 }: FontProps, ref: any) => {
   const context = useTheme()
-  const { fontConfig } = useConfig(context)
+  const { fontConfig } = getConfig(context)
   const css = useCss()
   const newStyle = { ...style }
 

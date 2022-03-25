@@ -2,7 +2,7 @@ import React from 'react'
 import cn from '../utils/class-names'
 import * as console from '../utils/console'
 import { GapComponent, GapProps, GAP_NAME } from './types'
-import { useConfig } from '../utils/use-config'
+import { getConfig } from '../utils/get-config'
 import { useTheme } from '../context'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
@@ -25,7 +25,7 @@ const Gap = ({
   ...restProps
 }: GapProps, ref: any) => {
   const [isInrow, setInrow] = React.useState(false)
-  const { gapConfig } = useConfig(useTheme())
+  const { gapConfig } = getConfig(useTheme())
   const css = useCss()
 
   const newStyle = { ...style }
