@@ -143,17 +143,10 @@ const Box = (props: BoxProps, ref: any) => {
 
   // Automatically inverse text and other stuff on this background
   let inverseStatus: boolean | undefined
-  inverseStatus = !!fill && normalizedConfig?.shallInverseOn?.includes(fill)
+  inverseStatus = !!fill && inverse && normalizedConfig?.shallInverseOn?.includes(fill)
 
-
-  if (context.TRY_TO_INVERSE && !inverse) {
-    inverseStatus = false
-  }
-
-  if (!fill || fill === 'none' || inverse) {
-    if (!inverse) {
-      inverseStatus = context.TRY_TO_INVERSE
-    }
+  if (!fill || fill === 'none') {
+    inverseStatus = context.TRY_TO_INVERSE
   }
 
   const newContext = {
