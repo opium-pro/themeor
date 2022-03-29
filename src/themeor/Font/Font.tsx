@@ -53,7 +53,7 @@ const Font = ({
       inline && css['inline'],
       inline === false && css['block'],
       fontConfig({ fill }) && css[`fill-${fill}`],
-      forceInverse && fontConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
+      forceInverse && fontConfig({ fillInverse: fill }) && css[`fill-inverse-${fill}`],
       fancy && fontConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
       (uppercase && css['uppercase']) || ((uppercase === false) && css['nouppercase']),
       (italic && css['italic']) || ((italic === false) && css['noitalic']),

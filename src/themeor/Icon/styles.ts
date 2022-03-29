@@ -10,7 +10,7 @@ export default function (normalizedConfig: any) {
     icon: {
       fill,
       fillFancy,
-      fillInversed,
+      fillInverse,
       size,
     }
   } = normalizedConfig
@@ -31,7 +31,7 @@ export default function (normalizedConfig: any) {
     }
   }
 
-  styles[`fill-inversed-${fill}`] = {}
+  styles[`fill-inverse-${fill}`] = {}
 
   // Fills
   for (const key in fill) {
@@ -52,10 +52,10 @@ export default function (normalizedConfig: any) {
     }
   }
 
-  for (const key in fillInversed) {
-    styles[`fill-inversed-${key}`] = {
-      '& *[fill]': { fill: fillInversed[key] },
-      '& *[stroke]': { stroke: fillInversed[key] },
+  for (const key in fillInverse) {
+    styles[`fill-inverse-${key}`] = {
+      '& *[fill]': { fill: fillInverse[key] },
+      '& *[stroke]': { stroke: fillInverse[key] },
       '& *[fill="none"]': { fill: 'none' },
       '& *[stroke="none"]': { stroke: 'none' },
     }
@@ -81,12 +81,12 @@ export default function (normalizedConfig: any) {
       }
     }
 
-    for (const key in fillInversed) {
-      styles[`force-${force}-${key}-inversed`] = {
-        '& *': { [force]: fillInversed[key] },
-        // '& *[class]': { [key]: fillInversed[key] },
-        // '& *[stroke]': { [key]: fillInversed[key] },
-        // '& *[fill]': { [key]: fillInversed[key] },
+    for (const key in fillInverse) {
+      styles[`force-${force}-${key}-inverse`] = {
+        '& *': { [force]: fillInverse[key] },
+        // '& *[class]': { [key]: fillInverse[key] },
+        // '& *[stroke]': { [key]: fillInverse[key] },
+        // '& *[fill]': { [key]: fillInverse[key] },
       }
     }
 

@@ -10,7 +10,7 @@ export default function (normalizedConfig: any) {
     box: {
       fill,
       fillFancy,
-      fillInversed,
+      fillInverse,
       fillStrong,
       radius,
       shadow,
@@ -41,11 +41,8 @@ export default function (normalizedConfig: any) {
   for (const key in fillFancy) {
     styles[`fill-fancy-${key}`] = { backgroundImage: fillFancy[key] }
   }
-  for (const key in fillInversed) {
-    styles[`fill-inversed-${key}`] = { backgroundColor: fillInversed[key] }
-  }
-  for (const key in fillStrong) {
-    styles[`fill-strong-${key}`] = { backgroundColor: fillStrong[key] }
+  for (const key in fillInverse) {
+    styles[`fill-inverse-${key}`] = { backgroundColor: fillInverse[key] }
   }
 
 

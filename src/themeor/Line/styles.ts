@@ -11,7 +11,7 @@ export default function (normalizedConfig: any) {
       weight,
       fill,
       fillFancy,
-      fillInversed,
+      fillInverse,
     }
   } = normalizedConfig
 
@@ -52,8 +52,8 @@ export default function (normalizedConfig: any) {
   for (const key in fillFancy) {
     styles[`fill-fancy-${key}`] = { borderImage: fillFancy[key] }
   }
-  for (const key in fillInversed) {
-    styles[`fill-inversed-${key}`] = { borderColor: fillInversed[key] }
+  for (const key in fillInverse) {
+    styles[`fill-inverse-${key}`] = { borderColor: fillInverse[key] }
   }
 
 

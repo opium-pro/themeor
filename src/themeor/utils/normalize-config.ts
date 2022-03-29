@@ -21,8 +21,8 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
     ...config.fancyFill,
     ...config.fillFancy,
   })
-  newConfig.fillInversed = makeFlat({
-    ...config.fillInversed,
+  newConfig.fillInverse = makeFlat({
+    ...config.fillInverse,
   })
 
 
@@ -58,10 +58,10 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
       ...newConfig.fill,
       ...makeFlat(config.box?.fill)
     },
-    fillInversed: {
+    fillInverse: {
       default: 'transparent',
-      ...newConfig.fillInversed,
-      ...makeFlat(config.box?.fillInversed)
+      ...newConfig.fillInverse,
+      ...makeFlat(config.box?.fillInverse)
     },
     fillFancy: {
       default: 'transparent',
@@ -100,10 +100,10 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
       ...newConfig.fill,
       ...makeFlat(config.font?.fill),
     },
-    fillInversed: {
+    fillInverse: {
       default: 'inherit',
-      ...newConfig.fillInversed,
-      ...makeFlat(config.font?.fillInversed),
+      ...newConfig.fillInverse,
+      ...makeFlat(config.font?.fillInverse),
     },
     fillFancy: {
       default: 'inherit',
@@ -125,10 +125,10 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
       ...newConfig.fill,
       ...makeFlat(config.line?.fill),
     },
-    fillInversed: {
+    fillInverse: {
       default: '#fff',
-      ...newConfig.fillInversed,
-      ...makeFlat(config.line?.fillInversed),
+      ...newConfig.fillInverse,
+      ...makeFlat(config.line?.fillInverse),
     },
     fillFancy: {
       default: '#000',
@@ -158,10 +158,10 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
       ...newConfig.fill,
       ...makeFlat(config.icon?.fill)
     },
-    fillInversed: {
+    fillInverse: {
       default: '#fff',
-      ...newConfig.fillInversed,
-      ...makeFlat(config.icon?.fillInversed),
+      ...newConfig.fillInverse,
+      ...makeFlat(config.icon?.fillInverse),
     },
     fillFancy: {
       default: '#000',
@@ -339,10 +339,10 @@ function mutateToOpiumFill(newConfig: any) {
   newConfig.line.fill = {...customFills, ...lineFill}
   newConfig.icon.fill = {...customFills, ...iconFill}
 
-  newConfig.box.fillInversed = boxFillInv
-  newConfig.font.fillInversed = fontFillInv
-  newConfig.line.fillInversed = lineFillInv
-  newConfig.icon.fillInversed = iconFillInv
+  newConfig.box.fillInverse = boxFillInv
+  newConfig.font.fillInverse = fontFillInv
+  newConfig.line.fillInverse = lineFillInv
+  newConfig.icon.fillInverse = iconFillInv
 
   newConfig.box.fillFancy = boxFillFancy
   newConfig.font.fillFancy = fontFillFancy

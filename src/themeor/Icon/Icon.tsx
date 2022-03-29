@@ -103,11 +103,11 @@ const Icon = ({
     style: newStyle,
     className: cn(
       css[`icon`],
-      forceLine && css[`force-stroke-${fill}${forseInverse ? '-inversed' : fancy ? '-fancy' : ''}`],
-      forceFill && css[`force-fill-${fill}${forseInverse ? '-inversed' : fancy ? '-fancy' : ''}`],
+      forceLine && css[`force-stroke-${fill}${forseInverse ? '-inverse' : fancy ? '-fancy' : ''}`],
+      forceFill && css[`force-fill-${fill}${forseInverse ? '-inverse' : fancy ? '-fancy' : ''}`],
       iconConfig({ fill }) && css[`fill-${fill}`],
       iconConfig({ size }) && css[`size-${size}`],
-      forseInverse && iconConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
+      forseInverse && iconConfig({ fillInverse: fill }) && css[`fill-inverse-${fill}`],
       fancy && iconConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
       additionalClassName,
       className

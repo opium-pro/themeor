@@ -30,7 +30,6 @@ const Box = (props: BoxProps, ref: any) => {
     radiusBottomRight,
     radiusBottomLeft,
     fancy,
-    strong,
     shadow,
     shadowInner,
     blur,
@@ -90,9 +89,6 @@ const Box = (props: BoxProps, ref: any) => {
   if (customBoxValue({ glow })) { newStyle.boxShadow = glow || undefined }
 
   // Setting classNames
-
-  const forceInverse = (inverse !== false) && (inverse || context.TRY_TO_INVERSE)
-
   const componentProps = {
     forwardRef: ref,
     ...restProps,
@@ -100,8 +96,7 @@ const Box = (props: BoxProps, ref: any) => {
       css['box'],
       img && css['img'],
       boxConfig({ fill }) && css[`fill-${fill}`],
-      forceInverse && boxConfig({ fillInversed: fill }) && css[`fill-inversed-${fill}`],
-      strong && boxConfig({ fillStrong: fill }) && css[`fill-strong-${fill}`],
+      inverse && boxConfig({ fillInverse: fill }) && css[`fill-inverse-${fill}`],
       fancy && boxConfig({ fillFancy: fill }) && css[`fill-fancy-${fill}`],
       boxConfig({ shadow }) && css[`shadow-${shadow}`],
       boxConfig({ blur }) && css[`blur-${blur}`],
@@ -146,16 +141,9 @@ const Box = (props: BoxProps, ref: any) => {
     return renderBoxComponent
   }
 
-  // @ts-ignore
-  const useOpiumFill: boolean = normalizedConfig?.fill?.[`base-strong`]
-
   // Automatically inverse text and other stuff on this background
   let inverseStatus: boolean | undefined
   inverseStatus = !!fill && normalizedConfig?.shallInverseOn?.includes(fill)
-  
-  if (useOpiumFill && !strong) {
-    inverseStatus = false
-  }
 
 
   if (context.TRY_TO_INVERSE && !inverse) {
@@ -163,7 +151,7 @@ const Box = (props: BoxProps, ref: any) => {
   }
 
   if (!fill || fill === 'none' || inverse) {
-    if (!strong) {
+    if (!inverse) {
       inverseStatus = context.TRY_TO_INVERSE
     }
   }

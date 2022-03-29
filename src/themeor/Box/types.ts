@@ -6,7 +6,6 @@ export const BOX_NAME = obfuscate ? hash('Box') : 'Box'
 
 export type BoxProps = CommonProps & {
   fill?: string | false,
-  strong?: boolean,
   inverse?: boolean,
   fancy?: boolean,
   borderFill?: string | false,

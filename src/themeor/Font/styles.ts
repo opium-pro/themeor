@@ -10,7 +10,7 @@ export default function (normalizedConfig: any) {
   const {
     font: {
       fill,
-      fillInversed,
+      fillInverse,
       fillFancy,
       size,
       weight,
@@ -59,8 +59,8 @@ export default function (normalizedConfig: any) {
       backgroundClip: 'text',
     }
   }
-  for (const key in fillInversed) {
-    styles[`fill-inversed-${key}`] = { color: fillInversed[key] }
+  for (const key in fillInverse) {
+    styles[`fill-inverse-${key}`] = { color: fillInverse[key] }
   }
 
 

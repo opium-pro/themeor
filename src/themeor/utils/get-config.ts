@@ -7,7 +7,7 @@ function selectConfig(context: any, component: any, param: any, reverse?: boolea
     const isDefined = (normalizedConfig[component]?.[key]?.[param[key]] !== undefined)
 
     if (!reverse) {
-      result.push(normalizedConfig[component][key][param[key]]?.toString())
+      result.push(normalizedConfig[component]?.[key]?.[param[key]]?.toString())
 
     } else {
       const wrongType = !['string', 'number'].includes(typeof param[key])
