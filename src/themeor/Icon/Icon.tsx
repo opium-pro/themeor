@@ -63,7 +63,7 @@ const Icon = ({
   }
 
   if (children) {
-    console.error(
+    console.warn(
       'Prop "children" is prohibited, it will be ignored',
       Icon
     )
@@ -75,7 +75,7 @@ const Icon = ({
 
   // @ts-ignore
   if (!size || !icons[size]) {
-    console.error(
+    console.warn(
       `There is no such size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
       Icon
     )
@@ -86,7 +86,7 @@ const Icon = ({
   const FinalIcon = name && icons[size]?.[name]
 
   if (!FinalIcon) {
-    console.error(
+    console.warn(
       `There is no such Icon like "${name}" with size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
       Icon
     )
