@@ -12,6 +12,8 @@ export * from './utils/get-config'
 export * from './with-tagless'
 export * from './config'
 
+export * from './Common'
+
 export * from './Theme'
 export * from './Box'
 export * from './Font'
