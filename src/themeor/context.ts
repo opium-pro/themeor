@@ -1,37 +1,23 @@
 import React from 'react'
 import { ThemeIcons, ThemeConfig } from './types'
 
-export interface ThemeContext {
-  shallInverseOn?: string[],
-  template?: string | string[],
-  TRY_TO_INVERSE?: boolean,
-  icons?: ThemeIcons,
-  // lineIcons?: boolean,
-  themeId?: string,
-  darkMode?: boolean,
-  gap?: object,
-  fill?: object,
-  fillInverse?: object,
-  fillFancy?: object,
-  font?: object,
-  box?: {
-    fill?: { [key: string]: string },
-    shadow?: { [key: string]: string },
-  },
-  line?: object,
-  icon?: object,
-  normalizedConfig?: ThemeContext,
+export type ThemeContext = {
+  icons?: ThemeIcons
+  themeId?: string
+  darkMode?: boolean
+  normalizedConfig?: ThemeConfig
 }
 
-export const ThemeContext: React.Context<ThemeContext> = React.createContext({})
+export const ThemeContext = React.createContext({} as ThemeContext)
 export const useTheme = () => React.useContext(ThemeContext)
+
 
 export type ConfigContext = {
   config?: ThemeConfig,
-  darkConfig?: ThemeConfig,
+  darkConfig?: ThemeConfig | false,
   icons?: ThemeIcons,
   currentConfig?: ThemeConfig,
-  setCurrentConfig?: (config: ThemeConfig) => any,
+  setCurrentConfig?: (config: ThemeConfig) => void,
 }
 
 

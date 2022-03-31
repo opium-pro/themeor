@@ -25,7 +25,7 @@ const Gap = ({
   ...restProps
 }: GapProps, ref: any) => {
   const [isinline, setinline] = React.useState(false)
-  const { gapConfig } = getConfig(useTheme())
+  const { gapConfig } = getConfig(useTheme().normalizedConfig)
   const css = useCss()
 
   const newStyle = { ...style }

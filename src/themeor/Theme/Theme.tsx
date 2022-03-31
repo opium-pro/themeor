@@ -7,7 +7,6 @@ import setBoxStyle from '../Box/styles'
 import setFontStyle from '../Font/styles'
 import setGapStyle from '../Gap/styles'
 import setAlignStyle from '../Align/styles'
-// import setAlimateStyle from '../Alimate/styles'
 import setLineStyle from '../Line/styles'
 import setIconStyle from '../Icon/styles'
 import setReactionStyle from '../Reaction/styles'
@@ -72,8 +71,7 @@ export const Theme: FC<ThemeProps> = ({
     }
   }, [icons])
 
-  const context = {
-    ...currentConfig,
+  const context: ThemeContext = {
     icons,
     themeId: id,
     darkMode: isDarkMode(),

@@ -5,13 +5,16 @@ export const REACTION_NAME = obfuscate ? hash('Reaction') : 'Reaction'
 
 export type TrackType = 'active' | 'focus' | 'hover'
 
-export type ReactionProps = React.AllHTMLAttributes<HTMLElement> & {
-  cursor?: string | false,
+export type ReactionConfigProps = {
   duration?: 'none' | string | false,
-  track?: Array<TrackType> | TrackType | false,
-  smooth?: boolean,
+  cursor?: string | false,
   timingFunction?: string | false,
   property?: string | false,
+}
+
+export type ReactionProps = CommonProps & ReactionConfigProps & {
+  track?: Array<TrackType> | TrackType | false,
+  smooth?: boolean,
   disabled?: boolean
 }
 

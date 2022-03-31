@@ -1,109 +1,70 @@
+import { ThemeConfig, ConfigurableComponents } from '../types'
 
-function selectConfig(context: any, component: any, param: any, reverse?: boolean) {
-  const { normalizedConfig } = context
 
-  const result = []
-  for (const key in param) {
-    const isDefined = (normalizedConfig[component]?.[key]?.[param[key]] !== undefined)
+function selectConfig (
+  normalizedConfig: ThemeConfig,
+  component: ConfigurableComponents,
+  compare: { [prop: string]: any },
+  boolean?: boolean
+) {
+  const result: any | any[] = []
+  for (const key in compare) {
+    const value = (normalizedConfig[component] as any)?.[key]?.[compare[key]]
+    const isDefined = value !== undefined
 
-    if (!reverse) {
-      result.push(normalizedConfig[component]?.[key]?.[param[key]]?.toString())
-
+    if (!boolean) {
+      result.push(value)
     } else {
-      const wrongType = !['string', 'number'].includes(typeof param[key])
+      const wrongType = !['string', 'number'].includes(typeof compare[key])
       result.push(wrongType ? false : !isDefined)
     }
   }
-  if (result.length <= 1) {
+  if (length <= 1) {
     return result[0]
   }
   return result
 }
 
 
-export function getConfig(context: any) {
-  const result = {} as {
-    boxConfig: (params: { [key: string]: any }) => any
-    fontConfig: (params: { [key: string]: any }) => any
-    gapConfig: (params: { [key: string]: any }) => any
-    lineConfig: (params: { [key: string]: any }) => any
-    iconConfig: (params: { [key: string]: any }) => any
-    reactionConfig: (params: { [key: string]: any }) => any
-    effectConfig: (params: { [key: string]: any }) => any
-    fitConfig: (params: { [key: string]: any }) => any
-    customBoxValue: (params: { [key: string]: any }) => any
-    customFontValue: (params: { [key: string]: any }) => any
-    customGapValue: (params: { [key: string]: any }) => any
-    customLineValue: (params: { [key: string]: any }) => any
-    customIconValue: (params: { [key: string]: any }) => any
-    customReactionValue: (params: { [key: string]: any }) => any
-    customEffectValue: (params: { [key: string]: any }) => any
-    customFitValue: (params: { [key: string]: any }) => any
-  }
+export const getConfig = (normalizedConfig: ThemeConfig = {}) => ({
+  boxConfig: (compare: { [key in keyof ThemeConfig['box']]: any }) =>
+    selectConfig(normalizedConfig, 'box', compare),
+  customBoxValue: (compare: { [key in keyof ThemeConfig['box']]: any }) =>
+    selectConfig(normalizedConfig, 'box', compare, true),
 
 
-  result.boxConfig = (params) => {
-    return selectConfig(context, 'box', params)
-  }
-  result.customBoxValue = (params) => {
-    return selectConfig(context, 'box', params, true)
-  }
+  fontConfig: (compare: { [key in keyof ThemeConfig['font']]: any }) =>
+    selectConfig(normalizedConfig, 'font', compare),
+  customFontValue: (compare: { [key in keyof ThemeConfig['font']]: any }) =>
+    selectConfig(normalizedConfig, 'font', compare, true),
 
 
-  result.fontConfig = (params) => {
-    return selectConfig(context, 'font', params)
-  }
-  result.customFontValue = (params) => {
-    return selectConfig(context, 'font', params, true)
-  }
+  gapConfig: (compare: { [key in keyof ThemeConfig['gap']]: any }) =>
+    selectConfig(normalizedConfig, 'gap', compare),
+  customGapValue: (compare: { [key in keyof ThemeConfig['gap']]: any }) =>
+    selectConfig(normalizedConfig, 'gap', compare, true),
 
 
-  result.gapConfig = (params) => {
-    return selectConfig(context, 'gap', params)
-  }
-  result.customGapValue = (params) => {
-    return selectConfig(context, 'gap', params, true)
-  }
+  lineConfig: (compare: { [key in keyof ThemeConfig['line']]: any }) =>
+    selectConfig(normalizedConfig, 'line', compare),
+  customLineValue: (compare: { [key in keyof ThemeConfig['line']]: any }) =>
+    selectConfig(normalizedConfig, 'line', compare, true),
 
 
-  result.lineConfig = (params) => {
-    return selectConfig(context, 'line', params)
-  }
-  result.customLineValue = (params) => {
-    return selectConfig(context, 'line', params, true)
-  }
+  iconConfig: (compare: { [key in keyof ThemeConfig['icon']]: any }) =>
+    selectConfig(normalizedConfig, 'icon', compare),
+  customIconValue: (compare: { [key in keyof ThemeConfig['icon']]: any }) =>
+    selectConfig(normalizedConfig, 'icon', compare, true),
 
 
-  result.iconConfig = (params) => {
-    return selectConfig(context, 'icon', params)
-  }
-  result.customIconValue = (params) => {
-    return selectConfig(context, 'icon', params, true)
-  }
+  reactionConfig: (compare: { [key in keyof ThemeConfig['reaction']]: any }) =>
+    selectConfig(normalizedConfig, 'reaction', compare),
+  customReactionValue: (compare: { [key in keyof ThemeConfig['reaction']]: any }) =>
+    selectConfig(normalizedConfig, 'reaction', compare, true),
 
 
-  result.reactionConfig = (params) => {
-    return selectConfig(context, 'reaction', params)
-  }
-  result.customReactionValue = (params) => {
-    return selectConfig(context, 'reaction', params, true)
-  }
-
-
-  result.effectConfig = (params) => {
-    return selectConfig(context, 'effect', params)
-  }
-  result.customEffectValue = (params) => {
-    return selectConfig(context, 'effect', params, true)
-  }
-
-
-  result.fitConfig = (params) => {
-    return selectConfig(context, 'fit', params)
-  }
-  result.customFitValue = (params) => {
-    return selectConfig(context, 'fit', params, true)
-  }
-
-  return result
-}
+  fitConfig: (compare: { [key in keyof ThemeConfig['fit']]: any }) =>
+    selectConfig(normalizedConfig, 'fit', compare),
+  customFitValue: (compare: { [key in keyof ThemeConfig['fit']]: any }) =>
+    selectConfig(normalizedConfig, 'fit', compare, true),
+})

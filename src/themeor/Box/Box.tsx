@@ -1,5 +1,6 @@
 import React from 'react'
-import { useTheme, ThemeContext } from '../context'
+import { useBox, BoxContext } from './context'
+import { useTheme } from '../context'
 import cn from '../utils/class-names'
 import { Line } from '../Line'
 import { BoxProps, BoxComponent, BOX_NAME } from './types'
@@ -40,19 +41,17 @@ const Box = (props: BoxProps, ref: any) => {
     ...restProps
   } = props
 
-  const context = useTheme()
-  const { boxConfig, customBoxValue } = getConfig(context)
+  const context = useBox()
+  const { normalizedConfig } = useTheme()
+  const { boxConfig, customBoxValue } = getConfig(normalizedConfig)
   const newStyle = { ...style }
-  const { normalizedConfig } = context
   const css = useCss()
 
 
   // Setting inline styles
-
   if (img) {
     newStyle.backgroundImage = `url('${img}')`
   }
-
   if (fill && !boxConfig({ fill })) {
     if (fancy) {
       newStyle.backgroundImage = fill
@@ -60,7 +59,6 @@ const Box = (props: BoxProps, ref: any) => {
       newStyle.backgroundColor = fill
     }
   }
-
   if (customBoxValue({ radius })) { newStyle.borderRadius = radius || undefined }
   if (customBoxValue({ radiusTop })) {
     newStyle.borderTopLeftRadius = radiusTop || undefined
@@ -155,9 +153,9 @@ const Box = (props: BoxProps, ref: any) => {
   }
 
   return (
-    <ThemeContext.Provider value={newContext}>
+    <BoxContext.Provider value={newContext}>
       {renderBoxComponent}
-    </ThemeContext.Provider>
+    </BoxContext.Provider>
   )
 }
 

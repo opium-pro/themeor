@@ -6,6 +6,7 @@ import { Common } from '../Common'
 import { getConfig } from '../utils/get-config'
 import { withTagless } from '../with-tagless'
 import { useCss } from './styles'
+import { useBox } from '../Box'
 
 
 const Line = ({
@@ -24,8 +25,8 @@ const Line = ({
   ...restProps
 }: LineProps, ref: any) => {
 
-  const { TRY_TO_INVERSE } = useTheme()
-  const { lineConfig, customLineValue } = getConfig(useTheme())
+  const { TRY_TO_INVERSE } = useBox()
+  const { lineConfig, customLineValue } = getConfig(useTheme().normalizedConfig)
   const css = useCss()
 
   const newStyle = { ...style }

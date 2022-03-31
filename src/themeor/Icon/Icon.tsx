@@ -6,6 +6,8 @@ import { IconProps, ICON_NAME, IconComponent } from "./types"
 import { getConfig } from '../utils/get-config'
 import { useCss } from './styles'
 import { setStyles } from '../utils/styles'
+import { useBox } from '../Box'
+
 
 let id = 0
 
@@ -25,10 +27,11 @@ const Icon = ({
 }: IconProps, ref: any) => {
   const thisId = useRef(++id)
   const newStyle = { ...style }
-  const { icons, TRY_TO_INVERSE } = useTheme()
+  const { TRY_TO_INVERSE } = useBox()
+  const { icons, normalizedConfig } = useTheme()
   const css = useCss()
 
-  const { iconConfig, customIconValue } = getConfig(useTheme())
+  const { iconConfig, customIconValue } = getConfig(normalizedConfig)
 
   function handleRef(node: any) {
     if (!node) { return }

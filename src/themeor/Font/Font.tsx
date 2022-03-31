@@ -6,6 +6,7 @@ import { getConfig } from '../utils/get-config'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
 import { useCss } from './styles'
+import { useBox } from '../Box'
 
 
 const Font = ({
@@ -30,8 +31,8 @@ const Font = ({
   children,
   ...restProps
 }: FontProps, ref: any) => {
-  const context = useTheme()
-  const { fontConfig } = getConfig(context)
+  const context = useBox()
+  const { fontConfig } = getConfig(useTheme().normalizedConfig)
   const css = useCss()
   const newStyle = { ...style }
 

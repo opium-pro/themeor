@@ -1,6 +1,6 @@
 import React from 'react'
 import * as console from '../utils/console'
-import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate } from '../index'
+import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Animate } from '../index'
 import { TaglessProps, TaglessComponent } from './types'
 import cn from '../utils/class-names'
 import {obfuscate, hash} from '../config'
@@ -66,7 +66,7 @@ export const withTagless = (Component: any): TaglessComponent => {
     }
 
     const OnlyChildComponent = onlyChild.type
-    const mergingComponents = [Theme, Box, Font, Line, Icon, Fit, Align, Gap, Effect, Animate]
+    const mergingComponents = [Theme, Box, Font, Line, Icon, Fit, Align, Gap, Animate]
     let child_is_themeor_component = mergingComponents.includes(OnlyChildComponent)
       || !!mergingComponents.find((mergingComponent: any) => mergingComponent.TryTagless === OnlyChildComponent)
 

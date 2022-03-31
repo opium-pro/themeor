@@ -8,6 +8,7 @@ import { useTheme } from '../context'
 import { Common } from '../Common'
 import { useCss } from './styles'
 
+
 const Align = ({
   row,
   vert = "top",
@@ -21,7 +22,7 @@ const Align = ({
   children,
   ...restProps
 }: AlignProps, ref: any) => {
-  const { gapConfig } = getConfig(useTheme())
+  const { gapConfig } = getConfig(useTheme().normalizedConfig)
   const css = useCss()
 
   const newStyle = { ...style }

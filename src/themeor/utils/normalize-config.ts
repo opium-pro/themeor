@@ -3,28 +3,19 @@ import { ThemeConfig } from '../types'
 import { allFills, baseFills } from './opium-fill'
 
 
-export function normalizeConfig(config: ThemeConfig): ThemeContext {
-  const newConfig = { ...config.themeContext, ...config }
-
-  const customFills = config.customVariables || {}
-  newConfig.customFills = {}
-  for (const key in customFills) {
-    newConfig.customFills[`--${key}`] = customFills[key]
-  }
+export function normalizeConfig(config: any): ThemeConfig {
+  const newConfig = { ...config }
 
   newConfig.fill = {
     none: 'transparent',
     ...makeFlat(config.fill),
   }
   newConfig.fillFancy = makeFlat({
-    ...config['fancy-fill'],
-    ...config.fancyFill,
     ...config.fillFancy,
   })
   newConfig.fillInverse = makeFlat({
     ...config.fillInverse,
   })
-
 
   newConfig.box = {
     radius: {
@@ -111,10 +102,10 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
       ...makeFlat(config.font?.fillFancy),
     },
     lineHeight: {
-      ...makeFlat(config.font?.['line-height']),
+      ...makeFlat(config.font?.['lineHeight']),
     },
     letterSpacing: {
-      ...makeFlat(config.font?.['letter-spacing'])
+      ...makeFlat(config.font?.['letterSpacing'])
     },
   }
 
@@ -179,7 +170,7 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
     duration: {
       default: '250ms',
       none: '0ms',
-      ...makeFlat(config.reaction?.speed),
+      ...makeFlat(config.reaction?.duration),
     },
     cursor: {
       pointer: 'pointer',
@@ -214,15 +205,6 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
   }
 
 
-  newConfig.effect = {
-    transparency: {
-      none: '1',
-      max: '0',
-      ...makeFlat(config.effect?.transparency)
-    },
-  }
-
-
   newConfig.fit = {
     zIndex: {
       ...makeFlat(config.fit?.zIndex),
@@ -232,18 +214,13 @@ export function normalizeConfig(config: ThemeConfig): ThemeContext {
       ...newConfig.gap.size,
       ...makeFlat(config.fit?.offset),
     },
-    shift: {
-      none: '0',
-      ...newConfig.gap.size,
-      ...makeFlat(config.fit?.shift),
-    },
   }
 
   // If use opium fill, then correct values to old config
-  const useOpiumFill = config.fill?.base?.strong && config.useOpiumFillShorthand !== false
+  const useOpiumFill = (config.fill?.base as any)?.strong
   if (useOpiumFill) {
     for (const fill of baseFills) {
-      if (newConfig.shallInverseOn.includes(fill)) {
+      if (newConfig.shallInverseOn?.includes(fill)) {
         newConfig.shallInverseOn.push(`${fill}-up`)
         newConfig.shallInverseOn.push(`${fill}-down`)
       }

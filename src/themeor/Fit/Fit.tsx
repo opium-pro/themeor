@@ -8,6 +8,7 @@ import { useTheme } from '../context'
 import { withTagless } from '../with-tagless'
 import {useCss} from './styles'
 
+
 const Fit = ({
   left,
   top,
@@ -35,8 +36,7 @@ const Fit = ({
   ...restProps
 }: FitProps, ref: any) => {
 
-  const context = useTheme()
-  const { fitConfig, customFitValue } = getConfig(context)
+  const { fitConfig, customFitValue } = getConfig(useTheme().normalizedConfig)
   const css = useCss()
 
   const newStyle = { ...style }
