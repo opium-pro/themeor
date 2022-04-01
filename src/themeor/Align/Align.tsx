@@ -20,6 +20,8 @@ const Align = ({
   style = {},
   stack,
   children,
+  reverse,
+  dense,
   ...restProps
 }: AlignProps, ref: any) => {
   const { gapConfig } = getConfig(useTheme().normalizedConfig)
@@ -51,6 +53,8 @@ const Align = ({
     className: cn(
       css[`align`],
       css[mode],
+      reverse && css[`reverse`],
+      dense && css[`dense`],
       vert && css[`${mode}-vert-${vert}`],
       hor && css[`${mode}-hor-${hor}`],
       !pattern && gapConfig({ size: gapVert }) && css[`vert-gap-${gapVert}`],

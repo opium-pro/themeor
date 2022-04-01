@@ -5,13 +5,15 @@ import { obfuscate, hash } from '../config'
 export const ALIGN_NAME = obfuscate ? hash('Align') : 'Align'
 
 export type AlignProps = CommonProps & {
-  row?: boolean,
-  stack?: boolean,
-  pattern?: string | false,
-  vert?: 'stretch' | 'top' | 'center' | 'bottom' | 'baseline' | false,
-  hor?: 'stretch' | 'left' | 'center' | 'right' | false,
-  gapVert?: string | false,
-  gapHor?: string | false,
+  row?: boolean
+  stack?: boolean
+  pattern?: string | false
+  vert?: 'stretch' | 'top' | 'center' | 'bottom' | 'baseline' | false
+  hor?: 'stretch' | 'left' | 'center' | 'right' | false
+  gapVert?: string | false
+  gapHor?: string | false
+  reverse?: boolean
+  dense?: boolean
 }
 
 export type AlignComponent = TaglessComponent<AlignProps> & {

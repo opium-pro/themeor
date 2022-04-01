@@ -77,16 +77,7 @@ const Icon = ({
   }
 
   // @ts-ignore
-  if (!size || !icons[size]) {
-    console.warn(
-      `There is no such size "${size}"\nCheck if you imported icons correctrly.\nMore info http://themoir.opium.pro/icons`,
-      Icon
-    )
-    return null
-  }
-
-  // @ts-ignore
-  const FinalIcon = name && icons[size]?.[name]
+  const FinalIcon = name && icons?.[name]
 
   if (!FinalIcon) {
     console.warn(

@@ -42,7 +42,5 @@ export type ThemeConfig = ConfigFill & {
 }
 
 export type ThemeIcons = {
-  [size: string]: {
-    [name: string]: any,
-  }
+  [name: string]: any,
 }

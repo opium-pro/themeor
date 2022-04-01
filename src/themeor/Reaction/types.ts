@@ -1,8 +1,10 @@
 import { obfuscate, hash } from "../config"
 import { CommonProps } from '../Common'
+import { ReactNode } from 'react'
+import { ReactionContext } from './context'
+
 
 export const REACTION_NAME = obfuscate ? hash('Reaction') : 'Reaction'
-
 export type TrackType = 'active' | 'focus' | 'hover'
 
 export type ReactionConfigProps = {
@@ -16,18 +18,12 @@ export type ReactionProps = CommonProps & ReactionConfigProps & {
   track?: Array<TrackType> | TrackType | false,
   smooth?: boolean,
   disabled?: boolean
+  children?: ReactNode | ((props: CommonProps, context: ReactionContext) => ReactNode)
 }
 
 export type ReactionState = {
-  hover: boolean,
-  active: boolean,
-  focus: boolean,
-  hoverOrFocus: boolean,
-}
-
-export type ReactionContextType = ReactionState & {
-  passProps?: any
-  className?: any
-  cursor?: string | false
-  disabled?: boolean
+  hover: boolean
+  active: boolean
+  focus: boolean
+  hoverOrFocus: boolean
 }

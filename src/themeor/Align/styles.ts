@@ -16,7 +16,12 @@ export default function (normalizedConfig: any) {
 
   styles[`align`] = { display: 'flex' }
 
-  styles[`col`] = { flexDirection: 'column' }
+  styles[`col`] = {
+    flexDirection: 'column',
+    [`&.reverse`]: {
+      flexDirection: 'column-reverse',
+    },
+  }
   styles[`col-vert-center`] = { justifyContent: 'center' }
   styles[`col-vert-top`] = { justifyContent: 'flex-start' }
   styles[`col-vert-bottom`] = { justifyContent: 'flex-end' }
@@ -28,7 +33,12 @@ export default function (normalizedConfig: any) {
 
   styles[`stack`] = { flexWrap: 'wrap' }
 
-  styles[`row`] = { flexDirection: 'row' }
+  styles[`row`] = {
+    flexDirection: 'row',
+    [`&.reverse`]: {
+      flexDirection: 'row-reverse',
+    },
+  }
   styles[`row-vert-center`] = { alignItems: 'center' }
   styles[`row-vert-top`] = { alignItems: 'flex-start' }
   styles[`row-vert-bottom`] = { alignItems: 'flex-end' }
@@ -68,6 +78,9 @@ export default function (normalizedConfig: any) {
   styles[`pattern`] = {
     display: 'grid',
     gridTemplateRows: 'auto',
+  }
+  styles[`dense`] = {
+    gridAutoFlow: 'dense'
   }
   styles[`pattern-vert-center`] = { alignItems: 'center' }
   styles[`pattern-vert-top`] = { alignItems: 'start' }

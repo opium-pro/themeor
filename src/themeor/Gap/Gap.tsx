@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import cn from '../utils/class-names'
-import * as console from '../utils/console'
+// import * as console from '../utils/console'
 import { GapComponent, GapProps, GAP_NAME } from './types'
 import { getConfig } from '../utils/get-config'
 import { useTheme } from '../context'
@@ -24,49 +24,55 @@ const Gap = ({
   style = {},
   ...restProps
 }: GapProps, ref: any) => {
-  const [isinline, setinline] = React.useState(false)
-  const { gapConfig } = getConfig(useTheme().normalizedConfig)
+  const { gapConfig, customGapValue } = getConfig(useTheme().normalizedConfig)
   const css = useCss()
+  const gapNode: any = useRef()
 
   const newStyle = { ...style }
 
-  const useinline = !children && (isinline || inline)
   const defaultGap = 'default'
   const notSpecified = !right && !left && !top && !bottom && !vert && !hor
-  const sizeIsTop = !children && !useinline && notSpecified
+  detectInline()
+  const emptyRow = !children && notSpecified && inline
+  const emptyCol = !children && notSpecified && !inline
 
-  if (size && !sizeIsTop && !gapConfig({size})) { newStyle.padding = size || undefined }
-  if (size && sizeIsTop && !gapConfig({size})) { newStyle.paddingTop = size || undefined }
-  if (vert && !gapConfig({size: vert})) {
-    newStyle.paddingTop = vert || undefined
-    newStyle.paddingBottom = vert || undefined
+  if (size && !!children && customGapValue({ size })) { newStyle.padding = size }
+  if (size && emptyRow && customGapValue({ size })) { newStyle.paddingLeft = size }
+  if (size && emptyCol && customGapValue({ size })) { newStyle.paddingTop = size }
+  if (vert && customGapValue({ size: vert })) {
+    newStyle.paddingTop = vert
+    newStyle.paddingBottom = vert
   }
-  if (hor && !gapConfig({size: hor})) {
-    newStyle.paddingRight = hor || undefined
-    newStyle.paddingLeft = hor || undefined
+  if (hor && customGapValue({ size: hor })) {
+    newStyle.paddingRight = hor
+    newStyle.paddingLeft = hor
   }
-  if (top && !gapConfig({size: top})) { newStyle.paddingTop = top || undefined }
-  if (right && !gapConfig({size: right})) { newStyle.paddingRight = right || undefined }
-  if (bottom && !gapConfig({size: bottom})) { newStyle.paddingBottom = bottom || undefined }
-  if (left && !gapConfig({size: left})) { newStyle.paddingLeft = left || undefined }
+  if (top && customGapValue({ size: top })) { newStyle.paddingTop = top }
+  if (right && customGapValue({ size: right })) { newStyle.paddingRight = right }
+  if (bottom && customGapValue({ size: bottom })) { newStyle.paddingBottom = bottom }
+  if (left && customGapValue({ size: left })) { newStyle.paddingLeft = left }
 
   // If is inside of flexbox row, make inline automatically
   function handleRef(node: any) {
     if (!node) { return }
     typeof forwardRef === 'function' && forwardRef(node)
     typeof ref === 'function' && ref(node)
+    gapNode.current = node
+  }
 
-    if (inline === true) {
-      setinline(true)
-    } else if (inline === false) {
-      setinline(false)
+  function detectInline() {
+    if (!gapNode.current) {
+      return
     }
 
-    const parentStyles = getComputedStyle(node.parentElement)
-    if (parentStyles.flexDirection === 'row' && parentStyles.display === 'flex') {
-      setinline(true)
-    } else {
-      setinline(false)
+    const parentStyles = getComputedStyle(gapNode.current.parentElement)
+    if (parentStyles.display === 'flex' && notSpecified) {
+      if (parentStyles.flexDirection.includes('row') && !inline) {
+        inline = true
+      }
+      if (!parentStyles.flexDirection.includes('row') && inline) {
+        inline = false
+      }
     }
   }
 
@@ -76,21 +82,22 @@ const Gap = ({
       Gap
     )
   }
+  
 
   const componentProps = {
     ...restProps,
     className: cn(
       css[`gap`],
-      useinline && notSpecified && css[`left-${size || defaultGap}`],
-      sizeIsTop && css[`top-${size || defaultGap}`],
+      emptyRow && css[`left-${size || defaultGap}`],
+      emptyCol && css[`top-${size || defaultGap}`],
       inline && css[`inline`],
-      gapConfig({size: top}) && css[`top-${top}`],
-      gapConfig({size: right}) && css[`right-${right}`],
-      gapConfig({size: bottom}) && css[`bottom-${bottom}`],
-      gapConfig({size: left}) && css[`left-${left}`],
-      !sizeIsTop && gapConfig({size: size}) && !!children && css[`size-${size}`],
-      gapConfig({size: vert}) && css[`vert-${vert}`],
-      gapConfig({size: hor}) && css[`hor-${hor}`],
+      gapConfig({ size: top }) && css[`top-${top}`],
+      gapConfig({ size: right }) && css[`right-${right}`],
+      gapConfig({ size: bottom }) && css[`bottom-${bottom}`],
+      gapConfig({ size: left }) && css[`left-${left}`],
+      size && gapConfig({ size: size }) && !!children && css[`size-${size}`],
+      gapConfig({ size: vert }) && css[`vert-${vert}`],
+      gapConfig({ size: hor }) && css[`hor-${hor}`],
       !size && !!children && notSpecified && css[`size-${defaultGap}`],
       className
     ),

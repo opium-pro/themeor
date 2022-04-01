@@ -84,16 +84,16 @@ export function Reaction({
     }
   }
 
-  const passState = {
+  const passState: ReactionContext = {
     cursor,
-    className: {
+    classNames: {
       ignoreEvents: css[`ignore`],
       cursor: reactionConfig({cursor}) && css[`cursor-${cursor}`],
     },
     ...state,
   }
 
-  const passProps: any = {
+  const passProps: ReactionProps = {
     className: cn(
       css[`reaction`],
       reactionConfig({cursor}) && css[`cursor-${cursor}`],
