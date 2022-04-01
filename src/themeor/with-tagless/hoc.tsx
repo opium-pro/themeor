@@ -1,5 +1,5 @@
 import React from 'react'
-import * as console from '../utils/console'
+// import * as console from '../utils/console'
 import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Animate } from '../index'
 import { TaglessProps, TaglessComponent } from './types'
 import cn from '../utils/class-names'
@@ -90,15 +90,16 @@ export const withTagless = (Component: any): TaglessComponent => {
     }
 
     const passProps = {
-      ...parentProps, children: ({ className, children, style, ...rest }: any) =>
-        React.cloneElement(onlyChild, {
+      ...parentProps, children: ({ className, children, style, ...rest }: any) => {
+        return React.cloneElement(onlyChild, {
           ...rest,
           ...mergedProps,
           className: cn(className, mergedProps.className),
           style: { ...style, ...mergedProps.style },
+          // children: (parentProps as any).children,
         })
+      }
     }
-
 
     if (Component.render) {
       return Component.render(passProps)

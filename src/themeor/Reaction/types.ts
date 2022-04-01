@@ -16,8 +16,9 @@ export type ReactionConfigProps = {
 
 export type ReactionProps = CommonProps & ReactionConfigProps & {
   track?: Array<TrackType> | TrackType | false,
-  smooth?: boolean,
+  smooth?: boolean
   disabled?: boolean
+  button?: boolean
   children?: ReactNode | ((props: CommonProps, context: ReactionContext) => ReactNode)
 }
 
@@ -26,4 +27,5 @@ export type ReactionState = {
   active: boolean
   focus: boolean
   hoverOrFocus: boolean
+  restProps: any
 }

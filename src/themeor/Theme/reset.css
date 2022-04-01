@@ -82,6 +82,8 @@ summary,
 time,
 mark,
 audio,
+button,
+input,
 video {
 	margin: 0;
 	padding: 0;
@@ -89,7 +91,12 @@ video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	text-decoration: initial;
+	text-decoration: inherit;
+	background: none;
+	box-sizing: inherit;
+	outline: none;
+	text-align: inherit;
+	color: inherit;
 }
 
 article,
@@ -136,8 +143,7 @@ q:after {
 
 button,
 input {
-	width: stretch;
-	width: -moz-available;
+	width: unset;
 }
 
 button::-moz-focus-inner {
@@ -148,13 +154,6 @@ button::-moz-focus-inner {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-}
-
-button {
-	background: initial;
-	border: initial;
-	box-sizing: initial;
-	outline: initial;
 }
 
 input[type="search"]::-ms-clear,

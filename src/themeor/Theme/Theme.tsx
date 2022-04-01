@@ -12,13 +12,13 @@ import setIconStyle from '../Icon/styles'
 import setReactionStyle from '../Reaction/styles'
 import setFitStyle from '../Fit/styles'
 import { normalizeConfig } from '../utils/normalize-config'
+import './reset'
 
 
 export const Theme: FC<ThemeProps> = ({
   children,
   icons,
   darkConfig,
-  reset,
   config = {},
 }) => {
   const [id] = useState(newId())
@@ -47,9 +47,9 @@ export const Theme: FC<ThemeProps> = ({
     changeColorMode()
   }, [config, darkConfig])
 
-  useEffect(() => {
-    reset && import('./reset')
-  }, [reset])
+  // useEffect(() => {
+  //   reset && import('./reset')
+  // }, [reset])
 
   // Update
   useEffect(() => {

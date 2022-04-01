@@ -66,7 +66,7 @@ const Gap = ({
     }
 
     const parentStyles = getComputedStyle(gapNode.current.parentElement)
-    if (parentStyles.display === 'flex' && notSpecified) {
+    if (parentStyles.display === 'flex' && notSpecified && !children) {
       if (parentStyles.flexDirection.includes('row') && !inline) {
         inline = true
       }

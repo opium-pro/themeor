@@ -2,7 +2,7 @@ import React, { FC, CSSProperties, AriaAttributes, ReactNode, DOMAttributes } fr
 
 type Booleanish = boolean | 'true' | 'false'
 
-export type CommonTagProps = AriaAttributes & DOMAttributes<{}> & {
+export type CommonTagProps = AriaAttributes & DOMAttributes<any> & {
   className?: string
   draggable?: Booleanish
   id?: string

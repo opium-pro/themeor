@@ -25,6 +25,8 @@ export function Reaction({
   onMouseLeave,
   onMouseDown,
   onMouseUp,
+  onClick,
+  button,
   style = {},
   ...restProps
 }: ReactionProps) {
@@ -33,7 +35,8 @@ export function Reaction({
     active: false,
     focus: false,
     hoverOrFocus: false,
-  })
+    restProps,
+  } as ReactionState)
   const { reactionConfig, customReactionValue } = getConfig(useTheme().normalizedConfig)
   const css = useCss()
   const newStyle = style
@@ -84,6 +87,11 @@ export function Reaction({
     }
   }
 
+  function handleClick(event: React.MouseEvent<HTMLElement>) {
+    setState({ ...state, focus: false, hoverOrFocus: state.hover } as ReactionState)
+    onClick?.(event)
+  }
+
   const passState: ReactionContext = {
     cursor,
     classNames: {
@@ -119,6 +127,12 @@ export function Reaction({
     passProps.onBlur = handleBlur
   }
 
+  if (button) {
+    passProps.onClick = handleClick
+  } else {
+    passProps.onClick = onClick
+  }
+
   return (
     <ReactionContext.Provider value={{
       ...passState,
@@ -126,7 +140,7 @@ export function Reaction({
       disabled,
     }}>
       {(typeof children === 'function') ? (
-        children(disabled ? {} : passProps, passState)
+        (children as any)(disabled ? {} : passProps, passState)
       ) : (children)}
     </ReactionContext.Provider>
   )
