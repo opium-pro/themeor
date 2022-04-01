@@ -25,7 +25,6 @@ export function Reaction({
   onMouseLeave,
   onMouseDown,
   onMouseUp,
-  onClick,
   button,
   style = {},
   ...restProps
@@ -55,7 +54,7 @@ export function Reaction({
   function handleMouseLeave(event: React.MouseEvent<HTMLElement>) {
     onMouseLeave && onMouseLeave(event)
     if (state.hover || state.hoverOrFocus) {
-      setState({ ...state, hover: false, active: false, hoverOrFocus: state.focus } as ReactionState)
+      setState({ ...state, hover: false, active: false, hoverOrFocus: false } as ReactionState)
     }
   }
 
@@ -85,11 +84,6 @@ export function Reaction({
     if (state.focus || state.hoverOrFocus) {
       setState({ ...state, focus: false, hoverOrFocus: state.hover } as ReactionState)
     }
-  }
-
-  function handleClick(event: React.MouseEvent<HTMLElement>) {
-    setState({ ...state, focus: false, hoverOrFocus: state.hover } as ReactionState)
-    onClick?.(event)
   }
 
   const passState: ReactionContext = {
@@ -125,12 +119,6 @@ export function Reaction({
   if (track && track.includes('focus')) {
     passProps.onFocus = handleFocus
     passProps.onBlur = handleBlur
-  }
-
-  if (button) {
-    passProps.onClick = handleClick
-  } else {
-    passProps.onClick = onClick
   }
 
   return (

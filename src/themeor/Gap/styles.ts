@@ -2,7 +2,6 @@ import { createStyleSheet, getClasses } from '../utils/styles'
 import { Classes, Styles } from 'jss'
 import { GAP_NAME } from './types'
 
-
 export const useCss: () => Classes = () => getClasses(GAP_NAME)
 
 
@@ -14,7 +13,6 @@ export default function (normalizedConfig: any) {
   const styles: Styles = {}
 
   styles[`gap`] = { boxSizing: 'border-box' }
-
   styles[`inline`] = { display: 'inline-block' }
 
   for (const key in size) {
