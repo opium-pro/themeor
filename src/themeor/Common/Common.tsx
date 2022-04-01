@@ -1,12 +1,8 @@
 import React from 'react'
 import { CommonComponent } from './types'
+import { config } from '../config'
 
-let CommonTag: any = 'div'
-
-
-export function setCommonTag(tag: any) {
-  CommonTag = tag
-}
+const { CommonTag } = config
 
 
 export const Common: CommonComponent = ({

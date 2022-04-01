@@ -1,6 +1,6 @@
 import { createStyleSheet, getClasses } from '../utils/styles'
 import { Classes, Styles } from 'jss'
-import {BOX_NAME} from './types'
+import { BOX_NAME } from './types'
 
 export const useCss: () => Classes = () => getClasses(BOX_NAME)
 
@@ -11,7 +11,6 @@ export default function (normalizedConfig: any) {
       fill,
       fillFancy,
       fillInverse,
-      fillStrong,
       radius,
       shadow,
       glow,

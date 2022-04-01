@@ -1,8 +1,8 @@
 import { CommonProps } from '../Common'
 import { TaglessComponent } from '../with-tagless'
-import { obfuscate, hash } from '../config'
+import { componentName } from '../utils/component-name'
 
-export const BOX_NAME = obfuscate ? hash('Box') : 'Box'
+export const BOX_NAME = componentName('Box')
 
 export type BoxConfigProps = {
   fill?: string | false,

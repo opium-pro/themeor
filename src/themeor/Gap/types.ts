@@ -1,8 +1,8 @@
 import { CommonProps } from "../Common"
 import { TaglessComponent } from "../with-tagless"
-import { obfuscate, hash } from "../config"
+import { componentName } from '../utils/component-name'
 
-export const GAP_NAME = obfuscate ? hash('Gap') : 'Gap'
+export const GAP_NAME = componentName('Gap')
 
 export type GapConfigProps = {
   size?: string | 'none' | false,

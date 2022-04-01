@@ -1,17 +1,17 @@
 import jss, { Classes, Styles, StyleSheet } from 'jss'
 import preset from 'jss-preset-default'
-import { isNative, obfuscate, hash } from '../config'
+import { config } from '../config'
 
 
 const createGenerateId = () => {
   return (rule: any, { options }: any) => {
     const unicName = `${options.classNamePrefix || ''}__${rule.key}`
-    const hashed = hash(unicName)
+    const hashed = config.hash(unicName)
 
-    if (isNative) {
+    if (config.isNative) {
       return `${rule.key}`
     }
-    if (obfuscate) {
+    if (config.obfuscate) {
       return `${hashed}`
     }
     return `${unicName}__${hashed}`

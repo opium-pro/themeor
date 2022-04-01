@@ -1,8 +1,8 @@
 import { CommonProps } from "../Common"
 import { TaglessComponent } from "../with-tagless"
-import { obfuscate, hash } from "../config"
+import { componentName } from '../utils/component-name'
 
-export const FIT_NAME = obfuscate ? hash('Fit') : 'Fit'
+export const FIT_NAME = componentName('Fit')
 
 export type FitConfigProps = {
   offset?: string | false,

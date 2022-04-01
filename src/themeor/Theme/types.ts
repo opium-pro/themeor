@@ -1,7 +1,7 @@
 import { ThemeConfig, ThemeIcons } from '../types'
-import { obfuscate, hash } from '../config'
+import { componentName } from '../utils/component-name'
 
-export const THEME_NAME = obfuscate ? hash('Theme') : 'Theme'
+export const THEME_NAME = componentName('Theme')
 
 export type ThemeProps = {
   config?: ThemeConfig

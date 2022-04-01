@@ -3,7 +3,7 @@ import * as console from '../utils/console'
 import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Animate } from '../index'
 import { TaglessProps, TaglessComponent } from './types'
 import cn from '../utils/class-names'
-import {obfuscate, hash} from '../config'
+import { config } from '../config'
 
 
 export const withTagless = (Component: any): TaglessComponent => {
@@ -109,9 +109,9 @@ export const withTagless = (Component: any): TaglessComponent => {
     }
   }
 
-  Tagless.displayName = obfuscate
-    ? hash('SYKA_BLYAD', true)
-    :`${Component.displayName || Component.name || Component.render?.displayName || Component.render?.name}.TryTagless`
+  Tagless.displayName = config.obfuscate
+    ? config.hash('Tagles', true)
+    : `${Component.displayName || Component.name || Component.render?.displayName || Component.render?.name}.TryTagless`
 
   const TaglessComponent: TaglessComponent = Component
   TaglessComponent.TryTagless = Tagless

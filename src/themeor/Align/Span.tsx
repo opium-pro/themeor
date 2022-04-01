@@ -2,7 +2,7 @@ import React from 'react'
 import Align from './Align'
 import { AlignSpanComponent, AlignSpanProps } from './types'
 import { withTagless } from '../with-tagless'
-import { obfuscate, hash } from '../config'
+import { componentName } from '../utils/component-name'
 
 
 const Span = ({ col = 1, style, ...restProps }: AlignSpanProps, ref: any) => {
@@ -21,5 +21,5 @@ const Span = ({ col = 1, style, ...restProps }: AlignSpanProps, ref: any) => {
 }
 
 
-Span.displayName = obfuscate ? hash('NOGA_KROKODILA') : 'Align.Span'
+Span.displayName = componentName('Align.Span')
 export default withTagless(React.forwardRef(Span)) as AlignSpanComponent

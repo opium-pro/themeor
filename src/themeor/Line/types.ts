@@ -1,8 +1,8 @@
 import { CommonProps } from "../Common"
 import { TaglessComponent } from "../with-tagless"
-import { obfuscate, hash } from "../config"
+import { componentName } from '../utils/component-name'
 
-export const LINE_NAME = obfuscate ? hash('Line') : 'Line'
+export const LINE_NAME = componentName('Line')
 
 export type LineConfigProps = {
   fill?: string | false

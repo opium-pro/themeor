@@ -1,8 +1,8 @@
 import {FC} from 'react'
-import { obfuscate, hash } from '../config'
+import { componentName } from '../utils/component-name'
 import { CommonProps } from '../Common'
 
-export const ICON_NAME = obfuscate ? hash('Icon') : 'Icon'
+export const ICON_NAME = componentName('Icon')
 
 export type IconConfigProps = {
   fill?: string | false

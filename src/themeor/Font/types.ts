@@ -1,8 +1,8 @@
 import { CommonProps } from '../Common'
 import { TaglessComponent } from "../with-tagless"
-import { obfuscate, hash } from '../config'
+import { componentName } from '../utils/component-name'
 
-export const FONT_NAME = obfuscate ? hash('Font') : 'Font'
+export const FONT_NAME = componentName('Font')
 
 export type FontConfigProps = {
   fill?: string | false,

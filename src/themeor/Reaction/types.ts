@@ -1,10 +1,10 @@
-import { obfuscate, hash } from "../config"
+import { componentName } from '../utils/component-name'
 import { CommonProps } from '../Common'
 import { ReactNode } from 'react'
 import { ReactionContext } from './context'
 
 
-export const REACTION_NAME = obfuscate ? hash('Reaction') : 'Reaction'
+export const REACTION_NAME = componentName('Reaction')
 export type TrackType = 'active' | 'focus' | 'hover'
 
 export type ReactionConfigProps = {
