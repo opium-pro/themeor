@@ -55,6 +55,7 @@ const Align = ({
       css[mode],
       reverse && css[`reverse`],
       dense && css[`dense`],
+      stack && css[`stack`],
       vert && css[`${mode}-vert-${vert}`],
       hor && css[`${mode}-hor-${hor}`],
       !pattern && gapConfig({ size: gapVert }) && css[`vert-gap-${gapVert}`],
