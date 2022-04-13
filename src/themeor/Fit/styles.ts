@@ -45,6 +45,10 @@ export default function (normalizedConfig: any) {
     display: 'block',
   }
 
+  styles[`contents`] = {
+    display: 'contents',
+  }
+
   styles[`scroll`] = {
     overflow: 'auto',
   }

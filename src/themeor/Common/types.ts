@@ -58,7 +58,7 @@ export type CommonTagProps = AriaAttributes & DOMAttributes<any> & {
   muted?: boolean
 }
 
-export type CommonProps = CommonTagProps & {
+export type CommonProps = Omit<CommonTagProps, 'onChange'> & {
   stretch?: boolean
   width?: string | false | number
   height?: string | false | number
@@ -77,6 +77,7 @@ export type CommonProps = CommonTagProps & {
   cursor?: string | false
   pointerEvents?: string | false
   delay?: string | false
+  onChange?: any
 }
 
 

@@ -32,6 +32,7 @@ const Fit = ({
   children,
   sticky,
   fixed,
+  contents,
   absolute,
   ...restProps
 }: FitProps, ref: any) => {
@@ -61,6 +62,7 @@ const Fit = ({
       inline && css[`inline`],
       stick && css[`stick-${stick}`],
       cover && css[`cover-${cover}`],
+      contents && css[`contents`],
       stick && !cover && css[`stick-parent`],
       fitConfig({ zIndex }) && css[`z-index-${zIndex}`],
       fitConfig({ offset }) && css[`offset-${offset}`],

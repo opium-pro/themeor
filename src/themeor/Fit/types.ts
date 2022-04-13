@@ -29,6 +29,7 @@ export type FitProps = CommonProps & FitConfigProps & {
   sticky?: boolean,
   fixed?: boolean,
   absolute?: boolean,
+  contents?: boolean,
 }
 
 export type FitComponent = TaglessComponent<FitProps>
