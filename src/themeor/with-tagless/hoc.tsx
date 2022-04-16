@@ -66,7 +66,7 @@ export const withTagless = (Component: any): TaglessComponent => {
     }
 
     const OnlyChildComponent = onlyChild.type
-    const mergingComponents = [Theme, Box, Font, Line, Icon, Fit, Align, Gap, Animate]
+    const mergingComponents = [Theme, Box, Font, Line, Icon, Fit, Align, Gap, Animate, Align.Span]
     let child_is_themeor_component = mergingComponents.includes(OnlyChildComponent)
       || !!mergingComponents.find((mergingComponent: any) => mergingComponent.TryTagless === OnlyChildComponent)
 
