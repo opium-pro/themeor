@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import cn from '../utils/class-names'
 import { ReactionProps, ReactionState, REACTION_NAME } from './types'
 import { ReactionContext } from './context'
@@ -42,7 +42,13 @@ export function Reaction({
 
   if (property) { newStyle.transitionProperty = property }
   if (timingFunction) { newStyle.transitionTimingFunction = timingFunction }
-  if (customReactionValue({duration})) { newStyle.transitionDuration = duration as any }
+  if (customReactionValue({ duration })) { newStyle.transitionDuration = duration as any }
+
+  useEffect(() => {
+    if (disabled) {
+      setState(state => ({ ...state, hover: false, hoverOrFocus: false, focus: false, active: false }))
+    }
+  }, [disabled])
 
   function handleMouseMove(event: React.MouseEvent<HTMLElement>) {
     onMouseMove && onMouseMove(event)
@@ -90,7 +96,7 @@ export function Reaction({
     cursor,
     classNames: {
       ignoreEvents: css[`ignore`],
-      cursor: reactionConfig({cursor}) && css[`cursor-${cursor}`],
+      cursor: reactionConfig({ cursor }) && css[`cursor-${cursor}`],
     },
     ...state,
   }
@@ -98,8 +104,8 @@ export function Reaction({
   const passProps: ReactionProps = {
     className: cn(
       css[`reaction`],
-      reactionConfig({cursor}) && css[`cursor-${cursor}`],
-      reactionConfig({duration}) && css[`duration-${duration}`],
+      reactionConfig({ cursor }) && css[`cursor-${cursor}`],
+      reactionConfig({ duration }) && css[`duration-${duration}`],
       className,
     ),
     style: newStyle,
