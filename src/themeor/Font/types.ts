@@ -23,6 +23,7 @@ export type FontProps = CommonProps & FontConfigProps & {
   inline?: boolean,
   noselect?: boolean,
   nowrap?: boolean,
+  prewrap?: boolean,
   wrap?: boolean,
 }
 

@@ -28,6 +28,7 @@ const Font = ({
   noselect,
   lineHeight,
   letterSpacing,
+  prewrap,
   children,
   ...restProps
 }: FontProps, ref: any) => {
@@ -66,6 +67,7 @@ const Font = ({
       fontConfig({ family }) && css[`family-${family}`],
       align && css[`align-${align}`],
       nowrap && css['nowrap'],
+      prewrap && css['prewrap'],
       wrap && css['wrap'],
       className,
     ),

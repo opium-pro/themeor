@@ -43,6 +43,7 @@ export default function (normalizedConfig: any) {
   styles[`noselect`] = { userSelect: 'none' }
   styles[`nowrap`] = { whiteSpace: 'nowrap' }
   styles[`wrap`] = { wordBreak: 'break-word' }
+  styles[`prewrap`] = { whiteSpace: 'pre-wrap' }
   styles[`italic`] = { fontStyle: 'italic' }
   styles[`noitalic`] = { fontStyle: 'normal' }
   styles[`uppercase`] = { textTransform: 'uppercase' }

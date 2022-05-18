@@ -60,7 +60,7 @@ export function Reaction({
   function handleMouseLeave(event: React.MouseEvent<HTMLElement>) {
     onMouseLeave && onMouseLeave(event)
     if (state.hover || state.hoverOrFocus) {
-      setState({ ...state, hover: false, active: false, hoverOrFocus: false } as ReactionState)
+      setState({ ...state, hover: false, active: false, hoverOrFocus: state.focus } as ReactionState)
     }
   }
 
