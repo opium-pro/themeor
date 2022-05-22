@@ -86,7 +86,7 @@ export function Reaction({
   }
 
   function handleBlur(event: React.FocusEvent<HTMLElement>) {
-    onBlur && onBlur(event)
+    onBlur?.(event)
     if (state.focus || state.hoverOrFocus) {
       setState({ ...state, focus: false, hoverOrFocus: state.hover } as ReactionState)
     }
