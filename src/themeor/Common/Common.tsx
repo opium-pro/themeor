@@ -2,8 +2,6 @@ import React from 'react'
 import { CommonComponent } from './types'
 import { config } from '../config'
 
-const { CommonTag } = config
-
 
 export const Common: CommonComponent = ({
   stretch,
@@ -29,6 +27,7 @@ export const Common: CommonComponent = ({
   ...restProps
 }, name?: string) => {
   const newStyle = { ...style }
+  const { CommonTag } = config
 
   if (stretch) { newStyle.flexGrow = 1 }
 

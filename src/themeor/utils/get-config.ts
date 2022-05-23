@@ -19,7 +19,7 @@ function selectConfig (
       result.push(wrongType ? false : !isDefined)
     }
   }
-  if (length <= 1) {
+  if (result.length <= 1) {
     return result[0]
   }
   return result

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { AnimateComponent, AnimateProps, AnimateCSS, ANIMATE_NAME } from './types'
 import cn from '../utils/class-names'
-import css from './animate.module.css'
 import cssVar from '../utils/css-variable'
 import newId from '../utils/new-id'
 import { Common } from '../Common'
 import { withTagless } from '../with-tagless'
+import { config } from '../config'
+import { useCss } from './styles'
 
 /*
   This is beta-component. Works only on web. Based on animate.css
@@ -25,6 +26,11 @@ const Animate = (props: AnimateProps, ref: any) => {
     mounted: initialMounted = true,
     ...restProps
   } = props
+  const css = useCss()
+
+  if (config.isNative) {
+    return null
+  }
 
   const [animationName, setAnimationName]: any = useState()
   const [isRemoving, setIsRemoving]: any = useState()
@@ -32,7 +38,6 @@ const Animate = (props: AnimateProps, ref: any) => {
   const [mounted, setMounted]: any = useState(initialMounted)
 
   const timeTillUnmount = duration * repeat + delay
-  
 
   function trigger(name: AnimateCSS) {
     setAnimationName(name)
@@ -62,8 +67,8 @@ const Animate = (props: AnimateProps, ref: any) => {
     onMouseEnter: (() => onHover && setAnimationName(onHover)),
     onClick: (() => onClick && setAnimationName(onClick)),
     className: cn(
-      css['animated'],
-      css[animationName],
+      'animated',
+      animationName,
     ),
   }
 

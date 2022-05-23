@@ -69,8 +69,8 @@ export type CommonProps = Omit<CommonTagProps, 'onChange'> & {
   forwardRef?: React.Ref<any>
   getNode?: (node?: any) => void
   transition?: string | boolean
-  opacity?: string | false
-  zoom?: string | false
+  opacity?: string | false | number
+  zoom?: string | false | number
   rotate?: string | false
   hidden?: boolean
   transform?: string | false

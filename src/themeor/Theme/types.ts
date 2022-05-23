@@ -7,4 +7,5 @@ export type ThemeProps = {
   config?: ThemeConfig
   darkConfig?: ThemeConfig | false
   icons?: ThemeIcons
+  reset?: boolean
 }

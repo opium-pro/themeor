@@ -19,9 +19,9 @@ export function normalizeConfig(config: any): ThemeConfig {
 
   newConfig.box = {
     radius: {
-      default: '0',
-      none: '0',
-      max: '1000px',
+      default: 0,
+      none: 0,
+      max: 1000,
       ...makeFlat(config.box?.radius),
     },
     shadow: {
@@ -127,7 +127,7 @@ export function normalizeConfig(config: any): ThemeConfig {
       ...makeFlat(config.line?.fillFancy),
     },
     weight: {
-      default: '1px',
+      default: 1,
       none: '0',
       ...makeFlat(config.line?.weight),
     },
@@ -136,8 +136,8 @@ export function normalizeConfig(config: any): ThemeConfig {
 
   newConfig.gap = {
     size: {
-      default: '16px',
-      none: '0',
+      default: 16,
+      none: 0,
       ...makeFlat(config.gap?.size || config.gap),
     },
   }

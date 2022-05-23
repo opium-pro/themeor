@@ -24,16 +24,16 @@ export default function (normalizedConfig: any) {
   const styles: Styles = {}
 
   styles[`font`] = {
-    color: 'inherit',
-    fontWeight: 'inherit',
-    fontSize: 'inherit',
-    lineHeight: 'inherit',
-    textAlign: 'inherit',
-    fontStyle: 'inherit',
-    textDecoration: 'inherit',
-    letterSpacing: 'inherit',
-    whiteSpace: 'inherit',
-    userSelect: 'inherit',
+    // color: 'inherit',
+    // fontWeight: 'inherit',
+    // fontSize: 'inherit',
+    // lineHeight: 'inherit',
+    // textAlign: 'inherit',
+    // fontStyle: 'inherit',
+    // textDecoration: 'inherit',
+    // letterSpacing: 'inherit',
+    // whiteSpace: 'inherit',
+    // userSelect: 'inherit',
   }
 
   styles[`inline`] = { display: 'inline-block' }

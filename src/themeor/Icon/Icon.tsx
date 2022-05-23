@@ -65,7 +65,7 @@ const Icon = ({
     `)
   }
 
-  if (children) {
+  if (typeof children !== 'function') {
     console.warn(
       'Prop "children" is prohibited, it will be ignored',
       Icon
@@ -108,7 +108,7 @@ const Icon = ({
     ),
   }
 
-  return (
+  return typeof children === 'function' ? children(FinalIcon, componentProps) : (
     <FinalIcon {...componentProps} />
   )
 }

@@ -5,6 +5,7 @@ import { ReactionContext } from './context'
 import { useCss } from './styles'
 import { getConfig } from '../utils/get-config'
 import { useTheme } from '../context'
+import { config } from '../config'
 
 
 Reaction.displayName = REACTION_NAME
@@ -41,7 +42,7 @@ export function Reaction({
   const newStyle = style
 
   if (property) { newStyle.transitionProperty = property }
-  if (timingFunction) { newStyle.transitionTimingFunction = timingFunction }
+  if (timingFunction && !config.isNative) { newStyle.transitionTimingFunction = timingFunction }
   if (customReactionValue({ duration })) { newStyle.transitionDuration = duration as any }
 
   useEffect(() => {

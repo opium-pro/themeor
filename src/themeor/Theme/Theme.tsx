@@ -10,9 +10,10 @@ import setAlignStyle from '../Align/styles'
 import setLineStyle from '../Line/styles'
 import setIconStyle from '../Icon/styles'
 import setReactionStyle from '../Reaction/styles'
+import setAnimateStyle from '../Animate/styles'
 import setFitStyle from '../Fit/styles'
 import { normalizeConfig } from '../utils/normalize-config'
-import './reset'
+import { config as globalConfig } from '../config'
 
 
 export const Theme: FC<ThemeProps> = ({
@@ -20,6 +21,7 @@ export const Theme: FC<ThemeProps> = ({
   icons,
   darkConfig,
   config = {},
+  reset,
 }) => {
   const [id] = useState(newId())
   const [currentConfig, setCurrentConfig] = useState(config)
@@ -35,11 +37,11 @@ export const Theme: FC<ThemeProps> = ({
 
   // Track dark mode
   useEffect(() => {
-    const colorScheme = window?.matchMedia('(prefers-color-scheme: dark)')
-    colorScheme.addEventListener && colorScheme.addEventListener('change', changeColorMode)
+    const colorScheme = window?.matchMedia?.('(prefers-color-scheme: dark)')
+    colorScheme?.addEventListener && colorScheme.addEventListener('change', changeColorMode)
     return () => {
-      const colorScheme = window?.matchMedia('(prefers-color-scheme: dark)')
-      colorScheme.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
+      const colorScheme = window?.matchMedia?.('(prefers-color-scheme: dark)')
+      colorScheme?.removeEventListener && colorScheme.removeEventListener('change', changeColorMode)
     }
   }, [currentConfig])
 
@@ -47,9 +49,9 @@ export const Theme: FC<ThemeProps> = ({
     changeColorMode()
   }, [config, darkConfig])
 
-  // useEffect(() => {
-  //   reset && import('./reset')
-  // }, [reset])
+  useEffect(() => {
+    reset && !globalConfig.isNative && require('./reset')
+  }, [reset])
 
   // Update
   useEffect(() => {
@@ -62,6 +64,7 @@ export const Theme: FC<ThemeProps> = ({
     setReactionStyle(normalizedConfig)
     setIconStyle(normalizedConfig)
     setAlignStyle(normalizedConfig)
+    setAnimateStyle(normalizedConfig)
     setIsReady(true)
   }, [currentConfig])
 

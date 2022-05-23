@@ -42,7 +42,7 @@
   "scripts": {
     "start": "react-scripts start",
     "watch": "nodemon -e ts,tsx,css -w ./src -x npm run build",
-    "watch:dist": "npm run clear && nodemon -e ts,tsx,css -w ./src -x npm run dist",
+    "watch:mobile": "npm run clear && nodemon -e ts,tsx,css -w ./src -x npm run dist",
     "clear": "rm -fr ./dist",
     "build:docs": "react-scripts build",
     "build": "tsc -p tsconfig.dist.json && npm run css",

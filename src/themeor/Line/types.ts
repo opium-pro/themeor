@@ -6,16 +6,16 @@ export const LINE_NAME = componentName('Line')
 
 export type LineConfigProps = {
   fill?: string | false
-  weight?: string | 'none' | false
+  weight?: string | 'none' | false | number
 }
 
 export type LineProps = CommonProps & LineConfigProps & {
   inverse?: boolean
   fancy?: boolean
-  top?: string | 'none' | false
-  right?: string | 'none' | false
-  bottom?: string | 'none' | false
-  left?: string | 'none' | false
+  top?: string | 'none' | false | number
+  right?: string | 'none' | false | number
+  bottom?: string | 'none' | false | number
+  left?: string | 'none' | false | number
   vert?: boolean
 }
 

@@ -6,7 +6,7 @@ export const ICON_NAME = componentName('Icon')
 
 export type IconConfigProps = {
   fill?: string | false
-  size?: string | false
+  size?: string | false | number
 }
 
 export type IconProps = CommonProps & IconConfigProps & {

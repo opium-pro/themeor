@@ -6,10 +6,10 @@ export const FONT_NAME = componentName('Font')
 
 export type FontConfigProps = {
   fill?: string | false,
-  size?: string | false,
+  size?: string | false | number,
   weight?: '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | false,
-  lineHeight?: string | false,
-  letterSpacing?: string | false,
+  lineHeight?: string | false | number,
+  letterSpacing?: string | false | number,
   family?: string | false,
   align?: 'left' | 'right' | 'center' | false,
 }

@@ -30,7 +30,10 @@ const Gap = ({
   const isDefined = !!(vert || hor || right || left || top || bottom)
 
   if (size && customGapValue({ size })) {
-    newStyle.padding = children ? size : `${size} 0 0 ${size}`
+    newStyle.paddingTop = size
+    newStyle.paddingRight = children ? size : 0
+    newStyle.paddingBottom = children ? size : 0
+    newStyle.paddingLeft = size
   }
   if (vert && customGapValue({ size: vert })) {
     newStyle.paddingTop = vert

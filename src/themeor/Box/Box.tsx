@@ -59,7 +59,12 @@ const Box = (props: BoxProps, ref: any) => {
       newStyle.backgroundColor = fill
     }
   }
-  if (customBoxValue({ radius })) { newStyle.borderRadius = radius || undefined }
+  if (customBoxValue({ radius })) {
+    newStyle.borderTopLeftRadius = radius || undefined
+    newStyle.borderTopRightRadius = radius || undefined
+    newStyle.borderBottomLeftRadius = radius || undefined
+    newStyle.borderBottomRightRadius = radius || undefined
+  }
   if (customBoxValue({ radiusTop })) {
     newStyle.borderTopLeftRadius = radiusTop || undefined
     newStyle.borderTopRightRadius = radiusTop || undefined
@@ -81,10 +86,10 @@ const Box = (props: BoxProps, ref: any) => {
   if (customBoxValue({ radius: radiusBottomLeft })) { newStyle.borderBottomLeftRadius = radiusBottomLeft || undefined }
   if (customBoxValue({ radius: radiusBottomRight })) { newStyle.borderBottomRightRadius = radiusBottomRight || undefined }
 
-  if (customBoxValue({ shadow })) { newStyle.boxShadow = shadow || undefined }
+  if (customBoxValue({ shadow })) { newStyle.boxShadow = shadow || undefined as any }
   if (customBoxValue({ shadowInner })) { newStyle.boxShadow = 'inset ' + shadowInner }
   if (customBoxValue({ blur })) { newStyle.backdropFilter = `blur(${blur})` }
-  if (customBoxValue({ glow })) { newStyle.boxShadow = glow || undefined }
+  if (customBoxValue({ glow })) { newStyle.boxShadow = glow || undefined as any }
 
   // Setting classNames
   const componentProps = {
@@ -135,7 +140,8 @@ const Box = (props: BoxProps, ref: any) => {
     )
   }
 
-  if (noContext || !normalizedConfig?.shallInverseOn) {
+
+  if (noContext) {
     return renderBoxComponent
   }
 
