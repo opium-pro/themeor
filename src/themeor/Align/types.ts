@@ -10,8 +10,8 @@ export type AlignProps = CommonProps & {
   pattern?: string | false
   vert?: 'stretch' | 'top' | 'center' | 'bottom' | 'baseline' | false
   hor?: 'stretch' | 'left' | 'center' | 'right' | false
-  gapVert?: string | false
-  gapHor?: string | false
+  gapVert?: string | false | number
+  gapHor?: string | false | number
   reverse?: boolean
   dense?: boolean
 }

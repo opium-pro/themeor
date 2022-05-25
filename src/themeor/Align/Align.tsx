@@ -24,7 +24,7 @@ const Align = ({
   dense,
   ...restProps
 }: AlignProps, ref: any) => {
-  const { gapConfig } = getConfig(useTheme().normalizedConfig)
+  const { gapConfig, customGapValue } = getConfig(useTheme().normalizedConfig)
   const css = useCss()
 
   const newStyle = { ...style }
@@ -38,10 +38,10 @@ const Align = ({
   //   newStyle.marginRight = minus(half(gapHor))
   //   newStyle.marginLeft = minus(half(gapHor))
   // }
-  if (gapVert && !gapConfig({ size: gapVert })) {
+  if (gapVert && customGapValue({ size: gapVert })) {
     newStyle.rowGap = gapVert || undefined
   }
-  if (gapHor && !gapConfig({ size: gapHor })) {
+  if (gapHor && customGapValue({ size: gapHor })) {
     newStyle.columnGap = gapHor || undefined
   }
 
