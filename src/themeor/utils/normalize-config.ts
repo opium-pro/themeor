@@ -128,7 +128,7 @@ export function normalizeConfig(config: any): ThemeConfig {
     },
     weight: {
       default: 1,
-      none: '0',
+      none: 0,
       ...makeFlat(config.line?.weight),
     },
   }
