@@ -19,9 +19,9 @@ export const minus = (value?: string | number | false) => {
 
 export const changeValue = (value: string | number = 0, action: (value: number) => number = v => v): string | number => {
   const isNumber = typeof value === 'number'
-  const number = isNumber ? value : parseInt(value)
+  const number = isNumber ? value : parseInt(value as string)
   const indexOfMeasurement = typeof value === 'number' ? 0 : number.toString().length
   const measurement = typeof value === 'number' ? '' : value.toString().slice(indexOfMeasurement, value.length)
-  const result = action(number)
+  const result = action(number as number)
   return isNumber ? result : `${result}${measurement}`
 }
