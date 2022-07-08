@@ -1,9 +1,11 @@
+import * as console from './utils/console'
+
 export * from './types'
 
 export * from './context'
 export { default as isDarkMode } from './utils/is-dark-mode'
 
-export * as console from './utils/console'
+export { console }
 export { default as cn } from './utils/class-names'
 export { normalizeConfig } from './utils/normalize-config'
 export * from './utils/styles'
