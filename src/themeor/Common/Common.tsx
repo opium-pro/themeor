@@ -24,12 +24,14 @@ export const Common: CommonComponent = ({
   getNode,
   delay,
   hidden,
+  shrink,
   ...restProps
 }, name?: string) => {
   const newStyle = { ...style }
   const { CommonTag } = config
 
   if (stretch) { newStyle.flexGrow = 1 }
+  if (shrink) { newStyle.flexShrink = 1 }
 
   if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
   if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }

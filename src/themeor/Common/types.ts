@@ -78,6 +78,7 @@ export type CommonProps = Omit<CommonTagProps, 'onChange'> & {
   pointerEvents?: string | false
   delay?: string | false
   onChange?: any
+  shrink?: boolean
 }
 
 
