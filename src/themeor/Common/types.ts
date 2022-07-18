@@ -79,6 +79,9 @@ export type CommonProps = Omit<CommonTagProps, 'onChange'> & {
   delay?: string | false
   onChange?: any
   shrink?: boolean
+  clip?: boolean
+  scroll?: boolean
+  // absolute?: boolean
 }
 
 

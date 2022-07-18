@@ -25,6 +25,9 @@ export const Common: CommonComponent = ({
   delay,
   hidden,
   shrink,
+  clip,
+  scroll,
+  // absolute,
   ...restProps
 }, name?: string) => {
   const newStyle = { ...style }
@@ -32,6 +35,9 @@ export const Common: CommonComponent = ({
 
   if (stretch) { newStyle.flexGrow = 1 }
   if (shrink) { newStyle.flexShrink = 1 }
+  if (clip) { newStyle.overflow = 'hidden' }
+  if (scroll) { newStyle.overflow = 'auto' }
+  // if (absolute) { newStyle.position = 'absolute' }
 
   if (maxWidth || width) { newStyle.maxWidth = maxWidth || width || undefined }
   if (minWidth || width) { newStyle.minWidth = minWidth || (maxWidth ? undefined : width) || undefined }
