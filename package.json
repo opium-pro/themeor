@@ -47,7 +47,7 @@
     "build:docs": "react-scripts build",
     "build": "tsc -p tsconfig.dist.json && npm run css",
     "css": "cd ./src/themeor && copyfiles -V ./**/*.css ../../dist && cd ../../",
-    "publish": "npm run clear && npm run build",
+    "release": "npm run clear && npm run build",
     "dist": "npm run build && copyfiles -V ./dist/* ./dist/**/* ../3p5-mobile/node_modules/themeor"
   },
   "eslintConfig": {
