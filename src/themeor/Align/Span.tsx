@@ -1,5 +1,5 @@
 import React from 'react'
-import Align from './Align.js'
+import Align from './align.js'
 import { AlignSpanComponent, AlignSpanProps } from './types.js'
 import { withTagless } from '../with-tagless/index.js'
 import { componentName } from '../utils/component-name.js'

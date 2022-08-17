@@ -1,5 +1,5 @@
 import { componentName } from '../utils/component-name.js'
-import { CommonProps } from '../Common/index.js'
+import { CommonProps } from '../common/index.js'
 import { ReactNode } from 'react'
 import { ReactionContext } from './context.js'
 

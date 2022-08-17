@@ -6,7 +6,7 @@ import { IconProps, ICON_NAME, IconComponent } from './types.js'
 import { getConfig } from '../utils/get-config.js'
 import { useCss } from './styles.js'
 import { setStyles } from '../utils/styles.js'
-import { useBox } from '../Box/index.js'
+import { useBox } from '../box/index.js'
 
 
 let id = 0
@@ -108,7 +108,7 @@ const Icon = ({
     ),
   }
 
-  return typeof children === 'function' ? children(FinalIcon, componentProps) : (
+  return typeof children === 'function' ? (children as Function)(FinalIcon, componentProps) : (
     <FinalIcon {...componentProps} />
   )
 }

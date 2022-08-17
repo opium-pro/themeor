@@ -3,7 +3,7 @@ import { AnimateComponent, AnimateProps, AnimateCSS, ANIMATE_NAME } from './type
 import cn from '../utils/class-names.js'
 import cssVar from '../utils/css-variable.js'
 import newId from '../utils/new-id.js'
-import { Common } from '../Common/index.js'
+import { Common } from '../common/index.js'
 import { withTagless } from '../with-tagless/index.js'
 import { config } from '../config.js'
 import { useCss } from './styles.js'

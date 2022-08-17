@@ -1,5 +1,5 @@
 import React from 'react'
-import { default as Align } from './Align.js'
+import { default as Align } from './align.js'
 import { default as Span } from './Span.js'
 import { AlignProps } from './types.js'
 

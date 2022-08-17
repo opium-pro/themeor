@@ -4,7 +4,7 @@ import cn from '../utils/class-names.js'
 import { GapComponent, GapProps, GAP_NAME } from './types.js'
 import { getConfig } from '../utils/get-config.js'
 import { useTheme } from '../context.js'
-import { Common } from '../Common/index.js'
+import { Common } from '../common/index.js'
 import { withTagless } from '../with-tagless/index.js'
 import { useCss } from './styles.js'
 

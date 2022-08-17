@@ -1,4 +1,4 @@
-import jss from 'jss'
+import { default as jss } from 'jss'
 
 const styles = {
   '@global': {

@@ -1,4 +1,4 @@
-import { CommonProps } from '../Common/index.js'
+import { CommonProps } from '../common/index.js'
 import { TaglessComponent } from '../with-tagless/index.js'
 import { componentName } from '../utils/component-name.js'
 

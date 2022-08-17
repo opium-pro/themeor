@@ -3,10 +3,10 @@ import { useTheme } from '../context.js'
 import cn from '../utils/class-names.js'
 import { FontCompoennt, FontProps, FONT_NAME } from './types.js'
 import { getConfig } from '../utils/get-config.js'
-import { Common } from '../Common/index.js'
+import { Common } from '../common/index.js'
 import { withTagless } from '../with-tagless/index.js'
 import { useCss } from './styles.js'
-import { useBox } from '../Box/index.js'
+import { useBox } from '../box/index.js'
 
 
 const Font = ({

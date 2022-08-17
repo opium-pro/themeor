@@ -1,2 +1,2 @@
-export * from './Common.js'
+export * from './common.js'
 export * from './types.js'

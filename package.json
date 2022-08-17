@@ -1,6 +1,6 @@
 {
   "name": "themeor",
-  "version": "3.0.0-beta",
+  "version": "3.0.1-beta",
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
@@ -22,23 +22,22 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "jss": "^10.7.1",
-    "jss-preset-default": "^10.7.1"
+    "jss": "^10.9.2",
+    "jss-preset-default": "^10.9.2"
   },
   "devDependencies": {
-    "@types/node": "^12.12.37",
-    "@types/react": "^17.0.5",
-    "@types/react-dom": "^17.0.4",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-syntax-highlighter": "^13.5.2",
     "copyfiles": "^2.4.1",
     "nodemon": "^2.0.12",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-syntax-highlighter": "^15.4.4",
-    "typescript": "^4.2.4"
+    "typescript": "^4.7.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,8 +45,7 @@
     "watch:mobile": "npm run clear && nodemon -e ts,tsx,css -w ./src -x npm run dist",
     "clear": "rm -fr ./dist",
     "build:docs": "react-scripts build",
-    "build": "tsc -p tsconfig.dist.json && npm run css",
-    "css": "cd ./src/themeor && copyfiles -V ./**/*.css ../../dist && cd ../../",
+    "build": "tsc -p tsconfig.dist.json",
     "release": "npm run clear && npm run build && npm publish",
     "dist": "npm run build && copyfiles -V ./dist/* ./dist/**/* ../3p5-mobile/node_modules/themeor"
   },

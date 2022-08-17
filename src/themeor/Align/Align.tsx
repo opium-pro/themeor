@@ -5,7 +5,7 @@ import { AlignComponent, AlignProps, ALIGN_NAME } from './types.js'
 import { withTagless } from '../with-tagless/index.js'
 import { getConfig } from '../utils/get-config.js'
 import { useTheme } from '../context.js'
-import { Common } from '../Common/index.js'
+import { Common } from '../common/index.js'
 import { useCss } from './styles.js'
 
 

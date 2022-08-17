@@ -72,7 +72,7 @@ export const Common: CommonComponent = ({
   const dontPassName = typeof CommonTag === 'string'
 
   return typeof children === 'function'
-    ? children(componentProps)
+    ? (children as Function)(componentProps)
     : <CommonTag
       data-themeor={dontPassName ? undefined : name}
       {...componentProps}
