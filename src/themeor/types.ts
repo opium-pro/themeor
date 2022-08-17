@@ -1,10 +1,10 @@
-import { BoxConfigProps } from './Box'
-import { FontConfigProps } from './Font'
-import { LineConfigProps } from './Line'
-import { IconConfigProps } from './Icon'
-import { FitConfigProps } from './Fit'
-import { GapConfigProps } from './Gap'
-import { ReactionConfigProps } from './Reaction'
+import { BoxConfigProps } from './Box/index.js'
+import { FontConfigProps } from './Font/index.js'
+import { LineConfigProps } from './Line/index.js'
+import { IconConfigProps } from './Icon/index.js'
+import { FitConfigProps } from './Fit/index.js'
+import { GapConfigProps } from './Gap/index.js'
+import { ReactionConfigProps } from './Reaction/index.js'
 
 
 export type ConfigVar = { [name: string]: string }

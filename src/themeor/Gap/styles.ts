@@ -1,6 +1,6 @@
-import { createStyleSheet, getClasses } from '../utils/styles'
+import { createStyleSheet, getClasses } from '../utils/styles.js'
 import { Classes, Styles } from 'jss'
-import { GAP_NAME } from './types'
+import { GAP_NAME } from './types.js'
 
 export const useCss: () => Classes = () => getClasses(GAP_NAME)
 

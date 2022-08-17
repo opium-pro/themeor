@@ -1,9 +1,9 @@
 import React from 'react'
 // import * as console from '../utils/console'
-import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Animate } from '../index'
-import { TaglessProps, TaglessComponent } from './types'
-import cn from '../utils/class-names'
-import { config } from '../config'
+import { Theme, Box, Font, Line, Icon, Fit, Align, Gap, Animate } from '../index.js'
+import { TaglessProps, TaglessComponent } from './types.js'
+import cn from '../utils/class-names.js'
+import { config } from '../config.js'
 
 
 export const withTagless = (Component: any): TaglessComponent => {

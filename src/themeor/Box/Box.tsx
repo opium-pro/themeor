@@ -1,13 +1,13 @@
 import React from 'react'
-import { useBox, BoxContext } from './context'
-import { useTheme } from '../context'
-import cn from '../utils/class-names'
-import { Line } from '../Line'
-import { BoxProps, BoxComponent, BOX_NAME } from './types'
-import { getConfig } from '../utils/get-config'
-import { Common } from '../Common'
-import { withTagless } from '../with-tagless'
-import {useCss} from './styles'
+import { useBox, BoxContext } from './context.js'
+import { useTheme } from '../context.js'
+import cn from '../utils/class-names.js'
+import { Line } from '../Line/index.js'
+import { BoxProps, BoxComponent, BOX_NAME } from './types.js'
+import { getConfig } from '../utils/get-config.js'
+import { Common } from '../Common/index.js'
+import { withTagless } from '../with-tagless/index.js'
+import { useCss } from './styles.js'
 
 
 const Box = (props: BoxProps, ref: any) => {

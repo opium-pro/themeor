@@ -1,4 +1,4 @@
-import { ThemeConfig, ConfigurableComponents } from '../types'
+import { ThemeConfig, ConfigurableComponents } from '../types.js'
 
 
 function selectConfig (

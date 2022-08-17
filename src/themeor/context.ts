@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeIcons, ThemeConfig } from './types'
+import { ThemeIcons, ThemeConfig } from './types.js'
 
 export type ThemeContext = {
   icons?: ThemeIcons

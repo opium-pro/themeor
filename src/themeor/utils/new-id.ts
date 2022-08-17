@@ -1,4 +1,4 @@
-let lastId = 0;
+let lastId = 0
 
 export default function newId(prefix='themeor-id') {
   lastId++;

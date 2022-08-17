@@ -1,2 +1,2 @@
-export { default as Line } from './Line'
-export * from './types'
+export { default as Line } from './Line.js'
+export * from './types.js'

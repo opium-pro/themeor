@@ -1,12 +1,12 @@
 import React, { useRef } from 'react'
-import cn from '../utils/class-names'
+import cn from '../utils/class-names.js'
 // import * as console from '../utils/console'
-import { GapComponent, GapProps, GAP_NAME } from './types'
-import { getConfig } from '../utils/get-config'
-import { useTheme } from '../context'
-import { Common } from '../Common'
-import { withTagless } from '../with-tagless'
-import { useCss } from './styles'
+import { GapComponent, GapProps, GAP_NAME } from './types.js'
+import { getConfig } from '../utils/get-config.js'
+import { useTheme } from '../context.js'
+import { Common } from '../Common/index.js'
+import { withTagless } from '../with-tagless/index.js'
+import { useCss } from './styles.js'
 
 
 const Gap = ({

@@ -1,12 +1,12 @@
 import React, { useRef } from 'react'
-import { useTheme } from '../context'
-import cn from '../utils/class-names'
-import * as console from '../utils/console'
-import { IconProps, ICON_NAME, IconComponent } from "./types"
-import { getConfig } from '../utils/get-config'
-import { useCss } from './styles'
-import { setStyles } from '../utils/styles'
-import { useBox } from '../Box'
+import { useTheme } from '../context.js'
+import cn from '../utils/class-names.js'
+import * as console from '../utils/console.js'
+import { IconProps, ICON_NAME, IconComponent } from './types.js'
+import { getConfig } from '../utils/get-config.js'
+import { useCss } from './styles.js'
+import { setStyles } from '../utils/styles.js'
+import { useBox } from '../Box/index.js'
 
 
 let id = 0

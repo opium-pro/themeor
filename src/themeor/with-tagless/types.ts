@@ -1,4 +1,4 @@
-import { CommonComponent } from '../Common'
+import { CommonComponent } from '../Common/index.js'
 
 export type TaglessProps = {
   children?: any,

@@ -1,6 +1,6 @@
 import React from 'react'
-import { CommonComponent } from './types'
-import { config } from '../config'
+import { CommonComponent } from './types.js'
+import { config } from '../config.js'
 
 
 export const Common: CommonComponent = ({

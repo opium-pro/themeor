@@ -1,5 +1,5 @@
-import { ThemeConfig, ThemeIcons } from '../types'
-import { componentName } from '../utils/component-name'
+import { ThemeConfig, ThemeIcons } from '../types.js'
+import { componentName } from '../utils/component-name.js'
 
 export const THEME_NAME = componentName('Theme')
 

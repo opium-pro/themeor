@@ -1,5 +1,5 @@
 import { Context, useContext, createContext } from 'react'
-import { ReactionState } from './types'
+import { ReactionState } from './types.js'
 
 
 export type ReactionContext = ReactionState & {

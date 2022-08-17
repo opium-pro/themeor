@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { AnimateComponent, AnimateProps, AnimateCSS, ANIMATE_NAME } from './types'
-import cn from '../utils/class-names'
-import cssVar from '../utils/css-variable'
-import newId from '../utils/new-id'
-import { Common } from '../Common'
-import { withTagless } from '../with-tagless'
-import { config } from '../config'
-import { useCss } from './styles'
+import { AnimateComponent, AnimateProps, AnimateCSS, ANIMATE_NAME } from './types.js'
+import cn from '../utils/class-names.js'
+import cssVar from '../utils/css-variable.js'
+import newId from '../utils/new-id.js'
+import { Common } from '../Common/index.js'
+import { withTagless } from '../with-tagless/index.js'
+import { config } from '../config.js'
+import { useCss } from './styles.js'
 
 /*
   This is beta-component. Works only on web. Based on animate.css

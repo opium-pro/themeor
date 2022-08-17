@@ -1,6 +1,6 @@
-import jss, { Classes, Styles, StyleSheet } from 'jss'
-import preset from 'jss-preset-default'
-import { config } from '../config'
+import { default as jss, Classes, Styles, StyleSheet } from 'jss'
+import { default as preset } from 'jss-preset-default'
+import { config } from '../config.js'
 
 
 const createGenerateId = () => {

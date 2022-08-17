@@ -1,6 +1,6 @@
-import { createStyleSheet, getClasses } from '../utils/styles'
+import { createStyleSheet, getClasses } from '../utils/styles.js'
 import { Classes, Styles } from 'jss'
-import { BOX_NAME } from './types'
+import { BOX_NAME } from './types.js'
 
 export const useCss: () => Classes = () => getClasses(BOX_NAME)
 

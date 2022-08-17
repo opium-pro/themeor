@@ -1,4 +1,4 @@
-import {createStyleNode, unsetStyles} from './styles'
+import {createStyleNode, unsetStyles} from './styles.js'
 
 const unset = unsetStyles
 

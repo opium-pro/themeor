@@ -1,2 +1,2 @@
-export { default as Fit } from './Fit'
-export * from './types'
+export { default as Fit } from './Fit.js'
+export * from './types.js'

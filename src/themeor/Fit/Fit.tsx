@@ -1,12 +1,12 @@
 import React from 'react'
-import cn from '../utils/class-names'
-import { FitComponent, FitProps, FIT_NAME } from './types'
-import { minus } from '../utils/change-css-value'
-import { Common } from '../Common'
-import { getConfig } from '../utils/get-config'
-import { useTheme } from '../context'
-import { withTagless } from '../with-tagless'
-import { useCss } from './styles'
+import cn from '../utils/class-names.js'
+import { FitComponent, FitProps, FIT_NAME } from './types.js'
+import { minus } from '../utils/change-css-value.js'
+import { Common } from '../Common/index.js'
+import { getConfig } from '../utils/get-config.js'
+import { useTheme } from '../context.js'
+import { withTagless } from '../with-tagless/index.js'
+import { useCss } from './styles.js'
 
 
 const Fit = ({

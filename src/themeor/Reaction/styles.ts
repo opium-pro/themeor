@@ -1,6 +1,6 @@
-import { createStyleSheet, getClasses } from '../utils/styles'
+import { createStyleSheet, getClasses } from '../utils/styles.js'
 import { Classes, Styles } from 'jss'
-import { REACTION_NAME } from './types'
+import { REACTION_NAME } from './types.js'
 
 export const useCss: () => Classes = () => getClasses(REACTION_NAME)
 

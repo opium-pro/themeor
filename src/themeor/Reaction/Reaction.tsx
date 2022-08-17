@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import cn from '../utils/class-names'
-import { ReactionProps, ReactionState, REACTION_NAME } from './types'
-import { ReactionContext } from './context'
-import { useCss } from './styles'
-import { getConfig } from '../utils/get-config'
-import { useTheme } from '../context'
-import { config } from '../config'
+import cn from '../utils/class-names.js'
+import { ReactionProps, ReactionState, REACTION_NAME } from './types.js'
+import { ReactionContext } from './context.js'
+import { useCss } from './styles.js'
+import { getConfig } from '../utils/get-config.js'
+import { useTheme } from '../context.js'
+import { config } from '../config.js'
 
 
 Reaction.displayName = REACTION_NAME

@@ -1,12 +1,12 @@
 import React from 'react'
-import { useTheme } from '../context'
-import cn from '../utils/class-names'
-import { FontCompoennt, FontProps, FONT_NAME } from './types'
-import { getConfig } from '../utils/get-config'
-import { Common } from '../Common'
-import { withTagless } from '../with-tagless'
-import { useCss } from './styles'
-import { useBox } from '../Box'
+import { useTheme } from '../context.js'
+import cn from '../utils/class-names.js'
+import { FontCompoennt, FontProps, FONT_NAME } from './types.js'
+import { getConfig } from '../utils/get-config.js'
+import { Common } from '../Common/index.js'
+import { withTagless } from '../with-tagless/index.js'
+import { useCss } from './styles.js'
+import { useBox } from '../Box/index.js'
 
 
 const Font = ({

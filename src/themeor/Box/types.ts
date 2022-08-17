@@ -1,6 +1,6 @@
-import { CommonProps } from '../Common'
-import { TaglessComponent } from '../with-tagless'
-import { componentName } from '../utils/component-name'
+import { CommonProps } from '../Common/index.js'
+import { TaglessComponent } from '../with-tagless/index.js'
+import { componentName } from '../utils/component-name.js'
 
 export const BOX_NAME = componentName('Box')
 

@@ -1,2 +1,2 @@
-export { default as Font } from './Font'
-export * from './types'
+export { default as Font } from './Font.js'
+export * from './types.js'

@@ -1,7 +1,7 @@
-import { minus, half } from '../utils/change-css-value'
-import { createStyleSheet, getClasses } from '../utils/styles'
+import { minus, half } from '../utils/change-css-value.js'
+import { createStyleSheet, getClasses } from '../utils/styles.js'
 import { Classes, Styles } from 'jss'
-import { ALIGN_NAME } from './types'
+import { ALIGN_NAME } from './types.js'
 
 
 export const useCss: () => Classes = () => getClasses(ALIGN_NAME)

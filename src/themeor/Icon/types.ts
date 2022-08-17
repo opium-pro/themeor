@@ -1,6 +1,6 @@
 import {FC} from 'react'
-import { componentName } from '../utils/component-name'
-import { CommonProps } from '../Common'
+import { componentName } from '../utils/component-name.js'
+import { CommonProps } from '../Common/index.js'
 
 export const ICON_NAME = componentName('Icon')
 

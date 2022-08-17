@@ -1,8 +1,8 @@
 import React from 'react'
-import Align from './Align'
-import { AlignSpanComponent, AlignSpanProps } from './types'
-import { withTagless } from '../with-tagless'
-import { componentName } from '../utils/component-name'
+import Align from './Align.js'
+import { AlignSpanComponent, AlignSpanProps } from './types.js'
+import { withTagless } from '../with-tagless/index.js'
+import { componentName } from '../utils/component-name.js'
 
 
 const Span = ({ col = 1, style, ...restProps }: AlignSpanProps, ref: any) => {

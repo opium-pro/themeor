@@ -1,4 +1,4 @@
-// In you have
+// If you have
 // padding: 10px 20px;
 
 // But you need

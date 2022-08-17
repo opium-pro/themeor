@@ -1,7 +1,7 @@
-import { componentName } from '../utils/component-name'
-import { CommonProps } from '../Common'
+import { componentName } from '../utils/component-name.js'
+import { CommonProps } from '../Common/index.js'
 import { ReactNode } from 'react'
-import { ReactionContext } from './context'
+import { ReactionContext } from './context.js'
 
 
 export const REACTION_NAME = componentName('Reaction')

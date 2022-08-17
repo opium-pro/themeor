@@ -1,6 +1,6 @@
-import { ThemeContext } from '../context'
-import { ThemeConfig } from '../types'
-import { allFills, baseFills } from './opium-fill'
+import { ThemeContext } from '../context.js'
+import { ThemeConfig } from '../types.js'
+import { allFills, baseFills } from './opium-fill.js'
 
 
 export function normalizeConfig(config: any): ThemeConfig {

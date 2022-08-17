@@ -5,6 +5,7 @@
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
   "homepage": "http://themeor.opium.pro",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/opium-pro/themeor.git"
@@ -47,7 +48,7 @@
     "build:docs": "react-scripts build",
     "build": "tsc -p tsconfig.dist.json && npm run css",
     "css": "cd ./src/themeor && copyfiles -V ./**/*.css ../../dist && cd ../../",
-    "release": "npm run clear && npm run build",
+    "release": "npm run clear && npm run build && npm publish",
     "dist": "npm run build && copyfiles -V ./dist/* ./dist/**/* ../3p5-mobile/node_modules/themeor"
   },
   "eslintConfig": {

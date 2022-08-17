@@ -1,2 +1,2 @@
-export * from './hoc'
-export * from './types'
+export * from './hoc.js'
+export * from './types.js'

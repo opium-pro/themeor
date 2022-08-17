@@ -1,2 +1,2 @@
-export { default as Gap } from './Gap'
-export * from './types'
+export { default as Gap } from './Gap.js'
+export * from './types.js'
