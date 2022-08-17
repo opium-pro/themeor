@@ -11,7 +11,7 @@ export type CommonTagProps = AriaAttributes & DOMAttributes<any> & {
   title?: string
   radioGroup?: string
   role?: string
-  children?: ReactNode
+  children?: ReactNode | Function
   dangerouslySetInnerHTML?: {
     __html: string;
   }
