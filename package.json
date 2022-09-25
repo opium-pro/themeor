@@ -1,6 +1,6 @@
 {
   "name": "themeor",
-  "version": "3.0.3-beta",
+  "version": "3.0.4-beta",
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
@@ -37,7 +37,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-syntax-highlighter": "^15.4.4",
-    "typescript": "^4.7.4"
+    "typescript": "4.8.3"
   },
   "scripts": {
     "start": "react-scripts start",

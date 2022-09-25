@@ -50,7 +50,7 @@ export const Theme: FC<ThemeProps> = ({
   }, [config, darkConfig])
 
   useEffect(() => {
-    reset && !globalConfig.isNative && require('./reset')
+    reset && !globalConfig.isNative && import('./reset.js')
   }, [reset])
 
   // Update
