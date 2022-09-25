@@ -11,7 +11,6 @@ export type CommonTagProps = AriaAttributes & DOMAttributes<any> & {
   title?: string
   radioGroup?: string
   role?: string
-  children?: ReactNode | Function
   dangerouslySetInnerHTML?: {
     __html: string;
   }
@@ -59,6 +58,7 @@ export type CommonTagProps = AriaAttributes & DOMAttributes<any> & {
 }
 
 export type CommonProps = Omit<CommonTagProps, 'onChange'> & {
+  children?: ReactNode | Function
   stretch?: boolean
   width?: string | false | number
   height?: string | false | number

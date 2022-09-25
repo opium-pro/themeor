@@ -1,6 +1,6 @@
 {
   "name": "themeor",
-  "version": "3.0.2-beta",
+  "version": "3.0.3-beta",
   "main": "./dist/index.js",
   "author": "Denis Elianovsky denis@opium.pro",
   "description": "Create sophisticated themes in React JS. Fast. Without even knowing CSS",
@@ -45,7 +45,7 @@
     "watch:mobile": "npm run clear && nodemon -e ts,tsx,css -w ./src -x npm run dist",
     "clear": "rm -fr ./dist",
     "build:docs": "react-scripts build",
-    "build": "tsc -p tsconfig.dist.json",
+    "build": "tsc",
     "release": "npm run clear && npm run build && npm publish",
     "dist": "npm run build && copyfiles -V ./dist/* ./dist/**/* ../3p5-mobile/node_modules/themeor"
   },

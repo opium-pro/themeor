@@ -14,12 +14,12 @@ export type ReactionConfigProps = {
   property?: string | false,
 }
 
-export type ReactionProps = CommonProps & ReactionConfigProps & {
+export type ReactionProps = Omit<CommonProps, 'children'> & ReactionConfigProps & {
   track?: Array<TrackType> | TrackType | false,
   smooth?: boolean
   disabled?: boolean
   button?: boolean
-  children?: ReactNode | ((props: CommonProps, context: ReactionContext) => ReactNode)
+  children?: ReactNode | ((props?: CommonProps, context?: ReactionContext) => ReactNode)
 }
 
 export type ReactionState = {
