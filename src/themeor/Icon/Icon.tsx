@@ -65,13 +65,6 @@ const Icon = ({
     `)
   }
 
-  if (typeof children !== 'function') {
-    console.warn(
-      'Prop "children" is prohibited, it will be ignored',
-      Icon
-    )
-  }
-
   if (!icons) {
     return null
   }
