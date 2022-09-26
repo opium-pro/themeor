@@ -18,7 +18,7 @@ const createGenerateId = () => {
   }
 }
 
-jss.setup({ ...preset(), createGenerateId })
+;(jss as any).setup({ ...(preset as any)(), createGenerateId })
 
 
 export const styleSheets: { [key: string]: StyleSheet } = {}
@@ -35,7 +35,7 @@ export function getInitialStyles(name: string): Styles {
 
 
 export function createStyleSheet(name: string, styles: Styles) {
-  const styleSheet: StyleSheet = jss.createStyleSheet(styles, { classNamePrefix: name, })
+  const styleSheet: StyleSheet = (jss as any).createStyleSheet(styles, { classNamePrefix: name, })
 
   if (styleSheets[name]) {
     styleSheets[name].detach()

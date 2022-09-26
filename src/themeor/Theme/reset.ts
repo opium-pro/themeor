@@ -1,5 +1,6 @@
 import { default as jss } from 'jss'
 
+
 const styles = {
   '@global': {
     'body': {
@@ -91,4 +92,4 @@ const styles = {
   },
 }
 
-jss.createStyleSheet(styles).attach()
+;(jss as any).createStyleSheet(styles).attach()
